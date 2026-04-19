@@ -1,15 +1,16 @@
 'use client';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
+type ServiceImage = { url: string; metadata?: { lqip?: string } | null };
 type Service = {
   name: string;
   shortDesc: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   longDesc: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  gallery: any[];
+  gallery: ServiceImage[];
   cta?: { label: string; link: string };
 };
 
@@ -50,19 +51,53 @@ export function ServiceTabs({ services }: { services: Service[] }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
+            className="grid md:grid-cols-2 gap-12 items-start"
           >
-            <h3 className="font-display text-5xl text-white mb-4">{current?.name}</h3>
-            <p className="font-sans text-lg max-w-3xl mb-8" style={{ color: 'var(--text-muted)' }}>{current?.shortDesc}</p>
-            {current?.cta && (
-              <a
-                href={current.cta.link}
-                className="inline-block px-6 py-3 font-sans text-sm uppercase tracking-widest transition hover:text-black"
-                style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid rgba(255,255,255,0.1)', color: 'white' }}
-                onMouseOver={(e) => { e.currentTarget.style.backgroundColor = 'var(--accent-cyan)'; e.currentTarget.style.color = 'black'; }}
-                onMouseOut={(e) => { e.currentTarget.style.backgroundColor = 'var(--bg-elevated)'; e.currentTarget.style.color = 'white'; }}
-              >
-                {current.cta.label}
-              </a>
+            {/* Text */}
+            <div>
+              <h3 className="font-display text-5xl text-white mb-4">{current?.name}</h3>
+              <p className="font-sans text-lg mb-8" style={{ color: 'var(--text-muted)' }}>{current?.shortDesc}</p>
+              {current?.cta && (
+                <a
+                  href={current.cta.link}
+                  className="service-cta inline-block px-6 py-3 font-sans text-sm uppercase tracking-widest transition"
+                >
+                  {current.cta.label}
+                </a>
+              )}
+            </div>
+
+            {/* Gallery grid */}
+            {current?.gallery?.length > 0 && (
+              <div className="grid grid-cols-2 gap-2">
+                {current.gallery.slice(0, 4).map((img, i) => (
+                  <div
+                    key={i}
+                    className={cn(
+                      'relative overflow-hidden',
+                      i === 0 ? 'col-span-2 aspect-video' : 'aspect-square',
+                    )}
+                    style={{ backgroundColor: 'var(--bg-surface)' }}
+                  >
+                    <Image
+                      src={img.url}
+                      alt=""
+                      fill
+                      className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
+                      sizes="(max-width: 1280px) 50vw, 600px"
+                      placeholder={img.metadata?.lqip ? 'blur' : 'empty'}
+                      blurDataURL={img.metadata?.lqip ?? undefined}
+                    />
+                    {/* Scanline overlay */}
+                    <div
+                      className="absolute inset-0 pointer-events-none opacity-20"
+                      style={{
+                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.03) 2px, rgba(0,191,255,0.03) 4px)',
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             )}
           </motion.div>
         </AnimatePresence>
@@ -77,6 +112,17 @@ export function ServiceTabs({ services }: { services: Service[] }) {
               <span className="font-mono text-sm group-open:rotate-45 transition-transform inline-block">+</span>
             </summary>
             <div className="pb-6">
+              {s.gallery?.[0] && (
+                <div className="relative aspect-video mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)' }}>
+                  <Image
+                    src={s.gallery[0].url}
+                    alt=""
+                    fill
+                    className="object-cover opacity-80"
+                    sizes="100vw"
+                  />
+                </div>
+              )}
               <p className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>{s.shortDesc}</p>
               {s.cta && (
                 <a
