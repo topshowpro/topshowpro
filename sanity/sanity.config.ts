@@ -9,6 +9,7 @@ export default defineConfig({
   title: 'Top Show Pro CMS',
   projectId: projectId || 'placeholder',
   dataset,
+  basePath: '/studio',
   plugins: [
     structureTool({
       structure: (S) =>
