@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type SiteSettings = {
   address?: string;
   email?: string;
@@ -16,7 +18,14 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
     <footer className="bg-bg-elevated border-t border-white/5 px-6 py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <p className="font-display text-xl md:text-2xl lg:text-3xl text-fg-primary mb-4">TOP SHOW PRO</p>
+          <Image
+            src="/Top-show-pro_logo.png"
+            alt="Top Show Pro"
+            width={160}
+            height={40}
+            className="h-8 w-auto mb-4"
+            style={{ filter: 'invert(1) hue-rotate(180deg)' }}
+          />
           <p className="font-sans text-sm text-fg-muted">{settings?.address}</p>
           <p className="font-sans text-sm text-fg-muted">{settings?.email}</p>
           <p className="font-sans text-sm text-fg-muted">{settings?.phone}</p>
