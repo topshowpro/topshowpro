@@ -6,7 +6,30 @@
       "Bash(mv *.md docs-kickoff/)",
       "Bash(mv *.png docs-kickoff/)",
       "Read(//c/Users/nicol/OneDrive/Documentos/**)",
-      "Bash(cp -r tsp-tmp/. \"top-show-pro/\")"
+      "Bash(cp -r tsp-tmp/. \"top-show-pro/\")",
+      "Bash(claude plugin *)",
+      "Bash(mkdir -p \"C:/Users/nicol/OneDrive/Documentos/top-show-pro/.claude/skills/top-show-pro-design-system\")",
+      "Bash(cp \"C:/Users/nicol/OneDrive/Documentos/top-show-pro/docs-kickoff/DESIGN-SYSTEM.md\" \"C:/Users/nicol/OneDrive/Documentos/top-show-pro/.claude/skills/top-show-pro-design-system/SKILL.md\")",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(curl -s http://localhost:3001/servicios)",
+      "Bash(curl -s http://localhost:3001/eventos)",
+      "Bash(curl -s \"http://localhost:3001/eventos/lizy-tagliani\")",
+      "Bash(wait)",
+      "Bash(curl -s http://localhost:3001/contacto)",
+      "Bash(curl -s http://localhost:3001/equipamiento)",
+      "Bash(curl -s \"http://localhost:3001/api/events?cats=1\")",
+      "Bash(curl -s \"http://localhost:3001/api/events\")",
+      "Bash(python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\(type\\(data\\), len\\(data\\) if isinstance\\(data, list\\) else 'not list'\\)\")",
+      "Bash(curl -sv \"http://localhost:3001/api/events\")",
+      "Bash(python3 -c \"import sys, json; data = json.load\\(sys.stdin\\); print\\('keys:', list\\(data.keys\\(\\)\\) if isinstance\\(data, dict\\) else data[:2]\\)\")",
+      "Bash(curl -s \"http://localhost:3001/api/events?fresh=1\")",
+      "Bash(curl *)",
+      "Bash(taskkill /PID 17020 /F)",
+      "Bash(taskkill /PID 46820 /F)",
+      "Bash(cmd /c \"taskkill /PID 17020 /F\")",
+      "Bash(cmd /c \"taskkill /PID 46820 /F\")",
+      "Bash(cmd /c \"taskkill /F /IM node.exe\")",
+      "Bash(powershell *)"
     ]
   }
 }

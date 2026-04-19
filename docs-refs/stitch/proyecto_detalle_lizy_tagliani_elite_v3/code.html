@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lizy Tagliani Elite - Top Show Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#87929b",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed-variant": "#004c69",
+                        "inverse-primary": "#00668a",
+                        "tertiary-container": "#00cc7c",
+                        "on-secondary": "#2e009c",
+                        "tertiary": "#00eb8f",
+                        "on-surface-variant": "#bcc8d1",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-tint": "#7ad0ff",
+                        "on-primary-fixed": "#001e2c",
+                        "secondary-container": "#4720ca",
+                        "on-tertiary-fixed": "#002110",
+                        "tertiary-fixed": "#56ffa7",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#e5deff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#00522f",
+                        "primary-container": "#00bfff",
+                        "secondary": "#c9bfff",
+                        "surface-variant": "#353534",
+                        "on-tertiary": "#00391f",
+                        "surface": "#131313",
+                        "primary-fixed-dim": "#7ad0ff",
+                        "on-primary-container": "#004a65",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#003549",
+                        "on-secondary-fixed": "#1a0063",
+                        "inverse-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#8fd6ff",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#baaeff",
+                        "outline-variant": "#3d4850",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-container": "#00502d",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#00e38a",
+                        "on-surface": "#e5e2e1",
+                        "primary-fixed": "#c3e8ff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Bebas Neue", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Orbitron", "sans-serif"],
+                        "subtitle": ["Montserrat", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500&amp;family=Montserrat:wght@500;600&amp;family=Orbitron:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #0A0A0A; color: #CCCCCC; }
+        h1, h2, h3, .font-display { font-family: 'Bebas Neue', sans-serif; }
+        .font-subtitle { font-family: 'Montserrat', sans-serif; }
+        .font-tech { font-family: 'Orbitron', sans-serif; }
+        
+        /* Grid Overlay Texture */
+        .bg-grid-overlay {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* The Glow Blob */
+        .bg-glow-blob {
+            position: absolute;
+            border-radius: 50%;
+            background-color: theme('colors.primary-container');
+            filter: blur(150px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background-color: theme('colors.surface-container');
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface-variant antialiased overflow-x-hidden selection:bg-primary-container selection:text-surface-lowest">
+<!-- Ambient Glow -->
+<div class="bg-glow-blob w-[600px] h-[600px] top-[-200px] left-[-200px]"></div>
+<div class="bg-glow-blob w-[500px] h-[500px] bottom-[10%] right-[-100px] bg-secondary"></div>
+<!-- TopAppBar JSON Component -->
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-full fixed top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl shadow-2xl shadow-sky-500/10 transition-transform bg-neutral-900/50">
+<div class="font-['Bebas_Neue'] text-3xl tracking-tighter text-sky-400">
+            TOP SHOW PRO
+        </div>
+<div class="hidden md:flex space-x-8">
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-sky-300 transition-all duration-300" href="#">SERVICIOS</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-sky-400 border-b-2 border-sky-400 pb-1 hover:text-sky-300 transition-all duration-300" href="#">PROYECTOS</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-sky-300 transition-all duration-300" href="#">EQUIPAMIENTO</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-sky-300 transition-all duration-300" href="#">CONTACTOS</a>
+</div>
+<button class="hidden md:block bg-[#0A0A0A] border-[1.5px] border-primary-container text-white font-subtitle font-medium py-2 px-6 rounded-DEFAULT hover:bg-primary-container hover:text-black transition-colors duration-300 scale-95 active:scale-90 text-sm tracking-wider uppercase">
+            GET QUOTE
+        </button>
+<button class="md:hidden text-sky-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+</nav>
+<main class="relative z-10 pt-24 pb-32">
+<!-- Hero Section -->
+<section class="relative w-full h-[614px] md:h-[768px] flex items-end overflow-hidden mb-16">
+<div class="absolute inset-0 z-0">
+<img alt="Stage Lighting Hero" class="w-full h-full object-cover object-center opacity-60" data-alt="Massive stage production with dramatic purple and blue lighting, lasers cutting through fog, crowd silhouettes, high energy concert atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6KjkMFh3kLDaleRQjwd4DLozGJmykExazBI0kNrnYLvsNCUMC6e-QteMxH7Xd7P1e-Lm5NZ-ampb3P61VmMhwYxaaD27Hyz9czZVPnWM-DoU2P8zGl47ZKhjS9KOqgQ-VPlORSZ5hx7mTfqubOeyYTfCDxb33opfSEo7NXwQ9KmTJ8iZg_xdC4o_emLqodSDCCM5aPUYTr2EhQO-cnaOC5xhFSW1N2DmZRcu0JuqDRlZQOgBBqrulHdwlSQKdenDt1S9HX4y_AQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+<!-- The Scanner Line -->
+<div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-50"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-12">
+<div class="flex flex-col items-start gap-4">
+<span class="font-subtitle text-[#5AA7E0] text-sm tracking-widest uppercase font-semibold">Eventos 05/07/2024</span>
+<h1 class="font-display text-7xl md:text-9xl text-on-surface uppercase leading-none tracking-tighter drop-shadow-2xl">
+                        LIZY TAGLIANI
+                    </h1>
+</div>
+</div>
+</section>
+<!-- Content Area -->
+<div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- Left Column: Description -->
+<div class="lg:col-span-4">
+<div class="sticky top-32 glass-panel p-8 rounded-DEFAULT border border-outline-variant/15">
+<h2 class="font-display text-4xl text-on-surface mb-6 uppercase tracking-wide">Project Brief</h2>
+<p class="font-body text-base text-on-surface-variant leading-relaxed mb-6">
+                        Despliegue técnico integral para el espectáculo de Lizy Tagliani. Un diseño de iluminación enfocado en resaltar la teatralidad y el dinamismo del show, utilizando un rider de última generación para crear atmósferas envolventes y transiciones de alto impacto visual.
+                    </p>
+<!-- Data Pulse Component -->
+<div class="bg-surface-container-highest p-4 rounded-DEFAULT border-l-2 border-tertiary relative overflow-hidden mt-8">
+<div class="absolute inset-0 bg-grid-overlay opacity-5"></div>
+<div class="relative z-10">
+<span class="font-subtitle text-xs text-on-surface-variant uppercase tracking-wider block mb-1">Status</span>
+<span class="font-tech text-tertiary text-xl uppercase">EXECUTED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Technical Gear Bento Grid -->
+<div class="lg:col-span-8">
+<div class="flex items-center gap-4 mb-8">
+<h2 class="font-display text-5xl text-on-surface uppercase tracking-wider">TECHNICAL GEAR</h2>
+<div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Gear Card 1 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="h-40 bg-surface-dim relative overflow-hidden">
+<img alt="Moviles" class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-500" data-alt="Close up of professional moving head stage light fixture, sleek black design, dramatic dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO49wMFhm5XuARj9CtJ__OIfc1DMGzBEjcaBiOofdcddSnOfNc61tnz8yNcKpmjrI9XBMTl_O8sAr6UqCKSCPRcB0mAcy-oZdwAwA2byTS9vBYKm4jsexWadPYNQHRSC5AAXnQoyg6qayGyDCPxWKgBdllAi2DQbLeOrJ8dQAGIt7k5UgAjwzONuVzzbEFfcwqS7U1f5vEbzGvrSZ3WY3grMi1RdYh_9fpVnlMPzE75-EP43YYulTpnw7UH2AqNlXSny7p58ryNw"/>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Moviles 7R</h3>
+</div>
+</div>
+<!-- Gear Card 2 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="h-40 bg-surface-dim relative overflow-hidden">
+<img alt="Moviles" class="w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-500" data-alt="Close up of professional moving head stage light fixture, sleek black design, dramatic dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMGqRKqnNM5f-bM5lFlkSm7l-bREEFxnnwbBIcYFCTwalceebDC-Mqz9XN8vilITS4MLdT2ebLlOpOKVP7yw6QErhN7mX0oQZ_2B8kQAIpPY4UhgaG9wLpK6JEAgeno2LXKDerQ5VEvXRAz8Tl5KKm4k8AP--pyRkkbbbA9nk28y-F_0J4yzubGVpU1z7sN_c4Vul5yh9PeNVXt7IIex78dP8rdWZLNuL_C2ioh_qDChUS72EToVL8S-KP03U14QBo_BF0RJ12Pg"/>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Moviles 740</h3>
+</div>
+</div>
+<!-- Gear Card 3 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 0;">lightbulb</span>
+<span class="font-tech text-xs text-outline tracking-widest">FX</span>
+</div>
+<div class="p-5 bg-surface-container-high">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Par Z</h3>
+</div>
+</div>
+<!-- Gear Card 4 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 0;">wb_sunny</span>
+<span class="font-tech text-xs text-outline tracking-widest">WASH</span>
+</div>
+<div class="p-5 bg-surface-container-high">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Aura</h3>
+</div>
+</div>
+<!-- Gear Card 5 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative md:col-span-2">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-tertiary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="h-40 bg-surface-dim relative overflow-hidden">
+<img alt="LED Screen" class="w-full h-full object-cover opacity-40 group-hover:opacity-70 transition-opacity duration-500" data-alt="Large scale LED video wall matrix displaying abstract digital patterns in blue and purple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATlr8iAxGH_C38EDJXuTNhkHJY8cdIQ9FeWDZqvRGR1JF4-2mREtb5qYQFrAjPVQtJWs6EpiwY4PCggzfPIr3OfsY34yxHF5MOhghi0d0DbJN4sYGQ9Fy7h4X6GmD6NOpGn3NVvQtOyT46z6SydDHazBleoxRiw559RP9z4vhcA7dFlTqb3byQnN3KVT-AR-I-OJba0rMPQNjbCqDD5mgwxA3Ssh9msNowNLMLy6nIZEgpK0c5_-wLgIqQXH9Ie7St3aviUZWuaw"/>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15 flex justify-between items-center">
+<h3 class="font-tech text-on-surface text-xl uppercase tracking-wide">Pantalla Led</h3>
+<span class="font-tech text-tertiary text-sm tracking-widest">6x4 MTS</span>
+</div>
+</div>
+<!-- Gear Card 6 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 0;">flare</span>
+<span class="font-tech text-xs text-outline tracking-widest">FRONT</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Fresneles Led</h3>
+</div>
+</div>
+<!-- Gear Card 7 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 0;">highlight</span>
+<span class="font-tech text-xs text-outline tracking-widest">PROFILE</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Leekos Led</h3>
+</div>
+</div>
+<!-- Gear Card 8 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 0;">motion_photos_on</span>
+<span class="font-tech text-xs text-outline tracking-widest">BEAM</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Móviles Led 400</h3>
+</div>
+</div>
+<!-- Gear Card 9 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 0;">adjust</span>
+<span class="font-tech text-xs text-outline tracking-widest">BEAM/WASH</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Móviles 1940</h3>
+</div>
+</div>
+<!-- Gear Card 10 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 0;">blur_on</span>
+<span class="font-tech text-xs text-outline tracking-widest">FX</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Nebula 18</h3>
+</div>
+</div>
+<!-- Gear Card 11 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="p-5 bg-surface-container-highest flex justify-between items-center">
+<span class="material-symbols-outlined text-secondary text-3xl" style="font-variation-settings: 'FILL' 0;">view_stream</span>
+<span class="font-tech text-xs text-outline tracking-widest">STRIP</span>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15">
+<h3 class="font-tech text-on-surface text-lg uppercase tracking-wide">Barras Led</h3>
+</div>
+</div>
+<!-- Gear Card 12 -->
+<div class="bg-surface-container-low rounded-DEFAULT overflow-hidden group relative md:col-span-2 lg:col-span-3">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-tertiary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="h-24 bg-surface-dim relative overflow-hidden">
+<img alt="LED Screen" class="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500" data-alt="Large scale LED video wall matrix displaying abstract digital patterns in blue and purple" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkS2CGytFIwAAVQra98_iRQbAEe7wjLbPJU2LOxKMEzrjsqRviQPZse9wm1_uUlG1tJ5R61UKboYMcEmOPxw7niUO2i8DkHB3wdNj2Ycu4Q7Hz1dz0y_VEsc2hMB3JT5zAY7mcSNtf2WFreM0bYrYK2isvOsheHfAfojdUvgLdEBbRW7A7W06Z2PKrQbFbt9avKq51j7JokwXru04UoQKO8j3TFS8VKYl7k2KEdSarN5_taFVNmHqcy3c3iUFpZEOQGMNNfUlJdQ"/>
+</div>
+<div class="p-5 bg-surface-container-high border-t border-outline-variant/15 flex justify-between items-center">
+<h3 class="font-tech text-on-surface text-xl uppercase tracking-wide">Pantalla Led</h3>
+<span class="font-tech text-tertiary text-sm tracking-widest">5x3 MTS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer JSON Component -->
+<footer class="w-full border-t border-neutral-800/30 bg-[#0A0A0A] mt-auto relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 max-w-7xl mx-auto">
+<div class="flex flex-col gap-4">
+<span class="font-['Bebas_Neue'] text-xl text-sky-400">TOP SHOW PRO</span>
+<span class="font-['Montserrat'] text-xs tracking-widest text-neutral-500">© 2024 TOP SHOW PRO | THE KINETIC BLUEPRINT</span>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">TEATRAL</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">DISCOTECAS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CORPORATIVOS</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">PRIVADAS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">SPECS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CONTACT</a>
+</div>
+</div>
+</footer>
+</body></html>
