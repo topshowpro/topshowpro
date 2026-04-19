@@ -6,7 +6,7 @@
 
 ## Acceso al Studio
 
-**URL:** [https://topshowpro.sanity.studio](https://topshowpro.sanity.studio)
+**URL:** [https://top-show-pro.vercel.app/studio]( https://top-show-pro.vercel.app/studio)
 *(También disponible en `/studio` cuando el servidor de desarrollo está corriendo)*
 
 El panel lateral izquierdo tiene estas secciones:
@@ -26,6 +26,19 @@ El panel lateral izquierdo tiene estas secciones:
 | 📬 | Categorías de Contacto | Opciones del formulario de contacto |
 | 📥 | Consultas recibidas | Formularios enviados por visitantes |
 | 🔍 | SEO Defaults | Título y descripción globales |
+| 🧪 | Vision | Herramienta técnica de consulta (uso interno) |
+
+### ⚠️ Notas importantes sobre el acceso
+Existen dos URLs de acceso, pero **siempre debés usar la de Vercel**:
+
+1. **URL de Vercel (Recomendada):** `https://top-show-pro.vercel.app/studio`
+   - Está vinculada directamente al código. Si el equipo técnico hace un cambio, lo ves acá al instante.
+2. **URL de Sanity.io (Desactualizada):** `https://topshowpro.sanity.studio`
+   - Es una instancia independiente que requiere despliegue manual. Suele estar desactualizada respecto a la versión de Vercel.
+
+### 🌐 Cambio de dominio y CORS
+Si decidís conectar un dominio propio (ej: `topshowpro.com.ar`), el Studio estará en `topshowpro.com.ar/studio`. 
+**Recordatorio:** Al cambiar el dominio, se debe entrar a [manage.sanity.io](https://manage.sanity.io) > API > CORS Origins y agregar la nueva URL con "Allow credentials" activado para que Sanity dé permiso de conexión al nuevo dominio.
 
 ---
 
@@ -99,8 +112,8 @@ Cada documento de cliente tiene:
 
 ### 1.4 Servicios (grilla en homepage)
 
-Los primeros 5 servicios activos aparecen en la grilla de la homepage. Cada tarjeta muestra:
-- Ícono
+Los primeros 5 servicios activos aparecen en la grilla de la homepage. Cada tarjeta muestra personalmente:
+
 - Nombre del servicio
 - Descripción corta
 - Primera imagen de la galería como fondo tenue
@@ -174,6 +187,7 @@ Cada evento es una tarjeta en la grilla y una página de detalle propia.
 #### Video del evento
 
 Pegar la URL directa de YouTube o Vimeo:
+
 - ✅ `https://www.youtube.com/watch?v=XXXXXXXXXXX`
 - ✅ `https://youtu.be/XXXXXXXXXXX`
 - ✅ `https://vimeo.com/XXXXXXXXX`
@@ -215,7 +229,7 @@ Si un servicio tiene un responsable técnico específico, completar:
 |-------|---------|
 | Nombre | Juan Pérez |
 | Teléfono | +54 11 8765-4321 |
-| Email | tecnico@topshowpro.com.ar |
+| Email | <tecnico@topshowpro.com.ar> |
 
 Si no se completa, el bloque de soporte técnico no aparece en ese servicio.
 
@@ -340,6 +354,7 @@ Categorías actuales: Producción Teatral, Discoteca, Evento Corporativo, Fiesta
 **Panel:** 📥 Consultas recibidas
 
 Cada vez que alguien envía el formulario de contacto, aparece un documento nuevo acá con:
+
 - Nombre, empresa, email, teléfono
 - Tipo de evento
 - Mensaje
@@ -437,7 +452,7 @@ Si necesitás cambiar alguno de estos textos, avisar al equipo de desarrollo.
 
 ## 10. Flujo de trabajo recomendado
 
-### Para agregar un evento nuevo:
+### Para agregar un evento nuevo
 
 1. Ir a **🎭 Eventos** → **Nuevo documento**
 2. Completar: Título, Slug (se genera automáticamente), Categoría, Fecha de inicio, Imagen hero
@@ -448,7 +463,7 @@ Si necesitás cambiar alguno de estos textos, avisar al equipo de desarrollo.
 7. Si querés que aparezca en la homepage: activar **Destacado** o agregarlo manualmente en **🏠 Homepage → Eventos Destacados**
 8. **Publicar** (botón verde arriba a la derecha)
 
-### Para agregar equipamiento nuevo:
+### Para agregar equipamiento nuevo
 
 1. Ir a **🔩 Ítems de Equipamiento** → **Nuevo documento**
 2. Completar nombre, marca y foto
@@ -457,7 +472,7 @@ Si necesitás cambiar alguno de estos textos, avisar al equipo de desarrollo.
 5. En el campo **Ítems**, agregar el ítem recién creado
 6. **Publicar** la categoría
 
-### Para actualizar datos de contacto:
+### Para actualizar datos de contacto
 
 1. Ir a **⚙️ Configuración del sitio**
 2. Modificar los campos deseados
