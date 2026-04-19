@@ -1,7 +1,15 @@
 export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: string | null }[] }) {
   const loop = [...brands, ...brands];
   return (
-    <div className="relative overflow-hidden py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+    <div
+      className="relative overflow-hidden py-16"
+      style={{
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
+      }}
+    >
       <div className="flex gap-16 animate-[marquee_40s_linear_infinite] whitespace-nowrap">
         {loop.map((b, i) => (
           <div
