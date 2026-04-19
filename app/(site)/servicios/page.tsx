@@ -58,8 +58,8 @@ export default async function ServiciosPage() {
             { num: '50+', label: 'Marcas de primer nivel' },
             { num: '24/7', label: 'Soporte técnico' },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="font-display text-5xl text-white mb-2" style={{ color: 'var(--accent-cyan)' }}>
+            <div key={stat.label} className="pl-4 text-left" style={{ borderLeft: '2px solid var(--accent-cyan)' }}>
+              <p className="font-display text-5xl mb-2" style={{ color: 'var(--accent-cyan)' }}>
                 {stat.num}
               </p>
               <p className="font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--text-faint)' }}>
