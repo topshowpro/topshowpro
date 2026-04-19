@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const links = [
@@ -42,10 +43,7 @@ export function Header() {
             <Link
               key={l.href}
               href={l.href}
-              className="font-sans text-sm uppercase tracking-widest transition"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseOver={(e) => { e.currentTarget.style.color = 'var(--accent-cyan)'; }}
-              onMouseOut={(e) => { e.currentTarget.style.color = 'var(--text-muted)'; }}
+              className="font-sans text-sm uppercase tracking-widest transition nav-link"
             >
               {l.label}
             </Link>
@@ -63,23 +61,29 @@ export function Header() {
         </button>
       </nav>
 
-      {open && (
-        <div
-          className="md:hidden px-6 py-8 space-y-4"
-          style={{ backgroundColor: 'var(--bg-base)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
-        >
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="block font-display text-3xl text-white hover:opacity-70 transition"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="md:hidden px-6 py-8 space-y-4"
+            style={{ backgroundColor: 'var(--bg-base)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+          >
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block font-display text-3xl text-white hover:opacity-70 transition"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
