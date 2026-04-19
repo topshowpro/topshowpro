@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'seoDefaults',
-  title: 'SEO Defaults',
+  title: '🔍 SEO Defaults',
   type: 'document',
   fields: [
     defineField({ name: 'titlePattern', type: 'string', initialValue: '{page} | Top Show Pro' }),

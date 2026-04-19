@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'contactCategory',
-  title: 'Contact Category',
+  title: '📬 Categorías de Contacto',
   type: 'document',
   fields: [
     defineField({ name: 'label', type: 'string', validation: (r) => r.required() }),

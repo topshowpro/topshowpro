@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'homepage',
-  title: 'Homepage',
+  title: '🏠 Homepage',
   type: 'document',
   fields: [
     defineField({ name: 'intro', type: 'array', of: [{ type: 'block' }], title: 'Intro (Hacemos que todo suceda)' }),

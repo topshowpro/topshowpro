@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'siteSettings',
-  title: 'Site Settings',
+  title: '⚙️ Configuración',
   type: 'document',
   fields: [
     defineField({ name: 'logo', type: 'image', options: { hotspot: true } }),

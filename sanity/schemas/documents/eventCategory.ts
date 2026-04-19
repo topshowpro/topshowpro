@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'eventCategory',
-  title: 'Event Category',
+  title: '🏷️ Categorías de Eventos',
   type: 'document',
   fields: [
     defineField({ name: 'label', type: 'string', validation: (r) => r.required() }),
