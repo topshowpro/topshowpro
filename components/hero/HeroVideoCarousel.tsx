@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { RevealText } from '@/components/motion/RevealText';
+import { NeonOrbs } from '@/components/ui/NeonOrbs';
 
 type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
 
@@ -17,9 +18,16 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   const slide = slides[idx];
 
   return (
-    <section className="relative h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
+    <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Focal beam background effect */}
       <div className="absolute inset-0 bg-focal-beam" />
+
+      {/* Neon ambient orbs */}
+      <NeonOrbs orbs={[
+        { color: 'cyan',   drift: 'a', size: '700px', top: '-180px',  right: '-150px', opacity: 0.7 },
+        { color: 'violet', drift: 'b', size: '500px', bottom: '-120px', left: '-80px',  opacity: 0.6 },
+        { color: 'mint',   drift: 'c', size: '300px', top: '40%',     left: '55%',     opacity: 0.35 },
+      ]} />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -37,7 +45,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               muted
               loop
               playsInline
-              className="h-full w-full object-cover opacity-50"
+              className="h-full w-full object-cover opacity-70"
               poster={slide.posterUrl ?? undefined}
             />
           ) : slide?.posterUrl ? (
@@ -45,7 +53,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               src={slide.posterUrl}
               alt=""
               fill
-              className="object-cover opacity-50"
+              className="object-cover opacity-70"
               priority
               sizes="100vw"
             />
@@ -60,7 +68,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
       <div className="relative z-10 flex h-full items-center justify-center px-6">
         <h1
-          className="text-center max-w-5xl font-display text-white leading-none"
+          className="text-center max-w-5xl font-display text-white leading-none text-neon-cyan"
           style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
         >
           <RevealText text={slide?.phrase ?? ''} key={idx} />
@@ -91,7 +99,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           {banner.cta && (
             <a
               href={banner.cta.link}
-              className="font-sans text-xs font-medium uppercase tracking-widest border-b border-black pb-0.5 text-black hover:opacity-70 transition"
+              className="font-sans text-xs font-medium uppercase tracking-widest px-4 py-2 btn-neon btn-neon-outline"
             >
               {banner.cta.label} →
             </a>

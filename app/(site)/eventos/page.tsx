@@ -1,32 +1,35 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { EventFilter } from '@/components/events/EventFilter';
 import { EventGrid } from '@/components/events/EventGrid';
 import { EventSkeleton } from '@/components/events/EventSkeleton';
 
 export default function EventosPage() {
   const [cats, setCats] = useState<{ label: string; slug: string }[]>([]);
-  const [events, setEvents] = useState<any[]>([]);
+  const [allEvents, setAllEvents] = useState<any[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/events?cats=1')
-      .then((r) => r.json())
-      .then(setCats);
+    Promise.all([
+      fetch('/api/events?cats=1', { cache: 'no-store' }).then((r) => r.json()),
+      fetch('/api/events', { cache: 'no-store' }).then((r) => r.json()),
+    ]).then(([cats, events]) => {
+      setCats(cats);
+      setAllEvents(events);
+      setLoading(false);
+    });
   }, []);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(`/api/events${active ? `?category=${active}` : ''}`)
-      .then((r) => r.json())
-      .then((data) => { setEvents(data); setLoading(false); });
-  }, [active]);
+  const events = useMemo(
+    () => active ? allEvents.filter((e) => e.category?.slug === active) : allEvents,
+    [allEvents, active],
+  );
 
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       <div
-        className="pt-32 pb-16 px-6 relative overflow-hidden"
+        className="pt-20 md:pt-32 pb-16 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         <div className="absolute inset-0 grid-overlay opacity-30" />
@@ -43,7 +46,7 @@ export default function EventosPage() {
         </div>
       </div>
 
-      <div className="pt-16 px-6 max-w-7xl mx-auto pb-24">
+      <div className="pt-16 px-6 max-w-7xl mx-auto pb-16 md:pb-24">
         <EventFilter categories={cats} active={active} onSelect={setActive} />
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

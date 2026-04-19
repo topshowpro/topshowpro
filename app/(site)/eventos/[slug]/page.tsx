@@ -46,7 +46,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </Link>
       </div>
       {/* Hero */}
-      <header className="relative h-[70svh] w-full overflow-hidden">
+      <header className="relative h-[50svh] md:h-[70svh] w-full overflow-hidden">
         {event.heroImage && (
           <Image
             src={event.heroImage.url}
@@ -176,7 +176,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
           >
             Galería
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
             {event.gallery.map((g: any, i: number) => (
               <div key={i} className="relative aspect-[4/3]" style={{ backgroundColor: 'var(--bg-surface)' }}>
                 <Image src={g.url} alt="" fill className="object-cover" sizes="(max-width: 1280px) 33vw, 400px" />
@@ -196,8 +196,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </h2>
         <a
           href="/contacto"
-          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest transition hover:opacity-80"
-          style={{ backgroundColor: 'var(--accent-cyan)', color: 'black' }}
+          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
         >
           Contactanos
         </a>

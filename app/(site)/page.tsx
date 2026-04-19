@@ -1,18 +1,22 @@
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_HERO, Q_HOMEPAGE, Q_BRANDS, Q_SERVICES } from '@/sanity/lib/queries';
+import { Q_HERO, Q_HOMEPAGE, Q_BRANDS, Q_SERVICES, Q_CLIENTS } from '@/sanity/lib/queries';
 import { HeroVideoCarousel } from '@/components/hero/HeroVideoCarousel';
 import { EventGrid } from '@/components/events/EventGrid';
 import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
+import { ClientsMarquee } from '@/components/clients/ClientsMarquee';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { ServiceCard } from '@/components/services/ServiceCard';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
+import { PortableText } from '@portabletext/react';
+import { NeonOrbs } from '@/components/ui/NeonOrbs';
 
 export default async function HomePage() {
-  const [hero, homepage, brands, services] = await Promise.all([
+  const [hero, homepage, brands, services, clients] = await Promise.all([
     sanityFetch<any>(Q_HERO, undefined, 'hero'),
     sanityFetch<any>(Q_HOMEPAGE, undefined, 'homepage'),
     sanityFetch<any[]>(Q_BRANDS, undefined, 'brand'),
     sanityFetch<any[]>(Q_SERVICES, undefined, 'service'),
+    sanityFetch<any[]>(Q_CLIENTS, undefined, 'client'),
   ]);
 
   return (
@@ -20,33 +24,46 @@ export default async function HomePage() {
       <OrganizationJsonLd />
       <HeroVideoCarousel slides={hero?.slides ?? []} banner={hero?.bannerAzul} />
 
+      {/* Clients marquee — right below hero */}
+      <ClientsMarquee clients={clients ?? []} />
+
       {/* Intro section */}
-      <section className="px-6 py-32 max-w-4xl mx-auto text-center">
-        <FadeIn>
-          <span className="font-mono text-xs uppercase tracking-widest mb-6 block" style={{ color: 'var(--accent-cyan)' }}>
-            — Quiénes somos
-          </span>
-          <h2
-            className="font-display text-white mb-8 leading-none"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-          >
-            Hacemos que todo suceda
-          </h2>
-          <p className="font-sans text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-            Acá es donde los eventos cobran vida. Somos tu aliado integral en soluciones técnicas
-            para espectáculos y eventos. Iluminación, sonido, pantallas LED, estructuras
-            y todo lo que lo hace posible son nuestro campo de acción.
-          </p>
-        </FadeIn>
+      <section className="relative overflow-hidden py-32">
+        <NeonOrbs orbs={[
+          { color: 'violet', drift: 'b', size: '600px', top: '-100px', right: '-200px', opacity: 0.5 },
+          { color: 'cyan',   drift: 'c', size: '300px', bottom: '-80px', left: '-60px', opacity: 0.3 },
+        ]} />
+        <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
+          <FadeIn>
+            <span className="font-mono text-xs uppercase tracking-widest mb-6 block" style={{ color: 'var(--accent-cyan)' }}>
+              — Quiénes somos
+            </span>
+            <h2
+              className="font-display text-white mb-8 leading-none text-neon-cyan"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
+            >
+              Hacemos que todo suceda
+            </h2>
+            <div className="font-sans text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+              {homepage?.intro
+                ? <PortableText value={homepage.intro} />
+                : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>
+              }
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
       {/* Services section */}
-      <section className="px-6 py-24" style={{ backgroundColor: 'var(--bg-surface)' }}>
-        <div className="max-w-7xl mx-auto">
+      <section className="relative overflow-hidden px-4 sm:px-6 py-24" style={{ backgroundColor: 'var(--bg-surface)' }}>
+        <NeonOrbs orbs={[
+          { color: 'cyan', drift: 'c', size: '400px', top: '-80px', right: '-60px', opacity: 0.25 },
+        ]} />
+        <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
             <div className="flex items-end justify-between mb-12">
               <h2
-                className="font-display text-white leading-none"
+                className="font-display text-white leading-none text-neon-cyan"
                 style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
               >
                 Servicios
@@ -60,10 +77,10 @@ export default async function HomePage() {
               </a>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {(services ?? []).map((s: any, i: number) => (
               <FadeIn key={s.name} delay={i * 0.1}>
-                <ServiceCard name={s.name} shortDesc={s.shortDesc} icon={s.icon} />
+                <ServiceCard name={s.name} shortDesc={s.shortDesc} icon={s.icon} coverImage={s.gallery?.[0]?.url ?? null} />
               </FadeIn>
             ))}
           </div>
@@ -71,11 +88,11 @@ export default async function HomePage() {
       </section>
 
       {/* Featured events section */}
-      <section className="px-6 py-24 max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
           <div className="flex items-end justify-between mb-12">
             <h2
-              className="font-display text-white leading-none"
+              className="font-display text-white leading-none text-neon-violet"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
             >
               Eventos destacados
@@ -96,24 +113,27 @@ export default async function HomePage() {
       <BrandsMarquee brands={brands ?? []} />
 
       {/* CTA section */}
-      <section className="px-6 py-32 text-center bg-focal-beam">
+      <section className="relative overflow-hidden px-4 sm:px-6 py-32 text-center bg-focal-beam">
+        <NeonOrbs orbs={[
+          { color: 'cyan',   drift: 'a', size: '700px', top: '-200px', left: '50%', opacity: 0.4 },
+          { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },
+        ]} />
         <FadeIn>
-          <span className="font-mono text-xs uppercase tracking-widest mb-6 block" style={{ color: 'var(--text-faint)' }}>
+          <span className="font-mono text-xs uppercase tracking-widest mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
             — Siguiente paso
           </span>
           <h2
-            className="font-display text-white mb-6 leading-none"
+            className="font-display text-white mb-6 leading-none text-neon-violet relative z-10"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
           >
             ¿Tu próximo evento?
           </h2>
-          <p className="font-sans text-lg mb-10 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
+          <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
             Contanos qué tenés en mente y te armamos una propuesta a medida.
           </p>
           <a
             href="/contacto"
-            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest transition hover:opacity-80"
-            style={{ backgroundColor: 'var(--accent-cyan)', color: 'black' }}
+            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan relative z-10"
           >
             Contactanos
           </a>

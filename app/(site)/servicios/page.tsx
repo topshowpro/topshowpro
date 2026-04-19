@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_SERVICES } from '@/sanity/lib/queries';
+import { Q_SERVICES, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
 import { ServiceTabs } from '@/components/services/ServiceTabs';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { buildMetadata } from '@/lib/seo';
@@ -12,15 +13,21 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function ServiciosPage() {
-  const services = await sanityFetch<any[]>(Q_SERVICES, undefined, 'service');
+  const [services, settings] = await Promise.all([
+    sanityFetch<any[]>(Q_SERVICES, undefined, 'service'),
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings'),
+  ]);
 
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Hero header */}
       <div
-        className="pt-32 pb-24 px-6 relative overflow-hidden"
+        className="pt-20 md:pt-32 pb-16 md:pb-24 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
+        {settings?.serviciosHero && (
+          <Image src={settings.serviciosHero} alt="" fill className="object-cover opacity-25" priority sizes="100vw" />
+        )}
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="absolute inset-0 bg-focal-beam" />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -51,7 +58,7 @@ export default async function ServiciosPage() {
         className="px-6 py-16"
         style={{ backgroundColor: 'var(--bg-surface)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
           {[
             { num: '15+', label: 'Años de experiencia' },
             { num: '500+', label: 'Eventos realizados' },
@@ -77,8 +84,7 @@ export default async function ServiciosPage() {
         </h2>
         <a
           href="/contacto"
-          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest transition hover:opacity-80"
-          style={{ backgroundColor: 'var(--accent-cyan)', color: 'black' }}
+          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
         >
           Hablemos
         </a>

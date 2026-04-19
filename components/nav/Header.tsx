@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -31,11 +32,16 @@ export function Header() {
       style={scrolled ? { backgroundColor: 'rgba(10,10,10,0.8)', borderBottom: '1px solid rgba(255,255,255,0.05)' } : {}}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link
-          href="/"
-          className="font-display text-2xl tracking-wider text-white hover:opacity-80 transition"
-        >
-          TOP SHOW PRO
+        <Link href="/" className="flex items-center hover:opacity-85 transition">
+          <Image
+            src="/Top-show-pro_logo.png"
+            alt="Top Show Pro"
+            width={160}
+            height={40}
+            className="h-9 w-auto"
+            style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
+            priority
+          />
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
@@ -52,7 +58,7 @@ export function Header() {
 
         <button
           onClick={() => setOpen((o) => !o)}
-          className="md:hidden text-white p-2"
+          className="md:hidden text-white p-3"
           aria-label="Menu"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -76,7 +82,7 @@ export function Header() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="block font-display text-3xl text-white hover:opacity-70 transition"
+                className="block font-display text-xl md:text-3xl text-white hover:opacity-70 transition"
               >
                 {l.label}
               </Link>

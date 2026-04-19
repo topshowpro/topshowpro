@@ -15,7 +15,7 @@ export function EventFilter({
       <button
         onClick={() => onSelect(null)}
         className={cn(
-          'px-4 py-2 font-mono text-xs uppercase tracking-widest transition',
+          'px-4 py-3 font-mono text-xs uppercase tracking-widest transition',
           active === null
             ? 'text-black'
             : 'text-[var(--text-muted)] hover:border-[var(--accent-cyan)]'
@@ -32,7 +32,7 @@ export function EventFilter({
           key={c.slug}
           onClick={() => onSelect(c.slug)}
           className={cn(
-            'px-4 py-2 font-mono text-xs uppercase tracking-widest transition',
+            'px-4 py-3 font-mono text-xs uppercase tracking-widest transition',
             active === c.slug
               ? 'text-black'
               : 'text-[var(--text-muted)] hover:border-[var(--accent-cyan)]'

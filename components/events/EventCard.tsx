@@ -30,6 +30,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, 33vw"
+        quality={75}
         placeholder={lqip ? 'blur' : 'empty'}
         blurDataURL={lqip ?? undefined}
       />
@@ -46,7 +47,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
           {category.label}
         </span>
         <h3
-          className="font-display text-3xl leading-none text-white"
+          className="font-display text-2xl md:text-3xl leading-none text-white"
         >
           {title}
         </h3>

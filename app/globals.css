@@ -82,6 +82,28 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(100%); }
   }
+
+  /* Neon orb drift paths */
+  @keyframes orb-drift-a {
+    0%, 100% { transform: translate(0px, 0px); }
+    25%  { transform: translate(40px, -50px); }
+    50%  { transform: translate(-25px, 35px); }
+    75%  { transform: translate(30px, 15px); }
+  }
+  @keyframes orb-drift-b {
+    0%, 100% { transform: translate(0px, 0px); }
+    25%  { transform: translate(-45px, 30px); }
+    50%  { transform: translate(30px, -40px); }
+    75%  { transform: translate(-15px, -20px); }
+  }
+  @keyframes orb-drift-c {
+    0%, 100% { transform: translate(0px, 0px); }
+    33%  { transform: translate(20px, 50px); }
+    66%  { transform: translate(-30px, -30px); }
+  }
+  --animate-orb-a: orb-drift-a 22s ease-in-out infinite;
+  --animate-orb-b: orb-drift-b 28s ease-in-out infinite;
+  --animate-orb-c: orb-drift-c 34s ease-in-out infinite;
 }
 
 :root {
@@ -301,6 +323,59 @@ body {
   color: var(--accent-cyan);
 }
 
+/* ── Neon ambient orbs ───────────────────────────────────────────────────── */
+
+.neon-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.neon-orb-a { animation: orb-drift-a 22s ease-in-out infinite; }
+.neon-orb-b { animation: orb-drift-b 28s ease-in-out infinite; }
+.neon-orb-c { animation: orb-drift-c 34s ease-in-out infinite; }
+
+.neon-orb-cyan {
+  background: radial-gradient(circle at center, rgba(0,191,255,0.28) 0%, rgba(0,191,255,0.08) 40%, transparent 70%);
+  filter: blur(60px);
+}
+.neon-orb-violet {
+  background: radial-gradient(circle at center, rgba(123,97,255,0.22) 0%, rgba(123,97,255,0.06) 40%, transparent 70%);
+  filter: blur(70px);
+}
+.neon-orb-mint {
+  background: radial-gradient(circle at center, rgba(0,255,156,0.18) 0%, rgba(0,255,156,0.05) 40%, transparent 70%);
+  filter: blur(65px);
+}
+
+/* ── Neon text glow ──────────────────────────────────────────────────────── */
+
+.text-neon-cyan {
+  text-shadow:
+    0 0  4px rgba(0,191,255,0.9),
+    0 0 12px rgba(0,191,255,0.55),
+    0 0 28px rgba(0,191,255,0.3),
+    0 0 60px rgba(0,191,255,0.12);
+}
+.text-neon-violet {
+  text-shadow:
+    0 0  4px rgba(123,97,255,0.9),
+    0 0 12px rgba(123,97,255,0.55),
+    0 0 28px rgba(123,97,255,0.3),
+    0 0 60px rgba(123,97,255,0.12);
+}
+.text-neon-mint {
+  text-shadow:
+    0 0  4px rgba(0,255,156,0.9),
+    0 0 12px rgba(0,255,156,0.5),
+    0 0 28px rgba(0,255,156,0.25),
+    0 0 60px rgba(0,255,156,0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neon-orb { animation: none !important; }
+}
+
 /* Service CTA button */
 .service-cta {
   background-color: var(--bg-elevated);
@@ -310,4 +385,80 @@ body {
 .service-cta:hover {
   background-color: var(--accent-cyan);
   color: var(--bg-base);
+}
+
+/* ── Neon CTA Button ──────────────────────────────────────────────────────── *
+ * Rest:  ::before square rotates with conic-gradient (no @property needed)   *
+ * Hover: multi-layer cyan box-shadow pulse                                    *
+ * Usage: className="btn-neon btn-neon-cyan"  or  "btn-neon btn-neon-outline" *
+ * --------------------------------------------------------------------------- */
+
+@keyframes neon-border-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.btn-neon {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  isolation: isolate;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  transition: box-shadow 0.4s ease;
+}
+
+/* Rotating gradient square — clipped to button bounds by overflow:hidden */
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    transparent 45%,
+    rgba(0, 191, 255, 0.5) 58%,
+    var(--accent-cyan) 68%,
+    var(--accent-violet) 80%,
+    rgba(180, 100, 255, 0.4) 88%,
+    transparent 96%
+  );
+  animation: neon-border-spin 3s linear infinite;
+  z-index: -2;
+}
+
+/* Inner fill — masks center, leaving 3px border strip visible */
+.btn-neon::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 2px;
+  background: var(--btn-fill, var(--bg-base));
+  z-index: -1;
+}
+
+.btn-neon:hover:not(:disabled) {
+  box-shadow:
+    0 0 12px var(--accent-cyan),
+    0 0 30px rgba(0, 191, 255, 0.6),
+    0 0 60px rgba(0, 191, 255, 0.25),
+    0 0 100px rgba(0, 191, 255, 0.08);
+}
+
+/* Solid cyan fill — primary CTA */
+.btn-neon-cyan {
+  --btn-fill: var(--accent-cyan);
+  color: #000 !important;
+}
+
+/* Dark surface fill — secondary / outline CTA */
+.btn-neon-outline {
+  --btn-fill: var(--bg-surface);
+  color: var(--accent-cyan) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-neon::before { animation: none; }
 }

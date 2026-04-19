@@ -10,7 +10,7 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
       }}
     >
-      <div className="flex gap-16 animate-[marquee_40s_linear_infinite] whitespace-nowrap">
+      <div className="flex gap-8 md:gap-16 animate-[marquee_40s_linear_infinite] whitespace-nowrap">
         {loop.map((b, i) => (
           <div
             key={i}

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { sanityFetch } from '@/sanity/lib/client';
 import { Q_CONTACT_CATEGORIES, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
 import { ContactForm } from '@/components/contact/ContactForm';
@@ -20,9 +21,12 @@ export default async function ContactoPage() {
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Header */}
       <div
-        className="pt-32 pb-12 px-6 relative overflow-hidden"
+        className="pt-20 md:pt-32 pb-12 px-4 sm:px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
+        {settings?.contactoHero && (
+          <Image src={settings.contactoHero} alt="" fill className="object-cover opacity-25" priority sizes="100vw" />
+        )}
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
           <span
@@ -41,8 +45,8 @@ export default async function ContactoPage() {
       </div>
 
       {/* Two-column layout */}
-      <div className="px-6 py-16 max-w-7xl mx-auto pb-24 grid grid-cols-1 lg:grid-cols-2 gap-16">
-        <div>
+      <div className="px-4 sm:px-6 py-16 max-w-7xl mx-auto pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
+        <div className="flex flex-col">
           <p className="font-sans text-lg mb-12" style={{ color: 'var(--text-muted)' }}>
             Dejanos tu consulta y te respondemos en 24hs hábiles.
           </p>

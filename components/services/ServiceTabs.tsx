@@ -2,15 +2,18 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+import { PortableText } from '@portabletext/react';
 import { cn } from '@/lib/utils';
 
 type ServiceImage = { url: string; metadata?: { lqip?: string } | null };
+type TechContact = { name: string; phone: string; email: string };
 type Service = {
   name: string;
   shortDesc: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   longDesc: any;
   gallery: ServiceImage[];
+  techContact?: TechContact;
   cta?: { label: string; link: string };
 };
 
@@ -55,12 +58,25 @@ export function ServiceTabs({ services }: { services: Service[] }) {
           >
             {/* Text */}
             <div>
-              <h3 className="font-display text-5xl text-white mb-4">{current?.name}</h3>
-              <p className="font-sans text-lg mb-8" style={{ color: 'var(--text-muted)' }}>{current?.shortDesc}</p>
+              <h3 className="font-display text-3xl md:text-5xl text-white mb-4">{current?.name}</h3>
+              <div className="font-sans text-lg mb-8" style={{ color: 'var(--text-muted)' }}>
+                {current?.longDesc?.length > 0
+                  ? <PortableText value={current.longDesc} />
+                  : <p>{current?.shortDesc}</p>
+                }
+              </div>
+              {current?.techContact && (
+                <div className="mb-8 p-4 font-mono text-sm" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
+                  <p className="uppercase tracking-widest text-xs mb-3" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
+                  <p className="text-white mb-1">{current.techContact.name}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>
+                </div>
+              )}
               {current?.cta && (
                 <a
                   href={current.cta.link}
-                  className="service-cta inline-block px-6 py-3 font-sans text-sm uppercase tracking-widest transition"
+                  className="inline-block px-6 py-3 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-outline"
                 >
                   {current.cta.label}
                 </a>
@@ -123,12 +139,24 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                   />
                 </div>
               )}
-              <p className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>{s.shortDesc}</p>
+              <div className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>
+                {s.longDesc?.length > 0
+                  ? <PortableText value={s.longDesc} />
+                  : <p>{s.shortDesc}</p>
+                }
+              </div>
+              {s.techContact && (
+                <div className="mt-4 p-3 font-mono text-xs" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
+                  <p className="uppercase tracking-widest mb-2" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
+                  <p className="text-white">{s.techContact.name}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{s.techContact.phone}</p>
+                  <p style={{ color: 'var(--text-muted)' }}>{s.techContact.email}</p>
+                </div>
+              )}
               {s.cta && (
                 <a
                   href={s.cta.link}
-                  className="inline-block mt-4 px-4 py-2 font-sans text-xs uppercase"
-                  style={{ border: '1px solid var(--accent-cyan)', color: 'var(--accent-cyan)' }}
+                  className="inline-block mt-4 px-4 py-2 font-sans text-xs uppercase btn-neon btn-neon-outline"
                 >
                   {s.cta.label}
                 </a>

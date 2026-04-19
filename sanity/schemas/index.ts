@@ -8,6 +8,7 @@ import service from './documents/service';
 import equipmentCategory from './documents/equipmentCategory';
 import equipmentItem from './documents/equipmentItem';
 import brand from './documents/brand';
+import client from './documents/client';
 import contactCategory from './documents/contactCategory';
 import lead from './documents/lead';
 import seoFields from './objects/seoFields';
@@ -18,7 +19,7 @@ export const schemaTypes = [
   // singletons
   siteSettings, hero, homepage, seoDefaults,
   // documents
-  event, eventCategory, service, equipmentCategory, equipmentItem, brand, contactCategory, lead,
+  event, eventCategory, service, equipmentCategory, equipmentItem, brand, client, contactCategory, lead,
   // objects
   seoFields, ctaBlock, mediaPicker,
 ];

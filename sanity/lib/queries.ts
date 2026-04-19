@@ -10,14 +10,26 @@ export const Q_HERO = `*[_type == "hero"][0]{
 export const Q_HOMEPAGE = `*[_type == "homepage"][0]{
   intro,
   ctaLabel,
-  "featuredEvents": featuredEvents[]->{
-    title, subtitle, "slug": slug.current, dateStart, dateEnd,
-    "category": category->{label, "slug": slug.current},
-    "heroImage": heroImage.asset->{url, metadata{lqip}}
-  }
+  "featuredEvents": coalesce(
+    featuredEvents[]->{
+      title, subtitle, "slug": slug.current, dateStart, dateEnd,
+      "category": category->{label, "slug": slug.current},
+      "heroImage": heroImage.asset->{url, metadata{lqip}}
+    },
+    *[_type == "event" && featured == true] | order(dateStart desc)[0...4] {
+      title, subtitle, "slug": slug.current, dateStart, dateEnd,
+      "category": category->{label, "slug": slug.current},
+      "heroImage": heroImage.asset->{url, metadata{lqip}}
+    }
+  )
 }`;
 
-export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]`;
+export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
+  logo, address, email, phone, schedule, socials, techContact,
+  "serviciosHero":    serviciosHero.asset->url,
+  "equipamientoHero": equipamientoHero.asset->url,
+  "contactoHero":     contactoHero.asset->url
+}`;
 
 export const Q_EVENTS_LIST = (category?: string) => `*[_type == "event"${category ? ` && category->slug.current == "${category}"` : ''}] | order(dateStart desc) {
   title, subtitle, "slug": slug.current, dateStart, dateEnd,
@@ -37,15 +49,16 @@ export const Q_EVENT_DETAIL = `*[_type == "event" && slug.current == $slug][0]{
 export const Q_EVENT_CATEGORIES = `*[_type == "eventCategory"] | order(order asc){ label, "slug": slug.current, icon }`;
 
 export const Q_SERVICES = `*[_type == "service"] | order(order asc){
-  name, icon, shortDesc, longDesc,
+  name, icon, shortDesc, longDesc, techContact,
   "gallery": gallery[].asset->{url, metadata{lqip}},
   cta
 }`;
 
 export const Q_EQUIPMENT_CATEGORIES = `*[_type == "equipmentCategory"] | order(order asc){
   name, "slug": slug.current, description,
+  "heroImage": heroImage.asset->url,
   "items": items[]->{
-    name, specs,
+    name,
     "photo": photo.asset->{url, metadata{lqip}},
     "brand": brand->{name}
   }
@@ -57,5 +70,7 @@ export const Q_BRANDS = `*[_type == "brand"] | order(name asc){
 }`;
 
 export const Q_CONTACT_CATEGORIES = `*[_type == "contactCategory"] | order(order asc){ label }`;
+
+export const Q_CLIENTS = `*[_type == "client"] | order(order asc){ name, website, "logoUrl": logo.asset->url }`;
 
 export const Q_SEO_DEFAULTS = `*[_type == "seoDefaults"][0]`;

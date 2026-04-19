@@ -30,6 +30,9 @@ export default defineType({
         { name: 'email', type: 'string' },
       ],
     }),
+    defineField({ name: 'serviciosHero',    title: 'Hero imagen: Servicios',    type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'equipamientoHero', title: 'Hero imagen: Equipamiento', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'contactoHero',     title: 'Hero imagen: Contacto',     type: 'image', options: { hotspot: true } }),
   ],
   preview: { select: { title: 'email' }, prepare: () => ({ title: 'Site Settings' }) },
 });

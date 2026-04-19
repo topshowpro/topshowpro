@@ -1,5 +1,6 @@
+import Image from 'next/image';
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_EQUIPMENT_CATEGORIES, Q_BRANDS } from '@/sanity/lib/queries';
+import { Q_EQUIPMENT_CATEGORIES, Q_BRANDS, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
 import { CategorySection } from '@/components/equipment/CategorySection';
 import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
 import { FadeIn } from '@/components/motion/FadeIn';
@@ -13,18 +14,22 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function EquipamientoPage() {
-  const [categories, brands] = await Promise.all([
+  const [categories, brands, settings] = await Promise.all([
     sanityFetch<any[]>(Q_EQUIPMENT_CATEGORIES, undefined, 'equipmentCategory'),
     sanityFetch<any[]>(Q_BRANDS, undefined, 'brand'),
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings'),
   ]);
 
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Header */}
       <div
-        className="pt-32 pb-24 px-6 relative overflow-hidden"
+        className="pt-20 md:pt-32 pb-16 md:pb-24 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
+        {settings?.equipamientoHero && (
+          <Image src={settings.equipamientoHero} alt="" fill className="object-cover opacity-25" priority sizes="100vw" />
+        )}
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="absolute inset-0 bg-focal-beam" />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -78,8 +83,7 @@ export default async function EquipamientoPage() {
           </p>
           <a
             href="/contacto"
-            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest transition hover:opacity-80"
-            style={{ backgroundColor: 'var(--accent-cyan)', color: 'black' }}
+            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
           >
             Solicitar cotización
           </a>
