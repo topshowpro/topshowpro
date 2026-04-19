@@ -93,11 +93,11 @@ const IMAGES = {
 
   // ── Servicio: Técnica Teatral ──────────────────────────
   svcTeatralGal1: {
-    url: 'https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?w=1200&q=80',
+    url: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=1200&q=80',
     filename: 'svc-teatral-gal-1.jpg',
   },
   svcTeatralGal2: {
-    url: 'https://images.unsplash.com/photo-1598387993441-a364f854cfba?w=1200&q=80',
+    url: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=1200&q=80',
     filename: 'svc-teatral-gal-2.jpg',
   },
   svcTeatralGal3: {
@@ -147,9 +147,23 @@ const IMAGES = {
     filename: 'svc-venta-gal-3.jpg',
   },
 
+  // ── Servicio: Servicio Técnico ─────────────────────────
+  svcTecnicoGal1: {
+    url: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=1200&q=80',
+    filename: 'svc-tecnico-gal-1.jpg',
+  },
+  svcTecnicoGal2: {
+    url: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&q=80',
+    filename: 'svc-tecnico-gal-2.jpg',
+  },
+  svcTecnicoGal3: {
+    url: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1200&q=80',
+    filename: 'svc-tecnico-gal-3.jpg',
+  },
+
   // ── Evento: Amnesia BA (discoteca) ────────────────────────
   eventAmnesiaHero: {
-    url: 'https://images.unsplash.com/photo-1571266028243-d220c6a0b1e4?w=1920&q=80',
+    url: 'https://images.unsplash.com/photo-1470229538611-16ba8c7ffbd7?w=1920&q=80',
     filename: 'event-amnesia-hero.jpg',
   },
   eventAmnesiaGal1: {
@@ -427,6 +441,11 @@ async function uploadImages() {
       id: 'service-venta',
       label: 'Venta Equipamiento',
       galKeys: ['svcVentaGal1', 'svcVentaGal2', 'svcVentaGal3'],
+    },
+    {
+      id: 'service-tecnico',
+      label: 'Servicio Técnico',
+      galKeys: ['svcTecnicoGal1', 'svcTecnicoGal2', 'svcTecnicoGal3'],
     },
   ];
 
