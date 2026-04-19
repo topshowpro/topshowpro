@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { bebas, montserrat, orbitron } from '@/lib/fonts';
 import { buildMetadata } from '@/lib/seo';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 export const metadata: Metadata = buildMetadata({});
@@ -12,6 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
