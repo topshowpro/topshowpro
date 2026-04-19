@@ -1,5 +1,14 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
+
+function toEmbedUrl(url: string): string {
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]+)/);
+  if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}`;
+  const vimeoMatch = url.match(/vimeo\.com\/(\d+)/);
+  if (vimeoMatch) return `https://player.vimeo.com/video/${vimeoMatch[1]}`;
+  return url;
+}
 import { sanityFetch } from '@/sanity/lib/client';
 import { Q_EVENT_DETAIL } from '@/sanity/lib/queries';
 import { formatDateRange } from '@/lib/utils';
@@ -25,6 +34,17 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
 
   return (
     <article style={{ backgroundColor: 'var(--bg-base)' }}>
+      <div className="px-6 pt-24 pb-0 max-w-7xl mx-auto">
+        <Link
+          href="/eventos"
+          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest transition nav-link"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+            <path d="M10 12L6 8l4-4" />
+          </svg>
+          Volver a eventos
+        </Link>
+      </div>
       {/* Hero */}
       <header className="relative h-[70svh] w-full overflow-hidden">
         {event.heroImage && (
@@ -126,6 +146,23 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
                 {e}
               </div>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* Video */}
+      {event.video && (
+        <section className="max-w-5xl mx-auto px-6 py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <h2 className="font-display text-white mb-8 leading-none" style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}>
+            Video
+          </h2>
+          <div className="relative aspect-video w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)' }}>
+            <iframe
+              src={toEmbedUrl(event.video)}
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
           </div>
         </section>
       )}
