@@ -16,16 +16,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const inputStyle = {
-  backgroundColor: 'var(--bg-elevated)',
-  border: '1px solid rgba(255,255,255,0.1)',
-  color: 'white',
-  width: '100%',
-  padding: '12px 16px',
-  fontFamily: 'inherit',
-  outline: 'none',
-  fontSize: '15px',
-};
 
 export function ContactForm({ categories }: { categories: { label: string }[] }) {
   const {
@@ -60,7 +50,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="category" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Categoría
               </label>
-              <select id="category" {...register('category')} style={{ ...inputStyle, cursor: 'pointer' }}>
+              <select id="category" {...register('category')} className="form-select">
                 <option value="" style={{ backgroundColor: 'var(--bg-elevated)' }}>Seleccioná una opción</option>
                 {categories.map((c) => (
                   <option key={c.label} value={c.label} style={{ backgroundColor: 'var(--bg-elevated)' }}>
@@ -78,14 +68,14 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Nombre / Empresa
                 </label>
-                <input id="name" {...register('name')} style={inputStyle} />
+                <input id="name" {...register('name')} className="form-input" />
                 {errors.name && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.name.message}</p>}
               </div>
               <div>
                 <label htmlFor="phone" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Teléfono
                 </label>
-                <input id="phone" {...register('phone')} style={inputStyle} />
+                <input id="phone" {...register('phone')} className="form-input" />
               </div>
             </div>
 
@@ -93,7 +83,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Email
               </label>
-              <input id="email" type="email" {...register('email')} style={inputStyle} />
+              <input id="email" type="email" {...register('email')} className="form-input" />
               {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
             </div>
 
@@ -101,7 +91,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Consulta
               </label>
-              <textarea id="message" {...register('message')} rows={5} style={{ ...inputStyle, resize: 'vertical' }} />
+              <textarea id="message" {...register('message')} rows={5} className="form-textarea" />
               {errors.message && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.message.message}</p>}
             </div>
 

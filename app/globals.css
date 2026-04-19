@@ -102,6 +102,9 @@
   --text-muted: #CCCCCC;
   --text-faint: #7A7A7A;
 
+  /* Error */
+  --color-error: #FF6B6B;
+
   /* Layout */
   --border-subtle: rgba(255, 255, 255, 0.08);
   --overlay-dark: rgba(0, 0, 0, 0.6);
@@ -259,4 +262,52 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Form field utilities */
+.form-input,
+.form-select,
+.form-textarea {
+  background-color: var(--bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  width: 100%;
+  padding: 12px 16px;
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--accent-cyan);
+}
+
+.form-textarea {
+  resize: vertical;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+/* Navigation */
+.nav-link {
+  color: var(--text-muted);
+}
+.nav-link:hover {
+  color: var(--accent-cyan);
+}
+
+/* Service CTA button */
+.service-cta {
+  background-color: var(--bg-elevated);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+.service-cta:hover {
+  background-color: var(--accent-cyan);
+  color: var(--bg-base);
 }
