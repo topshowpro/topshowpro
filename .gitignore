@@ -37,6 +37,9 @@ yarn-error.log*
 # docs-refs (stitch mockups - large files, optional)
 # docs-refs/
 
+# claude local settings (personal overrides, not for team)
+.claude/settings.local.json
+
 # vercel
 .vercel
 
