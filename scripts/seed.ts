@@ -217,6 +217,20 @@ const brands = [
   { _id: 'brand-martin',    _type: 'brand', name: 'Martin Professional', website: 'https://martin.com' },
 ];
 
+// Clientes
+const clients = [
+  { _id: 'client-teatro-colon',    _type: 'client', name: 'Teatro Colón',           order: 1 },
+  { _id: 'client-movistar-arena',  _type: 'client', name: 'Movistar Arena',          order: 2 },
+  { _id: 'client-luna-park',       _type: 'client', name: 'Luna Park',               order: 3 },
+  { _id: 'client-lollapalooza',    _type: 'client', name: 'Lollapalooza Argentina',  order: 4 },
+  { _id: 'client-banco-galicia',   _type: 'client', name: 'Banco Galicia',           order: 5 },
+  { _id: 'client-telecom',         _type: 'client', name: 'Telecom Argentina',       order: 6 },
+  { _id: 'client-hard-rock',       _type: 'client', name: 'Hard Rock Cafe BA',       order: 7 },
+  { _id: 'client-bafici',          _type: 'client', name: 'BAFICI',                  order: 8 },
+  { _id: 'client-move-concerts',   _type: 'client', name: 'Move Concerts',           order: 9 },
+  { _id: 'client-mercadolibre',    _type: 'client', name: 'MercadoLibre',            order: 10 },
+];
+
 // Categorías de contacto
 const contactCategories = [
   { _id: 'cc-teatro',       _type: 'contactCategory', label: 'Producción Teatral',  order: 1 },
@@ -382,6 +396,7 @@ async function seed() {
     ...services.map((d) =>            ({ label: `Servicio: ${d.name}`,       doc: d })),
     ...brands.map((d) =>              ({ label: `Marca: ${d.name}`,          doc: d })),
     ...contactCategories.map((d) =>   ({ label: `Contacto: ${d.label}`,      doc: d })),
+    ...clients.map((d) =>            ({ label: `Cliente: ${d.name}`,         doc: d })),
   ];
 
   // createIfNotExists — NO sobrescribe; preserva imágenes cargadas por upload-images

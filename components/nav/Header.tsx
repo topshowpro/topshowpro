@@ -39,7 +39,7 @@ export function Header() {
             width={160}
             height={40}
             className="h-9 w-auto"
-            style={{ filter: 'invert(1)', mixBlendMode: 'screen' }}
+            style={{ filter: 'invert(1) hue-rotate(180deg)' }}
             priority
           />
         </Link>
