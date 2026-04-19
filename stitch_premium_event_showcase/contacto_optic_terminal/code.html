@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Terminal de Transmisión de Datos</title>
+<!-- Google Fonts: Space Grotesk (Headline/Display), Orbitron (Technical), Inter (Body) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Orbitron:wght@400;500;700;900&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-highest": "#353534",
+                    "background": "#131313",
+                    "on-background": "#e5e2e1",
+                    "secondary-container": "#fdc400",
+                    "on-secondary-fixed": "#251a00",
+                    "primary-fixed": "#c3e8ff",
+                    "on-surface": "#e5e2e1",
+                    "surface-dim": "#131313",
+                    "on-surface-variant": "#bcc8d1",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary-fixed": "#e4e2e3",
+                    "on-primary-fixed": "#001e2c",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#474748",
+                    "surface-container-high": "#2a2a2a",
+                    "primary": "#8fd6ff",
+                    "on-primary": "#003549",
+                    "primary-fixed-dim": "#7ad0ff",
+                    "surface": "#131313",
+                    "primary-container": "#00bfff",
+                    "secondary-fixed": "#ffdf96",
+                    "surface-variant": "#353534",
+                    "secondary-fixed-dim": "#f6bf00",
+                    "tertiary-fixed-dim": "#c8c6c7",
+                    "surface-container": "#201f1f",
+                    "inverse-primary": "#00668a",
+                    "tertiary": "#cfcdce",
+                    "on-error": "#690005",
+                    "surface-bright": "#3a3939",
+                    "on-tertiary": "#303031",
+                    "tertiary-container": "#b3b2b3",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#ffe6af",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-tint": "#7ad0ff",
+                    "on-secondary-container": "#6c5200",
+                    "on-secondary": "#3e2e00",
+                    "on-tertiary-container": "#444546",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-primary-container": "#004a65",
+                    "outline": "#87929b",
+                    "outline-variant": "#3d4850",
+                    "on-primary-fixed-variant": "#004c69",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-fixed-variant": "#5a4400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {},
+            "fontFamily": {
+                    "headline": [
+                            "Space Grotesk"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Space Grotesk"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Engineering Grid Utility */
+        .bg-engineering-grid {
+            background-size: 24px 24px;
+            background-image: 
+                linear-gradient(to right, rgba(61, 72, 80, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(61, 72, 80, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased min-h-screen flex flex-col selection:bg-primary-container/30 selection:text-primary-container">
+<!-- TopNavBar Shared Component -->
+<header class="sticky top-0 w-full z-50 bg-[#131313]/90 backdrop-blur-xl border-b border-[#00BFFF]/10 shadow-[0_4px_20px_rgba(0,191,255,0.05)]">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-[1920px] mx-auto">
+<!-- Brand Logo -->
+<div class="text-2xl font-black text-[#00BFFF] tracking-tighter">
+                TOP SHOW PRO
+            </div>
+<!-- Navigation Links (Hidden on mobile for this specific prompt, relying on top level desktop view) -->
+<nav class="hidden md:flex items-center gap-8 font-['Space_Grotesk'] tracking-wider font-bold uppercase">
+<a class="text-slate-400 font-medium hover:text-[#00BFFF] transition-colors duration-300" href="#">DASHBOARD</a>
+<a class="text-slate-400 font-medium hover:text-[#00BFFF] transition-colors duration-300" href="#">DEVICES</a>
+<a class="text-slate-400 font-medium hover:text-[#00BFFF] transition-colors duration-300" href="#">SCENES</a>
+<a class="text-slate-400 font-medium hover:text-[#00BFFF] transition-colors duration-300" href="#">SYSTEM</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-400">
+<button class="hover:text-[#00BFFF] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="hover:text-[#00BFFF] transition-colors duration-300">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+</button>
+</div>
+<div class="text-[#00BFFF] font-['Space_Grotesk'] tracking-wider font-bold uppercase text-sm border border-[#00BFFF]/30 px-3 py-1 rounded-sm bg-[#00BFFF]/5">
+                    SYSTEM_READY
+                </div>
+</div>
+</div>
+</header>
+<!-- Main Content Area: Data Transmission Terminal -->
+<main class="flex-grow relative flex items-center justify-center p-6 md:p-12 overflow-hidden">
+<!-- Deep Background Image Layer (Technicians) -->
+<div class="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-luminosity" data-alt="Technical operations control room with silhouettes of engineers working behind glowing monitors in deep shadow and blue ambient light" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClQX-s3OQhFC1s2joOU73GooZlDNk8A1_rOdwxuhYYUrwcOovXCj4y_raymoobPm9ZGmnJquTKZtLwcCUqc9JDSgJF7MIL2gOTfRgZh9H6xA-vw2OWoZynp4RXMeufS0j4OskmFqequDISKP_tHGodUshzlcX5T7MChRKbaW8aJ1-4z-CTtExdJ4kOf40sSrtsy1d-XyA9CeoRZo_m9ttc0FjqMzySiosiFNMSEwIJp3ODY_dd_dh91tTwx5N59dhC9Mh6wZk_rA');">
+</div>
+<!-- Ambient Radial Gradient Overlay -->
+<div class="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,rgba(0,191,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+<!-- Engineering Grid -->
+<div class="absolute inset-0 z-0 bg-engineering-grid pointer-events-none"></div>
+<!-- Terminal Form Container (The "Frosted Optic" Glass Panel) -->
+<div class="relative z-10 w-full max-w-3xl bg-surface-variant/60 backdrop-blur-[20px] p-8 md:p-14 shadow-[0_20px_40px_rgba(0,191,255,0.08)]">
+<!-- Blueprint L-Bracket Detail -->
+<div class="absolute top-0 right-0 w-12 h-12 border-t border-r border-primary-container pointer-events-none opacity-80"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-primary-container/30 pointer-events-none"></div>
+<!-- Header Section -->
+<div class="mb-12 border-b border-outline-variant/20 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline text-3xl md:text-5xl font-bold text-on-surface tracking-tight uppercase">
+                        Data Transmission
+                    </h1>
+<p class="font-body text-on-surface-variant mt-2 max-w-md">
+                        Initiate secure uplink to central command. Enter payload parameters below.
+                    </p>
+</div>
+<!-- Technical Readout (Orbitron) -->
+<div class="text-right flex flex-col items-start md:items-end gap-1">
+<div class="font-['Orbitron'] text-xs text-primary-container uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#00bfff] animate-pulse"></span>
+                        Uplink Secure
+                    </div>
+<div class="font-['Orbitron'] text-[10px] text-outline tracking-wider">
+                        FREQ: 144.05 MHz | ENC: AES-256
+                    </div>
+</div>
+</div>
+<!-- The Form -->
+<form class="space-y-10">
+<!-- Input Group: Name / ID -->
+<div class="relative group">
+<label class="font-['Orbitron'] text-[10px] text-primary-container uppercase tracking-widest block mb-1 opacity-80 group-focus-within:opacity-100 transition-opacity" for="id_code">
+                        [01] OPERATIVE_ID
+                    </label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 text-on-surface font-body text-lg focus:ring-0 focus:border-primary-container placeholder:text-outline-variant/50 pb-2 px-0 transition-colors" id="id_code" name="id_code" placeholder="Enter designation..." required="" type="text"/>
+</div>
+<!-- Input Group: Email / Vector -->
+<div class="relative group">
+<label class="font-['Orbitron'] text-[10px] text-primary-container uppercase tracking-widest block mb-1 opacity-80 group-focus-within:opacity-100 transition-opacity" for="return_vector">
+                        [02] RETURN_VECTOR (COMMS)
+                    </label>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant/30 text-on-surface font-body text-lg focus:ring-0 focus:border-primary-container placeholder:text-outline-variant/50 pb-2 px-0 transition-colors" id="return_vector" name="return_vector" placeholder="Awaiting comms channel..." required="" type="email"/>
+</div>
+<!-- Input Group: Message / Payload -->
+<div class="relative group">
+<label class="font-['Orbitron'] text-[10px] text-primary-container uppercase tracking-widest block mb-1 opacity-80 group-focus-within:opacity-100 transition-opacity flex justify-between" for="data_payload">
+<span>[03] DATA_PAYLOAD</span>
+<span class="text-outline-variant">MAX_BYTES: 4096</span>
+</label>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant/30 text-on-surface font-body text-lg focus:ring-0 focus:border-primary-container placeholder:text-outline-variant/50 pb-2 px-0 transition-colors resize-none" id="data_payload" name="data_payload" placeholder="Input raw data sequence..." required="" rows="4"></textarea>
+</div>
+<!-- Action Area -->
+<div class="pt-6 flex justify-end">
+<!-- Primary Power State Button -->
+<button class="relative bg-primary-container text-on-primary-container font-headline font-bold uppercase tracking-widest px-8 py-4 flex items-center gap-3 group transition-all hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background" type="submit">
+<!-- Simulated physical backlit edge -->
+<div class="absolute inset-x-0 top-0 h-[1px] bg-white/30 pointer-events-none"></div>
+<span>TRANSMIT DATA</span>
+<!-- Technical Arrow Icon -->
+<span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform" data-icon="send">send</span>
+</button>
+</div>
+</form>
+<!-- Decorative Wireframe Background inside Card -->
+<div class="absolute right-8 bottom-8 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl text-primary-container" data-icon="memory" style="font-variation-settings: 'wght' 100;">memory</span>
+</div>
+</div>
+</main>
+<!-- Footer Shared Component -->
+<footer class="w-full bg-[#131313] border-t border-[#00BFFF]/5 z-10 relative">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-8 py-6 gap-4">
+<!-- Copyright / Log -->
+<div class="font-['Orbitron'] text-[10px] tracking-widest uppercase text-[#00BFFF] flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="terminal">terminal</span>
+                © 2024 CLAY PAKY PRECISION OPTIC | LOG_0.982.11
+            </div>
+<!-- Footer Links -->
+<div class="flex flex-wrap justify-center md:justify-end items-center gap-6 font-['Orbitron'] text-[10px] tracking-widest uppercase">
+<a class="text-slate-600 hover:text-[#00BFFF] transition-all hover:brightness-125" href="#">SYSTEM_STATUS</a>
+<span class="text-slate-600 hover:text-[#00BFFF] transition-all hover:brightness-125 cursor-default">COORDINATES: 45.6517 N, 9.5891 E</span>
+<a class="text-slate-600 hover:text-[#00BFFF] transition-all hover:brightness-125" href="#">LEGAL_SCHEMATICS</a>
+<a class="text-slate-600 hover:text-[#00BFFF] transition-all hover:brightness-125" href="#">SUPPORT_TICKET</a>
+</div>
+</div>
+</footer>
+</body></html>

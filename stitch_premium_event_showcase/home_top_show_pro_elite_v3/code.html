@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Top Show Pro - Producción Técnica de Eventos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@300;400;500;600&amp;family=Montserrat:wght@400;500;600;700&amp;family=Orbitron:wght@400;500;700;900&amp;family=Space+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#87929b",
+                      "surface-dim": "#131313",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-primary-fixed-variant": "#004c69",
+                      "inverse-primary": "#00668a",
+                      "tertiary-container": "#00cc7c",
+                      "on-secondary": "#2e009c",
+                      "tertiary": "#00eb8f",
+                      "on-surface-variant": "#bcc8d1",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "surface-tint": "#7ad0ff",
+                      "on-primary-fixed": "#001e2c",
+                      "secondary-container": "#4720ca",
+                      "on-tertiary-fixed": "#002110",
+                      "tertiary-fixed": "#56ffa7",
+                      "surface-container-highest": "#353534",
+                      "secondary-fixed": "#e5deff",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#00522f",
+                      "primary-container": "#00bfff",
+                      "secondary": "#c9bfff",
+                      "surface-variant": "#353534",
+                      "on-tertiary": "#00391f",
+                      "surface": "#131313",
+                      "primary-fixed-dim": "#7ad0ff",
+                      "on-primary-container": "#004a65",
+                      "surface-container": "#201f1f",
+                      "surface-bright": "#3a3939",
+                      "inverse-on-surface": "#313030",
+                      "on-primary": "#003549",
+                      "on-secondary-fixed": "#1a0063",
+                      "inverse-surface": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "primary": "#8fd6ff",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-container": "#baaeff",
+                      "outline-variant": "#3d4850",
+                      "on-background": "#e5e2e1",
+                      "on-tertiary-container": "#00502d",
+                      "background": "#131313",
+                      "tertiary-fixed-dim": "#00e38a",
+                      "on-surface": "#e5e2e1",
+                      "primary-fixed": "#c3e8ff",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "surface-container-high": "#2a2a2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Bebas Neue", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Montserrat", "sans-serif"],
+                      "tech": ["Orbitron", "sans-serif"]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        
+        .bg-grid-overlay {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        
+        .shadow-ambient {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        .bg-scanner {
+            background: linear-gradient(90deg, transparent, rgba(0, 191, 255, 0.5), transparent);
+        }
+      </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-primary-container selection:text-background">
+<!-- TopAppBar -->
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-full fixed top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl border-b border-neutral-900/50 shadow-2xl shadow-sky-500/10">
+<div class="font-['Bebas_Neue'] text-3xl tracking-tighter text-sky-400">
+            TOP SHOW PRO
+        </div>
+<div class="hidden md:flex space-x-8">
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-sky-400 border-b-2 border-sky-400 pb-1" href="#">SERVICIOS</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-white transition-colors hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">PROYECTOS</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-white transition-colors hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">EQUIPAMIENTO</a>
+<a class="font-['Bebas_Neue'] uppercase tracking-widest text-lg text-neutral-400 hover:text-white transition-colors hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">CONTACTOS</a>
+</div>
+<div>
+<button class="bg-[#0A0A0A] border-[1.5px] border-primary-container hover:bg-primary-container hover:text-black text-white font-montserrat font-medium text-sm px-6 py-2 rounded-none transition-colors">
+                GET QUOTE
+            </button>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20">
+<!-- Background Image/Video representation -->
+<div class="absolute inset-0 z-0">
+<img alt="Concert Production" class="w-full h-full object-cover opacity-30" data-alt="Massive concert stage setup viewed from behind the sound desk, glowing blue and purple lights piercing through thick atmospheric haze, technical equipment silhouettes in foreground" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBARSrSvvJ3x4e1HUfCPdbrgF7g8aa3t6ZXZNLT9r5gsKQiPJTNg9Bv7ZUI7JS62oHn4oPmBtn69YZEsTzarrlIBySSOBBtER4dt8-6rwTBtuv2CaId6r0uw_F6fJjP7WbavzhlaoZ_OSpk7dTho61DWW0JwH5U0qoVgzrwQkUz6hjBP-mFqwASxAvjz9MNSiyJAo-WY0ENugQx1Obk38dqoim2GxX_0GoZoVZmUfzY0RC6tR1LhnmWXlllLOdnVlOrjoDW_LJmA"/>
+<div class="absolute inset-0 bg-background/70 mix-blend-multiply"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+</div>
+<div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col items-start justify-center">
+<p class="font-montserrat font-semibold text-[#5AA7E0] tracking-widest text-sm mb-6 uppercase">
+                Empresa rental de tecnología para eventos y espectáculos.
+            </p>
+<h1 class="font-bebas text-6xl md:text-8xl lg:text-9xl text-white leading-[0.85] tracking-tighter mb-4 max-w-4xl uppercase drop-shadow-2xl">
+                Producción completa.<br/>
+<span class="text-primary-container">Sin vueltas.</span>
+</h1>
+<div class="mt-8 flex flex-col sm:flex-row gap-4">
+<button class="bg-[#0A0A0A] border-[1.5px] border-primary-container hover:bg-primary-container hover:text-black text-white font-montserrat font-medium px-8 py-4 rounded-none transition-colors text-sm tracking-wider uppercase">
+                    CONTACTAR
+                </button>
+<button class="bg-surface-container/50 backdrop-blur-md border-[1px] border-outline-variant/30 hover:bg-surface-container-high text-white font-montserrat font-medium px-8 py-4 rounded-none transition-colors text-sm tracking-wider uppercase">
+                    VER PROYECTOS
+                </button>
+</div>
+<div class="mt-20 w-full flex items-center gap-4 opacity-70">
+<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
+<p class="font-orbitron text-tertiary text-xs tracking-[0.2em]">SISTEMAS ONLINE // OPERATIVOS</p>
+<div class="h-[1px] flex-grow bg-outline-variant/30"></div>
+</div>
+</div>
+<!-- Middle Banner -->
+<div class="absolute bottom-0 left-0 w-full bg-primary-container py-3 overflow-hidden z-20 shadow-[0_-10px_30px_rgba(0,191,255,0.2)]">
+<div class="flex whitespace-nowrap opacity-90">
+<h3 class="font-bebas text-black text-2xl tracking-widest px-8">MENOS PROVEEDORES. MÁS TOP SHOW.</h3>
+<h3 class="font-bebas text-black text-2xl tracking-widest px-8">MENOS PROVEEDORES. MÁS TOP SHOW.</h3>
+<h3 class="font-bebas text-black text-2xl tracking-widest px-8">MENOS PROVEEDORES. MÁS TOP SHOW.</h3>
+<h3 class="font-bebas text-black text-2xl tracking-widest px-8">MENOS PROVEEDORES. MÁS TOP SHOW.</h3>
+</div>
+</div>
+</header>
+<!-- Content Sections -->
+<main class="relative z-10 bg-background pb-32">
+<div class="absolute inset-0 bg-grid-overlay pointer-events-none z-0"></div>
+<!-- Solutions Grid -->
+<section class="relative z-10 pt-32 px-6 md:px-12 max-w-7xl mx-auto">
+<header class="mb-16">
+<h2 class="font-bebas text-5xl md:text-7xl text-white uppercase tracking-tight">Arquitectura<br/><span class="text-secondary">Técnica</span></h2>
+<div class="w-24 h-1 bg-scanner mt-4"></div>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors duration-500 rounded-sm overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="p-8 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary-container mb-6 block" data-icon="speaker" data-weight="fill" style="font-variation-settings: 'FILL' 1;">speaker</span>
+<h3 class="font-bebas text-3xl text-white mb-2 tracking-wide">AUDIO</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Sistemas Line Array de alta presión sonora. Control digital total para estadios y arenas.</p>
+</div>
+<div class="mt-8">
+<span class="font-orbitron text-[10px] text-tertiary tracking-widest">SYS.01 // ACTIVO</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors duration-500 rounded-sm overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-secondary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="p-8 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-secondary mb-6 block" data-icon="lightbulb" data-weight="fill" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h3 class="font-bebas text-3xl text-white mb-2 tracking-wide">ILUMINACIÓN</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Diseño lumínico inmersivo. Cabezales móviles, wash y spot de última generación.</p>
+</div>
+<div class="mt-8">
+<span class="font-orbitron text-[10px] text-tertiary tracking-widest">SYS.02 // ACTIVO</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors duration-500 rounded-sm overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-tertiary to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="p-8 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-tertiary mb-6 block" data-icon="tv" data-weight="fill" style="font-variation-settings: 'FILL' 1;">tv</span>
+<h3 class="font-bebas text-3xl text-white mb-2 tracking-wide">PANTALLAS LED</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Superficies modulares de alta resolución. Procesamiento de video 4K en tiempo real.</p>
+</div>
+<div class="mt-8">
+<span class="font-orbitron text-[10px] text-tertiary tracking-widest">SYS.03 // ACTIVO</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group bg-surface-container-low hover:bg-surface-container transition-colors duration-500 rounded-sm overflow-hidden relative">
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-outline to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="p-8 h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl text-outline mb-6 block" data-icon="architecture" data-weight="fill" style="font-variation-settings: 'FILL' 1;">architecture</span>
+<h3 class="font-bebas text-3xl text-white mb-2 tracking-wide">ESTRUCTURAS</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">Sistemas de soporte y rigging certificados. Escenarios modulares de alta carga.</p>
+</div>
+<div class="mt-8">
+<span class="font-orbitron text-[10px] text-tertiary tracking-widest">SYS.04 // ACTIVO</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-[#0A0A0A] border-t border-neutral-800/30">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 max-w-7xl mx-auto">
+<div>
+<div class="font-['Bebas_Neue'] text-xl text-sky-400 mb-6">TOP SHOW PRO</div>
+<p class="font-['Montserrat'] text-xs tracking-widest text-neutral-500">THE KINETIC BLUEPRINT</p>
+<p class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 mt-2">© 2024 TOP SHOW PRO</p>
+</div>
+<div class="flex flex-col space-y-4">
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">TEATRAL</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">DISCOTECAS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CORPORATIVOS</a>
+</div>
+<div class="flex flex-col space-y-4">
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">PRIVADAS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">SPECS</a>
+<a class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CONTACT</a>
+</div>
+</div>
+</footer>
+</body></html>

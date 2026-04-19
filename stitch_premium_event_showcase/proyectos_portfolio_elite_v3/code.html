@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PROYECTOS - TOP SHOW PRO</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600&amp;family=Montserrat:wght@400;500;600&amp;family=Orbitron:wght@400;500;700&amp;family=Space+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#87929b",
+                        "surface-dim": "#131313",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed-variant": "#004c69",
+                        "inverse-primary": "#00668a",
+                        "tertiary-container": "#00cc7c",
+                        "on-secondary": "#2e009c",
+                        "tertiary": "#00eb8f",
+                        "on-surface-variant": "#bcc8d1",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#c9bfff",
+                        "surface-tint": "#7ad0ff",
+                        "on-primary-fixed": "#001e2c",
+                        "secondary-container": "#4720ca",
+                        "on-tertiary-fixed": "#002110",
+                        "tertiary-fixed": "#56ffa7",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#e5deff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#00522f",
+                        "primary-container": "#00bfff",
+                        "secondary": "#c9bfff",
+                        "surface-variant": "#353534",
+                        "on-tertiary": "#00391f",
+                        "surface": "#131313",
+                        "primary-fixed-dim": "#7ad0ff",
+                        "on-primary-container": "#004a65",
+                        "surface-container": "#201f1f",
+                        "surface-bright": "#3a3939",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#003549",
+                        "on-secondary-fixed": "#1a0063",
+                        "inverse-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "primary": "#8fd6ff",
+                        "surface-container-low": "#1c1b1b",
+                        "on-secondary-container": "#baaeff",
+                        "outline-variant": "#3d4850",
+                        "on-background": "#e5e2e1",
+                        "on-tertiary-container": "#00502d",
+                        "background": "#131313",
+                        "tertiary-fixed-dim": "#00e38a",
+                        "on-surface": "#e5e2e1",
+                        "primary-fixed": "#c3e8ff",
+                        "on-secondary-fixed-variant": "#441cc8",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Bebas Neue", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Montserrat", "sans-serif"],
+                        "tech": ["Orbitron", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0A0A0A; color: #CCCCCC; font-family: 'Inter', sans-serif; }
+        .bg-surface { background-color: #131313; }
+        .bg-surface-container-low { background-color: #1c1b1b; }
+        .bg-surface-container { background-color: #201f1f; }
+        .bg-surface-container-high { background-color: #2a2a2a; }
+        .bg-surface-container-highest { background-color: #353534; }
+        
+        /* Grid Texture Overlay */
+        .grid-overlay {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Scanner Line */
+        .scanner-line {
+            position: relative;
+        }
+        .scanner-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #00BFFF, transparent);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative grid-overlay">
+<!-- Ambient Glow Background -->
+<div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+<div class="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-primary-container rounded-full blur-[150px] opacity-[0.05]"></div>
+<div class="absolute bottom-[-20%] right-[-10%] w-[40vw] h-[40vw] bg-secondary rounded-full blur-[150px] opacity-[0.05]"></div>
+</div>
+<!-- TopAppBar -->
+<header class="bg-[#0A0A0A]/80 backdrop-blur-xl docked full-width top-0 shadow-2xl shadow-sky-500/10 flex justify-between items-center w-full px-8 py-4 max-w-full fixed top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="font-['Bebas_Neue'] text-3xl tracking-tighter text-sky-400 font-headline uppercase">
+                TOP SHOW PRO
+            </div>
+<nav class="hidden md:flex gap-6 font-['Bebas_Neue'] uppercase tracking-widest text-lg font-headline">
+<a class="text-neutral-400 hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">SERVICIOS</a>
+<a class="text-sky-400 border-b-2 border-sky-400 pb-1 scale-95 active:scale-90 transition-transform" href="#">PROYECTOS</a>
+<a class="text-neutral-400 hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">EQUIPAMIENTO</a>
+<a class="text-neutral-400 hover:text-sky-300 transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">CONTACTOS</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#0A0A0A] border-[1.5px] border-primary-container text-white font-label font-medium px-6 py-2 rounded-none hover:bg-primary-container hover:text-[#0A0A0A] transition-colors text-sm tracking-wider uppercase">
+                GET QUOTE
+            </button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 max-w-[1600px] mx-auto w-full relative z-10">
+<!-- Header Section -->
+<div class="mb-16">
+<h2 class="text-primary tracking-widest text-sm font-label font-semibold mb-4 uppercase">OBSIDIAN ARCHIVE</h2>
+<h1 class="text-6xl md:text-8xl font-headline text-on-surface uppercase tracking-tight leading-none">NUESTROS<br/><span class="text-primary-container">PROYECTOS</span></h1>
+</div>
+<!-- Filter Bar -->
+<div class="flex flex-wrap gap-4 mb-12 border-b border-surface-container-highest pb-6">
+<button class="text-primary-container font-tech text-sm tracking-widest uppercase border-b-2 border-primary-container pb-1">ALL</button>
+<button class="text-on-surface-variant hover:text-on-surface font-tech text-sm tracking-widest uppercase pb-1 transition-colors">TV</button>
+<button class="text-on-surface-variant hover:text-on-surface font-tech text-sm tracking-widest uppercase pb-1 transition-colors">CONCERTS</button>
+<button class="text-on-surface-variant hover:text-on-surface font-tech text-sm tracking-widest uppercase pb-1 transition-colors">THEATER</button>
+<button class="text-on-surface-variant hover:text-on-surface font-tech text-sm tracking-widest uppercase pb-1 transition-colors">CORPORATE</button>
+<button class="text-on-surface-variant hover:text-on-surface font-tech text-sm tracking-widest uppercase pb-1 transition-colors">SOCIAL</button>
+</div>
+<!-- Portfolio Grid (Asymmetric Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[300px]">
+<!-- Item 1: Large Concert Card -->
+<div class="md:col-span-8 md:row-span-2 bg-surface-container-high rounded-DEFAULT overflow-hidden group relative scanner-line">
+<div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10"></div>
+<img alt="Concert Stage Design" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Massive outdoor concert stage at night with intense laser lights, led screens, and huge crowd silhouette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0o974rqOBgP1dnTsKRj8mC331npQz5l6dr3mCei4covJ-_OYscdIvTBDPRTUcWqFxfrISGwTZNOEadFSVyCdHBtrqAyJjh6pJ-vKAtP6rfb57OrchsN7_Nz5Kd84ivgRCZVKMxINXlQ3XUvb05wmMNFVJggJspZLn80bF8NqMaRY11MwkQFSFkKAnQVrwqgBbXTFLqY1WzDdM6DAXMESKN-rFe6utVqbequXq5xX3adaSDSLeW9CGa4RD4pHuWw8TtVgVS8AtRw"/>
+<div class="absolute bottom-0 left-0 p-8 z-20 w-full bg-gradient-to-t from-[#0A0A0A] to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<p class="text-primary-container font-label text-xs tracking-widest uppercase mb-2">CONCERTS</p>
+<h3 class="text-4xl font-headline text-white uppercase tracking-wider">NEON SYMPHONY FESTIVAL</h3>
+</div>
+<div class="absolute top-4 right-4 z-20 font-tech text-tertiary text-xs bg-surface-container-highest px-2 py-1 rounded-none border-l-2 border-tertiary shadow-[0_10px_20px_rgba(0,0,0,0.5)]">
+                    ID: PRJ-992
+                </div>
+</div>
+<!-- Item 2: Tall TV Card -->
+<div class="md:col-span-4 md:row-span-2 bg-surface-container-high rounded-DEFAULT overflow-hidden group relative scanner-line">
+<div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10"></div>
+<img alt="TV Studio Setup" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="High tech television studio broadcast set with sleek anchor desk, glowing blue panels and robotic cameras" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK8PGeRChaDUFswNREZisa_scWo01wc7zokg2RztnJK8OL4lnB9EyxqMsUhsv31N-0W4AEFQnDgzaZanYf6L3b9fitUZHSgNnPxofGQjDU91z18OVWGZiAIGXbb_u-_Qycz7Kh5gDrCJh6QWr5KPpojT9fMHuPt1FySAes2aAK7qGLPTYrDxLGVvUjZIFLVDPQgM4excxX0E48D0YWj4ShChh9sjO_UyDpaIIC1OvuqiBRxQ40eJDCfCMtiDtZs03lNk_-YLfVKw"/>
+<div class="absolute bottom-0 left-0 p-6 z-20 w-full bg-gradient-to-t from-[#0A0A0A] to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<p class="text-secondary font-label text-xs tracking-widest uppercase mb-2">TV</p>
+<h3 class="text-3xl font-headline text-white uppercase tracking-wider">GLOBAL NEWS NETWORK SET</h3>
+</div>
+<div class="absolute top-4 right-4 z-20 font-tech text-primary-container text-xs bg-surface-container-highest px-2 py-1 rounded-none border-l-2 border-primary-container">
+                    ID: PRJ-845
+                </div>
+</div>
+<!-- Item 3: Standard Corporate Card -->
+<div class="md:col-span-4 md:row-span-1 bg-surface-container-high rounded-DEFAULT overflow-hidden group relative scanner-line">
+<div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10"></div>
+<img alt="Corporate Event Tech" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Modern corporate tech conference stage with large presentation screen and minimalist lighting design" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOE1yyclKsnrk74_XAtAwLeiJU9r3xBwKZ7-LTztK8ENtk8ocHSDhYjb1dloVtPo1qTNS-lkpCQ6Y4F-4yC6Pq5S5tHC7rARFcobfEHWm6ZDZ9XFULUeo-1EA6aFkij15okQvZendMMUiyFjOuYehtUEdPnWwytC2au79MM_iDHpt92Avm5RR_KSchT-iTIjmXTsTlqutTg96qYLfbzEmhQ_j66aN_Qe0-Ra7pAQkHikpsFFih4hiE4C3k3XDECV8IdjYDGj4-Pg"/>
+<div class="absolute bottom-0 left-0 p-6 z-20 w-full bg-gradient-to-t from-[#0A0A0A] to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<p class="text-outline font-label text-xs tracking-widest uppercase mb-1">CORPORATE</p>
+<h3 class="text-2xl font-headline text-white uppercase tracking-wider">TECH SUMMIT 2024</h3>
+</div>
+<div class="absolute top-4 right-4 z-20 font-tech text-outline text-xs bg-surface-container-highest px-2 py-1 rounded-none border-l-2 border-outline">
+                    ID: PRJ-711
+                </div>
+</div>
+<!-- Item 4: Standard Theater Card -->
+<div class="md:col-span-4 md:row-span-1 bg-surface-container-high rounded-DEFAULT overflow-hidden group relative scanner-line">
+<div class="absolute inset-0 bg-black/60 group-hover:bg-black/20 transition-all duration-500 z-10"></div>
+<img alt="Theater Stage Lighting" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="Dramatic theatrical stage lighting illuminating an empty stage with atmospheric fog and deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAloawW5X6yzcDD1gF_djtXP7rTjwIICw9dBsnzl12d8lh1xraQfQ0igWJ8oX348Zad6hWliwJ-Mf-7v3REBGWe1lg-o1bPtVGg-IqFF-CS8XeiIc9kc86cDOJyog5lxU2WynI0zzLUVuJ2IeEfs2O09Q4BakA5-bw2U-EOSZygrglNGKhb1MOxVhmP2sDBTjpwftlcySXgXb9cOgRRhBCvwzulPv2FZT0xFpL48LmHBTPB3tR9AEk4WCjqOanmZEO2Ey3cuydAPQ"/>
+<div class="absolute bottom-0 left-0 p-6 z-20 w-full bg-gradient-to-t from-[#0A0A0A] to-transparent translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+<p class="text-tertiary font-label text-xs tracking-widest uppercase mb-1">THEATER</p>
+<h3 class="text-2xl font-headline text-white uppercase tracking-wider">THE PHANTOM RIGGING</h3>
+</div>
+<div class="absolute top-4 right-4 z-20 font-tech text-tertiary text-xs bg-surface-container-highest px-2 py-1 rounded-none border-l-2 border-tertiary">
+                    ID: PRJ-602
+                </div>
+</div>
+<!-- Item 5: Data Pulse Card (No image) -->
+<div class="md:col-span-4 md:row-span-1 bg-surface-container-highest border-l-[3px] border-tertiary p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 grid-overlay opacity-10 pointer-events-none"></div>
+<div>
+<h4 class="font-tech text-tertiary text-sm tracking-widest uppercase mb-4">SYSTEM STATS OVERVIEW</h4>
+<div class="font-tech text-4xl text-white mb-2">14,500+</div>
+<div class="font-label text-xs text-on-surface-variant tracking-widest uppercase">TRUSS METERS DEPLOYED</div>
+</div>
+<div class="flex justify-between items-end border-t border-surface-container mt-6 pt-4">
+<div class="font-tech text-xs text-outline">SYS_UPTIME: 99.9%</div>
+<span class="material-symbols-outlined text-tertiary text-xl" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#0A0A0A] w-full border-t border-neutral-800/30 grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 max-w-7xl mx-auto relative z-20">
+<div>
+<div class="font-['Bebas_Neue'] text-xl text-sky-400 font-headline uppercase mb-4">TOP SHOW PRO</div>
+<p class="font-['Montserrat'] text-xs tracking-widest text-neutral-500 font-label">© 2024 TOP SHOW PRO | THE KINETIC BLUEPRINT</p>
+</div>
+<div class="md:col-span-2 flex flex-wrap gap-x-8 gap-y-4 font-['Montserrat'] text-xs tracking-widest font-label uppercase">
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">TEATRAL</a>
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">DISCOTECAS</a>
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CORPORATIVOS</a>
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">PRIVADAS</a>
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">SPECS</a>
+<a class="text-neutral-500 hover:text-indigo-400 transition-colors opacity-80 hover:opacity-100" href="#">CONTACT</a>
+</div>
+</footer>
+</body></html>

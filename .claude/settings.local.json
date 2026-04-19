@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node *)",
+      "Bash(mkdir -p docs-kickoff)",
+      "Bash(mv *.md docs-kickoff/)",
+      "Bash(mv *.png docs-kickoff/)",
+      "Read(//c/Users/nicol/OneDrive/Documentos/**)",
+      "Bash(cp -r tsp-tmp/. \"top-show-pro/\")"
+    ]
+  }
+}

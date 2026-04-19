@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TOP SHOW PRO - Equipment Brands</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600&amp;family=Montserrat:wght@400;500;600;700&amp;family=Orbitron:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#87929b",
+                      "surface-dim": "#131313",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#0e0e0e",
+                      "on-primary-fixed-variant": "#004c69",
+                      "inverse-primary": "#00668a",
+                      "tertiary-container": "#00cc7c",
+                      "on-secondary": "#2e009c",
+                      "tertiary": "#00eb8f",
+                      "on-surface-variant": "#bcc8d1",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#c9bfff",
+                      "surface-tint": "#7ad0ff",
+                      "on-primary-fixed": "#001e2c",
+                      "secondary-container": "#4720ca",
+                      "on-tertiary-fixed": "#002110",
+                      "tertiary-fixed": "#56ffa7",
+                      "surface-container-highest": "#353534",
+                      "secondary-fixed": "#e5deff",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#00522f",
+                      "primary-container": "#00bfff",
+                      "secondary": "#c9bfff",
+                      "surface-variant": "#353534",
+                      "on-tertiary": "#00391f",
+                      "surface": "#131313",
+                      "primary-fixed-dim": "#7ad0ff",
+                      "on-primary-container": "#004a65",
+                      "surface-container": "#201f1f",
+                      "surface-bright": "#3a3939",
+                      "inverse-on-surface": "#313030",
+                      "on-primary": "#003549",
+                      "on-secondary-fixed": "#1a0063",
+                      "inverse-surface": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "primary": "#8fd6ff",
+                      "surface-container-low": "#1c1b1b",
+                      "on-secondary-container": "#baaeff",
+                      "outline-variant": "#3d4850",
+                      "on-background": "#e5e2e1",
+                      "on-tertiary-container": "#00502d",
+                      "background": "#131313",
+                      "tertiary-fixed-dim": "#00e38a",
+                      "on-surface": "#e5e2e1",
+                      "primary-fixed": "#c3e8ff",
+                      "on-secondary-fixed-variant": "#441cc8",
+                      "surface-container-high": "#2a2a2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {},
+              "fontFamily": {
+                      "headline": ["Bebas Neue", "sans-serif"],
+                      "body": ["Inter", "sans-serif"],
+                      "label": ["Montserrat", "sans-serif"],
+                      "tech": ["Orbitron", "sans-serif"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .grid-overlay {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+        .scanner-line {
+            background: linear-gradient(90deg, transparent, #00BFFF, transparent);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-8 py-4 max-w-full fixed top-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-xl bg-neutral-900/50 shadow-2xl shadow-sky-500/10 docked full-width top-0">
+<div class="font-headline text-3xl tracking-tighter text-primary-container">TOP SHOW PRO</div>
+<nav class="hidden md:flex gap-8 font-headline tracking-widest text-lg">
+<a class="text-neutral-400 hover:text-white transition-colors hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">SERVICIOS</a>
+<a class="text-neutral-400 hover:text-white transition-colors hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">PROYECTOS</a>
+<a class="text-primary-container border-b-2 border-primary-container pb-1 hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">EQUIPAMIENTO</a>
+<a class="text-neutral-400 hover:text-white transition-colors hover:text-primary transition-all duration-300 scale-95 active:scale-90 transition-transform" href="#">CONTACTOS</a>
+</nav>
+<button class="bg-[#0A0A0A] border-[1.5px] border-primary-container text-white font-label font-medium px-6 py-2 rounded-none hover:bg-primary-container hover:text-black transition-colors hidden md:block">
+            GET QUOTE
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 px-6 md:px-12 relative z-10 w-full max-w-7xl mx-auto">
+<!-- Ambient Glow -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-container opacity-10 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+<div class="absolute inset-0 grid-overlay -z-10"></div>
+<!-- Section Header -->
+<div class="mb-20 text-center md:text-left">
+<h2 class="font-label text-primary font-semibold text-sm tracking-widest uppercase mb-4">MARCAS GLOBALES</h2>
+<h1 class="font-headline text-5xl md:text-7xl text-white tracking-wider mb-6">INDUSTRY STANDARD GEAR</h1>
+<p class="font-body text-on-surface-variant text-lg max-w-2xl">We source and deploy elite-tier equipment.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Category: Audio -->
+<div class="col-span-1 md:col-span-2 lg:col-span-2 bg-surface-container-high relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-[1px] scanner-line"></div>
+<div class="bg-surface-container-highest p-6 border-b border-outline-variant/15 flex justify-between items-center">
+<h3 class="font-headline text-2xl text-white tracking-widest">AUDIO SYSTEMS</h3>
+<span class="font-tech text-tertiary text-sm">01 / SONIC</span>
+</div>
+<div class="p-8 grid grid-cols-2 gap-8 items-center justify-items-center bg-surface-container-low min-h-[200px]">
+<img alt="Meyer Sound Logo" class="h-16 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="Monochrome minimalist logo of an audio equipment brand on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9f9RF2b3F_C36OlGT39kq52ja2C2-VY3si3PNRo-_slB6Hh6dyAsvNqLGwGSTWvEuDPyPGeOcDHC7LTLAzGYwMa6wKyOhvyPXarsBlWRIK8MKvFQqLK1rhCJMPAIEWIx3UKR9cj9AoE9Ieu2K29RCXdZEx_YS80g7jcuv2_5Pj5ellSF74W81LZ1CYzPm6OOT8wd0btnkKRCdpLLd5AytlmqUf3OYD_TaB3lOh2YpwBf7brzwnVrKkd9gfwQDJkxgm_Tt1zeyJg"/>
+<img alt="L-Acoustics Logo" class="h-12 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="Sleek geometric logo of professional speaker brand in white against dark surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAT9vJ-SP6l6gV0X3DN5tt8JWKar186GeFtICeWWqBL_aBwBty0rX8ClXE5eWfE0pZ1ErsQrBS2gqLQVJCghvzttx2oVh0p7_BWePlfaekect-LYIhid0w1WuZQ_RdFWcPHJVZAKb6pglf0tW6ybPZ3lg5B_JKQCEU6bEXEG6-tFq50CHQVZMMtQZ0F16GmUn8aT0RbibZThx8kirB7kGiGdLPAtrK3_SYpJYQrLEOXlnwHAtXmRcS4Qqlbq_eSxna-4a205RCjQg"/>
+</div>
+</div>
+<!-- Category: Illumination -->
+<div class="col-span-1 bg-surface-container-high relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-[1px] scanner-line"></div>
+<div class="bg-surface-container-highest p-6 border-b border-outline-variant/15 flex justify-between items-center">
+<h3 class="font-headline text-2xl text-white tracking-widest">ILLUMINATION</h3>
+<span class="font-tech text-tertiary text-sm">02 / LIGHT</span>
+</div>
+<div class="p-8 grid grid-cols-1 gap-8 items-center justify-items-center bg-surface-container-low min-h-[200px]">
+<img alt="Robe Logo" class="h-10 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="High tech lighting equipment brand logo rendered in stark white on black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJHa30CzPWwx8kAe0RkJod9tgSW3dKi1qDTqpHnLGXEP85zlj2C6tSwxZQxyHDHjBFXEwVol9QyNQdypcEDNKYLTZ_VnZUTdrvWaxmhvTlOeH9ntFELcrw43j_bijN7JlYNQ8_nTDepdsk6ZpzALtnRoW4IhAd2N1SjE8HMB4l76wH1YBbNTqiDzJn8idlp3sKwZAhtovhLuBTLnkZFX9a6TbTK5E74Vf7cxaWYoxCAO37SIbonDtPv5QTAhdPRf6HF5-z9x_IAA"/>
+<img alt="MA Lighting Logo" class="h-10 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="Industrial style logo for stage lighting controller brand monochrome" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV8BIFmzClRxrOTYfix36dCHYdJKQr6-fWXFeZY7JH3OHQsdqkDyErdmiYz3_NqN4NzR6eCz3NwD7Ri_l5tn3zmVspJgOpl3UYUl3HXzTUeen5D7AsUbinImAQ5wZcFBl3NWummakJOmx6dcPSewSIbzrf8DKzcEw5UJfxVnSFSTN_EPCWNuRQr9tmvOQ7TZGI5c3urPQjlrCGHw0N1B3LvxE0prUx92Kd-eDctNg3YK9DQsS1WugR2E2WU-zWl_cEez-C5G0-mg"/>
+</div>
+</div>
+<!-- Category: Video -->
+<div class="col-span-1 md:col-span-3 bg-surface-container-high relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-[1px] scanner-line"></div>
+<div class="bg-surface-container-highest p-6 border-b border-outline-variant/15 flex justify-between items-center">
+<h3 class="font-headline text-2xl text-white tracking-widest">VIDEO &amp; LED</h3>
+<span class="font-tech text-tertiary text-sm">03 / VISUAL</span>
+</div>
+<div class="p-8 grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center bg-surface-container-low min-h-[160px]">
+<img alt="Barco Logo" class="h-10 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="Minimalist technology brand logo for video projectors crisp white on deep black" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD474Ux7dENuHS6EnzYpdGuCHNOsD4IyXHhWI7NCXtZ4NO0o3ff7cq3Y1P9jDk3eKu-ggvacaxFUvI_zem8AluuY_dH6uP9cZsjGc7T_oQeKleRlHNynAgCFxaySNM8U1afTDu3orIYG3_3T2XrVdsK_NvU6gT_msuRlIVGkgaxb0Ey9gyrqLoUax-DXqsngkjATUYCxIEQA9miP2wVWg1DWvzhTkmaEcXsBW029i0RvPoTJj4AH3K4rX5bbtnOqSXa4cngedItKg"/>
+<img alt="Absen Logo" class="h-10 object-contain opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300" data-alt="Sharp angular logo for LED screen manufacturer displayed in grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLH-OdodfAu3dXR5vhYhrdnB20LhtWlgWdTCWuB7FU_70Cy9mV5jKofu9F0dv8BZhyAwjpkA85EPzkAny0iqWpxYO5ZpPUrNDy5-nluiZq6K2ed9QDzIdpGtYfYMTrh4CVq1u84Os2AgEPd2fEF4VBM7FQjOAlddC8uQrGWCbDuDZus5bdfdmAihDq0y2-ynlFlrLrhZCvbSCGHfTNTOUgRGTMsn0uk30pniHy4q9nrU0L623XZuYqCj8mp1tvLB4D-RhzfMKz2A"/>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-neutral-800/30 bg-[#0A0A0A] tonal-shift-bg-neutral-900 grid grid-cols-1 md:grid-cols-3 gap-8 px-12 py-16 max-w-7xl mx-auto z-10 relative">
+<div class="flex flex-col gap-4">
+<span class="font-headline text-xl text-primary-container">TOP SHOW PRO</span>
+<span class="font-label text-xs tracking-widest text-neutral-500">© 2024 TOP SHOW PRO | THE KINETIC BLUEPRINT</span>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">TEATRAL</a>
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">DISCOTECAS</a>
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">CORPORATIVOS</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">PRIVADAS</a>
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">SPECS</a>
+<a class="font-label text-xs tracking-widest text-neutral-500 hover:text-secondary transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">CONTACT</a>
+</div>
+</footer>
+</body></html>
