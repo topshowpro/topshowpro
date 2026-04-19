@@ -29,7 +29,12 @@
       "Bash(cmd /c \"taskkill /PID 17020 /F\")",
       "Bash(cmd /c \"taskkill /PID 46820 /F\")",
       "Bash(cmd /c \"taskkill /F /IM node.exe\")",
-      "Bash(powershell *)"
+      "Bash(powershell *)",
+      "Bash(vercel --version)",
+      "Bash(vercel whoami *)",
+      "Bash(vercel --prod --yes)",
+      "Bash(vercel inspect *)",
+      "Bash(vercel logs *)"
     ]
   }
 }

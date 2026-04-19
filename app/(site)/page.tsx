@@ -80,7 +80,7 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {(services ?? []).map((s: any, i: number) => (
               <FadeIn key={s.name} delay={i * 0.1}>
-                <ServiceCard name={s.name} shortDesc={s.shortDesc} icon={s.icon} coverImage={s.gallery?.[0]?.url ?? null} />
+                <ServiceCard name={s.name} shortDesc={s.shortDesc} coverImage={s.gallery?.[0]?.url ?? null} />
               </FadeIn>
             ))}
           </div>
