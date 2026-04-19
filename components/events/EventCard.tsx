@@ -9,10 +9,15 @@ export type EventCardProps = {
   dateStart: string;
   dateEnd?: string;
   category: { label: string };
-  heroImage: { url: string; metadata?: { lqip?: string } };
+  heroImage?: { url: string; metadata?: { lqip?: string } } | null;
 };
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=60';
+
 export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage }: EventCardProps) {
+  const imgSrc = heroImage?.url ?? FALLBACK_IMAGE;
+  const lqip = heroImage?.metadata?.lqip;
+
   return (
     <Link
       href={`/eventos/${slug}`}
@@ -20,13 +25,13 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
       style={{ backgroundColor: 'var(--bg-surface)' }}
     >
       <Image
-        src={heroImage.url}
+        src={imgSrc}
         alt={title}
         fill
         className="object-cover transition-transform duration-700 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, 33vw"
-        placeholder={heroImage.metadata?.lqip ? 'blur' : 'empty'}
-        blurDataURL={heroImage.metadata?.lqip ?? undefined}
+        placeholder={lqip ? 'blur' : 'empty'}
+        blurDataURL={lqip ?? undefined}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
@@ -36,7 +41,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
       <div className="absolute inset-x-0 bottom-0 p-5 space-y-2">
         <span
           className="inline-block font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
-          style={{ color: 'var(--accent-cyan)', border: '1px solid rgba(0,191,255,0.4)' }}
+          style={{ color: 'var(--accent-cyan)', border: '1px solid color-mix(in srgb, var(--accent-cyan) 40%, transparent)' }}
         >
           {category.label}
         </span>
