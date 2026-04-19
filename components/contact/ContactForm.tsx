@@ -57,52 +57,52 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
             transition={{ duration: 0.6 }}
           >
             <div>
-              <label className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
+              <label htmlFor="category" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Categoría
               </label>
-              <select {...register('category')} style={{ ...inputStyle, cursor: 'pointer' }}>
-                <option value="" style={{ backgroundColor: '#1a1a1a' }}>Seleccioná una opción</option>
+              <select id="category" {...register('category')} style={{ ...inputStyle, cursor: 'pointer' }}>
+                <option value="" style={{ backgroundColor: 'var(--bg-elevated)' }}>Seleccioná una opción</option>
                 {categories.map((c) => (
-                  <option key={c.label} value={c.label} style={{ backgroundColor: '#1a1a1a' }}>
+                  <option key={c.label} value={c.label} style={{ backgroundColor: 'var(--bg-elevated)' }}>
                     {c.label}
                   </option>
                 ))}
               </select>
               {errors.category && (
-                <p className="text-red-400 text-xs mt-1">{errors.category.message}</p>
+                <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.category.message}</p>
               )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
-                <label className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
+                <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Nombre / Empresa
                 </label>
-                <input {...register('name')} style={inputStyle} />
-                {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>}
+                <input id="name" {...register('name')} style={inputStyle} />
+                {errors.name && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.name.message}</p>}
               </div>
               <div>
-                <label className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
+                <label htmlFor="phone" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Teléfono
                 </label>
-                <input {...register('phone')} style={inputStyle} />
+                <input id="phone" {...register('phone')} style={inputStyle} />
               </div>
             </div>
 
             <div>
-              <label className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
+              <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Email
               </label>
-              <input type="email" {...register('email')} style={inputStyle} />
-              {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
+              <input id="email" type="email" {...register('email')} style={inputStyle} />
+              {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
             </div>
 
             <div>
-              <label className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
+              <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Consulta
               </label>
-              <textarea {...register('message')} rows={5} style={{ ...inputStyle, resize: 'vertical' }} />
-              {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>}
+              <textarea id="message" {...register('message')} rows={5} style={{ ...inputStyle, resize: 'vertical' }} />
+              {errors.message && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.message.message}</p>}
             </div>
 
             <button
