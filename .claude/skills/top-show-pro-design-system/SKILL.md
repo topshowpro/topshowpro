@@ -1,6 +1,6 @@
 ---
 name: top-show-pro-design-system
-description: Design system aislado de Top Show Pro. Use when working on any UI component, page, or style decision in the top-show-pro Next.js project — color tokens, typography (Bebas Neue/Montserrat/Orbitron), motion presets (Lenis + Framer Motion), component patterns (L-bracket corners, frosted glass, beam sweep), tailwind config, CSS variables. Auto-triggers on mentions of Top Show Pro UI/design/tokens/branding.
+description: Design system aislado de Top Show Pro. Use when working on any UI component, page, or style decision in the top-show-pro Next.js project — color tokens, typography (Playfair Display/Inter/Space Mono), motion presets (Lenis + Framer Motion), component patterns (L-bracket corners, frosted glass, beam sweep), tailwind config, CSS variables. Auto-triggers on mentions of Top Show Pro UI/design/tokens/branding.
 ---
 
 # Top Show Pro — Design System
@@ -12,8 +12,8 @@ Fuente de verdad única para decisiones de diseño del sitio **Top Show Pro** (e
 - **Dark-first**: fondos muy oscuros (`#0A0A0A`), superficies tonales (no bordes)
 - **Tech/blueprint aesthetic**: cyan como acento, Orbitron para datos, L-brackets en cards
 - **Motion moderno** (no parallax): Lenis smooth + Framer reveal + View Transitions API
-- **Tipografía alto impacto**: Bebas Neue para titulares gigantes, Montserrat cuerpo limpio
-- **Reducido**: solo 3 colores acento, 3 familias tipográficas. Nada más
+- **Tipografía alto impacto**: Playfair Display para titulares elegantes/brutales, Inter cuerpo hiper-legible.
+- **Detalle editorial**: uso de cursivas (italic) en el hero para énfasis sofisticado.
 
 ## Paleta (CSS variables)
 
@@ -49,36 +49,37 @@ Fuente de verdad única para decisiones de diseño del sitio **Top Show Pro** (e
 
 | Rol | Familia | Peso | Tamaño típico | Uso |
 |-----|---------|------|---------------|-----|
-| Display/H1 | **Bebas Neue** | 400 | `clamp(3rem, 8vw, 8rem)` | Hero phrase, titulares hero |
-| H2/H3 | **Bebas Neue** | 400 | `text-4xl` a `text-6xl` | Titulares de sección |
-| Subtítulos | **Montserrat** | 600 | `text-xl` a `text-2xl` | Subhead, intro párrafos |
-| Body | **Montserrat** | 400-500 | `text-base` | Descripciones, copy largo |
-| UI/Botones | **Montserrat** | 500 | `text-sm` uppercase tracking-wide | CTAs, navbar |
-| Técnico/Data | **Orbitron** | 400-500 | `text-xs` a `text-sm` | Specs equipamiento, fecha de evento, chips técnicos |
+| Display/H1 | **Playfair Display** | 900 | `clamp(3rem, 8vw, 8rem)` | Hero phrase. `ls: -0.02em`, `lh: 0.95`. Emphasis uses `italic`. |
+| H2/H3 | **Playfair Display** | 700 | `text-4xl` a `text-6xl` | Titulares de sección. `ls: -0.015em`, `lh: 1.05`. |
+| Subtítulos | **Inter** | 500 | `text-xl` a `text-2xl` | Subhead, intro párrafos. |
+| Body | **Inter** | 300-400 | `text-base` | Descripciones, copy largo. `lh: 1.75`. |
+| UI/Botones | **Inter** | 500-600 | `text-sm` uppercase tracking-wide | CTAs, navbar. |
+| Técnico/Data | **Space Mono** | 400 | `text-xs` a `text-sm` | Specs equipamiento, fecha de evento, chips técnicos. |
 
 **Setup con `next/font`**:
 
 ```ts
 // lib/fonts.ts
-import { Bebas_Neue, Montserrat, Orbitron } from 'next/font/google';
+import { Playfair_Display, Inter, Space_Mono } from 'next/font/google';
 
-export const bebas = Bebas_Neue({
+export const playfair = Playfair_Display({
   subsets: ['latin'],
-  weight: '400',
+  weight: ['700', '900'],
+  style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
 });
 
-export const montserrat = Montserrat({
+export const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-sans',
   display: 'swap',
 });
 
-export const orbitron = Orbitron({
+export const spaceMono = Space_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '700'],
   variable: '--font-mono',
   display: 'swap',
 });
@@ -87,13 +88,14 @@ export const orbitron = Orbitron({
 ## Escala tipográfica (titulares alto impacto tipo Christie Lites)
 
 ```css
-.text-display { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; letter-spacing: -0.02em; }
-.text-hero    { font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.01em; }
-.text-h2      { font-size: clamp(2rem, 4vw, 4rem); line-height: 1.1; }
-.text-h3      { font-size: clamp(1.5rem, 2.5vw, 2.5rem); line-height: 1.2; }
+```css
+.text-display { font-family: var(--font-display); font-weight: 900; font-size: clamp(3rem, 8vw, 8rem); line-height: 0.95; letter-spacing: -0.02em; }
+.text-hero    { font-family: var(--font-display); font-weight: 900; font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.01em; }
+.text-h2      { font-family: var(--font-display); font-weight: 700; font-size: clamp(2rem, 4vw, 4rem); line-height: 1.05; letter-spacing: -0.015em; }
+.text-h3      { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.5rem, 2.5vw, 2.5rem); line-height: 1.2; }
 ```
 
-Titulares usan tracking negativo (-1% a -2%) para peso visual. Bebas Neue ya es condensada.
+**Regla de Italic**: En el Hero, para crear el look "Stitch premium", usá siempre cursiva en la palabra de impacto final.
 
 ## Spacing / Layout
 
@@ -150,7 +152,7 @@ bg-[var(--bg-surface)]/60 backdrop-blur-2xl border border-white/5
 </button>
 ```
 
-### Chip técnico (Orbitron)
+### Chip técnico (Space Mono)
 
 ```tsx
 <span className="
@@ -352,7 +354,7 @@ No mezclar dos librerías en la misma sección. Usar Lucide para el 90% y Materi
 ## Checklist antes de mergear un componente nuevo
 
 - [ ] Usa solo tokens de la paleta definida (grep `#` en el archivo no devuelve hex fuera de la paleta)
-- [ ] Tipografía usa las 3 familias con roles correctos (display = Bebas, body = Montserrat, mono = Orbitron)
+- [ ] Tipografía usa las 3 familias con roles correctos (display = Playfair, body = Inter, mono = Space Mono)
 - [ ] Motion respeta `prefers-reduced-motion`
 - [ ] Focus states visibles (`focus:ring-2 ring-cyan`)
 - [ ] Alt text en imágenes

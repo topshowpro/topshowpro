@@ -12,11 +12,19 @@ export function RevealText({ text, className = '' }: { text: string; className?:
       animate="visible"
       variants={staggerContainer}
     >
-      {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom">
-          <motion.span variants={revealTextWords} className="inline-block">{w}</motion.span>
-        </span>
-      ))}
+      {words.map((w, i) => {
+        const isItalic = w.endsWith('.') || w.includes('!!!'); // simple heuristic or can be expanded
+        return (
+          <span key={i} className="inline-block overflow-hidden align-bottom">
+            <motion.span 
+              variants={revealTextWords} 
+              className={`inline-block ${isItalic ? 'italic' : ''}`}
+            >
+              {w}
+            </motion.span>
+          </span>
+        );
+      })}
     </motion.span>
   );
 }

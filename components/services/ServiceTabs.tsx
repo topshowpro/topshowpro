@@ -67,7 +67,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
               </div>
               {current?.techContact && (
                 <div className="mb-8 p-4 font-mono text-sm" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
-                  <p className="uppercase tracking-widest text-xs mb-3" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
+                  <p className="uppercase tracking-wider text-xs mb-3" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
                   <p className="text-white mb-1">{current.techContact.name}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>
@@ -147,7 +147,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
               </div>
               {s.techContact && (
                 <div className="mt-4 p-3 font-mono text-xs" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
-                  <p className="uppercase tracking-widest mb-2" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
+                  <p className="uppercase tracking-wider mb-2" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
                   <p className="text-white">{s.techContact.name}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{s.techContact.phone}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{s.techContact.email}</p>

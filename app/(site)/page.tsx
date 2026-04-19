@@ -35,7 +35,7 @@ export default async function HomePage() {
         ]} />
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
-            <span className="font-mono text-xs uppercase tracking-widest mb-6 block" style={{ color: 'var(--accent-cyan)' }}>
+            <span className="font-mono text-xs uppercase tracking-wider mb-6 block" style={{ color: 'var(--accent-cyan)' }}>
               — Quiénes somos
             </span>
             <h2
@@ -70,7 +70,7 @@ export default async function HomePage() {
               </h2>
               <a
                 href="/servicios"
-                className="font-mono text-xs uppercase tracking-widest transition hidden md:block"
+                className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
                 style={{ color: 'var(--accent-cyan)' }}
               >
                 Ver todos →
@@ -99,7 +99,7 @@ export default async function HomePage() {
             </h2>
             <a
               href="/eventos"
-              className="font-mono text-xs uppercase tracking-widest transition hidden md:block"
+              className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
               style={{ color: 'var(--accent-cyan)' }}
             >
               Ver todos →
@@ -119,7 +119,7 @@ export default async function HomePage() {
           { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },
         ]} />
         <FadeIn>
-          <span className="font-mono text-xs uppercase tracking-widest mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
+          <span className="font-mono text-xs uppercase tracking-wider mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
             — Siguiente paso
           </span>
           <h2
