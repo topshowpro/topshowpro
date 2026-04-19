@@ -4,7 +4,7 @@ type ServiceCardProps = {
   icon?: string;
 };
 
-export function ServiceCard({ name, shortDesc }: ServiceCardProps) {
+export function ServiceCard({ name, shortDesc, icon }: ServiceCardProps) {
   return (
     <div className="relative l-bracket p-8 aspect-[4/5] flex flex-col justify-end group overflow-hidden shadow-optic"
       style={{ backgroundColor: 'var(--bg-surface)' }}
@@ -17,6 +17,9 @@ export function ServiceCard({ name, shortDesc }: ServiceCardProps) {
         style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,191,255,0.05) 0%, transparent 70%)' }}
       />
 
+      {icon && (
+        <span className="text-4xl mb-4 relative z-10 block" aria-hidden="true">{icon}</span>
+      )}
       <h3 className="font-display text-2xl text-white mb-3 relative z-10">{name}</h3>
       <p className="font-sans text-sm relative z-10" style={{ color: 'var(--text-muted)' }}>{shortDesc}</p>
     </div>
