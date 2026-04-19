@@ -1,0 +1,23 @@
+export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: string | null }[] }) {
+  const loop = [...brands, ...brands];
+  return (
+    <div className="relative overflow-hidden py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+      <div className="flex gap-16 animate-[marquee_40s_linear_infinite] whitespace-nowrap">
+        {loop.map((b, i) => (
+          <div
+            key={i}
+            className="flex items-center justify-center min-w-[160px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
+          >
+            {b.logoUrl ? (
+              <img src={b.logoUrl} alt={b.name} className="h-10 object-contain" />
+            ) : (
+              <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                {b.name}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
