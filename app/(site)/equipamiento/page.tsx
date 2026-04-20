@@ -55,14 +55,6 @@ export default async function EquipamientoPage() {
 
       {/* Categories */}
       <div className="px-6 py-24 max-w-7xl mx-auto">
-        <FadeIn>
-          <h2
-            className="font-display text-white mb-12 leading-none"
-            style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}
-          >
-            Categorías
-          </h2>
-        </FadeIn>
         <CategorySection categories={categories ?? []} />
       </div>
 
