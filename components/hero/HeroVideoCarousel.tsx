@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { RevealText } from '@/components/motion/RevealText';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
 
@@ -97,12 +98,9 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
         >
           <span className="font-display text-xl md:text-2xl tracking-wider text-black">{banner.text}</span>
           {banner.cta && (
-            <a
-              href={banner.cta.link}
-              className="font-sans text-xs font-medium uppercase tracking-widest px-4 py-2 btn-neon btn-neon-outline"
-            >
+            <CtaOutlineLink href={banner.cta.link} className="h-8 px-3 text-[10px] text-black hover:text-white">
               {banner.cta.label} →
-            </a>
+            </CtaOutlineLink>
           )}
         </div>
       )}

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import { cn } from '@/lib/utils';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 type ServiceImage = { url: string; metadata?: { lqip?: string } | null };
 type TechContact = { name: string; phone: string; email: string };
@@ -74,12 +75,9 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                 </div>
               )}
               {current?.cta && (
-                <a
-                  href={current.cta.link}
-                  className="inline-block px-6 py-3 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-outline"
-                >
+                <CtaOutlineLink href={current.cta.link} className="h-9 px-5 text-[11px]">
                   {current.cta.label}
-                </a>
+                </CtaOutlineLink>
               )}
             </div>
 
@@ -154,12 +152,9 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                 </div>
               )}
               {s.cta && (
-                <a
-                  href={s.cta.link}
-                  className="inline-block mt-4 px-4 py-2 font-sans text-xs uppercase btn-neon btn-neon-outline"
-                >
+                <CtaOutlineLink href={s.cta.link} className="mt-4 h-8 px-4 text-[11px]">
                   {s.cta.label}
-                </a>
+                </CtaOutlineLink>
               )}
             </div>
           </details>

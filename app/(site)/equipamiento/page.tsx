@@ -4,6 +4,7 @@ import { Q_EQUIPMENT_CATEGORIES, Q_BRANDS, Q_SITE_SETTINGS } from '@/sanity/lib/
 import { CategorySection } from '@/components/equipment/CategorySection';
 import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
 import { FadeIn } from '@/components/motion/FadeIn';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -73,12 +74,9 @@ export default async function EquipamientoPage() {
           <p className="font-sans text-lg mb-10 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
             Pedinos un presupuesto personalizado para tu proyecto.
           </p>
-          <a
-            href="/contacto"
-            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-outline"
-          >
+          <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
             Solicitar cotización
-          </a>
+          </CtaOutlineLink>
         </FadeIn>
       </section>
     </div>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { cn } from '@/lib/utils';
 
 const links = [
@@ -24,50 +25,48 @@ export function Header() {
 
   return (
     <header
+      data-scrolled={scrolled}
       className={cn(
-        'fixed inset-x-0 top-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500',
-        scrolled ? 'backdrop-blur-2xl shadow-2xl shadow-black/50 border border-white/5' : 'bg-transparent'
+        'glass-island fixed inset-x-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500 md:inset-x-6 lg:inset-x-10',
+        scrolled ? 'top-3' : 'top-4'
       )}
-      style={scrolled ? { 
-        backgroundColor: 'rgba(26,26,26,0.75)',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.05)'
-      } : {}}
     >
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 md:py-4">
         <Link href="/" className="flex items-center hover:opacity-85 transition">
           <Image
             src="/Top-show-pro_logo.png"
             alt="Top Show Pro"
             width={160}
             height={40}
-            className="h-9 w-auto"
+            className="h-8 w-auto md:h-9"
             style={{ filter: 'invert(1) hue-rotate(180deg)' }}
             priority
           />
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="font-sans text-sm uppercase tracking-widest transition nav-link"
+              className="nav-link font-sans text-sm uppercase tracking-widest transition"
             >
               {l.label}
             </Link>
           ))}
-          <Link
+          <CtaOutlineLink
             href="/contacto"
-            className="btn-neon btn-neon-cyan font-sans text-sm uppercase tracking-wider"
+            className="h-8 px-3 text-[11px]"
           >
             Contacto
-          </Link>
+          </CtaOutlineLink>
         </div>
 
         <button
           onClick={() => setOpen((o) => !o)}
-          className="md:hidden text-white p-3"
-          aria-label="Menu"
+          className="text-white p-3 md:hidden"
+          aria-label="Menú"
+          aria-expanded={open}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d={open ? 'M6 6l12 12M18 6L6 18' : 'M3 6h18M3 12h18M3 18h18'} />
@@ -78,23 +77,31 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden px-6 py-8 space-y-4"
-            style={{ backgroundColor: 'var(--bg-base)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+            className="glass-panel-mobile px-6 py-7 md:hidden"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block font-display text-xl md:text-3xl text-white hover:opacity-70 transition"
-              >
-                {l.label}
-              </Link>
-            ))}
+            <div className="flex flex-col gap-4">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block font-display text-xl text-white transition hover:opacity-70"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+            <CtaOutlineLink
+              href="/contacto"
+              onClick={() => setOpen(false)}
+              className="mt-6 w-full justify-center py-3 text-xs"
+            >
+              Contacto
+            </CtaOutlineLink>
           </motion.div>
         )}
       </AnimatePresence>

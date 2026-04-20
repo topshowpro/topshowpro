@@ -9,9 +9,9 @@ type ServiceCardProps = {
 
 export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
   return (
-    <TiltCard className="w-full h-full">
+    <TiltCard className="h-full w-full">
       <div
-        className="relative l-bracket aspect-auto md:aspect-[4/5] flex flex-col justify-end group overflow-hidden shadow-optic"
+        className="group relative flex aspect-auto flex-col justify-end overflow-hidden l-bracket shadow-optic transition-all duration-500 md:aspect-[4/5]"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         <span className="l-bracket-bl" />
@@ -23,7 +23,7 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
             src={coverImage}
             alt=""
             fill
-            className="object-cover opacity-30 group-hover:opacity-45 transition-opacity duration-700"
+            className="object-cover opacity-30 transition-all duration-700 group-hover:scale-[1.06] group-hover:opacity-50"
             sizes="(max-width: 768px) 100vw, 25vw"
           />
         )}
@@ -33,13 +33,23 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
 
         {/* Hover glow */}
         <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,191,255,0.08) 0%, transparent 70%)' }}
         />
 
-        <div className="relative z-10 p-8">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background:
+              'linear-gradient(114deg, transparent 0%, rgba(0,191,255,0.16) 42%, rgba(123,97,255,0.16) 100%)',
+          }}
+        />
+
+        <div className="relative z-10 p-8 transition-transform duration-500 group-hover:-translate-y-1">
           <h3 className="font-display text-2xl text-white mb-3">{name}</h3>
-          <p className="font-sans text-sm" style={{ color: 'var(--text-muted)' }}>{shortDesc}</p>
+          <p className="font-sans text-sm" style={{ color: 'var(--text-muted)' }}>
+            {shortDesc}
+          </p>
         </div>
       </div>
     </TiltCard>
