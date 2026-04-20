@@ -3,7 +3,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { cn } from '@/lib/utils';
 
 const links = [
@@ -54,12 +53,12 @@ export function Header() {
               {l.label}
             </Link>
           ))}
-          <CtaOutlineLink
+          <Link
             href="/contacto"
-            className="h-8 px-3 text-[11px]"
+            className="navbar-contact-glass inline-flex h-8 items-center justify-center rounded-lg px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           >
             Contacto
-          </CtaOutlineLink>
+          </Link>
         </div>
 
         <button
@@ -95,13 +94,13 @@ export function Header() {
                 </Link>
               ))}
             </div>
-            <CtaOutlineLink
+            <Link
               href="/contacto"
               onClick={() => setOpen(false)}
-              className="mt-6 w-full justify-center py-3 text-xs"
+              className="navbar-contact-glass mt-6 inline-flex w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
             >
               Contacto
-            </CtaOutlineLink>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
