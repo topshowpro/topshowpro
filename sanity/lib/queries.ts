@@ -17,12 +17,12 @@ export const Q_HOMEPAGE = `{
       "heroImage": heroImage.asset->{url, metadata{lqip}}
     }
   },
-  "featuredByFlag": *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+  "featuredByFlag": *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
     "category": category->{label, "slug": slug.current},
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   },
-  "recentEvents": *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+  "recentEvents": *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
     "category": category->{label, "slug": slug.current},
     "heroImage": heroImage.asset->{url, metadata{lqip}}
