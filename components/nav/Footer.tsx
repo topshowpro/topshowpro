@@ -23,6 +23,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
             alt="Top Show Pro"
             width={160}
             height={40}
+            loading="lazy"
             className="h-8 w-auto mb-4"
             style={{ filter: 'invert(1) hue-rotate(180deg)' }}
           />

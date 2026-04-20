@@ -46,6 +46,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               muted
               loop
               playsInline
+              preload="none"
               className="h-full w-full object-cover opacity-70"
               poster={slide.posterUrl ?? undefined}
             />
