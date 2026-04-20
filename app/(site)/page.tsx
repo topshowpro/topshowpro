@@ -1,4 +1,6 @@
 import { sanityFetch } from '@/sanity/lib/client';
+import { buildMetadata } from '@/lib/seo';
+import type { Metadata } from 'next';
 import { Q_HERO, Q_HOMEPAGE, Q_BRANDS, Q_SERVICES, Q_CLIENTS } from '@/sanity/lib/queries';
 import { HeroVideoCarousel } from '@/components/hero/HeroVideoCarousel';
 import { EventGrid } from '@/components/events/EventGrid';
@@ -10,6 +12,12 @@ import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { PortableText } from '@portabletext/react';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Top Show Pro',
+  description: 'Rental de tecnología para eventos y espectáculos en Argentina. Audio, iluminación, pantallas LED y stages de primer nivel. +15 años de experiencia y +500 eventos realizados.',
+  path: '/',
+});
 
 export default async function HomePage() {
   const [hero, homepage, brands, services, clients] = await Promise.all([
@@ -36,11 +44,11 @@ export default async function HomePage() {
         ]} />
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
-            <span className="font-mono text-xs uppercase tracking-wider mb-6 block" style={{ color: 'var(--accent-cyan)' }}>
+            <span className="font-mono text-xs uppercase tracking-wider mb-6 block" style={{ color: 'var(--accent-led)' }}>
               — Quiénes somos
             </span>
             <h2
-              className="font-display text-white mb-8 leading-none text-neon-cyan"
+              className="font-festival-heading text-[var(--text-primary)] mb-8 leading-none text-neon-cyan"
               style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
             >
               Hacemos que todo suceda
@@ -64,7 +72,7 @@ export default async function HomePage() {
           <FadeIn>
             <div className="flex items-end justify-between mb-12">
               <h2
-                className="font-display text-white leading-none text-neon-cyan"
+                className="font-festival-heading text-[var(--text-primary)] leading-none text-neon-cyan"
                 style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
               >
                 Servicios
@@ -72,7 +80,7 @@ export default async function HomePage() {
               <a
                 href="/servicios"
                 className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-                style={{ color: 'var(--accent-cyan)' }}
+                style={{ color: 'var(--accent-led)' }}
               >
                 Ver todos →
               </a>
@@ -92,16 +100,16 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
           <div className="flex items-end justify-between mb-12">
-            <h2
-              className="font-display text-white leading-none text-neon-violet"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-            >
-              Eventos destacados
+              <h2
+                className="font-festival-heading text-[var(--text-primary)] leading-none text-neon-cyan"
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
+              >
+                Eventos destacados
             </h2>
             <a
               href="/eventos"
               className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-              style={{ color: 'var(--accent-cyan)' }}
+              style={{ color: 'var(--accent-led)' }}
             >
               Ver todos →
             </a>
@@ -124,7 +132,7 @@ export default async function HomePage() {
             — Siguiente paso
           </span>
           <h2
-            className="font-display text-white mb-6 leading-none text-neon-violet relative z-10"
+            className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-cyan relative z-10"
             style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
           >
             ¿Tu próximo evento?

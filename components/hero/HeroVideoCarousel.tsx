@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { RevealText } from '@/components/motion/RevealText';
-import { NeonOrbs } from '@/components/ui/NeonOrbs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
@@ -20,16 +19,6 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
-      {/* Focal beam background effect */}
-      <div className="absolute inset-0 bg-focal-beam" />
-
-      {/* Neon ambient orbs */}
-      <NeonOrbs orbs={[
-        { color: 'cyan',   drift: 'a', size: '700px', top: '-180px',  right: '-150px', opacity: 0.7 },
-        { color: 'violet', drift: 'b', size: '500px', bottom: '-120px', left: '-80px',  opacity: 0.6 },
-        { color: 'mint',   drift: 'c', size: '300px', top: '40%',     left: '55%',     opacity: 0.35 },
-      ]} />
-
       <AnimatePresence mode="wait">
         <motion.div
           key={idx}
@@ -46,8 +35,8 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               muted
               loop
               playsInline
-              preload="none"
-              className="h-full w-full object-cover opacity-70"
+              preload="metadata"
+              className="h-full w-full object-cover"
               poster={slide.posterUrl ?? undefined}
             />
           ) : slide?.posterUrl ? (
@@ -55,7 +44,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               src={slide.posterUrl}
               alt=""
               fill
-              className="object-cover opacity-70"
+              className="object-cover"
               priority
               sizes="100vw"
             />
@@ -63,15 +52,16 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(10,10,10,0.9)]" />
+      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.72)' }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
 
       {/* Grid overlay */}
-      <div className="absolute inset-0 grid-overlay opacity-40" />
+      <div className="absolute inset-0 grid-overlay opacity-25" />
 
       <div className="relative z-10 flex h-full items-center justify-center px-6">
         <h1
-          className="text-center max-w-5xl font-display text-white leading-none text-neon-cyan"
-          style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
+          className="text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] leading-[0.88]"
+          style={{ fontSize: 'clamp(3.4rem, 11vw, 10rem)', letterSpacing: '0.01em' }}
         >
           <RevealText text={slide?.phrase ?? ''} key={idx} />
         </h1>
@@ -85,7 +75,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               key={i}
               onClick={() => setIdx(i)}
               className="w-8 h-0.5 transition-all"
-              style={{ backgroundColor: i === idx ? 'var(--accent-cyan)' : 'rgba(255,255,255,0.3)' }}
+              style={{ backgroundColor: i === idx ? 'var(--accent-led)' : 'rgba(245,245,245,0.3)' }}
               aria-label={`Slide ${i + 1}`}
             />
           ))}
@@ -95,9 +85,9 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
       {banner?.text && (
         <div
           className="absolute bottom-0 inset-x-0 z-10 py-3 px-6 flex items-center justify-center gap-6"
-          style={{ backgroundColor: 'var(--accent-cyan)' }}
+          style={{ backgroundColor: 'var(--accent-led)' }}
         >
-          <span className="font-display text-xl md:text-2xl tracking-wider text-black">{banner.text}</span>
+          <span className="font-festival-heading text-xl md:text-2xl tracking-wider text-black">{banner.text}</span>
           {banner.cta && (
             <CtaOutlineLink href={banner.cta.link} className="h-8 px-3 text-[10px] text-black hover:text-black focus-visible:text-black">
               {banner.cta.label} →
