@@ -58,9 +58,7 @@ export function Header() {
           ))}
           <Link
             href="/contacto"
-            className="px-5 py-2.5 font-sans text-sm uppercase tracking-wider rounded-lg transition-all duration-300 hover:scale-105
-                   bg-[var(--accent-cyan)] text-black font-medium
-                   hover:shadow-[0_0_20px_rgba(0,191,255,0.4)]"
+            className="btn-neon btn-neon-cyan font-sans text-sm uppercase tracking-wider"
           >
             Contacto
           </Link>

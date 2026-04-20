@@ -196,7 +196,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </h2>
         <a
           href="/contacto"
-          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
+          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-outline"
         >
           Contactanos
         </a>
