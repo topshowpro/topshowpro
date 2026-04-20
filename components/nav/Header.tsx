@@ -27,7 +27,7 @@ export function Header() {
     <header
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all',
-        scrolled ? 'backdrop-blur-xl' : 'bg-transparent'
+        scrolled ? 'backdrop-blur-xl shadow-2xl -translate-y-0.5' : 'bg-transparent'
       )}
       style={scrolled ? { backgroundColor: 'rgba(10,10,10,0.8)', borderBottom: '1px solid rgba(255,255,255,0.05)' } : {}}
     >
