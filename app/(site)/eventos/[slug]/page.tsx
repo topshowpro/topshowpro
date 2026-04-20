@@ -13,6 +13,7 @@ import { sanityFetch } from '@/sanity/lib/client';
 import { Q_EVENT_DETAIL } from '@/sanity/lib/queries';
 import { formatDateRange } from '@/lib/utils';
 import { PortableText } from '@portabletext/react';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -194,12 +195,9 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         >
           ¿Necesitás algo similar?
         </h2>
-        <a
-          href="/contacto"
-          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
-        >
+        <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
           Contactanos
-        </a>
+        </CtaOutlineLink>
       </section>
     </article>
   );

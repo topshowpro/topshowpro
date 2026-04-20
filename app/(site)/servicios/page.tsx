@@ -3,6 +3,7 @@ import { sanityFetch } from '@/sanity/lib/client';
 import { Q_SERVICES, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
 import { ServiceTabs } from '@/components/services/ServiceTabs';
 import { FadeIn } from '@/components/motion/FadeIn';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -82,12 +83,9 @@ export default async function ServiciosPage() {
         <h2 className="font-display text-white mb-6" style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}>
           ¿Tenés un proyecto en mente?
         </h2>
-        <a
-          href="/contacto"
-          className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan"
-        >
+        <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
           Hablemos
-        </a>
+        </CtaOutlineLink>
       </section>
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export type TiltCardProps = {
@@ -12,7 +12,7 @@ export type TiltCardProps = {
 
 export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -22,6 +22,7 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [tiltIntensity, -tiltIntensity]), springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion) return;
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
@@ -35,7 +36,6 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
   const handleMouseLeave = () => {
     x.set(0);
     y.set(0);
-    setIsFocused(false);
   };
 
   return (
@@ -43,8 +43,7 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onMouseEnter={() => setIsFocused(true)}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+      style={prefersReducedMotion ? undefined : { rotateX, rotateY, transformStyle: 'preserve-3d' }}
       className={cn('relative transition-all duration-200', className)}
     >
       <div style={{ transform: 'translateZ(0)' }}>{children}</div>

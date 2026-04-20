@@ -9,6 +9,7 @@ import { ServiceCard } from '@/components/services/ServiceCard';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { PortableText } from '@portabletext/react';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
+import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 export default async function HomePage() {
   const [hero, homepage, brands, services, clients] = await Promise.all([
@@ -79,7 +80,7 @@ export default async function HomePage() {
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {(services ?? []).map((s: any, i: number) => (
-              <FadeIn key={s.name} delay={i * 0.1}>
+              <FadeIn key={s.name} delay={i * 0.08}>
                 <ServiceCard name={s.name} shortDesc={s.shortDesc} coverImage={s.gallery?.[0]?.url ?? null} />
               </FadeIn>
             ))}
@@ -131,12 +132,9 @@ export default async function HomePage() {
           <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
             Contanos qué tenés en mente y te armamos una propuesta a medida.
           </p>
-          <a
-            href="/contacto"
-            className="inline-block px-8 py-4 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan relative z-10"
-          >
+          <CtaOutlineLink href="/contacto" className="relative z-10 h-10 px-6 text-xs">
             Contactanos
-          </a>
+          </CtaOutlineLink>
         </FadeIn>
       </section>
     </>

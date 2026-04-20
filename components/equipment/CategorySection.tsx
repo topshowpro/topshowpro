@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 type EquipmentItem = {
   name: string;
@@ -20,6 +21,7 @@ type Category = {
 export function CategorySection({ categories }: { categories: Category[] }) {
   const firstCategorySlug = categories[0]?.slug;
   const [selectedSlug, setSelectedSlug] = useState<string | undefined>(firstCategorySlug);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     if (!categories.length) {
@@ -66,18 +68,32 @@ export function CategorySection({ categories }: { categories: Category[] }) {
           const cardDescription = cat.description || 'Catálogo premium con configuración adaptable al tipo de evento.';
 
           return (
-            <button
+            <motion.button
               key={cat.slug}
               type="button"
               aria-controls="equipment-category-detail"
               aria-pressed={isActive}
               onClick={() => setSelectedSlug(cat.slug)}
-              className="group l-bracket text-left relative overflow-hidden transition-colors duration-300 min-h-[330px]"
+              whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.995 }}
+              animate={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      scale: isActive ? 1.012 : 1,
+                      y: isActive ? -2 : 0,
+                    }
+              }
+              transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative min-h-[330px] overflow-hidden text-left l-bracket transition-all duration-300"
               style={{
                 backgroundColor: isActive ? 'color-mix(in srgb, var(--bg-surface-hi) 85%, var(--accent-cyan) 15%)' : 'var(--bg-surface)',
                 border: isActive
                   ? '1px solid color-mix(in srgb, var(--accent-cyan) 42%, transparent)'
                   : '1px solid rgba(255,255,255,0.08)',
+                boxShadow: isActive
+                  ? '0 16px 42px rgba(0, 191, 255, 0.2), inset 0 0 0 1px rgba(0, 191, 255, 0.16)'
+                  : '0 10px 28px rgba(0,0,0,0.18)',
               }}
             >
               <span className="l-bracket-bl" />
@@ -89,7 +105,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                     src={representative.url}
                     alt={cat.name}
                     fill
-                    className="object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+                    className="object-cover opacity-70 transition-all duration-500 group-hover:scale-[1.05] group-hover:opacity-90"
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     placeholder={representative.lqip ? 'blur' : 'empty'}
                     blurDataURL={representative.lqip}
@@ -99,6 +115,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                 )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-black/10 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'linear-gradient(115deg, transparent 0%, rgba(0,191,255,0.14) 44%, rgba(123,97,255,0.14) 100%)' }} />
 
                 <span
                   className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest"
@@ -134,7 +151,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                   {isActive ? 'Mostrando detalle' : 'Ver detalle'}
                 </p>
               </div>
-            </button>
+            </motion.button>
           );
         })}
       </div>
@@ -183,10 +200,11 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                   {selectedCategory.items.map((item) => (
                     <article
                       key={item.name}
-                      className="relative overflow-hidden"
+                      className="group relative overflow-hidden transition-all duration-300 hover:-translate-y-1"
                       style={{
                         backgroundColor: 'var(--bg-surface-hi)',
                         border: '1px solid rgba(255,255,255,0.06)',
+                        boxShadow: '0 8px 20px rgba(0,0,0,0.16)',
                       }}
                     >
                       {item.photo?.url && (
@@ -195,7 +213,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                             src={item.photo.url}
                             alt={item.name}
                             fill
-                            className="object-cover opacity-75"
+                            className="object-cover opacity-75 transition-transform duration-500 group-hover:scale-[1.04]"
                             sizes="(max-width: 1280px) 50vw, 25vw"
                             placeholder={item.photo.metadata?.lqip ? 'blur' : 'empty'}
                             blurDataURL={item.photo.metadata?.lqip ?? undefined}
