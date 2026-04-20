@@ -8,6 +8,7 @@ import './globals.css';
 export const metadata: Metadata = buildMetadata({});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  console.log('trigger deploy');
   return (
     <html lang="es" className={`${playfair.variable} ${inter.variable} ${spaceMono.variable}`}>
       <body>
