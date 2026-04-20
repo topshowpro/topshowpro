@@ -80,7 +80,7 @@ export default async function ServiciosPage() {
         <div className="absolute inset-0 bg-focal-beam" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <FadeIn>
-            <span className="mb-5 block font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--accent-cyan)' }}>
+            <span className="mb-5 block font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--accent-led)' }}>
               - Lineup de servicios
             </span>
             <h1
@@ -157,7 +157,7 @@ export default async function ServiciosPage() {
                               backgroundColor: 'rgba(0,191,255,0.08)',
                             }}
                           >
-                            <p className="mb-2 uppercase tracking-[0.18em]" style={{ color: 'var(--accent-cyan)' }}>
+                            <p className="mb-2 uppercase tracking-[0.18em]" style={{ color: 'var(--accent-led)' }}>
                               Direccion tecnica
                             </p>
                             {service.techContact.name && <p className="text-white">{service.techContact.name}</p>}
@@ -234,7 +234,7 @@ export default async function ServiciosPage() {
       >
         <div className="mx-auto max-w-7xl">
           <FadeIn>
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: 'var(--accent-cyan)' }}>
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: 'var(--accent-led)' }}>
               - Que incluye
             </p>
             <h2 className="max-w-4xl font-display text-4xl leading-[0.95] text-white md:text-6xl">Produccion integral, de punta a punta</h2>
@@ -252,7 +252,7 @@ export default async function ServiciosPage() {
               >
                 <span className="l-bracket-bl" />
                 <span className="l-bracket-br" />
-                <p className="mb-2 font-mono text-xs uppercase tracking-[0.16em]" style={{ color: 'var(--accent-cyan)' }}>
+                <p className="mb-2 font-mono text-xs uppercase tracking-[0.16em]" style={{ color: 'var(--accent-led)' }}>
                   {String(index + 1).padStart(2, '0')}
                 </p>
                 <h3 className="font-display text-2xl leading-tight text-white">{item.title}</h3>

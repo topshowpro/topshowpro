@@ -35,7 +35,7 @@ export function EventosClientPage() {
       >
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <span className="font-mono text-xs uppercase tracking-widest mb-4 block" style={{ color: 'var(--accent-cyan)' }}>
+          <span className="font-mono text-xs uppercase tracking-widest mb-4 block" style={{ color: 'var(--accent-led)' }}>
             — Portfolio
           </span>
           <h1

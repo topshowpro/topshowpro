@@ -73,7 +73,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               key={i}
               onClick={() => setIdx(i)}
               className="w-8 h-0.5 transition-all"
-              style={{ backgroundColor: i === idx ? 'var(--accent-led)' : 'rgba(245,245,245,0.3)' }}
+              style={{ backgroundColor: i === idx ? 'var(--accent-cyan)' : 'rgba(245,245,245,0.3)' }}
               aria-label={`Slide ${i + 1}`}
             />
           ))}
