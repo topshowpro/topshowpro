@@ -440,8 +440,8 @@ body {
   .neon-orb { animation: none !important; }
 }
 
-/* Neon Orbit Clean CTA (global) */
-@keyframes neon-orbit-clean-spin {
+/* Trace Runner CTA (global) */
+@keyframes trace-runner-spin {
   to {
     transform: rotate(360deg);
   }
@@ -451,24 +451,29 @@ body {
   position: relative;
   isolation: isolate;
   background: transparent;
-  color: var(--accent-cyan);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.18);
   font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 191, 255, 0.18);
+  box-shadow: none;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease;
 }
 
 .btn-neon-orbit::before {
   content: '';
   pointer-events: none;
   position: absolute;
-  inset: 0;
+  inset: -1px;
   border-radius: inherit;
-  padding: 1.5px;
+  padding: 1px;
   background: conic-gradient(
-    from 90deg,
-    rgba(0, 191, 255, 0.92) 0deg,
-    rgba(0, 191, 255, 0.82) 110deg,
-    rgba(123, 97, 255, 0.92) 220deg,
-    rgba(0, 191, 255, 0.92) 360deg
+    from 0deg,
+    transparent 0deg 314deg,
+    rgba(0, 191, 255, 0.94) 326deg,
+    rgba(123, 97, 255, 0.9) 344deg,
+    transparent 360deg
   );
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -479,7 +484,7 @@ body {
     linear-gradient(#000 0 0);
   mask-composite: exclude;
   transform-origin: center;
-  animation: neon-orbit-clean-spin 3.2s linear infinite;
+  animation: trace-runner-spin 7.2s linear infinite;
 }
 
 .btn-neon-orbit::after {
@@ -489,9 +494,9 @@ body {
   inset: -1px;
   border-radius: inherit;
   box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.1),
-    0 0 14px rgba(0, 191, 255, 0.16),
-    0 0 22px rgba(123, 97, 255, 0.14);
+    0 0 0 1px rgba(0, 191, 255, 0.18),
+    0 0 14px rgba(0, 191, 255, 0.14),
+    0 0 20px rgba(123, 97, 255, 0.1);
   opacity: 0;
   transition: opacity 220ms ease;
 }
@@ -501,8 +506,9 @@ body {
   opacity: 1;
 }
 
+.btn-neon-orbit:hover,
 .btn-neon-orbit:focus-visible {
-  color: #ffffff;
+  border-color: rgba(130, 188, 255, 0.36);
 }
 
 /* Service CTA button */
