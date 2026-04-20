@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { RevealText } from '@/components/motion/RevealText';
-import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
 
@@ -52,8 +51,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.72)' }} />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/85" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/45" />
 
       {/* Grid overlay */}
       <div className="absolute inset-0 grid-overlay opacity-25" />
@@ -87,12 +85,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           className="absolute bottom-0 inset-x-0 z-10 py-3 px-6 flex items-center justify-center gap-6"
           style={{ backgroundColor: 'var(--accent-led)' }}
         >
-          <span className="font-festival-heading text-xl md:text-2xl tracking-wider text-black">{banner.text}</span>
-          {banner.cta && (
-            <CtaOutlineLink href={banner.cta.link} className="h-8 px-3 text-[10px] text-black hover:text-black focus-visible:text-black">
-              {banner.cta.label} →
-            </CtaOutlineLink>
-          )}
+          <span className="font-festival-heading text-xl md:text-2xl tracking-wider italic text-black">{banner.text}</span>
         </div>
       )}
     </section>

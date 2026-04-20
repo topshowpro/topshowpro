@@ -28,6 +28,10 @@ export default async function HomePage() {
     sanityFetch<any[]>(Q_CLIENTS, undefined, 'client'),
   ]);
 
+  const featuredEvents = (homepage?.featuredEvents ?? []).filter(
+    (event: any) => event?.slug && event?.title,
+  );
+
   return (
     <>
       <OrganizationJsonLd />
@@ -115,7 +119,7 @@ export default async function HomePage() {
             </a>
           </div>
         </FadeIn>
-        <EventGrid events={homepage?.featuredEvents ?? []} />
+        <EventGrid events={featuredEvents} />
       </section>
 
       {/* Brands marquee */}
