@@ -96,7 +96,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-6 py-3 font-sans text-sm uppercase tracking-widest btn-neon btn-neon-cyan disabled:opacity-50"
+              className="w-full px-6 py-3 font-sans text-sm uppercase tracking-widest btn-simple disabled:opacity-50"
             >
               {isSubmitting ? 'Enviando...' : 'Enviar consulta'}
             </button>

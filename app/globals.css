@@ -502,26 +502,32 @@ body {
   color: var(--bg-base);
 }
 
-/* ── Neon CTA Button ──────────────────────────────────────────────────────── *
- * Rest:  ::before square rotates with conic-gradient (no @property needed)   *
- * Hover: multi-layer cyan box-shadow pulse                                    *
- * Usage: className="btn-neon btn-neon-cyan"  or  "btn-neon btn-neon-outline" *
- * --------------------------------------------------------------------------- */
+/* ── Simple CTA Button ────────────────────────────────────────────────── *
+ * Solid background, subtle hover animation only                         *
+ * Usage: className="btn-simple"                                        *
+ * ------------------------------------------------------------------------ */
 
-@keyframes neon-border-spin {
-  to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.btn-neon {
+.btn-simple {
   position: relative;
-  border-radius: 4px;
-  overflow: hidden;
-  isolation: isolate;
+  background: var(--accent-cyan);
+  color: #000;
   font-family: var(--font-sans);
   font-weight: 600;
-  letter-spacing: 0.12em;
-  transition: box-shadow 0.4s ease;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.btn-simple:hover:not(:disabled) {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+.btn-simple:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ── Neon CTA Button (legacy) ──────────────────────────────────────────────── *
 
 /* Rotating gradient square — clipped to button bounds by overflow:hidden */
 .btn-neon::before {
