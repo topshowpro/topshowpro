@@ -567,10 +567,98 @@ body {
   color: var(--accent-cyan) !important;
 }
 
+/* ── Perimeter Sweep CTA Button ───────────────────────────────────────────── *
+ * Line scans the full perimeter (left→top→right→bottom→left)              *
+ * Similar style to "Enviar consulta" but border scanner         *
+ * --------------------------------------------------------------- */
+
+@keyframes perimeter-scan {
+  0% {
+    clip-path: polygon(0% 0%, 4px 0%, 4px 1px, 0% 1px);
+  }
+  12.5% {
+    clip-path: polygon(0% 0%, 4px 0%, 4px 100%, 0% 100%);
+  }
+  25% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 1px, 0% 1px);
+  }
+  37.5% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, calc(100% - 4px) 100%, calc(100% - 4px) 1px, 0% 1px);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  62.5% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% calc(100% - 4px), 1px calc(100% - 4px), 1px 4px, 0% 4px);
+  }
+  75% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 4px);
+  }
+  87.5% {
+    clip-path: polygon(0% 0%, 4px 0%, 4px 100%, 0% 100%);
+  }
+  100% {
+    clip-path: polygon(0% 0%, 4px 0%, 4px 1px, 0% 1px);
+  }
+}
+
+.btn-perimeter-sweep {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  font-weight: 700;
+  overflow: clip;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-perimeter-sweep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-cyan);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.25s ease;
+}
+
+.btn-perimeter-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--accent-cyan) 0%,
+    rgba(0, 191, 255, 0.6) 50%,
+    var(--accent-cyan) 100%
+  );
+  clip-path: polygon(0% 0%, 4px 0%, 4px 1px, 0% 1px);
+  animation: perimeter-scan 2.5s linear infinite;
+  z-index: 1;
+}
+
+.btn-perimeter-sweep:hover,
+.btn-perimeter-sweep:focus-visible {
+  border-color: rgba(0, 191, 255, 0.5);
+  color: #ffffff;
+}
+
+.btn-perimeter-sweep:active {
+  transform: scale(0.98);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn-neon-orbit::before {
     animation: none;
   }
 
   .btn-neon::before { animation: none; }
+
+  .btn-perimeter-sweep::after {
+    animation: none;
+  }
 }
