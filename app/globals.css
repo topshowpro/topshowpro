@@ -440,21 +440,17 @@ body {
   .neon-orb { animation: none !important; }
 }
 
-/* CTA hover-only effects */
-@keyframes cta-shine-sweep {
-  0% {
-    transform: translateX(-150%) skewX(-18deg);
-    opacity: 0;
-  }
-
-  20% {
-    opacity: 0.55;
-  }
-
-  100% {
-    transform: translateX(170%) skewX(-18deg);
-    opacity: 0;
-  }
+.btn-neon,
+.btn-neon-orbit {
+  --btn-neon-border-gradient: conic-gradient(
+    from 0deg,
+    transparent 45%,
+    rgba(0, 191, 255, 0.5) 58%,
+    var(--accent-cyan) 68%,
+    var(--accent-violet) 80%,
+    rgba(180, 100, 255, 0.4) 88%,
+    transparent 96%
+  );
 }
 
 .btn-neon-orbit {
@@ -462,12 +458,11 @@ body {
   isolation: isolate;
   background: transparent;
   color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   font-weight: 700;
   box-shadow: none;
-  overflow: hidden;
+  overflow: clip;
   transition:
-    background-color 220ms ease,
     border-color 220ms ease,
     box-shadow 220ms ease,
     color 220ms ease;
@@ -475,50 +470,25 @@ body {
 
 .btn-neon-orbit::before {
   content: '';
-  pointer-events: none;
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    110deg,
-    transparent 0%,
-    rgba(0, 191, 255, 0.04) 38%,
-    rgba(255, 255, 255, 0.52) 50%,
-    rgba(123, 97, 255, 0.18) 62%,
-    transparent 100%
-  );
-  transform: translateX(-150%) skewX(-18deg);
-  opacity: 0;
-}
-
-.btn-neon-orbit::after {
-  content: '';
   pointer-events: none;
-  position: absolute;
-  inset: -1px;
+  inset: 0;
+  padding: 2px;
   border-radius: inherit;
-  box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.2),
-    0 0 14px rgba(0, 191, 255, 0.16),
-    0 0 22px rgba(123, 97, 255, 0.11);
-  opacity: 0;
-  transition: opacity 220ms ease;
-}
-
-.btn-neon-orbit:hover::after,
-.btn-neon-orbit:focus-visible::after {
-  opacity: 1;
-}
-
-.btn-neon-orbit:hover::before,
-.btn-neon-orbit:focus-visible::before {
-  animation: cta-shine-sweep 560ms cubic-bezier(0.16, 1, 0.3, 1) 1;
+  background: var(--btn-neon-border-gradient);
+  animation: neon-border-spin 3s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .btn-neon-orbit:hover,
 .btn-neon-orbit:focus-visible {
-  border-color: rgba(130, 188, 255, 0.36);
-  background-color: rgba(255, 255, 255, 0.02);
+  border-color: rgba(130, 188, 255, 0.45);
+  box-shadow:
+    0 0 14px rgba(0, 191, 255, 0.22),
+    0 0 36px rgba(0, 191, 255, 0.14);
 }
 
 /* Service CTA button */
@@ -562,15 +532,7 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(0deg);
-  background: conic-gradient(
-    from 0deg,
-    transparent 45%,
-    rgba(0, 191, 255, 0.5) 58%,
-    var(--accent-cyan) 68%,
-    var(--accent-violet) 80%,
-    rgba(180, 100, 255, 0.4) 88%,
-    transparent 96%
-  );
+  background: var(--btn-neon-border-gradient);
   animation: neon-border-spin 3s linear infinite;
   z-index: -2;
 }
@@ -608,15 +570,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .btn-neon-orbit::before {
     animation: none;
-    transform: none;
-    opacity: 0;
-  }
-
-  .btn-neon-orbit:hover::before,
-  .btn-neon-orbit:focus-visible::before {
-    animation: none;
-    transform: none;
-    opacity: 0.3;
   }
 
   .btn-neon::before { animation: none; }
