@@ -10,13 +10,18 @@ export const Q_HERO = `*[_type == "hero"][0]{
 export const Q_HOMEPAGE = `*[_type == "homepage"][0]{
   intro,
   ctaLabel,
-  "featuredEvents": coalesce(
-    featuredEvents[]->{
+  "featuredEvents": select(
+    count(featuredEvents[defined(@->_ref)]) > 0 => featuredEvents[]->{
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
       "category": category->{label, "slug": slug.current},
       "heroImage": heroImage.asset->{url, metadata{lqip}}
     },
-    *[_type == "event" && featured == true] | order(dateStart desc)[0...4] {
+    count(*[_type == "event" && featured == true]) > 0 => *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+      title, subtitle, "slug": slug.current, dateStart, dateEnd,
+      "category": category->{label, "slug": slug.current},
+      "heroImage": heroImage.asset->{url, metadata{lqip}}
+    },
+    *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
       "category": category->{label, "slug": slug.current},
       "heroImage": heroImage.asset->{url, metadata{lqip}}
