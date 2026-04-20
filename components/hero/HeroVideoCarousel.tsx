@@ -98,7 +98,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
         >
           <span className="font-display text-xl md:text-2xl tracking-wider text-black">{banner.text}</span>
           {banner.cta && (
-            <CtaOutlineLink href={banner.cta.link} className="h-8 px-3 text-[10px] text-black hover:text-white">
+            <CtaOutlineLink href={banner.cta.link} className="h-8 px-3 text-[10px] text-black hover:text-black focus-visible:text-black">
               {banner.cta.label} →
             </CtaOutlineLink>
           )}

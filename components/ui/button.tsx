@@ -12,7 +12,7 @@ const buttonVariants = cva(
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         cinematicOutline:
-          "relative border-white/30 bg-transparent font-sans uppercase tracking-[0.14em] text-[var(--accent-cyan)] shadow-[0_0_0_1px_rgba(255,255,255,0.04)] after:pointer-events-none after:absolute after:inset-[1px] after:-z-10 after:rounded-[inherit] after:border after:border-white/10 after:bg-[rgba(10,10,10,0.36)] after:backdrop-blur-md before:pointer-events-none before:absolute before:inset-0 before:-z-20 before:bg-[linear-gradient(110deg,rgba(0,191,255,0.04)_0%,rgba(0,191,255,0.12)_40%,rgba(123,97,255,0.16)_100%)] before:opacity-0 before:transition-opacity before:duration-500 hover:border-[rgba(0,191,255,0.65)] hover:text-white hover:shadow-[0_0_0_1px_rgba(0,191,255,0.22),0_10px_32px_rgba(0,191,255,0.2)] hover:before:opacity-100",
+          "btn-neon-orbit relative border border-transparent bg-transparent font-sans font-bold uppercase tracking-[0.14em] text-[var(--accent-cyan)] shadow-none hover:text-white focus-visible:border-transparent focus-visible:ring-[rgba(0,191,255,0.42)]",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
