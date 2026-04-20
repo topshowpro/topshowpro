@@ -84,7 +84,7 @@ export default async function HomePage() {
               <a
                 href="/servicios"
                 className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-                style={{ color: 'var(--accent-led)' }}
+                style={{ color: 'var(--accent-cyan)' }}
               >
                 Ver todos →
               </a>
@@ -113,7 +113,7 @@ export default async function HomePage() {
             <a
               href="/eventos"
               className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-              style={{ color: 'var(--accent-led)' }}
+              style={{ color: 'var(--accent-cyan)' }}
             >
               Ver todos →
             </a>
