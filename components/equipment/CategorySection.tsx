@@ -173,6 +173,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                   src={selectedCategory.heroImage}
                   alt={selectedCategory.name}
                   fill
+                  loading="lazy"
                   className="object-cover opacity-70"
                   sizes="(max-width: 1024px) 100vw, 36vw"
                 />
@@ -213,6 +214,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                             src={item.photo.url}
                             alt={item.name}
                             fill
+                            loading="lazy"
                             className="object-cover opacity-75 transition-transform duration-500 group-hover:scale-[1.04]"
                             sizes="(max-width: 1280px) 50vw, 25vw"
                             placeholder={item.photo.metadata?.lqip ? 'blur' : 'empty'}

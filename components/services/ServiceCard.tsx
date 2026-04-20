@@ -23,6 +23,7 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
             src={coverImage}
             alt=""
             fill
+            loading="lazy"
             className="object-cover opacity-30 transition-all duration-700 group-hover:scale-[1.06] group-hover:opacity-50"
             sizes="(max-width: 768px) 100vw, 25vw"
           />

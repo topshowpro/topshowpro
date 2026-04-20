@@ -73,7 +73,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 <label htmlFor="phone" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Teléfono
                 </label>
-                <input id="phone" {...register('phone')} className="form-input" />
+                <input id="phone" {...register('phone')} inputMode="tel" className="form-input" />
               </div>
             </div>
 
@@ -81,7 +81,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Email
               </label>
-              <input id="email" type="email" {...register('email')} className="form-input" />
+              <input id="email" type="email" inputMode="email" {...register('email')} className="form-input" />
               {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
             </div>
 
