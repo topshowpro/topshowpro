@@ -1,6 +1,7 @@
 'use client';
+
 import Image from 'next/image';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { useEffect, useMemo, useState } from 'react';
 
 type EquipmentItem = {
   name: string;
@@ -17,63 +18,176 @@ type Category = {
 };
 
 export function CategorySection({ categories }: { categories: Category[] }) {
+  const firstCategorySlug = categories[0]?.slug;
+  const [selectedSlug, setSelectedSlug] = useState<string | undefined>(firstCategorySlug);
+
+  useEffect(() => {
+    if (!categories.length) {
+      return;
+    }
+
+    if (!selectedSlug || !categories.some((cat) => cat.slug === selectedSlug)) {
+      setSelectedSlug(categories[0].slug);
+    }
+  }, [categories, selectedSlug]);
+
+  const selectedCategory = useMemo(
+    () => categories.find((cat) => cat.slug === selectedSlug) ?? categories[0],
+    [categories, selectedSlug],
+  );
+
+  const getRepresentativeImage = (cat: Category) => {
+    if (cat.heroImage) {
+      return { url: cat.heroImage, lqip: undefined as string | undefined };
+    }
+
+    const firstItemWithPhoto = cat.items.find((item) => item.photo?.url);
+    return {
+      url: firstItemWithPhoto?.photo?.url ?? null,
+      lqip: firstItemWithPhoto?.photo?.metadata?.lqip,
+    };
+  };
+
+  if (!categories.length) {
+    return (
+      <p className="font-sans text-sm" style={{ color: 'var(--text-faint)' }}>
+        No hay categorías disponibles por el momento.
+      </p>
+    );
+  }
+
   return (
-    <Accordion className="space-y-2">
-      {categories.map((cat, i) => (
-        <AccordionItem
-          key={cat.slug}
-          value={cat.slug}
-          className="overflow-hidden"
-          style={{ border: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          <AccordionTrigger className="px-6 py-5 hover:no-underline hover:text-[var(--accent-cyan)] transition-colors group">
-            <div className="flex items-center gap-4 w-full">
-              <span className="font-mono text-xs flex-shrink-0" style={{ color: 'var(--accent-cyan)' }}>
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <span className="font-display text-2xl text-white group-hover:text-[var(--accent-cyan)] transition-colors">
-                {cat.name}
-              </span>
-            </div>
-          </AccordionTrigger>
+    <section aria-label="Categorías de equipamiento" className="space-y-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+        {categories.map((cat, index) => {
+          const itemCount = (cat.items ?? []).length;
+          const representative = getRepresentativeImage(cat);
+          const isActive = selectedCategory?.slug === cat.slug;
+          const cardDescription = cat.description || 'Catálogo premium con configuración adaptable al tipo de evento.';
 
-          <AccordionContent
-            className="px-0 pb-0"
-            style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
-          >
-            {/* Category hero image */}
-            {cat.heroImage && (
-              <div className="relative w-full h-48 overflow-hidden">
-                <Image
-                  src={cat.heroImage}
-                  alt={cat.name}
-                  fill
-                  className="object-cover opacity-60"
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-transparent to-transparent" />
-                {/* Scanline overlay */}
-                <div
-                  className="absolute inset-0 pointer-events-none opacity-20"
+          return (
+            <button
+              key={cat.slug}
+              type="button"
+              aria-controls="equipment-category-detail"
+              aria-pressed={isActive}
+              onClick={() => setSelectedSlug(cat.slug)}
+              className="group l-bracket text-left relative overflow-hidden transition-colors duration-300 min-h-[330px]"
+              style={{
+                backgroundColor: isActive ? 'color-mix(in srgb, var(--bg-surface-hi) 85%, var(--accent-cyan) 15%)' : 'var(--bg-surface)',
+                border: isActive
+                  ? '1px solid color-mix(in srgb, var(--accent-cyan) 42%, transparent)'
+                  : '1px solid rgba(255,255,255,0.08)',
+              }}
+            >
+              <span className="l-bracket-bl" />
+              <span className="l-bracket-br" />
+
+              <div className="relative aspect-[3/2] overflow-hidden" style={{ backgroundColor: 'var(--bg-elevated)' }}>
+                {representative.url ? (
+                  <Image
+                    src={representative.url}
+                    alt={cat.name}
+                    fill
+                    className="object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    placeholder={representative.lqip ? 'blur' : 'empty'}
+                    blurDataURL={representative.lqip}
+                  />
+                ) : (
+                  <div className="absolute inset-0 grid-overlay opacity-30" />
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-black/10 to-transparent" />
+
+                <span
+                  className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest"
                   style={{
-                    background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.03) 2px, rgba(0,191,255,0.03) 4px)',
+                    color: 'var(--accent-cyan)',
+                    border: '1px solid color-mix(in srgb, var(--accent-cyan) 45%, transparent)',
+                    backgroundColor: 'rgba(10,10,10,0.66)',
                   }}
-                />
-              </div>
-            )}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </span>
 
-            <div className="px-6 pb-6 pt-4">
-              {cat.description && (
-                <p className="font-sans text-base mb-6" style={{ color: 'var(--text-muted)' }}>{cat.description}</p>
+                <span
+                  className="absolute top-3 right-3 inline-flex items-center px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest"
+                  style={{
+                    color: 'var(--text-primary)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    backgroundColor: 'rgba(10,10,10,0.66)',
+                  }}
+                >
+                  {itemCount} ítems
+                </span>
+              </div>
+
+              <div className="p-5">
+                <h3 className="font-display text-3xl leading-none mb-3" style={{ color: 'var(--text-primary)' }}>
+                  {cat.name}
+                </h3>
+                <p className="font-sans text-sm leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                  {cardDescription}
+                </p>
+                <p className="mt-4 font-mono text-[11px] uppercase tracking-widest" style={{ color: 'var(--text-faint)' }}>
+                  {isActive ? 'Mostrando detalle' : 'Ver detalle'}
+                </p>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {selectedCategory && (
+        <section
+          id="equipment-category-detail"
+          aria-live="polite"
+          className="relative overflow-hidden"
+          style={{
+            border: '1px solid rgba(255,255,255,0.1)',
+            backgroundColor: 'var(--bg-surface)',
+          }}
+        >
+          <div className="grid lg:grid-cols-[minmax(280px,36%)_1fr]">
+            <div className="relative min-h-[240px] lg:min-h-[320px] overflow-hidden">
+              {selectedCategory.heroImage ? (
+                <Image
+                  src={selectedCategory.heroImage}
+                  alt={selectedCategory.name}
+                  fill
+                  className="object-cover opacity-70"
+                  sizes="(max-width: 1024px) 100vw, 36vw"
+                />
+              ) : (
+                <div className="absolute inset-0 grid-overlay opacity-30" />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            </div>
+
+            <div className="p-6 md:p-8">
+              <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--accent-cyan)' }}>
+                Detalle de categoría
+              </p>
+              <h3 className="font-display text-4xl md:text-5xl leading-none mb-4 text-white">
+                {selectedCategory.name}
+              </h3>
+              {selectedCategory.description && (
+                <p className="font-sans text-base mb-6 max-w-3xl" style={{ color: 'var(--text-muted)' }}>
+                  {selectedCategory.description}
+                </p>
               )}
 
-              {(cat.items ?? []).length > 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-                  {(cat.items ?? []).map((item) => (
-                    <div
+              {(selectedCategory.items ?? []).length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                  {selectedCategory.items.map((item) => (
+                    <article
                       key={item.name}
-                      className="relative overflow-hidden group"
-                      style={{ backgroundColor: 'var(--bg-surface-hi)' }}
+                      className="relative overflow-hidden"
+                      style={{
+                        backgroundColor: 'var(--bg-surface-hi)',
+                        border: '1px solid rgba(255,255,255,0.06)',
+                      }}
                     >
                       {item.photo?.url && (
                         <div className="relative w-full aspect-video">
@@ -81,22 +195,24 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                             src={item.photo.url}
                             alt={item.name}
                             fill
-                            className="object-cover opacity-70 group-hover:opacity-100 transition-opacity"
-                            sizes="200px"
+                            className="object-cover opacity-75"
+                            sizes="(max-width: 1280px) 50vw, 25vw"
                             placeholder={item.photo.metadata?.lqip ? 'blur' : 'empty'}
                             blurDataURL={item.photo.metadata?.lqip ?? undefined}
                           />
                         </div>
                       )}
-                      <div className="p-4 font-mono text-sm" style={{ color: 'var(--text-muted)' }}>
-                        {item.name}
+                      <div className="p-4">
+                        <p className="font-mono text-sm" style={{ color: 'var(--text-muted)' }}>
+                          {item.name}
+                        </p>
                         {item.brand && (
-                          <span className="block text-xs mt-1" style={{ color: 'var(--text-faint)' }}>
+                          <p className="font-mono text-xs mt-1 uppercase tracking-wide" style={{ color: 'var(--text-faint)' }}>
                             {item.brand.name}
-                          </span>
+                          </p>
                         )}
                       </div>
-                    </div>
+                    </article>
                   ))}
                 </div>
               ) : (
@@ -105,9 +221,9 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                 </p>
               )}
             </div>
-          </AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+          </div>
+        </section>
+      )}
+    </section>
   );
 }
