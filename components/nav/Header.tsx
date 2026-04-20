@@ -9,7 +9,6 @@ const links = [
   { href: '/servicios', label: 'Servicios' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/equipamiento', label: 'Equipamiento' },
-  { href: '/contacto', label: 'Contacto' },
 ];
 
 export function Header() {
@@ -26,10 +25,13 @@ export function Header() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all',
-        scrolled ? 'backdrop-blur-xl shadow-2xl -translate-y-0.5' : 'bg-transparent'
+        'fixed inset-x-0 top-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500',
+        scrolled ? 'backdrop-blur-2xl shadow-2xl shadow-black/50 border border-white/5' : 'bg-transparent'
       )}
-      style={scrolled ? { backgroundColor: 'rgba(10,10,10,0.8)', borderBottom: '1px solid rgba(255,255,255,0.05)' } : {}}
+      style={scrolled ? { 
+        backgroundColor: 'rgba(26,26,26,0.75)',
+        boxShadow: '0 8px 32px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.05)'
+      } : {}}
     >
       <nav className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center hover:opacity-85 transition">
@@ -54,6 +56,14 @@ export function Header() {
               {l.label}
             </Link>
           ))}
+          <Link
+            href="/contacto"
+            className="px-5 py-2.5 font-sans text-sm uppercase tracking-wider rounded-lg transition-all duration-300 hover:scale-105
+                   bg-[var(--accent-cyan)] text-black font-medium
+                   hover:shadow-[0_0_20px_rgba(0,191,255,0.4)]"
+          >
+            Contacto
+          </Link>
         </div>
 
         <button
