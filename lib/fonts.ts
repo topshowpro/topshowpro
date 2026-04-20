@@ -1,10 +1,17 @@
-import { Playfair_Display, Inter, Space_Mono } from 'next/font/google';
+import { Playfair_Display, Inter, Space_Mono, Anton } from 'next/font/google';
 
 export const playfair = Playfair_Display({
   subsets: ['latin'],
   weight: ['700', '900'],
   style: ['normal', 'italic'],
   variable: '--font-display',
+  display: 'swap',
+});
+
+export const anton = Anton({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-condensed',
   display: 'swap',
 });
 

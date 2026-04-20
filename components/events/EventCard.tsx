@@ -18,12 +18,15 @@ const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1540575467063-178a50c2
 export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage }: EventCardProps) {
   const imgSrc = heroImage?.url ?? FALLBACK_IMAGE;
   const lqip = heroImage?.metadata?.lqip;
+  const start = new Date(dateStart);
+  const day = String(start.getDate()).padStart(2, '0');
+  const month = start.toLocaleString('es-AR', { month: 'short' }).replace('.', '').toUpperCase();
 
   return (
     <TiltCard className="group block w-full h-full">
       <Link
         href={`/eventos/${slug}`}
-        className="group relative block overflow-hidden aspect-[4/5]"
+        className="group relative block overflow-hidden aspect-[4/5] border"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         <Image
@@ -37,27 +40,29 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
           placeholder={lqip ? 'blur' : 'empty'}
           blurDataURL={lqip ?? undefined}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/65 to-black/20" />
 
-        {/* L-bracket detail top-right */}
-        <div className="absolute top-3 right-3 w-5 h-5" style={{ borderColor: 'var(--accent-cyan)', borderStyle: 'solid', borderWidth: '1px 1px 0 0', opacity: 0.5 }} />
+        <div className="absolute left-4 top-4 z-10 leading-none">
+          <p className="font-mono text-[3.4rem] md:text-[4.8rem] tracking-[-0.04em] text-[var(--text-primary)]">{day}</p>
+          <p className="font-mono text-[0.7rem] uppercase tracking-[0.26em]" style={{ color: 'var(--accent-led)' }}>{month}</p>
+        </div>
 
-        <div className="absolute inset-x-0 bottom-0 p-5 space-y-2">
+        <div className="absolute inset-x-0 bottom-0 p-5 space-y-3">
           <span
             className="inline-block font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
-            style={{ color: 'var(--accent-cyan)', border: '1px solid color-mix(in srgb, var(--accent-cyan) 40%, transparent)' }}
+            style={{ color: 'var(--accent-led)', border: '1px solid color-mix(in srgb, var(--accent-led) 48%, transparent)' }}
           >
             {category.label}
           </span>
           <h3
-            className="font-display text-2xl md:text-3xl leading-none text-white"
+            className="font-festival-heading text-3xl md:text-4xl leading-[0.9] uppercase text-[var(--text-primary)]"
           >
             {title}
           </h3>
           {subtitle && (
             <p className="font-sans text-sm line-clamp-2" style={{ color: 'var(--text-muted)' }}>{subtitle}</p>
           )}
-          <p className="font-mono text-xs uppercase" style={{ color: 'var(--text-faint)' }}>
+          <p className="font-mono text-xs uppercase tracking-[0.18em]" style={{ color: 'var(--text-faint)' }}>
             {formatDateRange(dateStart, dateEnd)}
           </p>
         </div>

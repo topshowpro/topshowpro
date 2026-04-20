@@ -3,59 +3,40 @@ type Client = { name: string; logoUrl?: string | null; website?: string | null }
 export function ClientsMarquee({ clients }: { clients: Client[] }) {
   if (!clients.length) return null;
 
-  const loop = [...clients, ...clients];
-
   return (
-    <div
-      className="relative overflow-hidden py-8"
-      style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+    <section
+      className="relative px-4 sm:px-6 py-14"
+      style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
     >
-      {/* Label — desktop */}
-      <p
-        className="absolute left-6 top-1/2 -translate-y-1/2 z-10 font-mono text-[10px] uppercase tracking-widest hidden lg:block"
-        style={{ color: 'var(--text-faint)' }}
-      >
-        Clientes
-      </p>
-      {/* Label — mobile */}
-      <p
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 font-mono text-[9px] uppercase tracking-widest lg:hidden"
-        style={{ color: 'var(--text-faint)' }}
-      >
-        Clientes
-      </p>
-
-      {/* Fade edges */}
-      <div
-        className="absolute inset-y-0 left-0 z-10 w-24 pointer-events-none"
-        style={{ background: 'linear-gradient(to right, var(--bg-base), transparent)' }}
-      />
-      <div
-        className="absolute inset-y-0 right-0 z-10 w-24 pointer-events-none"
-        style={{ background: 'linear-gradient(to left, var(--bg-base), transparent)' }}
-      />
-
-      {/* Marquee */}
-      <div className="flex gap-6 md:gap-12 animate-[marquee_35s_linear_infinite] whitespace-nowrap">
-        {loop.map((c, i) => (
-          <div key={i} className="flex items-center justify-center min-w-[160px]">
-            {c.logoUrl ? (
-              <img
-                src={c.logoUrl}
-                alt={c.name}
-                className="h-8 object-contain grayscale opacity-50 hover:opacity-90 hover:grayscale-0 transition-all duration-300"
-              />
-            ) : (
-              <span
-                className="font-display text-xl tracking-wide transition-colors duration-300 hover:text-white"
-                style={{ color: 'var(--text-faint)' }}
-              >
-                {c.name}
-              </span>
-            )}
-          </div>
-        ))}
+      <div className="max-w-7xl mx-auto">
+        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.26em]" style={{ color: 'var(--text-faint)' }}>
+          Clientes
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {clients.map((c) => (
+            <div
+              key={c.name}
+              className="group flex min-h-[90px] items-center justify-center border transition-transform duration-300 hover:scale-[1.03]"
+              style={{
+                borderColor: 'rgba(255,255,255,0.08)',
+                backgroundColor: 'rgba(255,255,255,0.02)',
+              }}
+            >
+              {c.logoUrl ? (
+                <img
+                  src={c.logoUrl}
+                  alt={c.name}
+                  className="h-10 md:h-12 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                />
+              ) : (
+                <span className="font-festival-heading text-2xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
+                  {c.name}
+                </span>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
