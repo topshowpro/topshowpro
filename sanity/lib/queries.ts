@@ -7,25 +7,33 @@ export const Q_HERO = `*[_type == "hero"][0]{
   bannerAzul{ text, cta }
 }`;
 
-export const Q_HOMEPAGE = `*[_type == "homepage"][0]{
-  intro,
-  ctaLabel,
-  "featuredEvents": select(
-    count(featuredEvents[defined(@->_ref)]) > 0 => featuredEvents[]->{
-      title, subtitle, "slug": slug.current, dateStart, dateEnd,
-      "category": category->{label, "slug": slug.current},
-      "heroImage": heroImage.asset->{url, metadata{lqip}}
-    },
-    count(*[_type == "event" && featured == true]) > 0 => *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
-      title, subtitle, "slug": slug.current, dateStart, dateEnd,
-      "category": category->{label, "slug": slug.current},
-      "heroImage": heroImage.asset->{url, metadata{lqip}}
-    },
-    *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+export const Q_HOMEPAGE = `{
+  "homepage": *[_type == "homepage"][0]{
+    intro,
+    ctaLabel,
+    "manualFeaturedEvents": featuredEvents[]->{
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
       "category": category->{label, "slug": slug.current},
       "heroImage": heroImage.asset->{url, metadata{lqip}}
     }
+  },
+  "featuredByFlag": *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+    title, subtitle, "slug": slug.current, dateStart, dateEnd,
+    "category": category->{label, "slug": slug.current},
+    "heroImage": heroImage.asset->{url, metadata{lqip}}
+  },
+  "recentEvents": *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...4] {
+    title, subtitle, "slug": slug.current, dateStart, dateEnd,
+    "category": category->{label, "slug": slug.current},
+    "heroImage": heroImage.asset->{url, metadata{lqip}}
+  }
+}{
+  "intro": homepage.intro,
+  "ctaLabel": homepage.ctaLabel,
+  "featuredEvents": select(
+    count(homepage.manualFeaturedEvents[defined(slug)]) > 0 => homepage.manualFeaturedEvents,
+    count(featuredByFlag[defined(slug)]) > 0 => featuredByFlag,
+    recentEvents
   )
 }`;
 
