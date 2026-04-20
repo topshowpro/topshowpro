@@ -440,10 +440,20 @@ body {
   .neon-orb { animation: none !important; }
 }
 
-/* Trace Runner CTA (global) */
-@keyframes trace-runner-spin {
-  to {
-    transform: rotate(360deg);
+/* CTA hover-only effects */
+@keyframes cta-shine-sweep {
+  0% {
+    transform: translateX(-150%) skewX(-18deg);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.55;
+  }
+
+  100% {
+    transform: translateX(170%) skewX(-18deg);
+    opacity: 0;
   }
 }
 
@@ -455,7 +465,9 @@ body {
   border-color: rgba(255, 255, 255, 0.18);
   font-weight: 700;
   box-shadow: none;
+  overflow: hidden;
   transition:
+    background-color 220ms ease,
     border-color 220ms ease,
     box-shadow 220ms ease,
     color 220ms ease;
@@ -467,24 +479,16 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg 314deg,
-    rgba(0, 191, 255, 0.94) 326deg,
-    rgba(123, 97, 255, 0.9) 344deg,
-    transparent 360deg
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    rgba(0, 191, 255, 0.04) 38%,
+    rgba(255, 255, 255, 0.52) 50%,
+    rgba(123, 97, 255, 0.18) 62%,
+    transparent 100%
   );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  transform-origin: center;
-  animation: trace-runner-spin 7.2s linear infinite;
+  transform: translateX(-150%) skewX(-18deg);
+  opacity: 0;
 }
 
 .btn-neon-orbit::after {
@@ -494,9 +498,9 @@ body {
   inset: -1px;
   border-radius: inherit;
   box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.18),
-    0 0 14px rgba(0, 191, 255, 0.14),
-    0 0 20px rgba(123, 97, 255, 0.1);
+    0 0 0 1px rgba(0, 191, 255, 0.2),
+    0 0 14px rgba(0, 191, 255, 0.16),
+    0 0 22px rgba(123, 97, 255, 0.11);
   opacity: 0;
   transition: opacity 220ms ease;
 }
@@ -506,9 +510,15 @@ body {
   opacity: 1;
 }
 
+.btn-neon-orbit:hover::before,
+.btn-neon-orbit:focus-visible::before {
+  animation: cta-shine-sweep 560ms cubic-bezier(0.16, 1, 0.3, 1) 1;
+}
+
 .btn-neon-orbit:hover,
 .btn-neon-orbit:focus-visible {
   border-color: rgba(130, 188, 255, 0.36);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 /* Service CTA button */
@@ -598,6 +608,15 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .btn-neon-orbit::before {
     animation: none;
+    transform: none;
+    opacity: 0;
+  }
+
+  .btn-neon-orbit:hover::before,
+  .btn-neon-orbit:focus-visible::before {
+    animation: none;
+    transform: none;
+    opacity: 0.3;
   }
 
   .btn-neon::before { animation: none; }
