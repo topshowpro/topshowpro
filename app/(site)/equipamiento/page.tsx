@@ -5,6 +5,7 @@ import { CategorySection } from '@/components/equipment/CategorySection';
 import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
+import { NeonBackdrop } from '@/components/ui/neon-backdrop';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -63,21 +64,32 @@ export default async function EquipamientoPage() {
       <BrandsMarquee brands={brands ?? []} />
 
       {/* CTA */}
-      <section className="px-6 py-32 text-center">
-        <FadeIn>
-          <h2
-            className="font-display text-white mb-6 leading-none"
-            style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}
-          >
-            ¿Necesitás cotizar?
-          </h2>
-          <p className="font-sans text-lg mb-10 max-w-xl mx-auto" style={{ color: 'var(--text-muted)' }}>
-            Pedinos un presupuesto personalizado para tu proyecto.
-          </p>
-          <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
-            Solicitar cotización
-          </CtaOutlineLink>
-        </FadeIn>
+      <section className="relative isolate overflow-hidden">
+        <NeonBackdrop variant="laser-cathedral" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(112%_88%_at_50%_102%,rgba(10,10,10,0.96)_12%,rgba(10,10,10,0.58)_46%,transparent_72%)]" />
+        <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.14]" />
+
+        <div className="relative mx-auto flex min-h-[clamp(24.5rem,55vh,37.5rem)] max-w-[68rem] items-center justify-center px-6 py-[3.25rem] text-center md:min-h-[clamp(28rem,63vh,43rem)] md:px-10 md:py-[3.75rem]">
+          <div className="relative w-full max-w-[42rem]">
+            <div className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[18rem] w-[112%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-88 blur-[80px] motion-reduce:opacity-58" style={{ background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--accent-cyan) 31%, transparent) 0%, color-mix(in srgb, var(--accent-violet) 11%, transparent) 38%, transparent 74%)' }} />
+            <div className="pointer-events-none absolute left-1/2 top-[calc(50%-8.5rem)] -z-10 h-px w-[72%] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/28 to-transparent" />
+
+            <FadeIn>
+              <h2
+                className="mx-auto mb-3 max-w-[11ch] font-display leading-none text-white md:mb-4"
+                style={{ fontSize: 'clamp(2.06rem, 5vw, 4.7rem)' }}
+              >
+                ¿Necesitás cotizar?
+              </h2>
+              <p className="mx-auto mb-7 max-w-[28ch] font-sans text-[1.04rem] md:mb-8 md:text-[1.08rem]" style={{ color: 'var(--text-muted)' }}>
+                Pedinos un presupuesto personalizado para tu proyecto.
+              </p>
+              <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
+                Solicitar cotización
+              </CtaOutlineLink>
+            </FadeIn>
+          </div>
+        </div>
       </section>
     </div>
   );

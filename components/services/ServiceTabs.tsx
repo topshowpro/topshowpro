@@ -1,167 +1,235 @@
 'use client';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import * as Accordion from '@radix-ui/react-accordion';
+import * as Tabs from '@radix-ui/react-tabs';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
-import { cn } from '@/lib/utils';
+import { ChevronDown } from 'lucide-react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 
 type ServiceImage = { url: string; metadata?: { lqip?: string } | null };
-type TechContact = { name: string; phone: string; email: string };
+type TechContact = { name?: string; phone?: string; email?: string };
+
 type Service = {
-  name: string;
-  shortDesc: string;
+  name?: string;
+  shortDesc?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  longDesc: any;
-  gallery: ServiceImage[];
+  longDesc?: any;
+  gallery?: ServiceImage[];
   techContact?: TechContact;
-  cta?: { label: string; link: string };
+  cta?: { label?: string; link?: string };
 };
 
-export function ServiceTabs({ services }: { services: Service[] }) {
-  const [active, setActive] = useState(0);
-  const current = services[active];
+type IncludeItem = {
+  title: string;
+  description: string;
+};
+
+const serviceFallbackDescription = 'Servicio tecnico integral para eventos y experiencias en vivo.';
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+export function ServiceTabs({ services, includes = [] }: { services: Service[]; includes?: IncludeItem[] }) {
+  const normalizedServices = useMemo(
+    () =>
+      (services ?? []).map((service, index) => {
+        const fallbackName = `Servicio ${index + 1}`;
+        const name = service.name?.trim() || fallbackName;
+        return {
+          ...service,
+          name,
+          value: `${slugify(name) || 'servicio'}-${index}`,
+        };
+      }),
+    [services],
+  );
+
+  const [active, setActive] = useState(normalizedServices[0]?.value ?? '');
+  const current = normalizedServices.find((service) => service.value === active) ?? normalizedServices[0];
+
+  if (!current) {
+    return (
+      <div
+        className="mx-auto max-w-7xl px-6 py-16 font-mono text-xs uppercase tracking-[0.2em] md:px-10"
+        style={{ border: '1px solid rgba(255,255,255,0.1)', color: 'var(--text-faint)' }}
+      >
+        No hay servicios disponibles en este momento.
+      </div>
+    );
+  }
+
+  const hasLongDesc = Array.isArray(current.longDesc) && current.longDesc.length > 0;
+  const cover = current.gallery?.[0];
+  const sideImage = current.gallery?.[1];
+  const hasTechContact = Boolean(current.techContact?.name || current.techContact?.phone || current.techContact?.email);
+  const ctaLabel = current.cta?.label?.trim() || 'Solicitar asesoramiento';
+  const ctaLink = current.cta?.link?.trim() || '/contacto';
+  const compactDescription = current.shortDesc?.trim() || serviceFallbackDescription;
 
   return (
-    <div>
-      <div className="hidden md:flex mb-12" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-        {services.map((s, i) => (
-          <button
-            key={s.name}
-            onClick={() => setActive(i)}
-            className={cn(
-              'px-6 py-4 font-display text-xl tracking-wide transition relative',
-              active === i ? '' : 'hover:text-white'
-            )}
-            style={{ color: active === i ? 'var(--accent-cyan)' : 'var(--text-muted)' }}
-          >
-            {s.name}
-            {active === i && (
-              <motion.div
-                layoutId="tab-indicator"
-                className="absolute inset-x-0 -bottom-px h-[2px]"
-                style={{ backgroundColor: 'var(--accent-cyan)' }}
-              />
-            )}
-          </button>
-        ))}
-      </div>
+    <div className="space-y-10">
+      <Tabs.Root value={active} onValueChange={setActive}>
+        <Tabs.List
+          aria-label="Seleccion de servicios"
+          className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {normalizedServices.map((service) => (
+            <Tabs.Trigger
+              key={service.value}
+              value={service.value}
+              className="whitespace-nowrap rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] data-[state=active]:border-[var(--accent-cyan)] data-[state=active]:bg-[rgba(23,133,211,0.16)] data-[state=active]:text-white"
+              style={{ borderColor: 'rgba(255,255,255,0.18)', color: 'var(--text-muted)' }}
+            >
+              {service.name}
+            </Tabs.Trigger>
+          ))}
+        </Tabs.List>
+      </Tabs.Root>
 
-      <div className="hidden md:block min-h-[400px]">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="grid md:grid-cols-2 gap-12 items-start"
-          >
-            {/* Text */}
+      <AnimatePresence mode="wait">
+        <motion.article
+          key={current.value}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          className="group relative overflow-hidden l-bracket p-6 md:p-8"
+          style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.1)' }}
+        >
+          <span className="l-bracket-bl" />
+          <span className="l-bracket-br" />
+
+          <div
+            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            style={{
+              background: 'linear-gradient(125deg, rgba(23,133,211,0.12) 0%, transparent 55%, rgba(23,133,211,0.06) 100%)',
+            }}
+          />
+
+          <div className="relative z-10 grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
             <div>
-              <h3 className="font-display text-3xl md:text-5xl text-white mb-4">{current?.name}</h3>
-              <div className="font-sans text-lg mb-8" style={{ color: 'var(--text-muted)' }}>
-                {current?.longDesc?.length > 0
-                  ? <PortableText value={current.longDesc} />
-                  : <p>{current?.shortDesc}</p>
-                }
-              </div>
-              {current?.techContact && (
-                <div className="mb-8 p-4 font-mono text-sm" style={{ border: '1px solid rgba(23,133,211,0.2)', backgroundColor: 'rgba(23,133,211,0.04)' }}>
-                  <p className="uppercase tracking-wider text-xs mb-3" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
-                  <p className="text-white mb-1">{current.techContact.name}</p>
-                  <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>
-                  <p style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em]" style={{ color: 'var(--text-faint)' }}>
+                Servicio activo
+              </p>
+              <h2 className="font-display text-4xl leading-[0.95] text-white md:text-6xl">{current.name}</h2>
+              <p className="mt-5 font-sans text-base leading-relaxed md:text-lg" style={{ color: 'var(--text-muted)' }}>
+                {compactDescription}
+              </p>
+
+              {hasLongDesc && (
+                <Accordion.Root type="single" collapsible className="mt-5">
+                  <Accordion.Item value="detalle" className="rounded-lg border" style={{ borderColor: 'rgba(255,255,255,0.16)' }}>
+                    <Accordion.Header>
+                      <Accordion.Trigger
+                        className="group flex w-full items-center justify-between px-4 py-3 text-left font-mono text-xs uppercase tracking-[0.14em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-surface)]"
+                        style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}
+                      >
+                        Ver detalle completo
+                        <ChevronDown className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                      </Accordion.Trigger>
+                    </Accordion.Header>
+                    <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                      <div className="px-4 pb-4 pt-2 font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
+                        <PortableText value={current.longDesc} />
+                      </div>
+                    </Accordion.Content>
+                  </Accordion.Item>
+                </Accordion.Root>
+              )}
+
+              {hasTechContact && (
+                <div
+                  className="mt-5 rounded-lg p-4 font-mono text-xs md:text-sm"
+                  style={{ border: '1px solid rgba(23,133,211,0.3)', backgroundColor: 'rgba(23,133,211,0.08)' }}
+                >
+                  <p className="mb-2 uppercase tracking-[0.16em]" style={{ color: 'var(--accent-cyan)' }}>
+                    Contacto tecnico
+                  </p>
+                  {current.techContact?.name && <p className="text-white">{current.techContact.name}</p>}
+                  {current.techContact?.phone && <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>}
+                  {current.techContact?.email && <p style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>}
                 </div>
               )}
-              {current?.cta && (
-                <CtaOutlineLink href={current.cta.link} className="h-9 px-5 text-[11px]">
-                  {current.cta.label}
-                </CtaOutlineLink>
-              )}
+
+              <CtaOutlineLink href={ctaLink} className="mt-7 h-10 px-6 text-[11px]">
+                {ctaLabel}
+              </CtaOutlineLink>
             </div>
 
-            {/* Gallery grid */}
-            {current?.gallery?.length > 0 && (
-              <div className="grid grid-cols-2 gap-2">
-                {current.gallery.slice(0, 4).map((img, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      'relative overflow-hidden',
-                      i === 0 ? 'col-span-2 aspect-video' : 'aspect-square',
-                    )}
-                    style={{ backgroundColor: 'var(--bg-surface)' }}
-                  >
-                    <Image
-                      src={img.url}
-                      alt=""
-                      fill
-                      loading="lazy"
-                      className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-300"
-                      sizes="(max-width: 1280px) 50vw, 600px"
-                      placeholder={img.metadata?.lqip ? 'blur' : 'empty'}
-                      blurDataURL={img.metadata?.lqip ?? undefined}
-                    />
-                    {/* Scanline overlay */}
-                    <div
-                      className="absolute inset-0 pointer-events-none opacity-20"
-                      style={{
-                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(23,133,211,0.03) 2px, rgba(23,133,211,0.03) 4px)',
-                      }}
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
-
-      {/* Mobile accordion */}
-      <div className="md:hidden space-y-2">
-        {services.map((s) => (
-          <details key={s.name} className="group" style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-            <summary className="font-display text-2xl text-white py-4 cursor-pointer list-none flex items-center justify-between">
-              {s.name}
-              <span className="font-mono text-sm group-open:rotate-45 transition-transform inline-block">+</span>
-            </summary>
-            <div className="pb-6">
-              {s.gallery?.[0] && (
-                <div className="relative aspect-video mb-4 overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)' }}>
+            <div className="grid gap-3">
+              {cover ? (
+                <div className="relative aspect-[4/3] overflow-hidden border border-white/10" style={{ backgroundColor: 'var(--bg-base)' }}>
                   <Image
-                    src={s.gallery[0].url}
-                    alt=""
+                    src={cover.url}
+                    alt={`Visual de ${current.name}`}
                     fill
                     loading="lazy"
-                    className="object-cover opacity-80"
-                    sizes="100vw"
+                    className="object-cover opacity-90 transition-opacity duration-300 hover:opacity-100"
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    placeholder={cover.metadata?.lqip ? 'blur' : 'empty'}
+                    blurDataURL={cover.metadata?.lqip ?? undefined}
+                  />
+                </div>
+              ) : (
+                <div
+                  className="flex aspect-[4/3] items-end p-4"
+                  style={{
+                    background: 'linear-gradient(155deg, rgba(23,133,211,0.18) 0%, rgba(23,133,211,0.05) 55%, rgba(10,10,10,1) 100%)',
+                  }}
+                >
+                  <p className="font-mono text-xs uppercase tracking-[0.16em]" style={{ color: 'var(--text-faint)' }}>
+                    Visual en produccion
+                  </p>
+                </div>
+              )}
+
+              {sideImage && (
+                <div className="relative aspect-[16/7] overflow-hidden border border-white/10" style={{ backgroundColor: 'var(--bg-base)' }}>
+                  <Image
+                    src={sideImage.url}
+                    alt={`Detalle de ${current.name}`}
+                    fill
+                    loading="lazy"
+                    className="object-cover opacity-80 transition-opacity duration-300 hover:opacity-95"
+                    sizes="(max-width: 1024px) 100vw, 42vw"
+                    placeholder={sideImage.metadata?.lqip ? 'blur' : 'empty'}
+                    blurDataURL={sideImage.metadata?.lqip ?? undefined}
                   />
                 </div>
               )}
-              <div className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>
-                {s.longDesc?.length > 0
-                  ? <PortableText value={s.longDesc} />
-                  : <p>{s.shortDesc}</p>
-                }
-              </div>
-              {s.techContact && (
-                <div className="mt-4 p-3 font-mono text-xs" style={{ border: '1px solid rgba(23,133,211,0.2)', backgroundColor: 'rgba(23,133,211,0.04)' }}>
-                  <p className="uppercase tracking-wider mb-2" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
-                  <p className="text-white">{s.techContact.name}</p>
-                  <p style={{ color: 'var(--text-muted)' }}>{s.techContact.phone}</p>
-                  <p style={{ color: 'var(--text-muted)' }}>{s.techContact.email}</p>
-                </div>
-              )}
-              {s.cta && (
-                <CtaOutlineLink href={s.cta.link} className="mt-4 h-8 px-4 text-[11px]">
-                  {s.cta.label}
-                </CtaOutlineLink>
-              )}
             </div>
-          </details>
-        ))}
-      </div>
+          </div>
+        </motion.article>
+      </AnimatePresence>
+
+      {includes.length > 0 && (
+        <div
+          className="rounded-lg p-5 md:p-7"
+          style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
+        >
+          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: 'var(--accent-cyan)' }}>
+            Incluye siempre
+          </p>
+          <div className="grid gap-3 md:grid-cols-2">
+            {includes.map((item) => (
+              <div key={item.title} className="rounded-md p-3" style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}>
+                <h3 className="font-display text-2xl leading-tight text-white md:text-3xl">{item.title}</h3>
+                <p className="mt-2 font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

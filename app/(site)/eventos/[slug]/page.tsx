@@ -35,19 +35,8 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
 
   return (
     <article style={{ backgroundColor: 'var(--bg-base)' }}>
-      <div className="px-6 pt-24 pb-0 max-w-7xl mx-auto">
-        <Link
-          href="/eventos"
-          className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest transition nav-link"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-            <path d="M10 12L6 8l4-4" />
-          </svg>
-          Volver a eventos
-        </Link>
-      </div>
       {/* Hero */}
-      <header className="relative h-[50svh] md:h-[70svh] w-full overflow-hidden">
+      <header className="relative h-[62svh] md:h-[76svh] lg:h-[84svh] w-full overflow-hidden">
         {event.heroImage && (
           <Image
             src={event.heroImage.url}
@@ -58,7 +47,22 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             sizes="100vw"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-transparent" />
+
+        <div className="absolute inset-x-0 top-24 z-30 px-6 md:top-28">
+          <div className="mx-auto max-w-7xl">
+            <Link
+              href="/eventos"
+              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-white transition nav-link"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <path d="M10 12L6 8l4-4" />
+              </svg>
+              Volver a eventos
+            </Link>
+          </div>
+        </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-12">
           <span
