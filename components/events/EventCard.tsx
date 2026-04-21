@@ -18,9 +18,9 @@ const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1540575467063-178a50c2
 export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage }: EventCardProps) {
   const imgSrc = heroImage?.url ?? FALLBACK_IMAGE;
   const lqip = heroImage?.metadata?.lqip;
-  const start = new Date(dateStart);
-  const day = String(start.getDate()).padStart(2, '0');
-  const month = start.toLocaleString('es-AR', { month: 'short' }).replace('.', '').toUpperCase();
+  const start = new Date(dateStart + 'T12:00:00Z');
+  const day = new Intl.DateTimeFormat('es-AR', { day: '2-digit', timeZone: 'America/Argentina/Buenos_Aires' }).format(start);
+  const month = new Intl.DateTimeFormat('es-AR', { month: 'short', timeZone: 'America/Argentina/Buenos_Aires' }).format(start).replace('.', '').toUpperCase();
 
   return (
     <TiltCard className="group block w-full h-full">
@@ -70,3 +70,5 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
     </TiltCard>
   );
 }
+
+
