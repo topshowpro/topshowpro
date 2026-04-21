@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 type Client = { name: string; logoUrl?: string | null; website?: string | null };
 
 export function ClientsMarquee({ clients }: { clients: Client[] }) {
@@ -23,10 +25,14 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
               }}
             >
               {c.logoUrl ? (
-                <img
+                <Image
                   src={c.logoUrl}
                   alt={c.name}
+                  width={180}
+                  height={64}
                   className="h-10 md:h-12 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  loading="lazy"
+                  sizes="(max-width: 768px) 140px, 180px"
                 />
               ) : (
                 <span className="font-festival-heading text-2xl tracking-wide" style={{ color: 'var(--text-primary)' }}>

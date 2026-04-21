@@ -16,10 +16,29 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const on = () => setScrolled(window.scrollY > 40);
-    on();
-    window.addEventListener('scroll', on);
-    return () => window.removeEventListener('scroll', on);
+    let ticking = false;
+
+    const update = () => {
+      const next = window.scrollY > 40;
+      setScrolled((prev) => (prev === next ? prev : next));
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (ticking) {
+        return;
+      }
+
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   return (

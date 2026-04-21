@@ -110,14 +110,14 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
             transform: 'rotateY(180deg)',
             backgroundColor: 'var(--bg-elevated)',
             border: '1px solid var(--accent-cyan)',
-            boxShadow: '0 0 40px rgba(0,191,255,0.3), 0 0 80px rgba(0,191,255,0.1), inset 0 0 40px rgba(0,191,255,0.05)',
+            boxShadow: '0 0 40px rgba(23,133,211,0.3), 0 0 80px rgba(23,133,211,0.1), inset 0 0 40px rgba(23,133,211,0.05)',
           }}
         >
           <div
             className="flex items-center justify-center w-16 h-16 rounded-full"
             style={{
               border: '2px solid var(--accent-cyan)',
-              boxShadow: '0 0 20px rgba(0,191,255,0.7)',
+              boxShadow: '0 0 20px rgba(23,133,211,0.7)',
             }}
           >
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" stroke="var(--accent-cyan)">
@@ -134,7 +134,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               style={{
                 fontSize: 'clamp(3rem, 5vw, 5rem)',
                 color: 'var(--accent-cyan)',
-                textShadow: '0 0 30px rgba(0,191,255,0.9), 0 0 60px rgba(0,191,255,0.4)',
+                textShadow: '0 0 30px rgba(23,133,211,0.9), 0 0 60px rgba(23,133,211,0.4)',
               }}
             >
               ¡Gracias!

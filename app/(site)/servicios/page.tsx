@@ -111,7 +111,7 @@ export default async function ServiciosPage() {
                   <div className="relative flex items-start md:pt-1">
                     <span
                       className="font-display text-[2.8rem] leading-none md:text-[4.75rem]"
-                      style={{ color: 'rgba(0,191,255,0.45)' }}
+                      style={{ color: 'rgba(23,133,211,0.45)' }}
                     >
                       {itemNumber}
                     </span>
@@ -130,7 +130,7 @@ export default async function ServiciosPage() {
                     <div
                       className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                       style={{
-                        background: 'linear-gradient(130deg, rgba(0,191,255,0.12) 0%, transparent 50%, rgba(0,191,255,0.06) 100%)',
+                        background: 'linear-gradient(130deg, rgba(23,133,211,0.12) 0%, transparent 50%, rgba(23,133,211,0.06) 100%)',
                       }}
                     />
 
@@ -153,8 +153,8 @@ export default async function ServiciosPage() {
                           <div
                             className="mt-7 p-4 font-mono text-xs md:text-sm"
                             style={{
-                              border: '1px solid rgba(0,191,255,0.3)',
-                              backgroundColor: 'rgba(0,191,255,0.08)',
+                              border: '1px solid rgba(23,133,211,0.3)',
+                              backgroundColor: 'rgba(23,133,211,0.08)',
                             }}
                           >
                             <p className="mb-2 uppercase tracking-[0.18em]" style={{ color: 'var(--accent-led)' }}>
@@ -191,7 +191,7 @@ export default async function ServiciosPage() {
                           <div
                             className="flex aspect-[4/3] items-end p-4"
                             style={{
-                              background: 'linear-gradient(160deg, rgba(0,191,255,0.18) 0%, rgba(0,191,255,0.05) 55%, rgba(10,10,10,1) 100%)',
+                              background: 'linear-gradient(160deg, rgba(23,133,211,0.18) 0%, rgba(23,133,211,0.05) 55%, rgba(10,10,10,1) 100%)',
                             }}
                           >
                             <p className="font-mono text-xs uppercase tracking-[0.16em]" style={{ color: 'var(--text-faint)' }}>

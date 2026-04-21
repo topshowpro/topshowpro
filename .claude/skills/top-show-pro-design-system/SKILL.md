@@ -26,7 +26,7 @@ Fuente de verdad única para decisiones de diseño del sitio **Top Show Pro** (e
   --bg-surface-hi: #1F1F1F;     /* Hover de cards */
 
   /* Acentos */
-  --accent-cyan: #00BFFF;       /* Principal (CTAs, hover, highlights) */
+  --accent-cyan: #1785d3;       /* Principal (CTAs, hover, highlights) */
   --accent-violet: #7B61FF;     /* Secundario (resaltar palabras clave) */
   --accent-mint: #00FF9C;       /* Indicadores técnicos/estados */
 
@@ -344,7 +344,7 @@ No mezclar dos librerías en la misma sección. Usar Lucide para el 90% y Materi
 
 ## Accesibilidad
 
-- Contraste mínimo: AA en texto crítico. Testear combos cyan-sobre-dark (suficiente si cyan >= `#00BFFF` sobre negro)
+- Contraste mínimo: AA en texto crítico. Testear combos cyan-sobre-dark (suficiente si cyan >= `#1785d3` sobre negro)
 - Focus rings: `ring-2 ring-[var(--accent-cyan)] ring-offset-2 ring-offset-[var(--bg-base)]`
 - Reduced motion: respetado globalmente vía `MotionConfig reducedMotion="user"`
 - Alt text obligatorio en imágenes (Sanity schema lo requiere)

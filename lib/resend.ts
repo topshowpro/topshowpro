@@ -49,8 +49,8 @@ function row(label: string, value: string) {
 function buildEmail(p: ContactPayload & { date: string }): string {
   const fields = [
     row('Nombre', p.name),
-    row('Email', `<a href="mailto:${p.email}" style="color:#00BFFF;text-decoration:none">${p.email}</a>`),
-    p.phone ? row('Tel&eacute;fono', `<a href="tel:${p.phone}" style="color:#00BFFF;text-decoration:none">${p.phone}</a>`) : '',
+    row('Email', `<a href="mailto:${p.email}" style="color:#1785d3;text-decoration:none">${p.email}</a>`),
+    p.phone ? row('Tel&eacute;fono', `<a href="tel:${p.phone}" style="color:#1785d3;text-decoration:none">${p.phone}</a>`) : '',
     p.company ? row('Empresa', p.company) : '',
   ].join('');
 
@@ -69,7 +69,7 @@ function buildEmail(p: ContactPayload & { date: string }): string {
 
           <!-- Header -->
           <tr>
-            <td style="background-color:#0A0A0A;padding:28px 32px;border-bottom:2px solid #00BFFF">
+            <td style="background-color:#0A0A0A;padding:28px 32px;border-bottom:2px solid #1785d3">
               <div style="font-size:22px;font-weight:700;letter-spacing:0.15em;color:#FFFFFF;line-height:1">TOP SHOW PRO</div>
               <div style="font-size:11px;letter-spacing:0.2em;color:#5AA7E0;margin-top:6px;text-transform:uppercase">Rental de tecnolog&iacute;a para eventos</div>
             </td>
@@ -78,7 +78,7 @@ function buildEmail(p: ContactPayload & { date: string }): string {
           <!-- Badge + Título -->
           <tr>
             <td style="padding:24px 32px 0">
-              <span style="display:inline-block;background-color:rgba(0,191,255,0.1);color:#00BFFF;border:1px solid rgba(0,191,255,0.3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:2px">${p.category ?? 'Consulta general'}</span>
+              <span style="display:inline-block;background-color:rgba(23,133,211,0.1);color:#1785d3;border:1px solid rgba(23,133,211,0.3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:2px">${p.category ?? 'Consulta general'}</span>
               <h1 style="font-size:26px;font-weight:700;color:#FFFFFF;margin:12px 0 4px;line-height:1.2">Nueva consulta recibida</h1>
               <p style="font-size:12px;color:#7A7A7A;margin:0;text-transform:capitalize">${p.date}</p>
             </td>
@@ -104,14 +104,14 @@ function buildEmail(p: ContactPayload & { date: string }): string {
           <tr>
             <td style="padding:0 32px 24px">
               <p style="font-size:10px;letter-spacing:0.2em;color:#5AA7E0;text-transform:uppercase;margin:0 0 12px">Mensaje</p>
-              <div style="font-size:14px;color:#CCCCCC;line-height:1.7;background-color:#1A1A1A;padding:16px 20px;border-radius:4px;border-left:3px solid #00BFFF;white-space:pre-wrap">${p.message}</div>
+              <div style="font-size:14px;color:#CCCCCC;line-height:1.7;background-color:#1A1A1A;padding:16px 20px;border-radius:4px;border-left:3px solid #1785d3;white-space:pre-wrap">${p.message}</div>
             </td>
           </tr>
 
           <!-- CTA -->
           <tr>
             <td style="padding:0 32px 32px">
-              <a href="mailto:${p.email}?subject=Re: ${encodeURIComponent(`Consulta ${p.category ?? ''} - Top Show Pro`)}" style="display:inline-block;background-color:#00BFFF;color:#000000;font-size:13px;font-weight:600;letter-spacing:0.05em;padding:12px 24px;border-radius:2px;text-decoration:none">Responder a ${p.name} &rarr;</a>
+              <a href="mailto:${p.email}?subject=Re: ${encodeURIComponent(`Consulta ${p.category ?? ''} - Top Show Pro`)}" style="display:inline-block;background-color:#1785d3;color:#000000;font-size:13px;font-weight:600;letter-spacing:0.05em;padding:12px 24px;border-radius:2px;text-decoration:none">Responder a ${p.name} &rarr;</a>
             </td>
           </tr>
 

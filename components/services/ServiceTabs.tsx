@@ -67,7 +67,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                 }
               </div>
               {current?.techContact && (
-                <div className="mb-8 p-4 font-mono text-sm" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
+                <div className="mb-8 p-4 font-mono text-sm" style={{ border: '1px solid rgba(23,133,211,0.2)', backgroundColor: 'rgba(23,133,211,0.04)' }}>
                   <p className="uppercase tracking-wider text-xs mb-3" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
                   <p className="text-white mb-1">{current.techContact.name}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>
@@ -107,7 +107,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                     <div
                       className="absolute inset-0 pointer-events-none opacity-20"
                       style={{
-                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.03) 2px, rgba(0,191,255,0.03) 4px)',
+                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(23,133,211,0.03) 2px, rgba(23,133,211,0.03) 4px)',
                       }}
                     />
                   </div>
@@ -146,7 +146,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
                 }
               </div>
               {s.techContact && (
-                <div className="mt-4 p-3 font-mono text-xs" style={{ border: '1px solid rgba(0,191,255,0.2)', backgroundColor: 'rgba(0,191,255,0.04)' }}>
+                <div className="mt-4 p-3 font-mono text-xs" style={{ border: '1px solid rgba(23,133,211,0.2)', backgroundColor: 'rgba(23,133,211,0.04)' }}>
                   <p className="uppercase tracking-wider mb-2" style={{ color: 'var(--accent-cyan)' }}>— Contacto técnico</p>
                   <p className="text-white">{s.techContact.name}</p>
                   <p style={{ color: 'var(--text-muted)' }}>{s.techContact.phone}</p>

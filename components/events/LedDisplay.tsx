@@ -31,14 +31,14 @@ export function LedDisplay({ images, title }: LedDisplayProps) {
           sizes="(max-width: 768px) 100vw, 50vw"
         />
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
-          style={{ backgroundColor: 'rgba(0,191,255,0.1)' }}>
+          style={{ backgroundColor: 'rgba(23,133,211,0.1)' }}>
           <span className="font-mono text-xs uppercase tracking-widest text-white">Ver galería</span>
         </div>
 
         {/* Scanline effect */}
         <div className="absolute inset-0 pointer-events-none opacity-20"
           style={{
-            background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.03) 2px, rgba(0,191,255,0.03) 4px)',
+            background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(23,133,211,0.03) 2px, rgba(23,133,211,0.03) 4px)',
           }}
         />
       </button>
@@ -46,7 +46,7 @@ export function LedDisplay({ images, title }: LedDisplayProps) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           className="max-w-4xl w-full p-0 overflow-hidden"
-          style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(0,191,255,0.2)' }}
+          style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(23,133,211,0.2)' }}
         >
           <DialogTitle className="sr-only">{title ?? 'Galería'}</DialogTitle>
           <motion.div
@@ -65,7 +65,7 @@ export function LedDisplay({ images, title }: LedDisplayProps) {
               {/* Scanline overlay */}
               <div className="absolute inset-0 pointer-events-none opacity-10"
                 style={{
-                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,191,255,0.05) 2px, rgba(0,191,255,0.05) 4px)',
+                  background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(23,133,211,0.05) 2px, rgba(23,133,211,0.05) 4px)',
                 }}
               />
             </div>

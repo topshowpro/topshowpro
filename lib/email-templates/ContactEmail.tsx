@@ -138,7 +138,7 @@ const container: React.CSSProperties = {
 const header: React.CSSProperties = {
   backgroundColor: '#0A0A0A',
   padding: '28px 32px',
-  borderBottom: '2px solid #00BFFF',
+  borderBottom: '2px solid #1785d3',
 };
 
 const brand: React.CSSProperties = {
@@ -160,9 +160,9 @@ const brandSub: React.CSSProperties = {
 
 const badge: React.CSSProperties = {
   display: 'inline-block',
-  backgroundColor: 'rgba(0,191,255,0.1)',
-  color: '#00BFFF',
-  border: '1px solid rgba(0,191,255,0.3)',
+  backgroundColor: 'rgba(23,133,211,0.1)',
+  color: '#1785d3',
+  border: '1px solid rgba(23,133,211,0.3)',
   fontSize: 10,
   letterSpacing: '0.2em',
   textTransform: 'uppercase',
@@ -218,7 +218,7 @@ const fieldValue: React.CSSProperties = {
 };
 
 const link: React.CSSProperties = {
-  color: '#00BFFF',
+  color: '#1785d3',
   textDecoration: 'none',
 };
 
@@ -229,14 +229,14 @@ const messageBox: React.CSSProperties = {
   backgroundColor: '#1A1A1A',
   padding: '16px 20px',
   borderRadius: 4,
-  borderLeft: '3px solid #00BFFF',
+  borderLeft: '3px solid #1785d3',
   whiteSpace: 'pre-wrap',
   margin: 0,
 };
 
 const ctaButton: React.CSSProperties = {
   display: 'inline-block',
-  backgroundColor: '#00BFFF',
+  backgroundColor: '#1785d3',
   color: '#000000',
   fontSize: 13,
   fontWeight: 600,

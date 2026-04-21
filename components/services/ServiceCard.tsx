@@ -35,14 +35,14 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
         {/* Hover glow */}
         <div
           className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,191,255,0.08) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse at bottom left, rgba(23,133,211,0.08) 0%, transparent 70%)' }}
         />
 
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           style={{
             background:
-              'linear-gradient(114deg, transparent 0%, rgba(0,191,255,0.16) 42%, rgba(123,97,255,0.16) 100%)',
+              'linear-gradient(114deg, transparent 0%, rgba(23,133,211,0.16) 42%, rgba(123,97,255,0.16) 100%)',
           }}
         />
 

@@ -110,7 +110,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
                   <span
                     key={tag}
                     className="font-mono text-xs px-2 py-0.5"
-                    style={{ border: '1px solid rgba(0,191,255,0.3)', color: 'var(--accent-cyan)' }}
+                    style={{ border: '1px solid rgba(23,133,211,0.3)', color: 'var(--accent-cyan)' }}
                   >
                     {tag}
                   </span>

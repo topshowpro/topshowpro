@@ -16,7 +16,7 @@ The palette is rooted in deep obsidian tones, punctuated by high-energy "Electri
 ### Color Tokens
 - **Background (Base):** `#0A0A0A` (The void/stage)
 - **Secondary Background:** `#1A1A1A` (The structure)
-- **Primary Accent:** `primary_container` (`#00BFFF`) - Electric Blue
+- **Primary Accent:** `primary_container` (`#1785d3`) - Electric Blue
 - **Secondary Accent:** `secondary` (`#7B61FF`) - Deep Purple
 - **Tertiary/Status:** `tertiary` (`#00FF9C`) - Neon Mint
 
@@ -32,7 +32,7 @@ Treat the UI as a series of physical layers—like stacked sheets of tinted glas
 
 ### The "Glass & Gradient" Rule
 Floating elements (drawers, tooltips, navigation) must utilize **Glassmorphism**. Apply a semi-transparent `surface_container` color with a `backdrop-blur` of 12px–20px. 
-**Signature Texture:** Use subtle linear gradients for high-impact CTAs, transitioning from `primary` (`#8FD6FF`) to `primary_container` (`#00BFFF`) at a 135-degree angle to provide visual "soul."
+**Signature Texture:** Use subtle linear gradients for high-impact CTAs, transitioning from `primary` (`#8FD6FF`) to `primary_container` (`#1785d3`) at a 135-degree angle to provide visual "soul."
 
 ---
 
@@ -46,7 +46,7 @@ The typography system is a hierarchy of authority. It mixes the impact of modern
 | **Headline** | Epilogue | ALL CAPS | Section headers, Large modal titles |
 | **Subtitle** | Space Grotesk | Sentence | `#5AA7E0` color; used for context above headlines |
 | **Body** | Inter | Sentence | `#CCCCCC` color; general readability |
-| **Tech/Stats**| Space Grotesk | ALL CAPS | `#00FF9C` or `#00BFFF`; data points, timers, IDs |
+| **Tech/Stats**| Space Grotesk | ALL CAPS | `#00FF9C` or `#1785d3`; data points, timers, IDs |
 
 **The Editorial Scale:** Use extreme size contrasts. A `headline` font should feel massive compared to the `body` text nearby. This "Big & Small" approach creates a signature, non-standard rhythm.
 
@@ -65,8 +65,8 @@ We convey hierarchy through **Tonal Layering** rather than traditional drop shad
 ## 5. Components
 
 ### Buttons (Command Elements)
-- **Primary:** Background `#0A0A0A`, Border 1.5px `primary_container` (`#00BFFF`). Text: Inter Medium, White. 
-- **Hover State:** Background fills with `primary_container` (`#00BFFF`), Text shifts to Black.
+- **Primary:** Background `#0A0A0A`, Border 1.5px `primary_container` (`#1785d3`). Text: Inter Medium, White. 
+- **Hover State:** Background fills with `primary_container` (`#1785d3`), Text shifts to Black.
 - **Shape:** Moderate roundedness (Level 2) to balance technical precision with modern interface approachability.
 
 ### Technical Cards

@@ -6,8 +6,64 @@ import { RevealText } from '@/components/motion/RevealText';
 
 type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
 
+type NetworkInformationWithSaveData = {
+  saveData?: boolean;
+};
+
+function heroPosterLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
+  const url = new URL(src);
+  const mobileWidth = width <= 1024;
+  const adaptiveQuality = quality ?? (mobileWidth ? 44 : 62);
+
+  url.searchParams.set('auto', 'format');
+  url.searchParams.set('fit', 'max');
+  url.searchParams.set('w', String(width));
+  url.searchParams.set('q', String(adaptiveQuality));
+
+  return url.toString();
+}
+
 export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?: { text?: string; cta?: { label: string; link: string } } }) {
   const [idx, setIdx] = useState(0);
+  const [allowVideo, setAllowVideo] = useState(false);
+  const [deferVideo, setDeferVideo] = useState(true);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const narrowViewport = window.matchMedia('(max-width: 1024px)').matches;
+    const isFirstVisit = window.localStorage.getItem('tsp-first-visit-done') !== '1';
+    const connection = (navigator as Navigator & { connection?: NetworkInformationWithSaveData }).connection;
+    const saveData = connection?.saveData === true;
+
+    window.localStorage.setItem('tsp-first-visit-done', '1');
+
+    setAllowVideo(!isFirstVisit && !reducedMotion && !coarsePointer && !narrowViewport && !saveData);
+  }, []);
+
+  useEffect(() => {
+    if (!allowVideo) {
+      setDeferVideo(true);
+      return;
+    }
+
+    const enableVideo = () => setDeferVideo(false);
+
+    const id = window.setTimeout(enableVideo, 8000);
+    window.addEventListener('pointerdown', enableVideo, { once: true, passive: true });
+    window.addEventListener('keydown', enableVideo, { once: true });
+
+    return () => {
+      window.clearTimeout(id);
+      window.removeEventListener('pointerdown', enableVideo);
+      window.removeEventListener('keydown', enableVideo);
+    };
+  }, [allowVideo]);
+
   useEffect(() => {
     if (slides.length < 2) return;
     const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 6000);
@@ -15,6 +71,8 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   }, [slides.length]);
 
   const slide = slides[idx];
+  const showVideo = Boolean(slide?.videoUrl) && allowVideo && !deferVideo;
+  const showPoster = Boolean(slide?.posterUrl) && !showVideo;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -27,25 +85,27 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           exit={{ opacity: 0 }}
           transition={{ duration: 1.2 }}
         >
-          {slide?.videoUrl ? (
+          {showVideo ? (
             <video
-              src={slide.videoUrl}
+              src={slide.videoUrl!}
               autoPlay
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               className="h-full w-full object-cover"
               poster={slide.posterUrl ?? undefined}
             />
-          ) : slide?.posterUrl ? (
+          ) : showPoster ? (
             <Image
-              src={slide.posterUrl}
+              src={slide.posterUrl!}
               alt=""
               fill
               className="object-cover"
               priority
+              loader={heroPosterLoader}
               sizes="100vw"
+              fetchPriority="high"
             />
           ) : null}
         </motion.div>
