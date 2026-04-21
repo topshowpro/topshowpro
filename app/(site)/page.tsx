@@ -21,11 +21,11 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function HomePage() {
   const [hero, homepage, brands, services, clients] = await Promise.all([
-    sanityFetch<any>(Q_HERO, undefined, 'hero'),
-    sanityFetch<any>(Q_HOMEPAGE, undefined, 'homepage'),
-    sanityFetch<any[]>(Q_BRANDS, undefined, 'brand'),
-    sanityFetch<any[]>(Q_SERVICES, undefined, 'service'),
-    sanityFetch<any[]>(Q_CLIENTS, undefined, 'client'),
+    sanityFetch<any>(Q_HERO, { revalidate: 30 }, 'hero'),
+    sanityFetch<any>(Q_HOMEPAGE, { revalidate: 30 }, 'homepage'),
+    sanityFetch<any[]>(Q_BRANDS, { revalidate: 30 }, 'brand'),
+    sanityFetch<any[]>(Q_SERVICES, { revalidate: 30 }, 'service'),
+    sanityFetch<any[]>(Q_CLIENTS, { revalidate: 30 }, 'client'),
   ]);
 
   const featuredEvents = (homepage?.featuredEvents ?? []).filter(

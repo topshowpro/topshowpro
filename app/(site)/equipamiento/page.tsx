@@ -17,9 +17,9 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function EquipamientoPage() {
   const [categories, brands, settings] = await Promise.all([
-    sanityFetch<any[]>(Q_EQUIPMENT_CATEGORIES, undefined, 'equipmentCategory'),
-    sanityFetch<any[]>(Q_BRANDS, undefined, 'brand'),
-    sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings'),
+    sanityFetch<any[]>(Q_EQUIPMENT_CATEGORIES, { revalidate: 30 }, 'equipmentCategory'),
+    sanityFetch<any[]>(Q_BRANDS, { revalidate: 30 }, 'brand'),
+    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
   ]);
 
   return (

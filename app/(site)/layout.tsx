@@ -7,12 +7,12 @@ import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await sanityFetch<any>(Q_SEO_DEFAULTS, undefined, 'seoDefaults');
+  const seo = await sanityFetch<any>(Q_SEO_DEFAULTS, { revalidate: 30 }, 'seoDefaults');
   return buildMetadata({ description: seo?.description });
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings');
+  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings');
   return (
     <LenisProvider>
       <Header />

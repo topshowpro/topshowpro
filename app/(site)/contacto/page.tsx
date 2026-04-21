@@ -13,8 +13,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ContactoPage() {
   const [categories, settings] = await Promise.all([
-    sanityFetch<any[]>(Q_CONTACT_CATEGORIES, undefined, 'contactCategory'),
-    sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings'),
+    sanityFetch<any[]>(Q_CONTACT_CATEGORIES, { revalidate: 30 }, 'contactCategory'),
+    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
   ]);
 
   return (

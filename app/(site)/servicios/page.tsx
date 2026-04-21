@@ -38,8 +38,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ServiciosPage() {
   const [services, settings] = await Promise.all([
-    sanityFetch<Service[]>(Q_SERVICES, undefined, 'service'),
-    sanityFetch<any>(Q_SITE_SETTINGS, undefined, 'siteSettings'),
+    sanityFetch<Service[]>(Q_SERVICES, { revalidate: 30 }, 'service'),
+    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
   ]);
 
   const includes = [

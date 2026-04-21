@@ -4,7 +4,7 @@ import { Q_EVENTS_LIST } from '@/sanity/lib/queries';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'https://topshowpro.vercel.app';
-  const events = await sanityFetch<any[]>(Q_EVENTS_LIST(), undefined, 'event');
+  const events = await sanityFetch<any[]>(Q_EVENTS_LIST(), { revalidate: 30 }, 'event');
   return [
     { url: base, lastModified: new Date() },
     { url: `${base}/servicios`, lastModified: new Date() },

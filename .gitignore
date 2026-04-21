@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+.lighthouseci/
 
 # next.js
 /.next/
@@ -23,22 +24,24 @@
 # misc
 .DS_Store
 *.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
+*.log
 .env*
 !.env.local.example
 
-# docs-refs (stitch mockups - large files, optional)
-# docs-refs/
+# editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-# claude local settings (personal overrides, not for team)
-.claude/settings.local.json
+# claude & local tools
+.claude/
+temp.js
+temp_queries.ts
+stitch_premium_event_showcase/
 
 # vercel
 .vercel
@@ -50,3 +53,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
