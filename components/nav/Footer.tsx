@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
 
 type SiteSettings = {
   address?: string;
@@ -37,18 +38,50 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
         </div>
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-fg-faint mb-4">Redes</p>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-row gap-5">
             {settings?.socials?.instagram && (
-              <a href={settings.socials.instagram} className="font-sans text-sm text-fg-muted hover:text-accent-cyan transition">Instagram</a>
+              <a 
+                href={settings.socials.instagram} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                aria-label="Instagram"
+              >
+                <Instagram size={22} strokeWidth={1.5} />
+              </a>
             )}
             {settings?.socials?.facebook && (
-              <a href={settings.socials.facebook} className="font-sans text-sm text-fg-muted hover:text-accent-cyan transition">Facebook</a>
+              <a 
+                href={settings.socials.facebook} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                aria-label="Facebook"
+              >
+                <Facebook size={22} strokeWidth={1.5} />
+              </a>
             )}
             {settings?.socials?.linkedin && (
-              <a href={settings.socials.linkedin} className="font-sans text-sm text-fg-muted hover:text-accent-cyan transition">LinkedIn</a>
+              <a 
+                href={settings.socials.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={22} strokeWidth={1.5} />
+              </a>
             )}
             {settings?.socials?.youtube && (
-              <a href={settings.socials.youtube} className="font-sans text-sm text-fg-muted hover:text-accent-cyan transition">YouTube</a>
+              <a 
+                href={settings.socials.youtube} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                aria-label="YouTube"
+              >
+                <Youtube size={22} strokeWidth={1.5} />
+              </a>
             )}
           </div>
         </div>
