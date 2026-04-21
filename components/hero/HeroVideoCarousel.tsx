@@ -4,7 +4,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { RevealText } from '@/components/motion/RevealText';
 
-type Slide = { phrase: string; accentColor?: string; videoUrl?: string | null; posterUrl?: string | null };
+type Slide = {
+  phrase: string;
+  accentColor?: string;
+  videoUrl?: string | null;
+  posterUrl?: string | null;
+  posterLqip?: string | null;
+};
 
 type NetworkInformationWithSaveData = {
   saveData?: boolean;
@@ -12,12 +18,13 @@ type NetworkInformationWithSaveData = {
 
 function heroPosterLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
   const url = new URL(src);
-  const mobileWidth = width <= 1024;
+  const targetWidth = Math.min(width, 2560);
+  const mobileWidth = targetWidth <= 1024;
   const adaptiveQuality = quality ?? (mobileWidth ? 44 : 62);
 
   url.searchParams.set('auto', 'format');
   url.searchParams.set('fit', 'max');
-  url.searchParams.set('w', String(width));
+  url.searchParams.set('w', String(targetWidth));
   url.searchParams.set('q', String(adaptiveQuality));
 
   return url.toString();
@@ -73,6 +80,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   const slide = slides[idx];
   const showVideo = Boolean(slide?.videoUrl) && allowVideo && !deferVideo;
   const showPoster = Boolean(slide?.posterUrl) && !showVideo;
+  const isFirstSlide = idx === 0;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -102,10 +110,13 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               alt=""
               fill
               className="object-cover"
-              priority
+              preload={isFirstSlide}
+              loading={isFirstSlide ? 'eager' : 'lazy'}
               loader={heroPosterLoader}
               sizes="100vw"
-              fetchPriority="high"
+              fetchPriority={isFirstSlide ? 'high' : 'auto'}
+              placeholder={slide.posterLqip ? 'blur' : 'empty'}
+              blurDataURL={slide.posterLqip ?? undefined}
             />
           ) : null}
         </motion.div>
