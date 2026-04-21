@@ -18,7 +18,7 @@ export const publishedSanityClient: SanityClient | null = hasSanity
       projectId,
       dataset,
       apiVersion,
-      useCdn: true,
+      useCdn: false,
       perspective: 'published',
       token: process.env.SANITY_API_READ_TOKEN,
     })
