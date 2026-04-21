@@ -33,6 +33,7 @@ function heroPosterLoader({ src, width, quality }: { src: string; width: number;
 export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?: { text?: string; cta?: { label: string; link: string } } }) {
   const [idx, setIdx] = useState(0);
   const [allowVideo, setAllowVideo] = useState(false);
+  const [allowFirstSlideVideo, setAllowFirstSlideVideo] = useState(false);
   const [deferVideo, setDeferVideo] = useState(true);
 
   useEffect(() => {
@@ -46,10 +47,12 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
     const isFirstVisit = window.localStorage.getItem('tsp-first-visit-done') !== '1';
     const connection = (navigator as Navigator & { connection?: NetworkInformationWithSaveData }).connection;
     const saveData = connection?.saveData === true;
+    const canAutoplayFirstSlide = !reducedMotion && !saveData;
 
     window.localStorage.setItem('tsp-first-visit-done', '1');
 
-    setAllowVideo(!isFirstVisit && !reducedMotion && !coarsePointer && !narrowViewport && !saveData);
+    setAllowFirstSlideVideo(canAutoplayFirstSlide);
+    setAllowVideo(!isFirstVisit && canAutoplayFirstSlide && !coarsePointer && !narrowViewport);
   }, []);
 
   useEffect(() => {
@@ -78,12 +81,16 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   }, [slides.length]);
 
   const slide = slides[idx];
-  const showVideo = Boolean(slide?.videoUrl) && allowVideo && !deferVideo;
-  const showPoster = Boolean(slide?.posterUrl) && !showVideo;
   const isFirstSlide = idx === 0;
+  const showVideo = Boolean(slide?.videoUrl) && ((isFirstSlide && allowFirstSlideVideo) || (allowVideo && !deferVideo));
+  const showPoster = Boolean(slide?.posterUrl) && !showVideo;
+  const firstSlideVideoUrl = slides[0]?.videoUrl ?? null;
+  const firstSlidePosterUrl = slides[0]?.posterUrl ?? null;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
+      {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
+      {firstSlideVideoUrl && <link rel="preload" as="video" href={firstSlideVideoUrl} fetchPriority="high" />}
       <AnimatePresence mode="wait">
         <motion.div
           key={idx}
@@ -100,7 +107,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               muted
               loop
               playsInline
-              preload="none"
+              preload={isFirstSlide ? 'auto' : 'none'}
               className="h-full w-full object-cover"
               poster={slide.posterUrl ?? undefined}
             />
