@@ -359,7 +359,7 @@ git commit -m "fix(services): replace onMouseOver with CSS hover on service CTA"
 
 Current:
 ```tsx
-style={{ color: 'var(--accent-cyan)', border: '1px solid rgba(0,191,255,0.4)' }}
+style={{ color: 'var(--accent-cyan)', border: '1px solid rgba(23,133,211,0.4)' }}
 ```
 
 Replace with:
@@ -371,7 +371,7 @@ style={{ color: 'var(--accent-cyan)', border: '1px solid color-mix(in srgb, var(
 
 Current:
 ```tsx
-<div className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-[rgba(0,191,255,0.2)] to-transparent opacity-0 transition-all duration-1000 group-hover:opacity-100 group-hover:translate-x-[200%]" />
+<div className="absolute inset-y-0 -left-1/2 w-1/2 bg-gradient-to-r from-transparent via-[rgba(23,133,211,0.2)] to-transparent opacity-0 transition-all duration-1000 group-hover:opacity-100 group-hover:translate-x-[200%]" />
 ```
 
 Replace with:
@@ -527,7 +527,7 @@ export function ServiceCard({ name, shortDesc, icon }: ServiceCardProps) {
 
       {/* Background glow on hover */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{ background: 'radial-gradient(ellipse at bottom left, rgba(0,191,255,0.05) 0%, transparent 70%)' }}
+        style={{ background: 'radial-gradient(ellipse at bottom left, rgba(23,133,211,0.05) 0%, transparent 70%)' }}
       />
 
       {icon && (

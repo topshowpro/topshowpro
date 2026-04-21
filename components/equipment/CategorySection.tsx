@@ -115,7 +115,7 @@ export function CategorySection({ categories }: { categories: Category[] }) {
                 )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-surface)] via-black/10 to-transparent" />
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'linear-gradient(115deg, transparent 0%, rgba(0,191,255,0.14) 44%, rgba(123,97,255,0.14) 100%)' }} />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: 'linear-gradient(115deg, transparent 0%, rgba(23,133,211,0.14) 44%, rgba(123,97,255,0.14) 100%)' }} />
 
                 <span
                   className="absolute top-3 left-3 inline-flex items-center px-2.5 py-1 font-mono text-[11px] uppercase tracking-widest"

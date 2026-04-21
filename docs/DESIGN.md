@@ -18,7 +18,7 @@ Dark-first, tech/blueprint aesthetic. Fondos muy oscuros, cyan como acento princ
 --bg-surface-hi: #1F1F1F    /* Hover de cards */
 
 /* Acentos */
---accent-cyan: #00BFFF      /* CTAs, hover, highlights */
+--accent-cyan: #1785d3      /* CTAs, hover, highlights */
 --accent-violet: #7B61FF    /* Palabras clave secundarias */
 --accent-mint: #00FF9C      /* Indicadores técnicos / estados */
 
@@ -104,7 +104,7 @@ Gradiente cyan que cruza el elemento al hover: `from-transparent via-cyan-400/20
 
 ### Radial gradient (hero / sección destacada)
 ```css
-background: radial-gradient(ellipse at top, rgba(0,191,255,0.15) 0%, transparent 50%);
+background: radial-gradient(ellipse at top, rgba(23,133,211,0.15) 0%, transparent 50%);
 ```
 
 ---

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: string | null }[] }) {
   const loop = [...brands, ...brands];
   return (
@@ -17,7 +19,15 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
             className="flex items-center justify-center min-w-[160px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
           >
             {b.logoUrl ? (
-              <img src={b.logoUrl} alt={b.name} className="h-10 object-contain" />
+              <Image
+                src={b.logoUrl}
+                alt={b.name}
+                width={180}
+                height={56}
+                className="h-10 w-auto object-contain"
+                loading="lazy"
+                sizes="180px"
+              />
             ) : (
               <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
                 {b.name}

@@ -11,7 +11,7 @@ export async function GET(req: Request) {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #0A0A0A 0%, #131313 70%, #00BFFF 200%)',
+          background: 'linear-gradient(135deg, #0A0A0A 0%, #131313 70%, #1785d3 200%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
         <div
           style={{
             fontSize: 18,
-            color: '#00BFFF',
+            color: '#1785d3',
             marginTop: 40,
             letterSpacing: '0.2em',
             textTransform: 'uppercase',

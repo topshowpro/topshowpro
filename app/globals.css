@@ -121,7 +121,7 @@
 
   /* Acentos: celeste principal + amarillo solo tipografico */
   --accent-led: #ffb300;
-  --accent-cyan: #00bfff;
+  --accent-cyan: #1785d3;
   --accent-violet: #7b61ff;
   --accent-mint: #00ff9c;
 
@@ -145,18 +145,18 @@
   --card-foreground: oklch(0.96 0 0);
   --popover: oklch(0.08 0 0);
   --popover-foreground: oklch(0.96 0 0);
-  --primary: #00bfff;
+  --primary: #1785d3;
   --primary-foreground: oklch(0.04 0 0);
   --secondary: oklch(0.14 0 0);
   --secondary-foreground: oklch(0.96 0 0);
   --muted: oklch(0.14 0 0);
   --muted-foreground: oklch(0.55 0 0);
-  --accent: #00bfff;
+  --accent: #1785d3;
   --accent-foreground: oklch(0.04 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 12%);
-  --ring: #00bfff;
+  --ring: #1785d3;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -165,12 +165,12 @@
   --radius: 0.125rem;
   --sidebar: oklch(0.08 0 0);
   --sidebar-foreground: oklch(0.96 0 0);
-  --sidebar-primary: #00bfff;
+  --sidebar-primary: #1785d3;
   --sidebar-primary-foreground: oklch(0.04 0 0);
   --sidebar-accent: oklch(0.14 0 0);
   --sidebar-accent-foreground: oklch(0.96 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: #00bfff;
+  --sidebar-ring: #1785d3;
 }
 
 html {
@@ -394,6 +394,14 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
     0 0 0 1px color-mix(in srgb, var(--accent-cyan) 28%, transparent),
     0 12px 26px color-mix(in srgb, var(--accent-cyan) 24%, transparent);
+}
+
+@media (max-width: 768px) {
+  .glass-island,
+  .glass-panel-mobile,
+  .navbar-contact-glass {
+    backdrop-filter: none;
+  }
 }
 
 /* ── Neon ambient orbs ───────────────────────────────────────────────────── */

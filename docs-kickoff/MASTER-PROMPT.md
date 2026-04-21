@@ -118,7 +118,7 @@ Además de los tokens en `DESIGN-SYSTEM.md` y Fase B de este prompt, respetá es
 - **Card padding**: 32px interno para "Industrial Minimalism"
 - **List active item**: 4px left-accent bar en `accent-cyan` en lugar de bullet/divider
 - **Particle chip**: selection chip con círculo 4px glow cyan al estar active
-- **CTA gradient**: buttons primary pueden tener gradient 135° de `#8FD6FF` → `#00BFFF`
+- **CTA gradient**: buttons primary pueden tener gradient 135° de `#8FD6FF` → `#1785d3`
 - **Micro-interactions**: elementos aparecen con "beam sweep" effect (ya tenés la utility `animate-beam-sweep`)
 - **Rounded**: **prohibido** `rounded-full` excepto action chips específicos. Default `rounded-sm` (0.125rem) o `rounded-none`
 
@@ -139,7 +139,7 @@ Agregalos a `app/globals.css` como utilities si los ves reutilizables:
 }
 
 .cta-gradient {
-  background: linear-gradient(135deg, #8FD6FF 0%, #00BFFF 100%);
+  background: linear-gradient(135deg, #8FD6FF 0%, #1785d3 100%);
 }
 
 .list-active-accent {
@@ -294,7 +294,7 @@ export default config;
   --bg-surface-hi: #1F1F1F;
 
   /* Acentos */
-  --accent-cyan: #00BFFF;
+  --accent-cyan: #1785d3;
   --accent-violet: #7B61FF;
   --accent-mint: #00FF9C;
 
@@ -2238,7 +2238,7 @@ export async function GET(req: Request) {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #0A0A0A 0%, #131313 70%, #00BFFF 200%)',
+          background: 'linear-gradient(135deg, #0A0A0A 0%, #131313 70%, #1785d3 200%)',
           width: '100%',
           height: '100%',
           display: 'flex',
@@ -2250,7 +2250,7 @@ export async function GET(req: Request) {
       >
         <div style={{ fontSize: 80, color: 'white', letterSpacing: '-0.02em', lineHeight: 1, fontWeight: 700 }}>{title}</div>
         <div style={{ fontSize: 32, color: '#5AA7E0', marginTop: 16 }}>{subtitle}</div>
-        <div style={{ fontSize: 18, color: '#00BFFF', marginTop: 40, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Top Show Pro</div>
+        <div style={{ fontSize: 18, color: '#1785d3', marginTop: 40, letterSpacing: '0.2em', textTransform: 'uppercase' }}>Top Show Pro</div>
       </div>
     ),
     { width: 1200, height: 630 }
@@ -2303,7 +2303,7 @@ export default function ContactEmail({ name, email, company, phone, category, me
     <Html>
       <Body style={{ background: '#0A0A0A', color: '#FFFFFF', fontFamily: 'system-ui' }}>
         <Container style={{ padding: 32, maxWidth: 600 }}>
-          <Heading style={{ color: '#00BFFF' }}>Nueva consulta de {category}</Heading>
+          <Heading style={{ color: '#1785d3' }}>Nueva consulta de {category}</Heading>
           <Text><strong>{name}</strong> ({email})</Text>
           <Text>Empresa: {company ?? '-'}</Text>
           <Text>Teléfono: {phone ?? '-'}</Text>

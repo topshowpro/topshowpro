@@ -11,7 +11,7 @@ The system breaks the "template" look through **Intentional Asymmetry** and **To
 The palette is rooted in deep obsidian tones, punctuated by high-energy technical accents. It mimics a dark laboratory where the only thing visible is the work itself, illuminated by precision instruments.
 
 ### Color Roles & Implementation
-- **Primary Focus (#00BFFF / `primary_container`):** This is our "Beam of Light." It should be used sparingly for high-action focal points and critical technical data.
+- **Primary Focus (#1785d3 / `primary_container`):** This is our "Beam of Light." It should be used sparingly for high-action focal points and critical technical data.
 - **Surface Hierarchy:** We utilize a "Dark-on-Dark" strategy. 
     - Base layers use `surface` (#131313).
     - Nested content uses `surface_container_low` or `surface_container_highest` to create a "stepping" effect.
@@ -46,7 +46,7 @@ Traditional drop shadows are replaced by **Ambient Occlusion** and **Tonal Stack
 ## 5. Components
 
 ### Buttons: The Power State
-- **Primary:** High-contrast `primary_container` (#00BFFF) with `on_primary_container` text. Apply a subtle "Inner Glow" (white at 10% opacity) on the top edge to simulate a physical backlit button.
+- **Primary:** High-contrast `primary_container` (#1785d3) with `on_primary_container` text. Apply a subtle "Inner Glow" (white at 10% opacity) on the top edge to simulate a physical backlit button.
 - **Secondary:** Transparent background with a `Ghost Border`. On hover, the background fills with `surface_container_high`.
 - **Tertiary/Ghost:** Orbitron typography in `primary`. No background. Used for low-priority technical actions.
 
