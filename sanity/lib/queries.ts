@@ -2,6 +2,7 @@ export const Q_HERO = `*[_type == "hero"][0]{
   slides[]{
     phrase, accentColor,
     "posterUrl": poster.asset->url,
+    "posterLqip": poster.asset->metadata.lqip,
     "videoUrl": video.asset->url
   },
   bannerAzul{ text, cta }
