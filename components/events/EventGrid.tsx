@@ -10,8 +10,8 @@ export function EventGrid({ events }: { events: EventCardProps[] }) {
   }
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {events.map((e) => (
-        <EventCard key={e.slug} {...e} />
+      {events.map((e, index) => (
+        <EventCard key={e.slug} {...e} priority={index === 0} />
       ))}
     </div>
   );

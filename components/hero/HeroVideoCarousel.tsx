@@ -84,13 +84,11 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   const isFirstSlide = idx === 0;
   const showVideo = Boolean(slide?.videoUrl) && ((isFirstSlide && allowFirstSlideVideo) || (allowVideo && !deferVideo));
   const showPoster = Boolean(slide?.posterUrl) && !showVideo;
-  const firstSlideVideoUrl = slides[0]?.videoUrl ?? null;
   const firstSlidePosterUrl = slides[0]?.posterUrl ?? null;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
-      {firstSlideVideoUrl && <link rel="preload" as="video" href={firstSlideVideoUrl} fetchPriority="high" />}
       <AnimatePresence mode="wait">
         <motion.div
           key={idx}
@@ -107,7 +105,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               muted
               loop
               playsInline
-              preload={isFirstSlide ? 'auto' : 'none'}
+              preload={isFirstSlide ? 'metadata' : 'none'}
               className="h-full w-full object-cover"
               poster={slide.posterUrl ?? undefined}
             />

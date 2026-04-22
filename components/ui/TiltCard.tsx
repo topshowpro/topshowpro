@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export type TiltCardProps = {
@@ -12,41 +11,70 @@ export type TiltCardProps = {
 
 export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
+  const frame = useRef<number | null>(null);
+  const canTiltRef = useRef(false);
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const detectCapability = () => {
+    if (typeof window === 'undefined') {
+      canTiltRef.current = false;
+      return;
+    }
 
-  const springConfig = { damping: 15, stiffness: 150, mass: 0.5 };
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [-tiltIntensity, tiltIntensity]), springConfig);
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [tiltIntensity, -tiltIntensity]), springConfig);
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+    const smallViewport = window.matchMedia('(max-width: 1024px)').matches;
+
+    canTiltRef.current = !reducedMotion && !coarsePointer && !smallViewport;
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (prefersReducedMotion) return;
-    if (!ref.current) return;
+    if (!canTiltRef.current || !ref.current) {
+      return;
+    }
+
     const rect = ref.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const mouseX = (e.clientX - centerX) / (rect.width / 2);
     const mouseY = (e.clientY - centerY) / (rect.height / 2);
-    x.set(mouseX);
-    y.set(mouseY);
+    const rotateX = -mouseY * tiltIntensity;
+    const rotateY = -mouseX * tiltIntensity;
+
+    if (frame.current !== null) {
+      cancelAnimationFrame(frame.current);
+    }
+
+    frame.current = requestAnimationFrame(() => {
+      if (!ref.current) {
+        return;
+      }
+
+      ref.current.style.transform = `perspective(900px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
+    });
   };
 
   const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
+    if (!ref.current) {
+      return;
+    }
+
+    if (frame.current !== null) {
+      cancelAnimationFrame(frame.current);
+      frame.current = null;
+    }
+
+    ref.current.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
   };
 
   return (
-    <motion.div
+    <div
       ref={ref}
+      onMouseEnter={detectCapability}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={prefersReducedMotion ? undefined : { rotateX, rotateY, transformStyle: 'preserve-3d' }}
       className={cn('relative transition-all duration-200', className)}
     >
       <div style={{ transform: 'translateZ(0)' }}>{children}</div>
-    </motion.div>
+    </div>
   );
 }

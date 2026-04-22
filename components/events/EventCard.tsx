@@ -11,11 +11,12 @@ export type EventCardProps = {
   dateEnd?: string;
   category: { label: string };
   heroImage?: { url: string; metadata?: { lqip?: string } } | null;
+  priority?: boolean;
 };
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=60';
 
-export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage }: EventCardProps) {
+export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage, priority = false }: EventCardProps) {
   const imgSrc = heroImage?.url ?? FALLBACK_IMAGE;
   const lqip = heroImage?.metadata?.lqip;
   const start = new Date(dateStart + 'T12:00:00Z');
@@ -33,7 +34,9 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
           src={imgSrc}
           alt={title}
           fill
-          loading="lazy"
+          priority={priority}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
           quality={75}

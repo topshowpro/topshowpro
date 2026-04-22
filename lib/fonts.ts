@@ -6,6 +6,7 @@ export const playfair = Playfair_Display({
   style: ['normal', 'italic'],
   variable: '--font-display',
   display: 'swap',
+  preload: false,
 });
 
 export const anton = Anton({
@@ -27,4 +28,5 @@ export const spaceMono = Space_Mono({
   weight: ['400', '700'],
   variable: '--font-mono',
   display: 'swap',
+  preload: false,
 });

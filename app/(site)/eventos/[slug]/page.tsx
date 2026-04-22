@@ -44,7 +44,10 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             fill
             className="object-cover"
             priority
+            fetchPriority="high"
             sizes="100vw"
+            placeholder={event.heroImage.metadata?.lqip ? 'blur' : 'empty'}
+            blurDataURL={event.heroImage.metadata?.lqip ?? undefined}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
