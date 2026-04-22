@@ -88,6 +88,15 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 text-center font-mono text-xs text-fg-faint uppercase tracking-widest">
         © {new Date().getFullYear()} Top Show Pro. Todos los derechos reservados.
+        <span className="mx-2">•</span>
+        <a 
+          href="https://www.digitalboost.com.ar/continua" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hover:text-accent-cyan transition-colors"
+        >
+          Desarrollado por Digital Boost
+        </a>
       </div>
     </footer>
   );
