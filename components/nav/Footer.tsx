@@ -44,7 +44,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.instagram} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="Instagram"
               >
                 <Instagram size={22} strokeWidth={1.5} />
