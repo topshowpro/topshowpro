@@ -90,7 +90,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
         © {new Date().getFullYear()} Top Show Pro. Todos los derechos reservados.
         <span className="mx-2">•</span>
         <a 
-          href="https://www.digitalboost.com.ar/continua" 
+          href="https://www.digitalboost.com.ar/" 
           target="_blank" 
           rel="noopener noreferrer"
           className="hover:text-accent-cyan transition-colors"
