@@ -39,6 +39,10 @@
 
 # claude & local tools
 .claude/
+.agents/
+skills-lock.json
+.lighthouse-local/
+.unlighthouse/
 temp.js
 temp_queries.ts
 stitch_premium_event_showcase/
