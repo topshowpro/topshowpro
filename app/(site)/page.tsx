@@ -12,6 +12,7 @@ import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { PortableText } from '@portabletext/react';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
+import { SectionHeader } from '@/components/ui/section-header';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Top Show Pro',
@@ -48,20 +49,14 @@ export default async function HomePage() {
         ]} />
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
-            <span className="font-mono text-xs uppercase tracking-wider mb-6 block" style={{ color: 'var(--accent-led)' }}>
-              — Quiénes somos
-            </span>
-            <h2
-              className="font-festival-heading text-[var(--text-primary)] mb-8 leading-none text-neon-cyan"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-            >
-              Hacemos que todo suceda
-            </h2>
-            <div className="font-sans text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
-              {homepage?.intro
-                ? <PortableText value={homepage.intro} />
-                : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>
-              }
+            <SectionHeader
+              eyebrow="Quiénes somos"
+              title="Hacemos que todo suceda"
+              className="mb-8 text-left"
+              titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center"
+            />
+            <div className="font-sans text-lg leading-relaxed text-center" style={{ color: 'var(--text-muted)' }}>
+              {homepage?.intro ? <PortableText value={homepage.intro} /> : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>}
             </div>
           </FadeIn>
         </div>
@@ -74,21 +69,13 @@ export default async function HomePage() {
         ]} />
         <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
-            <div className="flex items-end justify-between mb-12">
-              <h2
-                className="font-festival-heading text-[var(--text-primary)] leading-none text-neon-cyan"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-              >
-                Servicios
-              </h2>
-              <a
-                href="/servicios"
-                className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-                style={{ color: 'var(--accent-cyan)' }}
-              >
-                Ver todos →
-              </a>
-            </div>
+            <SectionHeader
+              eyebrow="Soluciones técnicas"
+              title="Servicios"
+              titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
+              actionHref="/servicios"
+              actionLabel="Ver todos →"
+            />
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {(services ?? []).map((s: any, i: number) => (
@@ -103,21 +90,13 @@ export default async function HomePage() {
       {/* Featured events section */}
       <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
-          <div className="flex items-end justify-between mb-12">
-              <h2
-                className="font-festival-heading text-[var(--text-primary)] leading-none text-neon-cyan"
-                style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-              >
-                Eventos destacados
-            </h2>
-            <a
-              href="/eventos"
-              className="font-mono text-xs uppercase tracking-wider transition hidden md:block"
-              style={{ color: 'var(--accent-cyan)' }}
-            >
-              Ver todos →
-            </a>
-          </div>
+          <SectionHeader
+            eyebrow="Portfolio"
+            title="Eventos destacados"
+            titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
+            actionHref="/eventos"
+            actionLabel="Ver todos →"
+          />
         </FadeIn>
         <EventGrid events={featuredEvents} />
       </section>

@@ -5,6 +5,7 @@ import { FadeIn } from '@/components/motion/FadeIn';
 import { ServiceTabs } from '@/components/services/ServiceTabs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { NeonBackdrop } from '@/components/ui/neon-backdrop';
+import { SectionHeader } from '@/components/ui/section-header';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -77,15 +78,12 @@ export default async function ServiciosPage() {
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <FadeIn>
-            <span className="mb-4 block font-mono text-xs uppercase tracking-widest" style={{ color: 'var(--accent-cyan)' }}>
-              — Soluciones tecnicas
-            </span>
-            <h1 className="font-display text-white leading-none" style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}>
-              Servicios
-            </h1>
-            <p className="mt-6 max-w-2xl font-sans text-lg" style={{ color: 'var(--text-muted)' }}>
-              Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo.
-            </p>
+            <SectionHeader
+              eyebrow="Soluciones tecnicas"
+              title="Servicios"
+              titleTag="h1"
+              description="Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."
+            />
           </FadeIn>
         </div>
       </section>

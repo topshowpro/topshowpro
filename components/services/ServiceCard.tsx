@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { TiltCard } from '@/components/ui/TiltCard';
+import { Tag } from '@/components/ui/tag';
 
 type ServiceCardProps = {
   name: string;
@@ -12,7 +13,7 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
     <TiltCard className="h-full w-full">
       <div
         className="group relative flex aspect-auto flex-col justify-end overflow-hidden l-bracket shadow-optic transition-all duration-500 md:aspect-[4/5]"
-        style={{ backgroundColor: 'var(--bg-surface)' }}
+        style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.1)' }}
       >
         <span className="l-bracket-bl" />
         <span className="l-bracket-br" />
@@ -47,6 +48,7 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
         />
 
         <div className="relative z-10 p-8 transition-transform duration-500 group-hover:-translate-y-1">
+          <Tag variant="soft" className="mb-4">Servicio</Tag>
           <h3 className="font-display text-2xl text-white mb-3">{name}</h3>
           <p className="font-sans text-sm" style={{ color: 'var(--text-muted)' }}>
             {shortDesc}

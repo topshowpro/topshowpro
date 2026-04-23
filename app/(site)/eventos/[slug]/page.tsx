@@ -14,6 +14,7 @@ import { Q_EVENT_DETAIL } from '@/sanity/lib/queries';
 import { formatDateRange } from '@/lib/utils';
 import { PortableText } from '@portabletext/react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
+import { Tag } from '@/components/ui/tag';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -68,12 +69,9 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-12">
-          <span
-            className="font-mono text-xs uppercase tracking-widest mb-4 block"
-            style={{ color: 'var(--accent-cyan)' }}
-          >
+          <Tag variant="accent" className="mb-4 inline-flex">
             {event.category?.label}
-          </span>
+          </Tag>
           <h1
             className="font-display text-white leading-none"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
@@ -114,13 +112,9 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
               <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--text-faint)' }}>Servicios</p>
               <div className="flex flex-wrap gap-2">
                 {event.tagsTecnicos.map((tag: string) => (
-                  <span
-                    key={tag}
-                    className="font-mono text-xs px-2 py-0.5"
-                    style={{ border: '1px solid rgba(23,133,211,0.3)', color: 'var(--accent-cyan)' }}
-                  >
+                  <Tag key={tag} variant="accent">
                     {tag}
-                  </span>
+                  </Tag>
                 ))}
               </div>
             </div>

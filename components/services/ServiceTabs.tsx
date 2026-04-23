@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
 import { ChevronDown } from 'lucide-react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
+import { Tag } from '@/components/ui/tag';
 
 type ServiceImage = { url: string; metadata?: { lqip?: string } | null };
 type TechContact = { name?: string; phone?: string; email?: string };
@@ -79,14 +80,13 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
       <Tabs.Root value={active} onValueChange={setActive}>
         <Tabs.List
           aria-label="Seleccion de servicios"
-          className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="ui-pill-tabs flex max-w-full overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {normalizedServices.map((service) => (
             <Tabs.Trigger
               key={service.value}
               value={service.value}
-              className="whitespace-nowrap rounded-full border px-4 py-2 font-mono text-xs uppercase tracking-[0.14em] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] data-[state=active]:border-[var(--accent-cyan)] data-[state=active]:bg-[rgba(23,133,211,0.16)] data-[state=active]:text-white"
-              style={{ borderColor: 'rgba(255,255,255,0.18)', color: 'var(--text-muted)' }}
+              className="ui-pill-tab"
             >
               {service.name}
             </Tabs.Trigger>
@@ -116,9 +116,7 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
 
           <div className="relative z-10 grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
             <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em]" style={{ color: 'var(--text-faint)' }}>
-                Servicio activo
-              </p>
+              <Tag variant="accent" className="mb-4">Servicio activo</Tag>
               <h2 className="font-display text-4xl leading-[0.95] text-white md:text-6xl">{current.name}</h2>
               <p className="mt-5 font-sans text-base leading-relaxed md:text-lg" style={{ color: 'var(--text-muted)' }}>
                 {compactDescription}

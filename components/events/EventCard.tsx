@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { formatDateRange } from '@/lib/utils';
+import { Tag } from '@/components/ui/tag';
 
 export type EventCardProps = {
   title: string;
@@ -28,7 +29,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
       <Link
         href={`/eventos/${slug}`}
         className="group relative block overflow-hidden aspect-[4/5] border"
-        style={{ backgroundColor: 'var(--bg-surface)' }}
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'rgba(255,255,255,0.12)' }}
       >
         <Image
           src={imgSrc}
@@ -51,12 +52,9 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
         </div>
 
         <div className="absolute inset-x-0 bottom-0 p-5 space-y-3">
-          <span
-            className="inline-block font-mono text-[10px] uppercase tracking-widest px-2 py-0.5"
-            style={{ color: 'var(--accent-led)', border: '1px solid color-mix(in srgb, var(--accent-led) 48%, transparent)' }}
-          >
+          <Tag variant="accent" className="text-[9px] tracking-[0.14em]">
             {category.label}
-          </span>
+          </Tag>
           <h3
             className="font-festival-heading text-3xl md:text-4xl leading-[0.9] uppercase text-[var(--text-primary)]"
           >

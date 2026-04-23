@@ -326,22 +326,87 @@ body {
   font-family: var(--font-sans);
   font-weight: 400;
   font-size: 15px;
-  transition: border-color 0.2s;
+  border-radius: 9999px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--accent-cyan);
+  border-color: color-mix(in srgb, var(--accent-cyan) 65%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-cyan) 22%, transparent);
+  background-color: color-mix(in srgb, var(--bg-elevated) 86%, var(--accent-cyan));
+}
+
+.form-input:hover,
+.form-select:hover,
+.form-textarea:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-cyan) 70%, transparent);
+  outline-offset: 2px;
+}
+
+.form-input[aria-invalid='true'],
+.form-select[aria-invalid='true'],
+.form-textarea[aria-invalid='true'] {
+  border-color: color-mix(in srgb, var(--color-error) 72%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-error) 28%, transparent);
 }
 
 .form-textarea {
   resize: vertical;
+  border-radius: 1rem;
 }
 
 .form-select {
   cursor: pointer;
+}
+
+/* Unified pills/tabs (MiniMax-inspired, adapted to Top Show Pro tokens) */
+.ui-pill-tabs {
+  display: inline-flex;
+  gap: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9999px;
+  padding: 4px;
+  background: color-mix(in srgb, var(--bg-elevated) 90%, transparent);
+}
+
+.ui-pill-tab {
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.58rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+  white-space: nowrap;
+}
+
+.ui-pill-tab:hover {
+  color: var(--text-primary);
+}
+
+.ui-pill-tab.ui-pill-tab-active,
+.ui-pill-tab[data-state='active'],
+.ui-pill-tab[aria-selected='true'] {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--accent-cyan) 50%, transparent);
+  background: color-mix(in srgb, var(--accent-cyan) 14%, transparent);
+}
+
+.ui-pill-tab:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-cyan) 72%, transparent);
+  outline-offset: 2px;
 }
 
 /* Navigation */

@@ -48,7 +48,13 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="category" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Categoría
               </label>
-              <select id="category" {...register('category')} className="form-select">
+              <select
+                id="category"
+                aria-invalid={Boolean(errors.category)}
+                aria-describedby={errors.category ? 'category-error' : undefined}
+                {...register('category')}
+                className="form-select"
+              >
                 <option value="" style={{ backgroundColor: 'var(--bg-elevated)' }}>Seleccioná una opción</option>
                 {categories.map((c) => (
                   <option key={c.label} value={c.label} style={{ backgroundColor: 'var(--bg-elevated)' }}>
@@ -57,7 +63,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 ))}
               </select>
               {errors.category && (
-                <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.category.message}</p>
+                <p id="category-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.category.message}</p>
               )}
             </div>
 
@@ -66,8 +72,14 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 <label htmlFor="name" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Nombre / Empresa
                 </label>
-                <input id="name" {...register('name')} className="form-input" />
-                {errors.name && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.name.message}</p>}
+                <input
+                  id="name"
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
+                  {...register('name')}
+                  className="form-input"
+                />
+                {errors.name && <p id="name-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.name.message}</p>}
               </div>
               <div>
                 <label htmlFor="phone" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
@@ -81,16 +93,31 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Email
               </label>
-              <input id="email" type="email" inputMode="email" {...register('email')} className="form-input" />
-              {errors.email && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
+              <input
+                id="email"
+                type="email"
+                inputMode="email"
+                aria-invalid={Boolean(errors.email)}
+                aria-describedby={errors.email ? 'email-error' : undefined}
+                {...register('email')}
+                className="form-input"
+              />
+              {errors.email && <p id="email-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
             </div>
 
             <div>
               <label htmlFor="message" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Consulta
               </label>
-              <textarea id="message" {...register('message')} rows={5} className="form-textarea" />
-              {errors.message && <p className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.message.message}</p>}
+              <textarea
+                id="message"
+                rows={5}
+                aria-invalid={Boolean(errors.message)}
+                aria-describedby={errors.message ? 'message-error' : undefined}
+                {...register('message')}
+                className="form-textarea"
+              />
+              {errors.message && <p id="message-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.message.message}</p>}
             </div>
 
             <button
