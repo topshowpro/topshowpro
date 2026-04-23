@@ -750,3 +750,24 @@ body {
     animation: none;
   }
 }
+
+/* Equal-width tabs for ServiceTabs */
+.ui-pill-tabs .ui-pill-tab {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Fix select dropdown arrow */
+.form-select {
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+/* Footer Digital Boost hover gold */
+.footer-db:hover {
+  color: #ffd700 !important;
+}
