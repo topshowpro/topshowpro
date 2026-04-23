@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+﻿import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'service',
@@ -10,7 +10,13 @@ export default defineType({
     defineField({ name: 'order', type: 'number', initialValue: 0 }),
     defineField({ name: 'shortDesc', type: 'text', rows: 2 }),
     defineField({ name: 'longDesc', type: 'array', of: [{ type: 'block' }] }),
-    defineField({ name: 'gallery', type: 'array', of: [{ type: 'image', options: { hotspot: true } }] }),
+    defineField({
+      name: 'gallery',
+      title: 'Galería',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      description: 'Medidas: 600×400 (3:2). Mín: 400×267. WebP/JPG. Usar misma relación de aspecto.',
+    }),
     defineField({
       name: 'techContact',
       title: 'Contacto técnico',
