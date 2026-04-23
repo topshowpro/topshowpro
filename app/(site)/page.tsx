@@ -110,16 +110,16 @@ export default async function HomePage() {
           { color: 'cyan',   drift: 'a', size: '700px', top: '-200px', left: '50%', opacity: 0.4 },
           { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },
         ]} />
-        <FadeIn>
-          <span className="font-mono text-xs uppercase tracking-wider mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
-            — Siguiente paso
-          </span>
-          <h2
-            className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-cyan relative z-10"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-          >
-            ¿Tu próximo evento?
-          </h2>
+<FadeIn>
+           <span className="font-mono text-xs uppercase tracking-wider mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
+             — Siguiente paso
+           </span>
+           <h2
+             className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-yellow relative z-10"
+             style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
+           >
+             ¿Tu próximo evento?
+           </h2>
           <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
             Contanos qué tenés en mente y te armamos una propuesta a medida.
           </p>

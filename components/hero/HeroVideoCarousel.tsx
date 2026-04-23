@@ -134,7 +134,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
       <div className="relative z-10 flex h-full items-center justify-center px-6">
         <h1
-          className="text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] leading-[0.88]"
+          className="text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] text-neon-yellow leading-[0.88]"
           style={{ fontSize: 'clamp(3.4rem, 11vw, 10rem)', letterSpacing: '0.01em' }}
         >
           <RevealText text={slide?.phrase ?? ''} key={idx} />
