@@ -80,7 +80,7 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
       <Tabs.Root value={active} onValueChange={setActive}>
         <Tabs.List
           aria-label="Seleccion de servicios"
-          className="ui-pill-tabs mx-auto max-w-fit justify-center overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="ui-pill-tabs flex overflow-x-auto px-6 md:px-8 pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {normalizedServices.map((service) => (
             <Tabs.Trigger
