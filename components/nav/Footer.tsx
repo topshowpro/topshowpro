@@ -55,7 +55,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="Facebook"
               >
                 <Facebook size={22} strokeWidth={1.5} />
@@ -66,7 +66,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="LinkedIn"
               >
                 <Linkedin size={22} strokeWidth={1.5} />
@@ -77,7 +77,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.youtube} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-accent-cyan hover:scale-110 transition-all duration-300" 
+                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="YouTube"
               >
                 <Youtube size={22} strokeWidth={1.5} />
@@ -93,7 +93,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           href="https://www.digitalboost.com.ar/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="hover:text-accent-cyan transition-colors"
+          className="hover:text-[#ffd700] transition-colors"
         >
           Desarrollado por Digital Boost
         </a>
