@@ -38,7 +38,6 @@ export default async function HomePage() {
       <OrganizationJsonLd />
       <HeroVideoCarousel slides={hero?.slides ?? []} banner={hero?.bannerAzul} />
 
-      {/* Clients marquee — right below hero */}
       <ClientsMarquee clients={clients ?? []} />
 
       {/* Intro section */}
@@ -50,7 +49,7 @@ export default async function HomePage() {
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
             <SectionHeader
-              eyebrow="Quiénes somos"
+              eyebrow=""
               title="Hacemos que todo suceda"
               className="mb-8 text-left"
               titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center"
@@ -70,7 +69,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
             <SectionHeader
-              eyebrow="Soluciones técnicas"
+              eyebrow=""
               title="Servicios"
               titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
               actionHref="/servicios"
@@ -91,7 +90,7 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
           <SectionHeader
-            eyebrow="Portfolio"
+            eyebrow=""
             title="Eventos destacados"
             titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
             actionHref="/eventos"
@@ -111,9 +110,6 @@ export default async function HomePage() {
           { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },
         ]} />
 <FadeIn>
-           <span className="font-mono text-xs uppercase tracking-wider mb-6 block relative z-10" style={{ color: 'var(--text-faint)' }}>
-             — Siguiente paso
-           </span>
            <h2
              className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-yellow relative z-10"
              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}

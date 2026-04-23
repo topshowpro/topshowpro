@@ -11,9 +11,6 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
       style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
     >
       <div className="max-w-7xl mx-auto">
-        <p className="mb-6 font-mono text-[10px] uppercase tracking-[0.26em]" style={{ color: 'var(--text-faint)' }}>
-          Clientes
-        </p>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {clients.map((c) => (
             <div
