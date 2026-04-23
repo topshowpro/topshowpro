@@ -8,10 +8,10 @@ export default defineType({
     defineField({ name: 'name', type: 'string', validation: (r) => r.required() }),
     defineField({
       name: 'logo',
-      title: 'Logo',
+      title: '🏷️ Logo del cliente (280×112)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 280×112 (alto fijo). Mín: 180×72. PNG transparente con logo blanco o negro.',
+      description: 'Medidas recomendadas: 280×112px (alto fijo). Mínimo: 180×72px. Usar PNG transparente con logo blanco o negro sobre fondo transparente.',
     }),
     defineField({ name: 'website', type: 'url' }),
     defineField({ name: 'order', type: 'number', initialValue: 0 }),

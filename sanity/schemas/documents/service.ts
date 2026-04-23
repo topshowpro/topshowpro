@@ -12,10 +12,10 @@ export default defineType({
     defineField({ name: 'longDesc', type: 'array', of: [{ type: 'block' }] }),
     defineField({
       name: 'gallery',
-      title: 'Galería',
+      title: '🖼️ Galería de imágenes (600×400)',
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
-      description: 'Medidas: 600×400 (3:2). Mín: 400×267. WebP/JPG. Usar misma relación de aspecto.',
+      description: 'Medidas recomendadas: 600×400px (3:2). Mínimo: 400×267px. Usar misma relación de aspecto para consistencia visual. Formato: WebP o JPG.',
     }),
     defineField({
       name: 'techContact',

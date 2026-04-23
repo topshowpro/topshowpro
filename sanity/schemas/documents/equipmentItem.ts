@@ -10,10 +10,10 @@ export default defineType({
     defineField({ name: 'specs', type: 'array', of: [{ type: 'block' }] }),
     defineField({
       name: 'photo',
-      title: 'Foto del equipo',
+      title: '📷 Foto del equipo (600×400)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 600×400 (3:2). Mín: 400×267. WebP/JPG. Fondo neutro o oscuro recomienda.',
+      description: 'Medidas recomendadas: 600×400px (3:2). Mínimo: 400×267px. Fondo neutro o oscuro recomienda. Formato: WebP o JPG.',
     }),
     defineField({ name: 'datasheet', type: 'file', options: { accept: 'application/pdf' } }),
   ],
