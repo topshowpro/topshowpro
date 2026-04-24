@@ -13,8 +13,7 @@ export default defineType({
       title: 'Imagen de categoria (1600x900)',
       type: 'image',
       options: { hotspot: true },
-      description:
-        'Medidas recomendadas: 1600x900px (16:9). Minimo: 1200x675px. Formato: WebP o JPG. Calidad recomendada: 80-85%.',
+      description: 'Medidas recomendadas: 1600x900px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({ name: 'items', type: 'array', of: [{ type: 'reference', to: [{ type: 'equipmentItem' }] }] }),
     defineField({ name: 'order', type: 'number', initialValue: 0 }),

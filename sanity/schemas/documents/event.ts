@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'event',
@@ -37,14 +37,18 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       validation: (r) => r.required(),
-      description: 'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG con calidad 80-85%.',
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'gallery',
-      title: '🖼️ Galeria (800x533)',
+      title: '🖼️ Galeria (800x600)',
       type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      description: 'Medidas recomendadas: 800x533px (4:3). Minimo: 400x300px. Formato: WebP o JPG con calidad 80-85%.',
+      of: [{ 
+        type: 'image', 
+        options: { hotspot: true },
+        description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).'
+      }],
+      description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({ name: 'video', type: 'url', title: 'URL video (YouTube/Vimeo/Mux)' }),
     defineField({

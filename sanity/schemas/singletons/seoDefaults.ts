@@ -11,8 +11,7 @@ export default defineType({
       name: 'ogImage',
       type: 'image',
       title: 'OG Image (1200x630)',
-      description:
-        'Medidas recomendadas: 1200x630px (Open Graph). Formato: JPG o WebP. Calidad recomendada: 82-90%. Mantener texto dentro de margenes seguros.',
+      description: 'Medidas recomendadas: 1200x630px. Formato: JPG o PNG (Max 1MB).',
     }),
   ],
   preview: { prepare: () => ({ title: 'SEO Defaults' }) },

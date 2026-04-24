@@ -18,8 +18,7 @@ export default defineType({
               type: 'image',
               title: 'Poster image (1920x1080)',
               options: { hotspot: true },
-              description:
-                'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG. Calidad recomendada: 80-85%.',
+              description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
             },
             { name: 'phrase', type: 'string', validation: (r) => r.required() },
             {

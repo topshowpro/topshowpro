@@ -17,8 +17,7 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       hidden: ({ parent }) => parent?.kind !== 'image',
-      description:
-        'Base recomendada: 1600x900px (16:9). Ajustar segun bloque destino. Formato: WebP o JPG. Calidad 80-85% para foto / 90%+ para piezas con texto.',
+      description: 'Medidas recomendadas: 1600x900px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({ name: 'videoUrl', type: 'url', hidden: ({ parent }) => parent?.kind !== 'videoUrl' }),
   ],

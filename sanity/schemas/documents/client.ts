@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'client',
@@ -8,11 +8,10 @@ export default defineType({
     defineField({ name: 'name', type: 'string', validation: (r) => r.required() }),
     defineField({
       name: 'logo',
-      title: '🏷️ Logo del cliente (280x112)',
+      title: '🏷️ Logo del cliente (360x128)',
       type: 'image',
       options: { hotspot: true },
-      description:
-        'Medidas recomendadas: 280x112px (alto fijo). Minimo: 180x72px. Preferentemente logo blanco en PNG/SVG con fondo transparente. Evitar fondos solidos y sombras.',
+      description: 'Medidas recomendadas: 360x128px. SVG o PNG/WebP (Transparente).',
     }),
     defineField({ name: 'website', type: 'url' }),
     defineField({ name: 'order', type: 'number', initialValue: 0 }),

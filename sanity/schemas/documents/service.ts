@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'service',
@@ -12,10 +12,14 @@ export default defineType({
     defineField({ name: 'longDesc', type: 'array', of: [{ type: 'block' }] }),
     defineField({
       name: 'gallery',
-      title: '🖼️ Galeria de imagenes (600x400)',
+      title: '🖼️ Galeria de imagenes (800x600)',
       type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      description: 'Medidas recomendadas: 600x400px (3:2). Minimo: 400x267px. Usar misma relacion de aspecto para consistencia visual. Formato: WebP o JPG con calidad 80-85%.',
+      of: [{ 
+        type: 'image', 
+        options: { hotspot: true },
+        description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).'
+      }],
+      description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'techContact',

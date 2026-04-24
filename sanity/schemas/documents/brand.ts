@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'brand',
@@ -11,8 +11,7 @@ export default defineType({
       title: '🏷️ Logo de marca (360x112)',
       type: 'image',
       options: { hotspot: true },
-      description:
-        'Medidas recomendadas: 360x112px (alto fijo). Minimo: 280x88px. Preferentemente PNG/SVG con fondo transparente y logo blanco o negro. Mantener contraste limpio.',
+      description: 'Medidas recomendadas: 360x112px. SVG o PNG/WebP (Transparente).',
     }),
     defineField({ name: 'website', type: 'url' }),
   ],

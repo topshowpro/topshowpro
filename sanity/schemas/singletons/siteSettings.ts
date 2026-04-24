@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity';
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'siteSettings',
@@ -10,8 +10,7 @@ export default defineType({
       title: '🔶 Logo del sitio (160x40)',
       type: 'image',
       options: { hotspot: true },
-      description:
-        'Medidas recomendadas: 160x40px. Preferentemente PNG o SVG con fondo transparente (logo blanco). Si usas JPG/WebP, exportar en calidad 90% o superior.',
+      description: 'Medidas recomendadas: 160x40px. SVG o PNG/WebP (Transparente).',
     }),
     defineField({ name: 'address', type: 'string' }),
     defineField({ name: 'email', type: 'string' }),
@@ -42,21 +41,21 @@ export default defineType({
       title: '🖼️ Hero: Servicios (1920x1080)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG con calidad 80-85%.',
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'equipamientoHero',
       title: '🖼️ Hero: Equipamiento (1920x1080)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG con calidad 80-85%.',
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'contactoHero',
       title: '🖼️ Hero: Contacto (1920x1080)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG con calidad 80-85%.',
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
   ],
   preview: { select: { title: 'email' }, prepare: () => ({ title: 'Site Settings' }) },
