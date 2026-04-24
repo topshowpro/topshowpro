@@ -72,7 +72,7 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
       onMouseEnter={detectCapability}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={cn('relative transition-all duration-200', className)}
+      className={cn('relative transition-transform duration-200', className)}
     >
       <div style={{ transform: 'translateZ(0)' }}>{children}</div>
     </div>

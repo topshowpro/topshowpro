@@ -1,24 +1,15 @@
-import { Playfair_Display, Inter, Space_Mono, Anton } from 'next/font/google';
+import { Bebas_Neue, Montserrat, Space_Mono } from 'next/font/google';
 
-export const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  style: ['normal', 'italic'],
-  variable: '--font-display',
-  display: 'swap',
-  preload: false,
-});
-
-export const anton = Anton({
+export const bebas = Bebas_Neue({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-condensed',
+  variable: '--font-display',
   display: 'swap',
 });
 
-export const inter = Inter({
+export const montserrat = Montserrat({
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
 });
@@ -28,5 +19,4 @@ export const spaceMono = Space_Mono({
   weight: ['400', '700'],
   variable: '--font-mono',
   display: 'swap',
-  preload: false,
 });

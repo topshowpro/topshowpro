@@ -39,8 +39,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ServiciosPage() {
   const [services, settings] = await Promise.all([
-    sanityFetch<Service[]>(Q_SERVICES, { revalidate: 30 }, 'service'),
-    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
+    sanityFetch<Service[]>(Q_SERVICES, undefined, { tag: 'service', revalidate: 30 }),
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
   ]);
 
   const includes = [
@@ -79,7 +79,6 @@ export default async function ServiciosPage() {
         <div className="relative z-10 mx-auto max-w-7xl">
           <FadeIn>
             <SectionHeader
-              eyebrow="Soluciones tecnicas"
               title="Servicios"
               titleTag="h1"
               description="Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."
@@ -108,9 +107,6 @@ export default async function ServiciosPage() {
           />
 
           <FadeIn>
-            <span className="mb-5 block font-mono text-xs uppercase tracking-wider" style={{ color: 'var(--text-faint)' }}>
-              - Siguiente paso
-            </span>
             <h2 className="font-display text-white" style={{ fontSize: 'clamp(2.3rem, 6vw, 5.5rem)', lineHeight: 0.95 }}>
               Armemos tu proximo evento
             </h2>
@@ -118,7 +114,7 @@ export default async function ServiciosPage() {
               Contanos objetivos, fechas y alcance. Te proponemos una solucion tecnica a medida con mirada de show.
             </p>
             <div className="mt-10">
-              <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
+              <CtaOutlineLink href="/contacto" className="min-h-11 px-7 text-xs">
                 Ir a contacto
               </CtaOutlineLink>
             </div>

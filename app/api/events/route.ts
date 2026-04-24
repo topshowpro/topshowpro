@@ -9,10 +9,10 @@ export async function GET(req: Request) {
   const headers = { "Cache-Control": "no-store" };
 
   if (url.searchParams.has("cats")) {
-    const cats = await sanityFetch(Q_EVENT_CATEGORIES, { revalidate: 30 }, "eventCategory");
+    const cats = await sanityFetch(Q_EVENT_CATEGORIES, undefined, { tag: "eventCategory", revalidate: 30 });
     return NextResponse.json(cats, { headers });
   }
-  const category = url.searchParams.get("category") ?? undefined;
-  const events = await sanityFetch(Q_EVENTS_LIST(category), { revalidate: 30 }, "event");
+  const category = url.searchParams.get("category") ?? null;
+  const events = await sanityFetch(Q_EVENTS_LIST, { category }, { tag: "event", revalidate: 30 });
   return NextResponse.json(events, { headers });
 }

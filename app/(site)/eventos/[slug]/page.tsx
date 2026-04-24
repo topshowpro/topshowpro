@@ -20,19 +20,24 @@ import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const event = await sanityFetch<any>(Q_EVENT_DETAIL, { slug }, `event:${slug}`);
+  const event = await sanityFetch<any>(Q_EVENT_DETAIL, { slug }, { tag: `event:${slug}`, revalidate: 30 });
   return buildMetadata({
-    title: event?.title,
-    description: event?.subtitle,
-    ogImage: event?.heroImage?.url,
+    title: event?.seo?.title || event?.title,
+    description: event?.seo?.description || event?.subtitle,
+    ogImage: event?.seo?.ogImage || event?.heroImage?.url,
+    noIndex: Boolean(event?.seo?.noIndex),
     path: `/eventos/${slug}`,
   });
 }
 
 export default async function EventoDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const event = await sanityFetch<any>(Q_EVENT_DETAIL, { slug }, `event:${slug}`);
+  const event = await sanityFetch<any>(Q_EVENT_DETAIL, { slug }, { tag: `event:${slug}`, revalidate: 30 });
   if (!event) notFound();
+
+  const gallery = Array.isArray(event.gallery)
+    ? event.gallery.filter((item: any): item is { url: string } => typeof item?.url === 'string' && item.url.length > 0)
+    : [];
 
   return (
     <article style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -69,9 +74,10 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-12">
-          <Tag variant="accent" className="mb-4 inline-flex">
+          <span className="event-category-pill mb-4">
+            <span aria-hidden="true" className="event-category-pill__dot" />
             {event.category?.label}
-          </Tag>
+          </span>
           <h1
             className="font-display text-white leading-none"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
@@ -170,7 +176,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
       )}
 
       {/* Gallery */}
-      {event.gallery?.length > 0 && (
+      {gallery.length > 0 && (
         <section className="max-w-7xl mx-auto px-6 py-16">
           <h2
             className="font-display text-white mb-8 leading-none"
@@ -179,7 +185,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             Galería
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
-            {event.gallery.map((g: any, i: number) => (
+            {gallery.map((g: { url: string }, i: number) => (
               <div key={i} className="relative aspect-[4/3]" style={{ backgroundColor: 'var(--bg-surface)' }}>
                 <Image src={g.url} alt="" fill className="object-cover" sizes="(max-width: 1280px) 33vw, 400px" />
               </div>
@@ -196,7 +202,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         >
           ¿Necesitás algo similar?
         </h2>
-        <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
+        <CtaOutlineLink href="/contacto" className="min-h-11 px-7 text-xs">
           Contactanos
         </CtaOutlineLink>
       </section>

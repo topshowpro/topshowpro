@@ -8,10 +8,11 @@ export default defineType({
     defineField({ name: 'name', type: 'string', validation: (r) => r.required() }),
     defineField({
       name: 'logoBw',
-      title: '🏷️ Logo de marca (360×112)',
+      title: '🏷️ Logo de marca (360x112)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas recomendadas: 360×112px (alto fijo). Mínimo: 280×88px. Usar PNG transparente con logo negro o blanco sobre fondo transparente.',
+      description:
+        'Medidas recomendadas: 360x112px (alto fijo). Minimo: 280x88px. Preferentemente PNG/SVG con fondo transparente y logo blanco o negro. Mantener contraste limpio.',
     }),
     defineField({ name: 'website', type: 'url' }),
   ],

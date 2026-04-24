@@ -17,9 +17,9 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function EquipamientoPage() {
   const [categories, brands, settings] = await Promise.all([
-    sanityFetch<any[]>(Q_EQUIPMENT_CATEGORIES, { revalidate: 30 }, 'equipmentCategory'),
-    sanityFetch<any[]>(Q_BRANDS, { revalidate: 30 }, 'brand'),
-    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
+    sanityFetch<any[]>(Q_EQUIPMENT_CATEGORIES, undefined, { tag: 'equipmentCategory', revalidate: 30 }),
+    sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
   ]);
 
   return (
@@ -36,12 +36,6 @@ export default async function EquipamientoPage() {
         <div className="absolute inset-0 bg-focal-beam" />
         <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
-            <span
-              className="font-mono text-xs uppercase tracking-widest mb-4 block"
-              style={{ color: 'var(--accent-cyan)' }}
-            >
-              — Tecnología de punta
-            </span>
             <h1
               className="font-display text-white leading-none mb-6"
               style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
@@ -84,7 +78,7 @@ export default async function EquipamientoPage() {
               <p className="mx-auto mb-7 max-w-[28ch] font-sans text-[1.04rem] md:mb-8 md:text-[1.08rem]" style={{ color: 'var(--text-muted)' }}>
                 Pedinos un presupuesto personalizado para tu proyecto.
               </p>
-              <CtaOutlineLink href="/contacto" className="h-10 px-7 text-xs">
+              <CtaOutlineLink href="/contacto" className="min-h-11 px-7 text-xs">
                 Solicitar cotización
               </CtaOutlineLink>
             </FadeIn>

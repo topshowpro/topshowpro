@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { formatDateRange } from '@/lib/utils';
-import { Tag } from '@/components/ui/tag';
 
 export type EventCardProps = {
   title: string;
@@ -10,14 +9,13 @@ export type EventCardProps = {
   slug: string;
   dateStart: string;
   dateEnd?: string;
-  category: { label: string };
   heroImage?: { url: string; metadata?: { lqip?: string } } | null;
   priority?: boolean;
 };
 
 const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=60';
 
-export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category, heroImage, priority = false }: EventCardProps) {
+export function EventCard({ title, subtitle, slug, dateStart, dateEnd, heroImage, priority = false }: EventCardProps) {
   const imgSrc = heroImage?.url ?? FALLBACK_IMAGE;
   const lqip = heroImage?.metadata?.lqip;
   const start = new Date(dateStart + 'T12:00:00Z');
@@ -28,7 +26,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
     <TiltCard className="group block w-full h-full">
       <Link
         href={`/eventos/${slug}`}
-        className="group relative block overflow-hidden aspect-[4/5] border"
+        className="event-card-surface-shadow group relative block aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border"
         style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'rgba(255,255,255,0.12)' }}
       >
         <Image
@@ -51,10 +49,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, category,
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.26em]" style={{ color: 'var(--accent-led)' }}>{month}</p>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 p-5 space-y-3">
-          <Tag variant="accent" className="text-[9px] tracking-[0.14em]">
-            {category.label}
-          </Tag>
+        <div className="absolute inset-x-0 bottom-0 space-y-2 p-5">
           <h3
             className="font-festival-heading text-3xl md:text-4xl leading-[0.9] uppercase text-[var(--text-primary)]"
           >

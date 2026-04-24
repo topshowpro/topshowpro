@@ -13,7 +13,14 @@ export default defineType({
           type: 'object',
           fields: [
             { name: 'video', type: 'file', options: { accept: 'video/*' } },
-            { name: 'poster', type: 'image', title: 'Poster image' },
+            {
+              name: 'poster',
+              type: 'image',
+              title: 'Poster image (1920x1080)',
+              options: { hotspot: true },
+              description:
+                'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG. Calidad recomendada: 80-85%.',
+            },
             { name: 'phrase', type: 'string', validation: (r) => r.required() },
             {
               name: 'accentColor',

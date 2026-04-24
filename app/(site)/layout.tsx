@@ -7,16 +7,22 @@ import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const seo = await sanityFetch<any>(Q_SEO_DEFAULTS, { revalidate: 30 }, 'seoDefaults');
-  return buildMetadata({ description: seo?.description });
+  const seo = await sanityFetch<any>(Q_SEO_DEFAULTS, undefined, { tag: 'seoDefaults', revalidate: 30 });
+  return buildMetadata({ titlePattern: seo?.titlePattern, description: seo?.description, ogImage: seo?.ogImage });
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings');
+  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 });
   return (
     <LenisProvider>
-      <Header />
-      <main>{children}</main>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--bg-elevated)] focus:px-4 focus:py-3 focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest focus:text-white"
+      >
+        Saltar al contenido
+      </a>
+      <Header settings={settings} />
+      <main id="main-content">{children}</main>
       <Footer settings={settings} />
     </LenisProvider>
   );

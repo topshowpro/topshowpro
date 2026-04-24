@@ -8,13 +8,16 @@ export function EventFilter({
   onSelect,
   panelId,
 }: {
-  categories: { label: string; slug: string }[];
+  categories: { label: string; slug: string; icon?: string }[];
   active: string | null;
   onSelect: (slug: string | null) => void;
   panelId?: string;
 }) {
   const tabListId = useId();
-  const items = [{ label: 'Todos', slug: null as string | null }, ...categories.map((category) => ({ label: category.label, slug: category.slug }))];
+  const items = [
+    { label: 'Todos', slug: null as string | null, icon: undefined as string | undefined },
+    ...categories.map((category) => ({ label: category.label, slug: category.slug, icon: category.icon })),
+  ];
 
   function onKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
@@ -62,7 +65,7 @@ export function EventFilter({
               onKeyDown={(event) => onKeyDown(event, index)}
               className={cn('ui-pill-tab', selected && 'ui-pill-tab-active')}
             >
-              {item.label}
+              {item.icon ? `${item.icon} ${item.label}` : item.label}
             </button>
           );
         })}

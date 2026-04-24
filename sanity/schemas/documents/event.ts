@@ -33,18 +33,18 @@ export default defineType({
     }),
     defineField({
       name: 'heroImage',
-      title: '📐 Imagen principal (1920×1080 / 16:9)',
+      title: '📐 Imagen principal (1920x1080 / 16:9)',
       type: 'image',
       options: { hotspot: true },
       validation: (r) => r.required(),
-      description: 'Medidas recomendadas: 1920×1080px (16:9). Mínimo: 1280×720px. Formato: WebP o JPG con compresión 80-85%.',
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Minimo: 1280x720px. Formato: WebP o JPG con calidad 80-85%.',
     }),
     defineField({
       name: 'gallery',
-      title: '🖼️ Galería (800×533)',
+      title: '🖼️ Galeria (800x533)',
       type: 'array',
       of: [{ type: 'image', options: { hotspot: true } }],
-      description: 'Medidas recomendadas: 800×533px (4:3). Mínimo: 400×300px. Formato: WebP o JPG.',
+      description: 'Medidas recomendadas: 800x533px (4:3). Minimo: 400x300px. Formato: WebP o JPG con calidad 80-85%.',
     }),
     defineField({ name: 'video', type: 'url', title: 'URL video (YouTube/Vimeo/Mux)' }),
     defineField({

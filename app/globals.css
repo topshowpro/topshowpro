@@ -189,6 +189,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a,
+button,
+input,
+select,
+textarea,
+[role='button'] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(23, 133, 211, 0.22);
+}
+
 ::selection {
   background-color: var(--accent-cyan);
   color: var(--bg-base);
@@ -218,14 +228,12 @@ body {
   background-size: 24px 24px;
 }
 
-/* Stitch-specific utilities */
-.shadow-optic {
-  box-shadow: 0 20px 40px color-mix(in srgb, var(--accent-cyan) 8%, transparent);
-  border-radius: var(--radius-card);
+.card-surface-shadow {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
-.card-surface-shadow {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+.event-card-surface-shadow {
+  box-shadow: 0 14px 26px -14px rgba(0, 0, 0, 0.42);
 }
 
 .services-reveal-track {
@@ -248,7 +256,9 @@ body {
     gap: 1.5rem;
     overflow-x: auto;
     overflow-y: visible;
-    padding-right: 0.5rem;
+    padding-top: 0.45rem;
+    padding-left: 0.35rem;
+    padding-right: 0.85rem;
     padding-bottom: 0.4rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -261,10 +271,13 @@ body {
   .services-reveal-track > * {
     flex-shrink: 0;
     align-self: flex-start;
+    position: relative;
   }
 }
 
 .service-card-reveal {
+  position: relative;
+  z-index: 0;
   width: 100%;
   max-width: 100%;
   border-radius: var(--radius-card);
@@ -272,28 +285,43 @@ body {
   --service-card-expanded: 19.5rem;
 }
 
+.service-card-shell {
+  background-color: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  transition: box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1), border-color 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.service-card-shell:hover,
+.service-card-shell:focus-within {
+  border-color: color-mix(in srgb, var(--accent-cyan) 34%, rgba(255, 255, 255, 0.12));
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.26), 0 0 0 1px color-mix(in srgb, var(--accent-cyan) 18%, transparent);
+}
+
 .service-card-reveal-inner {
   width: 100%;
   border-radius: var(--radius-card);
+  will-change: width;
 }
 
 @media (min-width: 1024px) {
   .service-card-reveal {
     width: var(--service-card-collapsed);
     max-width: var(--service-card-collapsed);
-    overflow: visible;
-    transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1), max-width 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    overflow: hidden;
+    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1), max-width 420ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-card-reveal:hover,
   .service-card-reveal:focus-within {
+    z-index: 3;
     width: var(--service-card-expanded);
     max-width: var(--service-card-expanded);
   }
 
   .service-card-reveal-inner {
     width: var(--service-card-collapsed);
-    transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .service-card-reveal:hover .service-card-reveal-inner,
@@ -544,6 +572,7 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   background: linear-gradient(160deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.9));
   backdrop-filter: blur(16px) saturate(120%);
+  overscroll-behavior: contain;
 }
 
 .navbar-contact-glass {
@@ -632,6 +661,14 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .neon-orb { animation: none !important; }
+}
+
+@media (max-width: 768px) {
+  .neon-orb-cyan,
+  .neon-orb-violet,
+  .neon-orb-mint {
+    filter: blur(42px);
+  }
 }
 
 .btn-neon,

@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { RevealText } from '@/components/motion/RevealText';
 
 type Slide = {
@@ -148,10 +149,16 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
             <button
               key={i}
               onClick={() => setIdx(i)}
-              className="w-8 h-0.5 transition-all"
-              style={{ backgroundColor: i === idx ? 'var(--accent-cyan)' : 'rgba(245,245,245,0.3)' }}
+              className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all"
+              style={{ backgroundColor: i === idx ? 'rgba(23,133,211,0.14)' : 'rgba(245,245,245,0.06)' }}
               aria-label={`Slide ${i + 1}`}
-            />
+              aria-current={i === idx}
+            >
+              <span
+                className="h-0.5 w-8"
+                style={{ backgroundColor: i === idx ? 'var(--accent-cyan)' : 'rgba(245,245,245,0.3)' }}
+              />
+            </button>
           ))}
         </div>
       )}
@@ -162,6 +169,14 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           style={{ backgroundColor: 'var(--accent-led)' }}
         >
           <span className="font-festival-heading text-xl md:text-2xl tracking-wider italic text-black">{banner.text}</span>
+          {banner.cta?.label && banner.cta?.link && (
+            <Link
+              href={banner.cta.link}
+              className="inline-flex min-h-11 min-w-11 items-center rounded-md border border-black/50 px-4 font-mono text-[11px] uppercase tracking-wider text-black transition hover:bg-black hover:text-[var(--accent-led)]"
+            >
+              {banner.cta.label}
+            </Link>
+          )}
         </div>
       )}
     </section>

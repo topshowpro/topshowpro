@@ -13,8 +13,8 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function ContactoPage() {
   const [categories, settings] = await Promise.all([
-    sanityFetch<any[]>(Q_CONTACT_CATEGORIES, { revalidate: 30 }, 'contactCategory'),
-    sanityFetch<any>(Q_SITE_SETTINGS, { revalidate: 30 }, 'siteSettings'),
+    sanityFetch<any[]>(Q_CONTACT_CATEGORIES, undefined, { tag: 'contactCategory', revalidate: 30 }),
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
   ]);
 
   return (
@@ -29,12 +29,6 @@ export default async function ContactoPage() {
         )}
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <span
-            className="font-mono text-xs uppercase tracking-widest mb-4 block"
-            style={{ color: 'var(--accent-cyan)' }}
-          >
-            — Hablemos
-          </span>
           <h1
             className="font-display text-white leading-none"
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
@@ -56,11 +50,9 @@ export default async function ContactoPage() {
         <aside className="space-y-8 lg:pt-8">
           {/* Contact info */}
           <div
-            className="p-8 l-bracket"
-            style={{ backgroundColor: 'var(--bg-surface)' }}
+            className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+            style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
-            <span className="l-bracket-bl" />
-            <span className="l-bracket-br" />
             <p
               className="font-mono text-xs uppercase tracking-widest mb-4"
               style={{ color: 'var(--text-faint)' }}
@@ -73,8 +65,8 @@ export default async function ContactoPage() {
 
           {settings?.techContact && (
             <div
-              className="p-8"
-              style={{ backgroundColor: 'var(--bg-surface)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+              className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+              style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
               <p
                 className="font-mono text-xs uppercase tracking-widest mb-4"
@@ -89,8 +81,8 @@ export default async function ContactoPage() {
           )}
 
           <div
-            className="p-8"
-            style={{ backgroundColor: 'var(--bg-surface)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+            className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+            style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             <p
               className="font-mono text-xs uppercase tracking-widest mb-4"
@@ -103,8 +95,8 @@ export default async function ContactoPage() {
 
           {settings?.address && (
             <div
-              className="p-8"
-              style={{ backgroundColor: 'var(--bg-surface)', borderTop: '1px solid rgba(255,255,255,0.05)' }}
+              className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+              style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
               <p
                 className="font-mono text-xs uppercase tracking-widest mb-4"

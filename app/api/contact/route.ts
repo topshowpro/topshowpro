@@ -19,8 +19,11 @@ export async function POST(req: Request) {
     const body = await req.json();
     const data = schema.parse(body);
 
-    const okCaptcha = await verifyTurnstile(data.turnstileToken);
-    if (!okCaptcha) return NextResponse.json({ error: 'Captcha inválido' }, { status: 400 });
+    const shouldEnforceCaptcha = Boolean(process.env.TURNSTILE_SECRET_KEY && process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+    if (shouldEnforceCaptcha) {
+      const okCaptcha = await verifyTurnstile(data.turnstileToken);
+      if (!okCaptcha) return NextResponse.json({ error: 'Captcha inválido' }, { status: 400 });
+    }
 
     if (sanityClient && process.env.SANITY_API_WRITE_TOKEN) {
       const writeClient = sanityClient.withConfig({

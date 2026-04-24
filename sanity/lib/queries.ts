@@ -5,7 +5,7 @@ export const Q_HERO = `*[_type == "hero"][0]{
     "posterLqip": poster.asset->metadata.lqip,
     "videoUrl": video.asset->url
   },
-  bannerAzul{ text, cta }
+  bannerAzul{ text, cta{ label, link, variant } }
 }`;
 
 export const Q_HOMEPAGE = `{
@@ -14,18 +14,15 @@ export const Q_HOMEPAGE = `{
     ctaLabel,
     "manualFeaturedEvents": featuredEvents[]->{
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
-      "category": category->{label, "slug": slug.current},
       "heroImage": heroImage.asset->{url, metadata{lqip}}
     }
   },
   "featuredByFlag": *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
-    "category": category->{label, "slug": slug.current},
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   },
   "recentEvents": *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
-    "category": category->{label, "slug": slug.current},
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   }
 }{
@@ -39,15 +36,16 @@ export const Q_HOMEPAGE = `{
 }`;
 
 export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
-  logo, address, email, phone, schedule, socials, techContact,
+  "logoUrl": logo.asset->url,
+  address, email, phone, schedule, socials, techContact,
   "serviciosHero":    serviciosHero.asset->url,
   "equipamientoHero": equipamientoHero.asset->url,
   "contactoHero":     contactoHero.asset->url
 }`;
 
-export const Q_EVENTS_LIST = (category?: string) => `*[_type == "event"${category ? ` && category->slug.current == "${category}"` : ''}] | order(dateStart desc) {
+export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc) {
   title, subtitle, "slug": slug.current, dateStart, dateEnd,
-  "category": category->{label, "slug": slug.current},
+  "categorySlug": category->slug.current,
   "heroImage": heroImage.asset->{url, metadata{lqip}}
 }`;
 
@@ -57,7 +55,12 @@ export const Q_EVENT_DETAIL = `*[_type == "event" && slug.current == $slug][0]{
   "category": category->{label, "slug": slug.current},
   "heroImage": heroImage.asset->{url, metadata{lqip}},
   "gallery": gallery[].asset->{url, metadata{lqip}},
-  seo
+  "seo": seo{
+    title,
+    description,
+    noIndex,
+    "ogImage": ogImage.asset->url
+  }
 }`;
 
 export const Q_EVENT_CATEGORIES = `*[_type == "eventCategory"] | order(order asc){ label, "slug": slug.current, icon }`;
@@ -74,7 +77,9 @@ export const Q_EQUIPMENT_CATEGORIES = `*[_type == "equipmentCategory"] | order(o
   "items": items[]->{
     name,
     "photo": photo.asset->{url, metadata{lqip}},
-    "brand": brand->{name}
+    "brand": brand->{name},
+    "datasheetUrl": datasheet.asset->url,
+    specs
   }
 }`;
 
@@ -87,4 +92,8 @@ export const Q_CONTACT_CATEGORIES = `*[_type == "contactCategory"] | order(order
 
 export const Q_CLIENTS = `*[_type == "client"] | order(order asc){ name, website, "logoUrl": logo.asset->url }`;
 
-export const Q_SEO_DEFAULTS = `*[_type == "seoDefaults"][0]`;
+export const Q_SEO_DEFAULTS = `*[_type == "seoDefaults"][0]{
+  titlePattern,
+  description,
+  "ogImage": ogImage.asset->url
+}`;

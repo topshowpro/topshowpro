@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
 
 type SiteSettings = {
+  logoUrl?: string;
   address?: string;
   email?: string;
   phone?: string;
@@ -20,13 +21,13 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <Image
-            src="/Top-show-pro_logo.png"
+            src={settings?.logoUrl || '/Top-show-pro_logo.png'}
             alt="Top Show Pro"
             width={160}
             height={40}
             loading="lazy"
             className="h-8 w-auto mb-4"
-            style={{ filter: 'invert(1) hue-rotate(180deg)' }}
+            style={settings?.logoUrl ? undefined : { filter: 'invert(1) hue-rotate(180deg)' }}
           />
           <p className="font-sans text-sm text-fg-muted">{settings?.address}</p>
           <p className="font-sans text-sm text-fg-muted">{settings?.email}</p>
@@ -44,7 +45,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.instagram} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="Instagram"
               >
                 <Instagram size={22} strokeWidth={1.5} />
@@ -55,7 +56,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="Facebook"
               >
                 <Facebook size={22} strokeWidth={1.5} />
@@ -66,7 +67,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="LinkedIn"
               >
                 <Linkedin size={22} strokeWidth={1.5} />
@@ -77,7 +78,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.youtube} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
                 aria-label="YouTube"
               >
                 <Youtube size={22} strokeWidth={1.5} />
@@ -93,7 +94,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           href="https://www.digitalboost.com.ar/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="hover:text-[#ffd700] transition-colors"
+          className="inline-flex min-h-11 items-center hover:text-[#ffd700] transition-colors"
         >
           Desarrollado por Digital Boost
         </a>

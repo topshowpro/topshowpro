@@ -45,7 +45,7 @@ Regla: no introducir colores fuera de esta paleta. No inlinear hex values en com
 | Display / H1 | **Bebas Neue** | Hero phrase, titulares hero |
 | H2 / H3 | **Bebas Neue** | Titulares de sección |
 | Subtítulos / Body | **Montserrat** | Copy, descripción, CTAs, navbar |
-| Técnico / Data | **Orbitron** | Specs equipamiento, fechas, chips |
+| Técnico / Data | **Space Mono** | Specs equipamiento, fechas, chips |
 
 Variables font: `--font-display`, `--font-sans`, `--font-mono`. Configuradas en `lib/fonts.ts`.
 
@@ -99,7 +99,7 @@ Gradiente cyan que cruza el elemento al hover: `from-transparent via-cyan-400/20
 ### Botón primario
 `bg-[var(--bg-elevated)] border border-white/10` → hover: `bg-[var(--accent-cyan)] text-black border-transparent`.
 
-### Chip técnico (Orbitron)
+### Chip técnico (Space Mono)
 `font-mono text-xs uppercase tracking-wider bg-white/5 border border-white/10 text-[var(--accent-cyan)]`
 
 ### Radial gradient (hero / sección destacada)
@@ -142,7 +142,7 @@ No mezclar las dos librerías en la misma sección.
 ## Checklist antes de mergear un componente
 
 - [ ] Solo tokens de la paleta (ningún hex fuera de ella)
-- [ ] Tipografía con roles correctos (display=Bebas, body=Montserrat, mono=Orbitron)
+- [ ] Tipografía con roles correctos (display=Bebas, body=Montserrat, mono=Space Mono)
 - [ ] Motion respeta `prefers-reduced-motion`
 - [ ] Focus states visibles
 - [ ] Alt text en imágenes

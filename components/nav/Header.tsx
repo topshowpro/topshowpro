@@ -11,7 +11,11 @@ const links = [
   { href: '/equipamiento', label: 'Equipamiento' },
 ];
 
-export function Header() {
+type SiteSettings = {
+  logoUrl?: string;
+};
+
+export function Header({ settings }: { settings?: SiteSettings | null }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -41,6 +45,27 @@ export function Header() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const { body } = document;
+    const prevOverflow = body.style.overflow;
+    const prevTouchAction = body.style.touchAction;
+    const prevOverscrollBehavior = body.style.overscrollBehavior;
+
+    body.style.overflow = 'hidden';
+    body.style.touchAction = 'none';
+    body.style.overscrollBehavior = 'contain';
+
+    return () => {
+      body.style.overflow = prevOverflow;
+      body.style.touchAction = prevTouchAction;
+      body.style.overscrollBehavior = prevOverscrollBehavior;
+    };
+  }, [open]);
+
   return (
     <header
       data-scrolled={scrolled}
@@ -52,12 +77,12 @@ export function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 md:py-4">
         <Link href="/" className="flex items-center hover:opacity-85 transition">
           <Image
-            src="/Top-show-pro_logo.png"
+            src={settings?.logoUrl || '/Top-show-pro_logo.png'}
             alt="Top Show Pro"
             width={160}
             height={40}
             className="h-8 w-auto md:h-9"
-            style={{ filter: 'invert(1) hue-rotate(180deg)' }}
+            style={settings?.logoUrl ? undefined : { filter: 'invert(1) hue-rotate(180deg)' }}
             priority
           />
         </Link>
@@ -74,7 +99,7 @@ export function Header() {
           ))}
           <Link
             href="/contacto"
-            className="navbar-contact-glass inline-flex h-8 items-center justify-center rounded-lg px-3 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
+            className="navbar-contact-glass inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-4 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           >
             Contacto
           </Link>
@@ -82,9 +107,10 @@ export function Header() {
 
         <button
           onClick={() => setOpen((o) => !o)}
-          className="text-white p-3 md:hidden"
+          className="min-h-11 min-w-11 p-3 text-white md:hidden"
           aria-label="Menú"
           aria-expanded={open}
+          aria-controls="mobile-nav-panel"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d={open ? 'M6 6l12 12M18 6L6 18' : 'M3 6h18M3 12h18M3 18h18'} />
@@ -95,6 +121,7 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-nav-panel"
             className="glass-panel-mobile px-6 py-7 md:hidden"
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +143,7 @@ export function Header() {
             <Link
               href="/contacto"
               onClick={() => setOpen(false)}
-              className="navbar-contact-glass mt-6 inline-flex w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
+              className="navbar-contact-glass mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
             >
               Contacto
             </Link>

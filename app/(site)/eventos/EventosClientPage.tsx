@@ -7,7 +7,7 @@ import { EventSkeleton } from '@/components/events/EventSkeleton';
 import { SectionHeader } from '@/components/ui/section-header';
 
 export function EventosClientPage() {
-  const [cats, setCats] = useState<{ label: string; slug: string }[]>([]);
+  const [cats, setCats] = useState<{ label: string; slug: string; icon?: string }[]>([]);
   const [allEvents, setAllEvents] = useState<any[]>([]);
   const [active, setActive] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export function EventosClientPage() {
   }, []);
 
   const events = useMemo(
-    () => (active ? allEvents.filter((e) => e.category?.slug === active) : allEvents),
+    () => (active ? allEvents.filter((e) => e.categorySlug === active) : allEvents),
     [allEvents, active],
   );
 
@@ -36,7 +36,7 @@ export function EventosClientPage() {
       >
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <SectionHeader eyebrow="Portfolio" title="Eventos" titleTag="h1" className="mb-0" />
+          <SectionHeader title="Eventos" titleTag="h1" className="mb-0" />
         </div>
       </div>
 

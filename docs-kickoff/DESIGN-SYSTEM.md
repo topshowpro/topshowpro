@@ -1,6 +1,6 @@
 ---
 name: top-show-pro-design-system
-description: Design system aislado de Top Show Pro. Use when working on any UI component, page, or style decision in the top-show-pro Next.js project — color tokens, typography (Bebas Neue/Montserrat/Orbitron), motion presets (Lenis + Framer Motion), component patterns (L-bracket corners, frosted glass, beam sweep), tailwind config, CSS variables. Auto-triggers on mentions of Top Show Pro UI/design/tokens/branding.
+description: Design system aislado de Top Show Pro. Use when working on any UI component, page, or style decision in the top-show-pro Next.js project — color tokens, typography (Bebas Neue/Montserrat/Space Mono), motion presets (Lenis + Framer Motion), component patterns (L-bracket corners, frosted glass, beam sweep), tailwind config, CSS variables. Auto-triggers on mentions of Top Show Pro UI/design/tokens/branding.
 ---
 
 # Top Show Pro — Design System
@@ -10,7 +10,7 @@ Fuente de verdad única para decisiones de diseño del sitio **Top Show Pro** (e
 ## Concepto general
 
 - **Dark-first**: fondos muy oscuros (`#0A0A0A`), superficies tonales (no bordes)
-- **Tech/blueprint aesthetic**: cyan como acento, Orbitron para datos, L-brackets en cards
+- **Tech/blueprint aesthetic**: cyan como acento, Space Mono para datos, L-brackets en cards
 - **Motion moderno** (no parallax): Lenis smooth + Framer reveal + View Transitions API
 - **Tipografía alto impacto**: Bebas Neue para titulares gigantes, Montserrat cuerpo limpio
 - **Reducido**: solo 3 colores acento, 3 familias tipográficas. Nada más
@@ -49,18 +49,18 @@ Fuente de verdad única para decisiones de diseño del sitio **Top Show Pro** (e
 
 | Rol | Familia | Peso | Tamaño típico | Uso |
 |-----|---------|------|---------------|-----|
-| Display/H1 | **Bebas Neue** | 400 | `clamp(3rem, 8vw, 8rem)` | Hero phrase, titulares hero |
-| H2/H3 | **Bebas Neue** | 400 | `text-4xl` a `text-6xl` | Titulares de sección |
+| Display/H1 | **Bebas Neue** | 400 | `clamp(3rem, 8vw, 7.5rem)` | Hero phrase, titulares hero |
+| H2/H3 | **Bebas Neue** | 400 | `clamp(1.9rem, 4vw, 3.5rem)` | Titulares de sección |
 | Subtítulos | **Montserrat** | 600 | `text-xl` a `text-2xl` | Subhead, intro párrafos |
 | Body | **Montserrat** | 400-500 | `text-base` | Descripciones, copy largo |
 | UI/Botones | **Montserrat** | 500 | `text-sm` uppercase tracking-wide | CTAs, navbar |
-| Técnico/Data | **Orbitron** | 400-500 | `text-xs` a `text-sm` | Specs equipamiento, fecha de evento, chips técnicos |
+| Técnico/Data | **Space Mono** | 400-700 | `text-xs` a `text-sm` | Specs equipamiento, fecha de evento, chips técnicos |
 
 **Setup con `next/font`**:
 
 ```ts
 // lib/fonts.ts
-import { Bebas_Neue, Montserrat, Orbitron } from 'next/font/google';
+import { Bebas_Neue, Montserrat, Space_Mono } from 'next/font/google';
 
 export const bebas = Bebas_Neue({
   subsets: ['latin'],
@@ -76,9 +76,9 @@ export const montserrat = Montserrat({
   display: 'swap',
 });
 
-export const orbitron = Orbitron({
+export const spaceMono = Space_Mono({
   subsets: ['latin'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '700'],
   variable: '--font-mono',
   display: 'swap',
 });
@@ -87,10 +87,10 @@ export const orbitron = Orbitron({
 ## Escala tipográfica (titulares alto impacto tipo Christie Lites)
 
 ```css
-.text-display { font-size: clamp(3rem, 8vw, 8rem); line-height: 0.9; letter-spacing: -0.02em; }
-.text-hero    { font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1; letter-spacing: -0.01em; }
-.text-h2      { font-size: clamp(2rem, 4vw, 4rem); line-height: 1.1; }
-.text-h3      { font-size: clamp(1.5rem, 2.5vw, 2.5rem); line-height: 1.2; }
+.text-display { font-size: clamp(3rem, 8vw, 7.5rem); line-height: 0.9; letter-spacing: -0.01em; }
+.text-hero    { font-size: clamp(2.4rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: -0.008em; }
+.text-h2      { font-size: clamp(1.9rem, 4vw, 3.5rem); line-height: 1; letter-spacing: -0.008em; }
+.text-h3      { font-size: clamp(1.4rem, 2.8vw, 2.3rem); line-height: 1.05; }
 ```
 
 Titulares usan tracking negativo (-1% a -2%) para peso visual. Bebas Neue ya es condensada.
@@ -150,7 +150,7 @@ bg-[var(--bg-surface)]/60 backdrop-blur-2xl border border-white/5
 </button>
 ```
 
-### Chip técnico (Orbitron)
+### Chip técnico (Space Mono)
 
 ```tsx
 <span className="
@@ -352,7 +352,7 @@ No mezclar dos librerías en la misma sección. Usar Lucide para el 90% y Materi
 ## Checklist antes de mergear un componente nuevo
 
 - [ ] Usa solo tokens de la paleta definida (grep `#` en el archivo no devuelve hex fuera de la paleta)
-- [ ] Tipografía usa las 3 familias con roles correctos (display = Bebas, body = Montserrat, mono = Orbitron)
+- [ ] Tipografía usa las 3 familias con roles correctos (display = Bebas, body = Montserrat, mono = Space Mono)
 - [ ] Motion respeta `prefers-reduced-motion`
 - [ ] Focus states visibles (`focus:ring-2 ring-cyan`)
 - [ ] Alt text en imágenes

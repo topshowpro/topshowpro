@@ -35,6 +35,9 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
 
   return (
     <div className="flex-1 flex flex-col" style={{ perspective: '1200px' }}>
+      <p className="sr-only" aria-live="polite">
+        {isSubmitting ? 'Enviando consulta…' : sent ? 'Consulta enviada correctamente.' : ''}
+      </p>
       <motion.div
         className="relative flex-1"
         animate={{ rotateY: sent ? 180 : 0 }}
@@ -50,6 +53,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               </label>
               <select
                 id="category"
+                autoComplete="off"
                 aria-invalid={Boolean(errors.category)}
                 aria-describedby={errors.category ? 'category-error' : undefined}
                 {...register('category')}
@@ -74,6 +78,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 </label>
                 <input
                   id="name"
+                  autoComplete="name"
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? 'name-error' : undefined}
                   {...register('name')}
@@ -85,7 +90,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
                 <label htmlFor="phone" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                   Teléfono
                 </label>
-                <input id="phone" {...register('phone')} inputMode="tel" className="form-input" />
+                <input id="phone" type="tel" autoComplete="tel" {...register('phone')} inputMode="tel" className="form-input" />
               </div>
             </div>
 
@@ -93,13 +98,15 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <label htmlFor="email" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Email
               </label>
-              <input
-                id="email"
-                type="email"
-                inputMode="email"
-                aria-invalid={Boolean(errors.email)}
-                aria-describedby={errors.email ? 'email-error' : undefined}
-                {...register('email')}
+                <input
+                  id="email"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  spellCheck={false}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                  {...register('email')}
                 className="form-input"
               />
               {errors.email && <p id="email-error" className="text-xs mt-1" style={{ color: 'var(--color-error)' }}>{errors.email.message}</p>}
@@ -112,6 +119,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               <textarea
                 id="message"
                 rows={5}
+                autoComplete="off"
                 aria-invalid={Boolean(errors.message)}
                 aria-describedby={errors.message ? 'message-error' : undefined}
                 {...register('message')}
@@ -125,7 +133,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               disabled={isSubmitting}
               className="w-full px-6 py-3 font-sans text-sm uppercase tracking-widest btn-simple disabled:opacity-50"
             >
-              {isSubmitting ? 'Enviando...' : 'Enviar consulta'}
+              {isSubmitting ? 'Enviando…' : 'Enviar consulta'}
             </button>
           </form>
         </div>

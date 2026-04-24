@@ -22,11 +22,11 @@ export const metadata: Metadata = buildMetadata({
 
 export default async function HomePage() {
   const [hero, homepage, brands, services, clients] = await Promise.all([
-    sanityFetch<any>(Q_HERO, { revalidate: 30 }, 'hero'),
-    sanityFetch<any>(Q_HOMEPAGE, { revalidate: 30 }, 'homepage'),
-    sanityFetch<any[]>(Q_BRANDS, { revalidate: 30 }, 'brand'),
-    sanityFetch<any[]>(Q_SERVICES, { revalidate: 30 }, 'service'),
-    sanityFetch<any[]>(Q_CLIENTS, { revalidate: 30 }, 'client'),
+    sanityFetch<any>(Q_HERO, undefined, { tag: 'hero', revalidate: 30 }),
+    sanityFetch<any>(Q_HOMEPAGE, undefined, { tag: 'homepage', revalidate: 30 }),
+    sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
+    sanityFetch<any[]>(Q_SERVICES, undefined, { tag: 'service', revalidate: 30 }),
+    sanityFetch<any[]>(Q_CLIENTS, undefined, { tag: 'client', revalidate: 30 }),
   ]);
 
   const featuredEvents = (homepage?.featuredEvents ?? []).filter(
@@ -49,7 +49,6 @@ export default async function HomePage() {
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
             <SectionHeader
-              eyebrow=""
               title="Hacemos que todo suceda"
               className="mb-8 text-left"
               titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center"
@@ -69,14 +68,13 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto relative z-10">
           <FadeIn>
             <SectionHeader
-              eyebrow=""
               title="Servicios"
               titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
               actionHref="/servicios"
               actionLabel="Ver todos →"
             />
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="services-reveal-track">
             {(services ?? []).map((s: any, i: number) => (
               <FadeIn key={s.name} delay={i * 0.08}>
                 <ServiceCard name={s.name} shortDesc={s.shortDesc} coverImage={s.gallery?.[0]?.url ?? null} />
@@ -90,7 +88,6 @@ export default async function HomePage() {
       <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
           <SectionHeader
-            eyebrow=""
             title="Eventos destacados"
             titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)]"
             actionHref="/eventos"
@@ -119,8 +116,8 @@ export default async function HomePage() {
           <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
             Contanos qué tenés en mente y te armamos una propuesta a medida.
           </p>
-          <CtaOutlineLink href="/contacto" className="relative z-10 h-10 px-6 text-xs">
-            Contactanos
+          <CtaOutlineLink href="/contacto" className="relative z-10 min-h-11 px-6 text-xs">
+            {homepage?.ctaLabel || 'Contactanos'}
           </CtaOutlineLink>
         </FadeIn>
       </section>
