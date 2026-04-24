@@ -45,7 +45,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.instagram} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
                 aria-label="Instagram"
               >
                 <Instagram size={22} strokeWidth={1.5} />
@@ -56,7 +56,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
                 aria-label="Facebook"
               >
                 <Facebook size={22} strokeWidth={1.5} />
@@ -67,7 +67,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
                 aria-label="LinkedIn"
               >
                 <Linkedin size={22} strokeWidth={1.5} />
@@ -78,7 +78,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.youtube} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[#ffd700] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
                 aria-label="YouTube"
               >
                 <Youtube size={22} strokeWidth={1.5} />
@@ -94,7 +94,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           href="https://www.digitalboost.com.ar/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center hover:text-[#ffd700] transition-colors"
+          className="inline-flex min-h-11 items-center hover:text-[var(--accent-cyan)] transition-colors"
         >
           Desarrollado por Digital Boost
         </a>

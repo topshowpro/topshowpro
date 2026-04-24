@@ -77,7 +77,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
   useEffect(() => {
     if (slides.length < 2) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4500);
+    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 3500);
     return () => clearInterval(t);
   }, [slides.length]);
 
@@ -85,11 +85,15 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   const isFirstSlide = idx === 0;
   const showVideo = Boolean(slide?.videoUrl) && ((isFirstSlide && allowFirstSlideVideo) || (allowVideo && !deferVideo));
   const showPoster = Boolean(slide?.posterUrl) && !showVideo;
-  const firstSlidePosterUrl = slides[0]?.posterUrl ?? null;
+  
+  const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
+  const nextSlidePosterUrl = slides[(idx + 1) % slides.length]?.posterUrl;
+  const optimizedNextPosterUrl = nextSlidePosterUrl ? heroPosterLoader({ src: nextSlidePosterUrl, width: 1920 }) : null;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
+      {optimizedNextPosterUrl && <link rel="preload" as="image" href={optimizedNextPosterUrl} />}
       <AnimatePresence mode="wait">
         <motion.div
           key={idx}
@@ -97,7 +101,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           {showVideo ? (
             <video
@@ -108,7 +112,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               playsInline
               preload={isFirstSlide ? 'metadata' : 'none'}
               className="h-full w-full object-cover"
-              poster={slide.posterUrl ?? undefined}
+              poster={slide.posterUrl ? heroPosterLoader({ src: slide.posterUrl, width: 1920 }) : undefined}
             />
           ) : showPoster ? (
             <Image
