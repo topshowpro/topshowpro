@@ -81,6 +81,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
     return () => clearInterval(t);
   }, [slides.length]);
 
+  const slide = slides[idx];
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
 
   return (
