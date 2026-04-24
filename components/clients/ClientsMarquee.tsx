@@ -19,7 +19,7 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                 href={c.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex min-h-[90px] items-center justify-center border transition-transform duration-300 hover:scale-[1.03]"
+                className="group flex min-h-[110px] items-center justify-center border transition-transform duration-300 hover:scale-[1.03]"
                 style={{
                   borderColor: 'rgba(255,255,255,0.08)',
                   backgroundColor: 'rgba(255,255,255,0.02)',
@@ -29,11 +29,11 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                   <Image
                     src={c.logoUrl}
                     alt={c.name}
-                    width={180}
-                    height={64}
-                    className="h-10 md:h-12 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                    width={220}
+                    height={78}
+                    className="h-14 md:h-16 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
                     loading="lazy"
-                    sizes="(max-width: 768px) 140px, 180px"
+                    sizes="(max-width: 768px) 180px, 220px"
                   />
                 ) : (
                   <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2" style={{ color: 'var(--text-primary)' }}>
@@ -44,7 +44,7 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
             ) : (
               <div
                 key={c.name}
-                className="group flex min-h-[90px] items-center justify-center border transition-transform duration-300 hover:scale-[1.03]"
+                className="group flex min-h-[110px] items-center justify-center border transition-transform duration-300 hover:scale-[1.03]"
                 style={{
                   borderColor: 'rgba(255,255,255,0.08)',
                   backgroundColor: 'rgba(255,255,255,0.02)',
@@ -54,11 +54,11 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                   <Image
                     src={c.logoUrl}
                     alt={c.name}
-                    width={180}
-                    height={64}
-                    className="h-10 md:h-12 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                    width={220}
+                    height={78}
+                    className="h-14 md:h-16 object-contain grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
                     loading="lazy"
-                    sizes="(max-width: 768px) 140px, 180px"
+                    sizes="(max-width: 768px) 180px, 220px"
                   />
                 ) : (
                   <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2" style={{ color: 'var(--text-primary)' }}>

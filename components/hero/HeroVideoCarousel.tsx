@@ -77,7 +77,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
   useEffect(() => {
     if (slides.length < 2) return;
-    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 6000);
+    const t = setInterval(() => setIdx((i) => (i + 1) % slides.length), 4500);
     return () => clearInterval(t);
   }, [slides.length]);
 
@@ -97,7 +97,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
+          transition={{ duration: 0.8 }}
         >
           {showVideo ? (
             <video

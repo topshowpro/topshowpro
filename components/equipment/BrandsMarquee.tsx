@@ -20,17 +20,17 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
               href={b.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center min-w-[160px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
+              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
             >
               {b.logoUrl ? (
                 <Image
                   src={b.logoUrl}
                   alt={b.name}
-                  width={180}
-                  height={56}
-                  className="h-10 w-auto object-contain"
+                  width={220}
+                  height={68}
+                  className="h-14 md:h-16 w-auto object-contain"
                   loading="lazy"
-                  sizes="180px"
+                  sizes="220px"
                 />
               ) : (
                 <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
@@ -41,17 +41,17 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
           ) : (
             <div
               key={i}
-              className="flex items-center justify-center min-w-[160px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
+              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
             >
               {b.logoUrl ? (
                 <Image
                   src={b.logoUrl}
                   alt={b.name}
-                  width={180}
-                  height={56}
-                  className="h-10 w-auto object-contain"
+                  width={220}
+                  height={68}
+                  className="h-14 md:h-16 w-auto object-contain"
                   loading="lazy"
-                  sizes="180px"
+                  sizes="220px"
                 />
               ) : (
                 <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>

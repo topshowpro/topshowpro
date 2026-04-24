@@ -92,7 +92,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
             <Link
               key={l.href}
               href={l.href}
-              className="nav-link font-sans text-sm uppercase tracking-widest transition"
+              className="nav-link font-sans text-sm font-semibold uppercase tracking-widest transition"
             >
               {l.label}
             </Link>
