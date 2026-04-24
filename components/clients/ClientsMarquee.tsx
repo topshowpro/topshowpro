@@ -36,7 +36,7 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                     sizes="(max-width: 768px) 140px, 180px"
                   />
                 ) : (
-                  <span className="font-festival-heading text-2xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
+                  <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2" style={{ color: 'var(--text-primary)' }}>
                     {c.name}
                   </span>
                 )}
@@ -61,7 +61,7 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                     sizes="(max-width: 768px) 140px, 180px"
                   />
                 ) : (
-                  <span className="font-festival-heading text-2xl tracking-wide" style={{ color: 'var(--text-primary)' }}>
+                  <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2" style={{ color: 'var(--text-primary)' }}>
                     {c.name}
                   </span>
                 )}

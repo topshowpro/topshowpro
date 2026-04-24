@@ -64,7 +64,7 @@ export default async function ServiciosPage() {
 
   return (
     <div className="bg-[var(--bg-base)]">
-      <section className="relative overflow-hidden px-6 pb-16 pt-20 md:px-6 md:pb-24 md:pt-32" style={{ backgroundColor: 'var(--bg-surface)' }}>
+      <section className="relative overflow-hidden px-6 pb-16 pt-32 md:px-6 md:pb-24 md:pt-40" style={{ backgroundColor: 'var(--bg-surface)' }}>
         {settings?.serviciosHero && (
           <Image
             src={settings.serviciosHero}

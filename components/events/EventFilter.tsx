@@ -45,7 +45,7 @@ export function EventFilter({
         aria-orientation="horizontal"
         aria-label="Filtrar eventos por categoria"
         id={tabListId}
-        className="ui-pill-tabs flex-wrap justify-center"
+        className="ui-pill-tabs flex max-w-full justify-start overflow-x-auto md:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item, index) => {
           const selected = active === item.slug;
@@ -63,7 +63,7 @@ export function EventFilter({
               tabIndex={selected ? 0 : -1}
               onClick={() => onSelect(item.slug)}
               onKeyDown={(event) => onKeyDown(event, index)}
-              className={cn('ui-pill-tab', selected && 'ui-pill-tab-active')}
+              className={cn('ui-pill-tab shrink-0', selected && 'ui-pill-tab-active')}
             >
               {item.icon ? `${item.icon} ${item.label}` : item.label}
             </button>

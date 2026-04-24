@@ -70,7 +70,7 @@
   --leading-body: 1.65;
 
   /* Animations */
-  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 20s linear infinite;
   --animate-beam-sweep: beam-sweep 1s ease-out;
   --animate-scanline: scanline 3s linear infinite;
 
@@ -456,7 +456,8 @@ textarea,
   text-transform: uppercase;
   letter-spacing: 0.12em;
   transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .ui-pill-tab:hover {
@@ -474,6 +475,25 @@ textarea,
 .ui-pill-tab:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--accent-cyan) 72%, transparent);
   outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .ui-pill-tabs {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    gap: 0.5rem !important;
+  }
+  .ui-pill-tab {
+    background: color-mix(in srgb, var(--bg-elevated) 90%, transparent) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  }
+  .ui-pill-tab.ui-pill-tab-active,
+  .ui-pill-tab[data-state='active'],
+  .ui-pill-tab[aria-selected='true'] {
+    background: color-mix(in srgb, var(--accent-cyan) 14%, transparent) !important;
+    border-color: color-mix(in srgb, var(--accent-cyan) 50%, transparent) !important;
+  }
 }
 
 .event-category-pill {

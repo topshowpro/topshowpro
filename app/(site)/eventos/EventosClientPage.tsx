@@ -31,7 +31,7 @@ export function EventosClientPage() {
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       <div
-        className="pt-20 md:pt-32 pb-16 px-6 relative overflow-hidden"
+        className="pt-32 md:pt-40 pb-16 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         <div className="absolute inset-0 grid-overlay opacity-30" />

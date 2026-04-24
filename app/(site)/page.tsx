@@ -48,11 +48,9 @@ export default async function HomePage() {
         ]} />
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
           <FadeIn>
-            <SectionHeader
-              title="Hacemos que todo suceda"
-              className="mb-8 text-left"
-              titleClassName="font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center"
-            />
+            <h2 className="font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center mb-8">
+              Hacemos que todo suceda
+            </h2>
             <div className="font-sans text-lg leading-relaxed text-center" style={{ color: 'var(--text-muted)' }}>
               {homepage?.intro ? <PortableText value={homepage.intro} /> : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>}
             </div>

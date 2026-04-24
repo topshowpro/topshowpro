@@ -87,7 +87,7 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
             <Tabs.Trigger
               key={service.value}
               value={service.value}
-              className="ui-pill-tab"
+              className="ui-pill-tab shrink-0"
             >
               {service.name}
             </Tabs.Trigger>
