@@ -84,6 +84,16 @@
     100% { transform: translateX(100%); }
   }
 
+  @keyframes scanner {
+    0% { transform: translateX(-250px); }
+    100% { transform: translateX(100vw); }
+  }
+
+  @keyframes snake {
+    0% { stroke-dasharray: 150 1500; stroke-dashoffset: 150; }
+    100% { stroke-dasharray: 150 1500; stroke-dashoffset: -1200; }
+  }
+
   @keyframes scanline {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(100%); }

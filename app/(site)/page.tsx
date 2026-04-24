@@ -41,16 +41,45 @@ export default async function HomePage() {
       <ClientsMarquee clients={clients ?? []} />
 
       {/* Intro section */}
-      <section className="relative overflow-hidden py-32">
+      <section className="relative overflow-hidden py-32 flex flex-col items-center">
         <NeonOrbs orbs={[
           { color: 'violet', drift: 'b', size: '600px', top: '-100px', right: '-200px', opacity: 0.5 },
           { color: 'cyan',   drift: 'c', size: '300px', bottom: '-80px', left: '-60px', opacity: 0.3 },
         ]} />
-        <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center">
+        
+        <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
           <FadeIn>
-            <h2 className="font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center mb-8">
+            <h2 className="font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center mb-0">
               Hacemos que todo suceda
             </h2>
+          </FadeIn>
+        </div>
+
+        {/* Animated Snake LED (Curved violet line) */}
+        <div className="relative w-full h-[60px] my-4 overflow-hidden z-10 flex items-center pointer-events-none">
+          <svg width="100%" height="100%" viewBox="0 0 1000 60" preserveAspectRatio="none" className="absolute left-0 top-0">
+            {/* The faint background track */}
+            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="2" />
+            
+            {/* The centered static violet glow */}
+            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(139, 92, 246, 0.5)" strokeWidth="4" 
+              style={{ filter: 'blur(8px)' }}
+              strokeDasharray="400 1000" strokeDashoffset="-300"
+            />
+
+            {/* The moving violet snake beam */}
+            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="#8b5cf6" strokeWidth="2" 
+              strokeLinecap="round"
+              style={{ 
+                animation: 'snake 3s linear infinite',
+                filter: 'drop-shadow(0 0 8px #8b5cf6) drop-shadow(0 0 16px #8b5cf6)' 
+              }}
+            />
+          </svg>
+        </div>
+
+        <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
+          <FadeIn delay={0.2}>
             <div className="font-sans text-lg leading-relaxed text-center" style={{ color: 'var(--text-muted)' }}>
               {homepage?.intro ? <PortableText value={homepage.intro} /> : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>}
             </div>
