@@ -53,7 +53,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
     window.localStorage.setItem('tsp-first-visit-done', '1');
 
     setAllowFirstSlideVideo(canAutoplayFirstSlide);
-    setAllowVideo(!isFirstVisit && canAutoplayFirstSlide && !coarsePointer && !narrowViewport);
+    setAllowVideo(canAutoplayFirstSlide);
   }, []);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
     const enableVideo = () => setDeferVideo(false);
 
-    const id = window.setTimeout(enableVideo, 8000);
+    const id = window.setTimeout(enableVideo, 2000);
     window.addEventListener('pointerdown', enableVideo, { once: true, passive: true });
     window.addEventListener('keydown', enableVideo, { once: true });
 
@@ -81,56 +81,65 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
     return () => clearInterval(t);
   }, [slides.length]);
 
-  const slide = slides[idx];
-  const isFirstSlide = idx === 0;
-  const showVideo = Boolean(slide?.videoUrl) && ((isFirstSlide && allowFirstSlideVideo) || (allowVideo && !deferVideo));
-  const showPoster = Boolean(slide?.posterUrl) && !showVideo;
-  
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
-  const nextSlidePosterUrl = slides[(idx + 1) % slides.length]?.posterUrl;
-  const optimizedNextPosterUrl = nextSlidePosterUrl ? heroPosterLoader({ src: nextSlidePosterUrl, width: 1920 }) : null;
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
-      {optimizedNextPosterUrl && <link rel="preload" as="image" href={optimizedNextPosterUrl} />}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={idx}
-          className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {showVideo ? (
-            <video
-              src={slide.videoUrl!}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload={isFirstSlide ? 'metadata' : 'none'}
-              className="h-full w-full object-cover"
-              poster={slide.posterUrl ? heroPosterLoader({ src: slide.posterUrl, width: 1920 }) : undefined}
-            />
-          ) : showPoster ? (
-            <Image
-              src={slide.posterUrl!}
-              alt=""
-              fill
-              className="object-cover"
-              preload={isFirstSlide}
-              loading={isFirstSlide ? 'eager' : 'lazy'}
-              loader={heroPosterLoader}
-              sizes="100vw"
-              fetchPriority={isFirstSlide ? 'high' : 'auto'}
-              placeholder={slide.posterLqip ? 'blur' : 'empty'}
-              blurDataURL={slide.posterLqip ?? undefined}
-            />
-          ) : null}
-        </motion.div>
-      </AnimatePresence>
+      
+      {slides.map((s, i) => {
+        const isActive = i === idx;
+        const isFirst = i === 0;
+        const showVid = Boolean(s.videoUrl) && ((isFirst && allowFirstSlideVideo) || (allowVideo && !deferVideo));
+        const showImg = Boolean(s.posterUrl) && !showVid;
+        
+        return (
+          <div
+            key={i}
+            className="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            style={{
+              opacity: isActive ? 1 : 0,
+              pointerEvents: isActive ? 'auto' : 'none',
+              zIndex: isActive ? 1 : 0
+            }}
+          >
+            {showVid ? (
+              <video
+                src={s.videoUrl!}
+                autoPlay={isActive}
+                muted
+                loop
+                playsInline
+                preload={i <= 1 ? 'metadata' : 'none'}
+                className="h-full w-full object-cover"
+                poster={s.posterUrl ? heroPosterLoader({ src: s.posterUrl, width: 1920 }) : undefined}
+                ref={(el) => {
+                  if (el) {
+                    if (isActive) {
+                      el.play().catch(() => {});
+                    } else {
+                      el.pause();
+                    }
+                  }
+                }}
+              />
+            ) : showImg ? (
+              <Image
+                src={s.posterUrl!}
+                alt=""
+                fill
+                className="object-cover"
+                loading={isFirst ? 'eager' : 'lazy'}
+                loader={heroPosterLoader}
+                sizes="100vw"
+                fetchPriority={isFirst ? 'high' : 'auto'}
+                placeholder={s.posterLqip ? 'blur' : 'empty'}
+                blurDataURL={s.posterLqip ?? undefined}
+              />
+            ) : null}
+          </div>
+        );
+      })}
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/45" />
 
