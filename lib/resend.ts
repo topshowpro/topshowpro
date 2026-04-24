@@ -19,7 +19,7 @@ export async function sendContactEmail(params: ContactPayload) {
   }
 
   const from = process.env.RESEND_FROM || 'Top Show Pro <onboarding@resend.dev>';
-  const to = process.env.RESEND_TO || 'topshowpro@gmail.com';
+  const to = process.env.RESEND_TO || 'atopshowpro@gmail.com';
 
   const date = new Date().toLocaleDateString('es-AR', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
