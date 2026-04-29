@@ -10,7 +10,7 @@ export default defineType({
       title: '🔶 Logo del sitio (160x40)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas recomendadas: 160x40px. SVG o PNG/WebP (Transparente).',
+      description: 'Medidas: 160x40px (4:1). SVG o PNG (Transparente). Menor a 50KB.',
     }),
     defineField({ name: 'address', type: 'string' }),
     defineField({ name: 'email', type: 'string' }),
@@ -41,7 +41,7 @@ export default defineType({
       title: '🖼️ Hero: Servicios (Imagen)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 1920x1080px.',
+      description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'serviciosDesc',
@@ -54,7 +54,7 @@ export default defineType({
       title: '🖼️ Hero: Equipamiento (Imagen)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 1920x1080px.',
+      description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'equipamientoDesc',
@@ -67,7 +67,7 @@ export default defineType({
       title: '🖼️ Hero: Contacto (Imagen)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 1920x1080px.',
+      description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'contactoDesc',
@@ -80,7 +80,7 @@ export default defineType({
       title: '🖼️ Hero: Eventos (Imagen)',
       type: 'image',
       options: { hotspot: true },
-      description: 'Medidas: 1920x1080px.',
+      description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
       name: 'eventosDesc',
