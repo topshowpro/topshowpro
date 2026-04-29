@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Guía de Especificaciones de Imágenes (Top Show Pro)</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 0 auto; padding: 40px; color: #333; }
+    h1 { border-bottom: 2px solid #eaecef; padding-bottom: 10px; color: #111; }
+    h2 { margin-top: 30px; border-bottom: 1px solid #eaecef; padding-bottom: 5px; color: #222; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 30px; font-size: 14px; }
+    th, td { border: 1px solid #dfe2e5; padding: 10px 12px; text-align: left; }
+    th { background-color: #f6f8fa; font-weight: 600; }
+    tr:nth-child(even) { background-color: #fbfcfd; }
+    code { font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace; background-color: #f0f2f4; padding: 3px 6px; border-radius: 4px; font-size: 13px; color: #d73a49; }
+    p, li { font-size: 15px; }
+    ul { padding-left: 20px; }
+    @media print {
+      body { padding: 0; max-width: 100%; }
+      table { page-break-inside: avoid; }
+      h2 { page-break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guía de Especificaciones de Imágenes (Top Show Pro)</h1>
+  <p>Este documento detalla <strong>al 100% de precisión</strong> las dimensiones, relaciones de aspecto y calidades recomendadas para todos los campos de imágenes administrables desde Sanity CMS. Estas medidas están auditadas directamente contra los componentes React (Next.js) que las renderizan en el front-end.</p>
+  <p>Mantener estas reglas garantiza una carga rápida (buen SEO/Core Web Vitals) y un escalado perfecto en pantallas Retina (densidad 2x) sin sufrir recortes indeseados o imágenes borrosas.</p>
+
+  <h2>1. Ajustes Globales (Site Settings &amp; SEO)</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Logo del sitio</strong></td><td><code>160 x 40 px</code></td><td>4:1</td><td>SVG o PNG/WebP</td><td>Fondo transparente. Logo color blanco. Exportar en alta calidad.</td></tr>
+      <tr><td><strong>Hero: Servicios</strong></td><td><code>1920 x 1080 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Ocupará todo el fondo de la cabecera.</td></tr>
+      <tr><td><strong>Hero: Equipamiento</strong></td><td><code>1920 x 1080 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Ocupará todo el fondo de la cabecera.</td></tr>
+      <tr><td><strong>Hero: Contacto</strong></td><td><code>1920 x 1080 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Ocupará todo el fondo de la cabecera.</td></tr>
+      <tr><td><strong>OG Image Default</strong></td><td><code>1200 x 630 px</code></td><td>~1.91:1</td><td>JPG o PNG</td><td>Menor a 1MB. Mantener textos centrados por recortes en RRSS.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. Homepage (Hero, Marcas y Clientes)</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Poster del Video Hero</strong></td><td><code>1920 x 1080 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Se muestra mientras el video de fondo carga.</td></tr>
+      <tr><td><strong>Logo de Marca</strong> (<code>brand</code>)</td><td><code>360 x 112 px</code></td><td>~3.2:1</td><td>SVG o PNG/WebP</td><td>Renderizado nativo: <code>180x56px</code>. Medida Retina: <code>360x112px</code>. Logo blanco/negro.</td></tr>
+      <tr><td><strong>Logo de Cliente</strong> (<code>client</code>)</td><td><code>360 x 128 px</code></td><td>~2.8:1</td><td>SVG o PNG/WebP</td><td>Renderizado nativo: <code>180x64px</code>. Medida Retina: <code>360x128px</code>. Evitar bordes o fondos.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Equipamiento (Categorías y Productos)</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Imagen de Categoría</strong></td><td><code>1600 x 900 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Usada de fondo en las tarjetas del catálogo.</td></tr>
+      <tr><td><strong>Foto del Equipo</strong></td><td><code>800 x 450 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Fondo oscuro o neutro para integrarse al grid.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Eventos Destacados</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Imagen Principal (Hero)</strong></td><td><code>1920 x 1080 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Imagen principal al entrar al evento.</td></tr>
+      <tr><td><strong>Imágenes de Galería</strong></td><td><code>800 x 600 px</code></td><td>4:3</td><td>WebP o JPG</td><td>Calidad 80-85%. El layout CSS (<code>aspect-[4/3]</code>) exige esta proporción exacta.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. Servicios (Tabs)</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Imágenes de Galería</strong></td><td><code>800 x 600 px</code></td><td>4:3</td><td>WebP o JPG</td><td>Calidad 80-85%. La primera foto es <code>cover</code> (<code>4:3</code>), la segunda es <code>sideImage</code>. Recomendamos siempre 4:3 para estandarizar el CMS.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>6. Recursos Generales (Bloques Modulares)</h2>
+  <table>
+    <thead>
+      <tr><th>Campo</th><th>Dimensiones Exactas</th><th>Aspect Ratio</th><th>Formato Recomendado</th><th>Notas</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>MediaPicker (Genérico)</strong></td><td><code>1600 x 900 px</code></td><td>16:9</td><td>WebP o JPG</td><td>Calidad 80-85%. Esta base es la más segura para cualquier inserción en Rich Text o Landing pages.</td></tr>
+      <tr><td><strong>SEO Overrides (OG)</strong></td><td><code>1200 x 630 px</code></td><td>~1.91:1</td><td>JPG o PNG</td><td>Mismas reglas que la OG Image Default (max 1MB).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>💡 Mejores Prácticas de Rendimiento (Calidad)</h2>
+  <ol>
+    <li><strong>Usa WebP siempre que sea posible</strong>: Pesa entre un 25% y 30% menos que un JPG equivalente manteniendo la misma calidad. En Photoshop o herramientas como Squoosh, un <strong>80% o 85% de calidad WebP</strong> es el punto dulce entre peso y nitidez.</li>
+    <li><strong>Logos en SVG o PNG Cuantizado</strong>: Los formatos vectoriales (SVG) son ideales. Si usas PNG, pásalos por un optimizador para reducir los colores que no se usan (PNG-8) si son de un solo tono (blanco).</li>
+    <li><strong>No subas archivos crudos (Raw/Print)</strong>: Evitar imágenes mayores a 2MB. Sanity Studio genera "derivados" de las imágenes para el Front, pero tener la imagen original optimizada previene problemas de memoria, cuotas de ancho de banda y demoras de carga para el administrador que sube el contenido.</li>
+  </ol>
+
+  <script>
+    window.onload = () => { window.print(); }
+  </script>
+</body>
+</html>

@@ -57,6 +57,13 @@ export default defineType({
       options: { hotspot: true },
       description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
     }),
+    defineField({
+      name: 'eventosHero',
+      title: '🖼️ Hero: Eventos (1920x1080)',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
+    }),
   ],
   preview: { select: { title: 'email' }, prepare: () => ({ title: 'Site Settings' }) },
 });

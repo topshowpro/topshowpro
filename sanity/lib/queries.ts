@@ -40,7 +40,8 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   address, email, phone, schedule, socials, techContact,
   "serviciosHero":    serviciosHero.asset->url,
   "equipamientoHero": equipamientoHero.asset->url,
-  "contactoHero":     contactoHero.asset->url
+  "contactoHero":     contactoHero.asset->url,
+  "eventosHero":      eventosHero.asset->url
 }`;
 
 export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc) {

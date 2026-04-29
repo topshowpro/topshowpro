@@ -1,12 +1,17 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import { EventFilter } from '@/components/events/EventFilter';
 import { EventGrid } from '@/components/events/EventGrid';
 import { EventSkeleton } from '@/components/events/EventSkeleton';
 import { SectionHeader } from '@/components/ui/section-header';
 
-export function EventosClientPage() {
+interface EventosClientPageProps {
+  settings?: any;
+}
+
+export function EventosClientPage({ settings }: EventosClientPageProps) {
   const [cats, setCats] = useState<{ label: string; slug: string; icon?: string }[]>([]);
   const [allEvents, setAllEvents] = useState<any[]>([]);
   const [active, setActive] = useState<string | null>(null);
@@ -28,12 +33,23 @@ export function EventosClientPage() {
     [allEvents, active],
   );
 
+  // Imagen dummy mientras el cliente no carga una en el CMS
+  const heroSrc = settings?.eventosHero || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop';
+
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       <div
         className="pt-32 md:pt-40 pb-16 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
+        <Image
+          src={heroSrc}
+          alt=""
+          fill
+          className="object-cover opacity-25"
+          priority
+          sizes="100vw"
+        />
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
           <SectionHeader title="Eventos" titleTag="h1" className="mb-0" />
