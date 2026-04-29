@@ -26,7 +26,7 @@ export default async function EquipamientoPage() {
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Header */}
       <div
-        className="pt-20 md:pt-32 pb-16 md:pb-24 px-6 relative overflow-hidden"
+        className="pt-32 md:pt-40 pb-16 md:pb-24 px-6 relative overflow-hidden"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         {settings?.equipamientoHero && (
