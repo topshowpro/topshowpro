@@ -10,7 +10,10 @@ export const Q_HERO = `*[_type == "hero"][0]{
 
 export const Q_HOMEPAGE = `{
   "homepage": *[_type == "homepage"][0]{
+    introTitle,
     intro,
+    footerTitle,
+    footerSubtitle,
     ctaLabel,
     "manualFeaturedEvents": featuredEvents[]->{
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
@@ -26,7 +29,10 @@ export const Q_HOMEPAGE = `{
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   }
 }{
+  "introTitle": homepage.introTitle,
   "intro": homepage.intro,
+  "footerTitle": homepage.footerTitle,
+  "footerSubtitle": homepage.footerSubtitle,
   "ctaLabel": homepage.ctaLabel,
   "featuredEvents": select(
     count(homepage.manualFeaturedEvents[defined(slug)]) > 0 => homepage.manualFeaturedEvents,
@@ -45,7 +51,9 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   "contactoHero":     contactoHero.asset->url,
   "contactoDesc":     contactoDesc,
   "eventosHero":      eventosHero.asset->url,
-  "eventosDesc":      eventosDesc
+  "eventosDesc":      eventosDesc,
+  menuLinks,
+  copyright
 }`;
 
 export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc) {

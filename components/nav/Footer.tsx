@@ -7,6 +7,7 @@ type SiteSettings = {
   email?: string;
   phone?: string;
   schedule?: string;
+  copyright?: string;
   socials?: {
     instagram?: string | null;
     facebook?: string | null;
@@ -88,7 +89,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 text-center font-mono text-xs text-fg-faint uppercase tracking-widest">
-        © {new Date().getFullYear()} Top Show Pro. Todos los derechos reservados.
+        © {new Date().getFullYear()} {settings?.copyright || 'Top Show Pro. Todos los derechos reservados.'}
         <span className="mx-2">•</span>
         <a 
           href="https://www.digitalboost.com.ar/" 

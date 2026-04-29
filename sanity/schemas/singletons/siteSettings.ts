@@ -88,6 +88,26 @@ export default defineType({
       type: 'text',
       rows: 2,
     }),
+    defineField({
+      name: 'menuLinks',
+      title: '🔗 Menú de Navegación',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'label', type: 'string', title: 'Etiqueta' },
+            { name: 'href', type: 'string', title: 'Link (ej: /servicios)' },
+          ],
+        },
+      ],
+    }),
+    defineField({
+      name: 'copyright',
+      title: '© Copyright Texto',
+      type: 'string',
+      initialValue: 'Top Show Pro. Todos los derechos reservados.',
+    }),
   ],
   preview: { select: { title: 'email' }, prepare: () => ({ title: 'Site Settings' }) },
 });

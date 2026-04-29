@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
-const links = [
+const defaultLinks = [
   { href: '/servicios', label: 'Servicios' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/equipamiento', label: 'Equipamiento' },
@@ -13,11 +13,14 @@ const links = [
 
 type SiteSettings = {
   logoUrl?: string;
+  menuLinks?: { label: string; href: string }[];
 };
 
 export function Header({ settings }: { settings?: SiteSettings | null }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const displayLinks = settings?.menuLinks?.length ? settings.menuLinks : defaultLinks;
 
   useEffect(() => {
     let ticking = false;
@@ -88,7 +91,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
-          {links.map((l) => (
+          {displayLinks.map((l) => (
             <Link
               key={l.href}
               href={l.href}
@@ -129,7 +132,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-col gap-4">
-              {links.map((l) => (
+              {displayLinks.map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}

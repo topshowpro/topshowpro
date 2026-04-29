@@ -50,7 +50,7 @@ export default async function HomePage() {
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
           <FadeIn>
             <h2 className="font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center mb-0">
-              Hacemos que todo suceda
+              {homepage?.introTitle || 'Hacemos que todo suceda'}
             </h2>
           </FadeIn>
         </div>
@@ -138,10 +138,10 @@ export default async function HomePage() {
              className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-yellow relative z-10"
              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
            >
-             ¿Tu próximo evento?
+             {homepage?.footerTitle || '¿Tu próximo evento?'}
            </h2>
           <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
-            Contanos qué tenés en mente y te armamos una propuesta a medida.
+            {homepage?.footerSubtitle || 'Contanos qué tenés en mente y te armamos una propuesta a medida.'}
           </p>
           <CtaOutlineLink href="/contacto" className="relative z-10 min-h-11 px-6 text-xs">
             {homepage?.ctaLabel || 'Contactanos'}
