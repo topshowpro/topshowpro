@@ -4,6 +4,7 @@ import { Q_EQUIPMENT_CATEGORIES, Q_BRANDS, Q_SITE_SETTINGS } from '@/sanity/lib/
 import { CategorySection } from '@/components/equipment/CategorySection';
 import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
 import { FadeIn } from '@/components/motion/FadeIn';
+import { cn } from '@/lib/utils';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { NeonBackdrop } from '@/components/ui/neon-backdrop';
 import { buildMetadata } from '@/lib/seo';
@@ -21,6 +22,15 @@ export default async function EquipamientoPage() {
     sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
     sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
   ]);
+
+  const fontSizeMap: Record<string, string> = {
+    '14': 'text-sm',
+    '16': 'text-base',
+    '18': 'text-lg',
+    '24': 'text-xl md:text-2xl',
+  };
+
+  const descSizeClass = fontSizeMap[settings?.equipamientoFontSize || '18'];
 
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -42,7 +52,7 @@ export default async function EquipamientoPage() {
             >
               Equipamiento
             </h1>
-            <p className="font-sans text-lg max-w-2xl" style={{ color: 'var(--text-muted)' }}>
+            <p className={cn("font-sans max-w-2xl", descSizeClass)} style={{ color: 'var(--text-muted)' }}>
               {settings?.equipamientoDesc || "Trabajamos con las mejores marcas del mundo para garantizar calidad y confiabilidad en cada evento."}
             </p>
           </FadeIn>

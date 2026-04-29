@@ -42,6 +42,15 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
   // Imagen dummy mientras el cliente no carga una en el CMS
   const heroSrc = settings?.eventosHero || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop';
 
+  const fontSizeMap: Record<string, string> = {
+    '14': 'text-sm',
+    '16': 'text-base',
+    '18': 'text-lg',
+    '24': 'text-xl md:text-2xl',
+  };
+
+  const descSizeClass = fontSizeMap[settings?.eventosFontSize || '18'];
+
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       <div
@@ -63,6 +72,7 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
               title="Eventos"
               titleTag="h1"
               description={settings?.eventosDesc || "Portfolio de proyectos realizados: eventos corporativos, festivales, conciertos y activaciones de marca."}
+              descriptionClassName={descSizeClass}
             />
           </FadeIn>
         </div>

@@ -50,6 +50,13 @@ export default defineType({
       rows: 2,
     }),
     defineField({
+      name: 'serviciosFontSize',
+      title: '📏 Hero: Servicios (Tamaño Fuente)',
+      type: 'string',
+      options: { list: [{ title: '14px', value: '14' }, { title: '16px', value: '16' }, { title: '18px', value: '18' }, { title: '24px', value: '24' }] },
+      initialValue: '18',
+    }),
+    defineField({
       name: 'equipamientoHero',
       title: '🖼️ Hero: Equipamiento (Imagen)',
       type: 'image',
@@ -61,6 +68,13 @@ export default defineType({
       title: '📝 Hero: Equipamiento (Descripción)',
       type: 'text',
       rows: 2,
+    }),
+    defineField({
+      name: 'equipamientoFontSize',
+      title: '📏 Hero: Equipamiento (Tamaño Fuente)',
+      type: 'string',
+      options: { list: [{ title: '14px', value: '14' }, { title: '16px', value: '16' }, { title: '18px', value: '18' }, { title: '24px', value: '24' }] },
+      initialValue: '18',
     }),
     defineField({
       name: 'contactoHero',
@@ -76,6 +90,13 @@ export default defineType({
       rows: 2,
     }),
     defineField({
+      name: 'contactoFontSize',
+      title: '📏 Hero: Contacto (Tamaño Fuente)',
+      type: 'string',
+      options: { list: [{ title: '14px', value: '14' }, { title: '16px', value: '16' }, { title: '18px', value: '18' }, { title: '24px', value: '24' }] },
+      initialValue: '18',
+    }),
+    defineField({
       name: 'eventosHero',
       title: '🖼️ Hero: Eventos (Imagen)',
       type: 'image',
@@ -87,6 +108,13 @@ export default defineType({
       title: '📝 Hero: Eventos (Descripción)',
       type: 'text',
       rows: 2,
+    }),
+    defineField({
+      name: 'eventosFontSize',
+      title: '📏 Hero: Eventos (Tamaño Fuente)',
+      type: 'string',
+      options: { list: [{ title: '14px', value: '14' }, { title: '16px', value: '16' }, { title: '18px', value: '18' }, { title: '24px', value: '24' }] },
+      initialValue: '18',
     }),
     defineField({
       name: 'menuLinks',

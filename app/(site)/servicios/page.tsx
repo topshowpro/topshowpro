@@ -62,6 +62,15 @@ export default async function ServiciosPage() {
     },
   ];
 
+  const fontSizeMap: Record<string, string> = {
+    '14': 'text-sm',
+    '16': 'text-base',
+    '18': 'text-lg',
+    '24': 'text-xl md:text-2xl',
+  };
+
+  const descSizeClass = fontSizeMap[settings?.serviciosFontSize || '18'];
+
   return (
     <div className="bg-[var(--bg-base)]">
       <section className="relative overflow-hidden px-6 pb-16 pt-32 md:px-6 md:pb-24 md:pt-40" style={{ backgroundColor: 'var(--bg-surface)' }}>
@@ -82,6 +91,7 @@ export default async function ServiciosPage() {
               title="Servicios"
               titleTag="h1"
               description={settings?.serviciosDesc || "Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."}
+              descriptionClassName={descSizeClass}
             />
           </FadeIn>
         </div>

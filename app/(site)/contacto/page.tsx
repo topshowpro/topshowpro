@@ -4,6 +4,7 @@ import { Q_CONTACT_CATEGORIES, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
 import { ContactForm } from '@/components/contact/ContactForm';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Contacto',
@@ -16,6 +17,15 @@ export default async function ContactoPage() {
     sanityFetch<any[]>(Q_CONTACT_CATEGORIES, undefined, { tag: 'contactCategory', revalidate: 30 }),
     sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
   ]);
+
+  const fontSizeMap: Record<string, string> = {
+    '14': 'text-sm',
+    '16': 'text-base',
+    '18': 'text-lg',
+    '24': 'text-xl md:text-2xl',
+  };
+
+  const descSizeClass = fontSizeMap[settings?.contactoFontSize || '18'];
 
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -35,7 +45,7 @@ export default async function ContactoPage() {
           >
             Contacto
           </h1>
-          <p className="font-sans text-lg mt-6 max-w-2xl" style={{ color: 'var(--text-muted)' }}>
+          <p className={cn("font-sans mt-6 max-w-2xl", descSizeClass)} style={{ color: 'var(--text-muted)' }}>
             {settings?.contactoDesc || "Dejanos tu consulta y te respondemos en 24hs hábiles."}
           </p>
         </div>

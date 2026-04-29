@@ -48,12 +48,16 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   address, email, phone, schedule, socials, techContact,
   "serviciosHero":    serviciosHero.asset->url,
   "serviciosDesc":    serviciosDesc,
+  "serviciosFontSize": serviciosFontSize,
   "equipamientoHero": equipamientoHero.asset->url,
   "equipamientoDesc": equipamientoDesc,
+  "equipamientoFontSize": equipamientoFontSize,
   "contactoHero":     contactoHero.asset->url,
   "contactoDesc":     contactoDesc,
+  "contactoFontSize": contactoFontSize,
   "eventosHero":      eventosHero.asset->url,
   "eventosDesc":      eventosDesc,
+  "eventosFontSize":  eventosFontSize,
   menuLinks,
   copyright
 }`;
