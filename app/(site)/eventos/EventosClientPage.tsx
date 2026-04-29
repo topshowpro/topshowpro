@@ -57,7 +57,7 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
             <SectionHeader
               title="Eventos"
               titleTag="h1"
-              description="Portfolio de proyectos realizados: eventos corporativos, festivales, conciertos y activaciones de marca."
+              description={settings?.eventosDesc || "Portfolio de proyectos realizados: eventos corporativos, festivales, conciertos y activaciones de marca."}
             />
           </FadeIn>
         </div>

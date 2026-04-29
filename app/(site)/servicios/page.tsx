@@ -81,7 +81,7 @@ export default async function ServiciosPage() {
             <SectionHeader
               title="Servicios"
               titleTag="h1"
-              description="Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."
+              description={settings?.serviciosDesc || "Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."}
             />
           </FadeIn>
         </div>

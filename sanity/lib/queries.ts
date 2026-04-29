@@ -39,9 +39,13 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   "logoUrl": logo.asset->url,
   address, email, phone, schedule, socials, techContact,
   "serviciosHero":    serviciosHero.asset->url,
+  "serviciosDesc":    serviciosDesc,
   "equipamientoHero": equipamientoHero.asset->url,
+  "equipamientoDesc": equipamientoDesc,
   "contactoHero":     contactoHero.asset->url,
-  "eventosHero":      eventosHero.asset->url
+  "contactoDesc":     contactoDesc,
+  "eventosHero":      eventosHero.asset->url,
+  "eventosDesc":      eventosDesc
 }`;
 
 export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc) {

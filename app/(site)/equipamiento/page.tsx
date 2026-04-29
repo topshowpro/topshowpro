@@ -43,7 +43,7 @@ export default async function EquipamientoPage() {
               Equipamiento
             </h1>
             <p className="font-sans text-lg max-w-2xl" style={{ color: 'var(--text-muted)' }}>
-              Trabajamos con las mejores marcas del mundo para garantizar calidad y confiabilidad en cada evento.
+              {settings?.equipamientoDesc || "Trabajamos con las mejores marcas del mundo para garantizar calidad y confiabilidad en cada evento."}
             </p>
           </FadeIn>
         </div>

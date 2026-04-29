@@ -35,15 +35,15 @@ export default async function ContactoPage() {
           >
             Contacto
           </h1>
+          <p className="font-sans text-lg mt-6 max-w-2xl" style={{ color: 'var(--text-muted)' }}>
+            {settings?.contactoDesc || "Dejanos tu consulta y te respondemos en 24hs hábiles."}
+          </p>
         </div>
       </div>
 
       {/* Two-column layout */}
       <div className="px-4 sm:px-6 py-16 max-w-7xl mx-auto pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
         <div className="flex flex-col">
-          <p className="font-sans text-lg mb-12" style={{ color: 'var(--text-muted)' }}>
-            Dejanos tu consulta y te respondemos en 24hs hábiles.
-          </p>
           <ContactForm categories={categories ?? []} />
         </div>
 
