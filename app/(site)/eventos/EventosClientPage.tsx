@@ -34,6 +34,11 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
     [allEvents, active],
   );
 
+  // Filtrar categorías que no tienen eventos asociados
+  const availableCats = useMemo(() => {
+    return cats.filter((cat) => allEvents.some((event) => event.categorySlug === cat.slug));
+  }, [cats, allEvents]);
+
   // Imagen dummy mientras el cliente no carga una en el CMS
   const heroSrc = settings?.eventosHero || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop';
 
@@ -64,7 +69,7 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
       </div>
 
       <div className="pt-16 px-6 max-w-7xl mx-auto pb-16 md:pb-24">
-        <EventFilter categories={cats} active={active} onSelect={setActive} panelId="event-results-panel" />
+        <EventFilter categories={availableCats} active={active} onSelect={setActive} panelId="event-results-panel" />
         {loading ? (
           <div id="event-results-panel" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
