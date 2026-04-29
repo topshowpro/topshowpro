@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { EventFilter } from '@/components/events/EventFilter';
 import { EventGrid } from '@/components/events/EventGrid';
 import { EventSkeleton } from '@/components/events/EventSkeleton';
+import { FadeIn } from '@/components/motion/FadeIn';
 import { SectionHeader } from '@/components/ui/section-header';
 
 interface EventosClientPageProps {
@@ -52,7 +53,13 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
         />
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <SectionHeader title="Eventos" titleTag="h1" className="mb-0" />
+          <FadeIn>
+            <SectionHeader
+              title="Eventos"
+              titleTag="h1"
+              description="Portfolio de proyectos realizados: eventos corporativos, festivales, conciertos y activaciones de marca."
+            />
+          </FadeIn>
         </div>
       </div>
 
