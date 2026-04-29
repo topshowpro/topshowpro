@@ -31,8 +31,10 @@ export const Q_HOMEPAGE = `{
 }{
   "introTitle": homepage.introTitle,
   "intro": homepage.intro,
+  "introFontSize": homepage.introFontSize,
   "footerTitle": homepage.footerTitle,
   "footerSubtitle": homepage.footerSubtitle,
+  "footerFontSize": homepage.footerFontSize,
   "ctaLabel": homepage.ctaLabel,
   "featuredEvents": select(
     count(homepage.manualFeaturedEvents[defined(slug)]) > 0 => homepage.manualFeaturedEvents,

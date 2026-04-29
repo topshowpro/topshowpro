@@ -13,6 +13,7 @@ import { PortableText } from '@portabletext/react';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { SectionHeader } from '@/components/ui/section-header';
+import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Top Show Pro',
@@ -32,6 +33,16 @@ export default async function HomePage() {
   const featuredEvents = (homepage?.featuredEvents ?? []).filter(
     (event: any) => event?.slug && event?.title,
   );
+
+  const fontSizeMap: Record<string, string> = {
+    '14': 'text-sm',
+    '16': 'text-base',
+    '18': 'text-lg',
+    '24': 'text-xl md:text-2xl',
+  };
+
+  const introSizeClass = fontSizeMap[homepage?.introFontSize || '18'];
+  const footerSizeClass = fontSizeMap[homepage?.footerFontSize || '18'];
 
   return (
     <>
@@ -80,7 +91,7 @@ export default async function HomePage() {
 
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
           <FadeIn delay={0.2}>
-            <div className="font-sans text-lg leading-relaxed text-center" style={{ color: 'var(--text-muted)' }}>
+            <div className={cn("font-sans leading-relaxed text-center", introSizeClass)} style={{ color: 'var(--text-muted)' }}>
               {homepage?.intro ? <PortableText value={homepage.intro} /> : <p>Somos tu aliado integral en soluciones técnicas para espectáculos y eventos.</p>}
             </div>
           </FadeIn>
@@ -140,7 +151,7 @@ export default async function HomePage() {
            >
              {homepage?.footerTitle || '¿Tu próximo evento?'}
            </h2>
-          <p className="font-sans text-lg mb-10 max-w-xl mx-auto relative z-10" style={{ color: 'var(--text-muted)' }}>
+          <p className={cn("font-sans mb-10 max-w-xl mx-auto relative z-10", footerSizeClass)} style={{ color: 'var(--text-muted)' }}>
             {homepage?.footerSubtitle || 'Contanos qué tenés en mente y te armamos una propuesta a medida.'}
           </p>
           <CtaOutlineLink href="/contacto" className="relative z-10 min-h-11 px-6 text-xs">
