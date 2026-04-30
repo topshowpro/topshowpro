@@ -11,6 +11,7 @@ import { ServiceCard } from '@/components/services/ServiceCard';
 import { OrganizationJsonLd } from '@/components/seo/JsonLd';
 import { PortableText } from '@portabletext/react';
 import { NeonOrbs } from '@/components/ui/NeonOrbs';
+import { RevealText } from '@/components/motion/RevealText';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { SectionHeader } from '@/components/ui/section-header';
 import { cn } from '@/lib/utils';
@@ -71,11 +72,9 @@ export default async function HomePage() {
         ]} />
         
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
-          <FadeIn>
-            <h2 className={cn("font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-[var(--text-primary)] text-center mb-0", introNeonClass)}>
-              {homepage?.introTitle || 'Hacemos que todo suceda'}
-            </h2>
-          </FadeIn>
+          <h2 className={cn("font-display leading-[0.9] text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-[var(--text-primary)] text-center mb-0", introNeonClass)}>
+            <RevealText text={homepage?.introTitle || 'Hacemos que todo suceda'} />
+          </h2>
         </div>
 
         {/* Animated Snake LED (Curved violet line) */}
@@ -156,13 +155,13 @@ export default async function HomePage() {
           { color: 'cyan',   drift: 'a', size: '700px', top: '-200px', left: '50%', opacity: 0.4 },
           { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },
         ]} />
-<FadeIn>
-           <h2
-             className={cn("font-festival-heading text-[var(--text-primary)] mb-6 leading-none relative z-10", footerNeonClass)}
-             style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
-           >
-             {homepage?.footerTitle || '¿Tu próximo evento?'}
-           </h2>
+        <FadeIn>
+          <h2
+            className={cn("font-festival-heading text-[var(--text-primary)] mb-6 leading-[0.9] relative z-10", footerNeonClass)}
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
+          >
+            <RevealText text={homepage?.footerTitle || '¿Tu próximo evento?'} />
+          </h2>
           <p className={cn("font-sans mb-10 max-w-xl mx-auto relative z-10", footerSizeClass)} style={{ color: 'var(--text-muted)' }}>
             {homepage?.footerSubtitle || 'Contanos qué tenés en mente y te armamos una propuesta a medida.'}
           </p>
