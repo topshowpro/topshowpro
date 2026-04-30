@@ -1,8 +1,9 @@
 import { LenisProvider } from '@/components/motion/LenisProvider';
 import { Header } from '@/components/nav/Header';
 import { Footer } from '@/components/nav/Footer';
+import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_SITE_SETTINGS, Q_SEO_DEFAULTS } from '@/sanity/lib/queries';
+import { Q_SITE_SETTINGS_CHROME, Q_SEO_DEFAULTS } from '@/sanity/lib/queries';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -12,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 });
+  const settings = await sanityFetch<any>(Q_SITE_SETTINGS_CHROME, undefined, { tag: 'siteSettings', revalidate: 30 });
   return (
     <LenisProvider>
       <a
@@ -24,6 +25,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header settings={settings} />
       <main id="main-content">{children}</main>
       <Footer settings={settings} />
+      <WhatsAppButton />
     </LenisProvider>
   );
 }

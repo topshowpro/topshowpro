@@ -30,9 +30,9 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
             className="h-8 w-auto mb-4"
             style={settings?.logoUrl ? undefined : { filter: 'invert(1) hue-rotate(180deg)' }}
           />
-          <p className="font-sans text-sm text-fg-muted">{settings?.address}</p>
-          <p className="font-sans text-sm text-fg-muted">{settings?.email}</p>
-          <p className="font-sans text-sm text-fg-muted">{settings?.phone}</p>
+          <p className="font-sans text-sm text-fg-muted break-words">{settings?.address}</p>
+          <p className="font-sans text-sm text-fg-muted break-all">{settings?.email}</p>
+          <p className="font-sans text-sm text-fg-muted break-words">{settings?.phone}</p>
         </div>
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-fg-faint mb-4">Horario</p>
@@ -95,7 +95,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
           href="https://www.digitalboost.com.ar/" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center hover:text-[var(--accent-cyan)] transition-colors"
+          className="inline-flex min-h-11 items-center px-2 hover:text-[var(--accent-cyan)] transition-colors"
         >
           Desarrollado por Digital Boost
         </a>

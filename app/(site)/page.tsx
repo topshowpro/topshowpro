@@ -60,7 +60,11 @@ export default async function HomePage() {
   return (
     <>
       <OrganizationJsonLd />
-      <HeroVideoCarousel slides={hero?.slides ?? []} banner={hero?.bannerAzul} />
+      <HeroVideoCarousel
+        slides={hero?.slides ?? []}
+        banner={hero?.bannerAzul}
+        videoStrategy={{ eagerFirstVideo: true, deferNonFirstVideoMs: 8000 }}
+      />
 
       <ClientsMarquee clients={clients ?? []} />
 
@@ -77,24 +81,24 @@ export default async function HomePage() {
           </h2>
         </div>
 
-        {/* Animated Snake LED (Curved violet line) */}
+        {/* Animated Snake LED (Curved cyan line) */}
         <div className="relative w-full h-[60px] my-4 overflow-hidden z-10 flex items-center pointer-events-none">
           <svg width="100%" height="100%" viewBox="0 0 1000 60" preserveAspectRatio="none" className="absolute left-0 top-0">
             {/* The faint background track */}
             <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="2" />
             
-            {/* The centered static violet glow */}
-            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(139, 92, 246, 0.5)" strokeWidth="4" 
+            {/* The centered static cyan glow */}
+            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(23, 133, 211, 0.5)" strokeWidth="4" 
               style={{ filter: 'blur(8px)' }}
               strokeDasharray="400 1000" strokeDashoffset="-300"
             />
 
-            {/* The moving violet snake beam */}
-            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="#8b5cf6" strokeWidth="2" 
+            {/* The moving cyan snake beam */}
+            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="#1785D3" strokeWidth="2" 
               strokeLinecap="round"
               style={{ 
                 animation: 'snake 3s linear infinite',
-                filter: 'drop-shadow(0 0 8px #8b5cf6) drop-shadow(0 0 16px #8b5cf6)' 
+                filter: 'drop-shadow(0 0 8px #1785D3) drop-shadow(0 0 16px #1785D3)' 
               }}
             />
           </svg>

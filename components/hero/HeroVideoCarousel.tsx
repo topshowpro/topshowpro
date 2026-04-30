@@ -17,6 +17,12 @@ type Slide = {
 
 type NetworkInformationWithSaveData = {
   saveData?: boolean;
+  effectiveType?: string;
+};
+
+type HeroVideoStrategy = {
+  eagerFirstVideo?: boolean;
+  deferNonFirstVideoMs?: number;
 };
 
 function heroPosterLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
@@ -33,11 +39,24 @@ function heroPosterLoader({ src, width, quality }: { src: string; width: number;
   return url.toString();
 }
 
-export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?: { text?: string; cta?: { label: string; link: string } } }) {
+export function HeroVideoCarousel({
+  slides,
+  banner,
+  videoStrategy,
+}: {
+  slides: Slide[];
+  banner?: { text?: string; backgroundColor?: string; showCta?: boolean; cta?: { label: string; link: string } };
+  videoStrategy?: HeroVideoStrategy;
+}) {
   const [idx, setIdx] = useState(0);
-  const [allowVideo, setAllowVideo] = useState(false);
-  const [allowFirstSlideVideo, setAllowFirstSlideVideo] = useState(false);
-  const [deferVideo, setDeferVideo] = useState(true);
+  const [allowVideoPlayback, setAllowVideoPlayback] = useState(false);
+  const [shouldLoadDeferredVideos, setShouldLoadDeferredVideos] = useState(false);
+  const [firstVideoReady, setFirstVideoReady] = useState(false);
+  const [userInteracted, setUserInteracted] = useState(false);
+  const [activeVideoPreload, setActiveVideoPreload] = useState<'none' | 'metadata' | 'auto'>('metadata');
+
+  const eagerFirstVideo = videoStrategy?.eagerFirstVideo ?? true;
+  const deferNonFirstVideoMs = videoStrategy?.deferNonFirstVideoMs ?? 2200;
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -45,37 +64,62 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
     }
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
-    const narrowViewport = window.matchMedia('(max-width: 1024px)').matches;
-    const isFirstVisit = window.localStorage.getItem('tsp-first-visit-done') !== '1';
     const connection = (navigator as Navigator & { connection?: NetworkInformationWithSaveData }).connection;
     const saveData = connection?.saveData === true;
-    const canAutoplayFirstSlide = !reducedMotion && !saveData;
+    const canPlayVideo = !reducedMotion && !saveData;
+    const effectiveType = connection?.effectiveType;
 
-    window.localStorage.setItem('tsp-first-visit-done', '1');
+    const preloadMode: 'none' | 'metadata' | 'auto' =
+      saveData || effectiveType === 'slow-2g' || effectiveType === '2g'
+        ? 'metadata'
+        : effectiveType === '3g'
+          ? 'metadata'
+          : 'auto';
 
-    setAllowFirstSlideVideo(canAutoplayFirstSlide);
-    setAllowVideo(canAutoplayFirstSlide);
+    setAllowVideoPlayback(canPlayVideo);
+    setActiveVideoPreload(preloadMode);
   }, []);
 
   useEffect(() => {
-    if (!allowVideo) {
-      setDeferVideo(true);
+    if (!allowVideoPlayback) {
+      setShouldLoadDeferredVideos(false);
       return;
     }
 
-    const enableVideo = () => setDeferVideo(false);
+    const enableVideo = () => {
+      setUserInteracted(true);
+      setShouldLoadDeferredVideos(true);
+    };
 
-    const id = window.setTimeout(enableVideo, 2000);
+    if (firstVideoReady) {
+      const timeoutId = window.setTimeout(() => setShouldLoadDeferredVideos(true), deferNonFirstVideoMs);
+      return () => {
+        window.clearTimeout(timeoutId);
+      };
+    }
+
+    const idleCallback =
+      'requestIdleCallback' in window
+        ? window.requestIdleCallback(() => {
+            if (firstVideoReady || userInteracted) {
+              setShouldLoadDeferredVideos(true);
+            }
+          }, { timeout: deferNonFirstVideoMs + 6000 })
+        : null;
+
     window.addEventListener('pointerdown', enableVideo, { once: true, passive: true });
+    window.addEventListener('touchstart', enableVideo, { once: true, passive: true });
     window.addEventListener('keydown', enableVideo, { once: true });
 
     return () => {
-      window.clearTimeout(id);
+      if (idleCallback !== null && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleCallback);
+      }
       window.removeEventListener('pointerdown', enableVideo);
+      window.removeEventListener('touchstart', enableVideo);
       window.removeEventListener('keydown', enableVideo);
     };
-  }, [allowVideo]);
+  }, [allowVideoPlayback, deferNonFirstVideoMs, firstVideoReady, userInteracted]);
 
   useEffect(() => {
     if (slides.length < 2) return;
@@ -112,9 +156,14 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
       {slides.map((s, i) => {
         const isActive = i === idx;
         const isFirst = i === 0;
-        const showVid = Boolean(s.videoUrl) && ((isFirst && allowFirstSlideVideo) || (allowVideo && !deferVideo));
-        const showImg = Boolean(s.posterUrl) && !showVid;
-        
+        const canRenderVideo =
+          Boolean(s.videoUrl) &&
+          allowVideoPlayback &&
+          isActive &&
+          (isFirst ? eagerFirstVideo : shouldLoadDeferredVideos);
+
+        const showPosterImage = Boolean(s.posterUrl) && (!canRenderVideo || (isFirst && !firstVideoReady));
+
         return (
           <div
             key={i}
@@ -125,27 +174,7 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
               zIndex: isActive ? 1 : 0
             }}
           >
-            {showVid ? (
-              <video
-                src={s.videoUrl!}
-                autoPlay={isActive}
-                muted
-                loop
-                playsInline
-                preload={i <= 1 ? 'metadata' : 'none'}
-                className="h-full w-full object-cover"
-                poster={s.posterUrl ? heroPosterLoader({ src: s.posterUrl, width: 1920 }) : undefined}
-                ref={(el) => {
-                  if (el) {
-                    if (isActive) {
-                      el.play().catch(() => {});
-                    } else {
-                      el.pause();
-                    }
-                  }
-                }}
-              />
-            ) : showImg ? (
+            {showPosterImage ? (
               <Image
                 src={s.posterUrl!}
                 alt=""
@@ -157,6 +186,29 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
                 fetchPriority={isFirst ? 'high' : 'auto'}
                 placeholder={s.posterLqip ? 'blur' : 'empty'}
                 blurDataURL={s.posterLqip ?? undefined}
+              />
+            ) : null}
+
+            {canRenderVideo ? (
+              <video
+                src={s.videoUrl!}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload={activeVideoPreload}
+                className="h-full w-full object-cover"
+                poster={s.posterUrl ? heroPosterLoader({ src: s.posterUrl, width: 1920 }) : undefined}
+                onLoadedData={() => {
+                  if (isFirst) {
+                    setFirstVideoReady(true);
+                  }
+                }}
+                onPlaying={() => {
+                  if (isFirst) {
+                    setFirstVideoReady(true);
+                  }
+                }}
               />
             ) : null}
           </div>
@@ -201,13 +253,31 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
       {banner?.text && (
         <div
           className="absolute bottom-0 inset-x-0 z-10 py-3 px-6 flex items-center justify-center gap-6"
-          style={{ backgroundColor: 'var(--accent-led)' }}
+          style={{ 
+            backgroundColor: banner.backgroundColor === 'yellow' ? 'var(--accent-led)' : 
+                             banner.backgroundColor === 'cyan' ? 'var(--accent-cyan)' :
+                             banner.backgroundColor === 'violet' ? '#8b5cf6' :
+                             banner.backgroundColor === 'fuchsia' ? '#d946ef' :
+                             banner.backgroundColor === 'mint' ? '#2dd4bf' :
+                             banner.backgroundColor === 'black' ? '#000000' :
+                             'var(--accent-led)' 
+          }}
         >
-          <span className="font-festival-heading text-xl md:text-2xl tracking-wider italic text-black">{banner.text}</span>
-          {banner.cta?.label && banner.cta?.link && (
+          <span className={cn(
+            "font-festival-heading text-xl md:text-2xl tracking-wider italic",
+            (banner.backgroundColor === 'black' || banner.backgroundColor === 'violet') ? 'text-white' : 'text-black'
+          )}>
+            {banner.text}
+          </span>
+          {banner.showCta !== false && banner.cta?.label && banner.cta?.link && (
             <Link
               href={banner.cta.link}
-              className="inline-flex min-h-11 min-w-11 items-center rounded-md border border-black/50 px-4 font-mono text-[11px] uppercase tracking-wider text-black transition hover:bg-black hover:text-[var(--accent-led)]"
+              className={cn(
+                "inline-flex min-h-11 min-w-11 items-center rounded-md border px-4 font-mono text-[11px] uppercase tracking-wider transition",
+                (banner.backgroundColor === 'black' || banner.backgroundColor === 'violet') 
+                  ? "border-white/30 text-white hover:bg-white hover:text-black" 
+                  : "border-black/50 text-black hover:bg-black hover:text-[var(--accent-led)]"
+              )}
             >
               {banner.cta.label}
             </Link>

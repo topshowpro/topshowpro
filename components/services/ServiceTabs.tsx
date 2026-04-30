@@ -1,11 +1,9 @@
 'use client';
 import { useMemo, useState } from 'react';
-import * as Accordion from '@radix-ui/react-accordion';
 import * as Tabs from '@radix-ui/react-tabs';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import { PortableText } from '@portabletext/react';
-import { ChevronDown } from 'lucide-react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { Tag } from '@/components/ui/tag';
 
@@ -23,11 +21,6 @@ type Service = {
   cta?: { label?: string; link?: string };
 };
 
-type IncludeItem = {
-  title: string;
-  description: string;
-};
-
 const serviceFallbackDescription = 'Servicio tecnico integral para eventos y experiencias en vivo.';
 
 function slugify(value: string) {
@@ -39,7 +32,8 @@ function slugify(value: string) {
     .replace(/(^-|-$)/g, '');
 }
 
-export function ServiceTabs({ services, includes = [] }: { services: Service[]; includes?: IncludeItem[] }) {
+export function ServiceTabs({ services }: { services: Service[] }) {
+  const shouldReduceMotion = useReducedMotion();
   const normalizedServices = useMemo(
     () =>
       (services ?? []).map((service, index) => {
@@ -81,7 +75,7 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
       <Tabs.Root value={active} onValueChange={setActive}>
         <Tabs.List
           aria-label="Seleccion de servicios"
-          className="ui-pill-tabs flex w-full justify-start overflow-x-auto px-6 pb-1 md:justify-center md:px-8 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="ui-pill-tabs flex w-full justify-start overflow-x-auto px-1 pb-1 md:justify-center md:px-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {normalizedServices.map((service) => (
             <Tabs.Trigger
@@ -98,10 +92,10 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
       <AnimatePresence mode="wait">
         <motion.article
           key={current.value}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+          transition={shouldReduceMotion ? { duration: 0.14 } : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           className="card-surface-shadow group relative overflow-hidden rounded-[var(--radius-card)] p-6 md:p-8"
           style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.1)' }}
         >
@@ -120,30 +114,20 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
                   {current.icon}
                 </p>
               )}
-              <h2 className="font-display text-4xl leading-[0.95] text-white md:text-6xl">{current.name}</h2>
+              <h2 className="font-display text-3xl leading-[0.95] text-white md:text-6xl break-words">{current.name}</h2>
               <p className="mt-5 font-sans text-base leading-relaxed md:text-lg" style={{ color: 'var(--text-muted)' }}>
                 {compactDescription}
               </p>
 
               {hasLongDesc && (
-                <Accordion.Root type="single" collapsible className="mt-5">
-                  <Accordion.Item value="detalle" className="rounded-[var(--radius-card)] border" style={{ borderColor: 'rgba(255,255,255,0.16)' }}>
-                    <Accordion.Header>
-                      <Accordion.Trigger
-                        className="group flex w-full items-center justify-between px-4 py-3 text-left font-mono text-xs uppercase tracking-[0.14em] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-surface)]"
-                        style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}
-                      >
-                        Ver detalle completo
-                        <ChevronDown className="size-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                      </Accordion.Trigger>
-                    </Accordion.Header>
-                    <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                      <div className="px-4 pb-4 pt-2 font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
-                        <PortableText value={current.longDesc} />
-                      </div>
-                    </Accordion.Content>
-                  </Accordion.Item>
-                </Accordion.Root>
+                <div className="mt-5 border-t pt-5" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--accent-cyan)' }}>
+                    Detalle del servicio
+                  </p>
+                  <div className="font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
+                    <PortableText value={current.longDesc} />
+                  </div>
+                </div>
               )}
 
               {hasTechContact && (
@@ -155,8 +139,8 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
                     Contacto tecnico
                   </p>
                   {current.techContact?.name && <p className="text-white">{current.techContact.name}</p>}
-                  {current.techContact?.phone && <p style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>}
-                  {current.techContact?.email && <p style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>}
+                  {current.techContact?.phone && <p className="break-words" style={{ color: 'var(--text-muted)' }}>{current.techContact.phone}</p>}
+                  {current.techContact?.email && <p className="break-all" style={{ color: 'var(--text-muted)' }}>{current.techContact.email}</p>}
                 </div>
               )}
 
@@ -210,27 +194,6 @@ export function ServiceTabs({ services, includes = [] }: { services: Service[]; 
           </div>
         </motion.article>
       </AnimatePresence>
-
-      {includes.length > 0 && (
-        <div
-          className="card-surface-shadow rounded-[var(--radius-card)] p-5 md:p-7"
-          style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em]" style={{ color: 'var(--accent-cyan)' }}>
-            Incluye siempre
-          </p>
-          <div className="grid gap-3 md:grid-cols-2">
-            {includes.map((item) => (
-              <div key={item.title} className="rounded-[calc(var(--radius-card)-0.25rem)] p-3" style={{ backgroundColor: 'rgba(255,255,255,0.02)' }}>
-                <h3 className="font-display text-2xl leading-tight text-white md:text-3xl">{item.title}</h3>
-                <p className="mt-2 font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

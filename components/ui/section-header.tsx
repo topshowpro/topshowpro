@@ -39,34 +39,33 @@ export function SectionHeader({
         </div>
       )}
 
-      <div className="flex items-end justify-between gap-4">
-        <div className="max-w-3xl">
-          <Title
-            className={cn(
-              'font-display leading-none text-white',
-              titleTag === 'h1' ? 'text-[clamp(3rem,8vw,8rem)]' : 'text-[clamp(2.5rem,6vw,6rem)]',
-              titleClassName,
-            )}
-          >
-            {title}
-          </Title>
-          {description && (
-            <p className={cn('mt-5 font-sans text-base md:text-lg', descriptionClassName)} style={{ color: 'var(--text-muted)' }}>
-              {description}
-            </p>
+      <div className="flex items-center justify-between gap-4">
+        <Title
+          className={cn(
+            'font-display leading-none text-white',
+            titleTag === 'h1' ? 'text-[clamp(3rem,8vw,8rem)]' : 'text-[clamp(2.5rem,6vw,6rem)]',
+            titleClassName,
           )}
-        </div>
+        >
+          {title}
+        </Title>
 
         {actionLabel && actionHref && (
           <Link
             href={actionHref}
-            className="hidden font-mono text-xs uppercase tracking-[0.14em] transition hover:text-white md:block"
+            className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] transition hover:text-white md:text-xs"
             style={{ color: 'var(--accent-cyan)' }}
           >
             {actionLabel}
           </Link>
         )}
       </div>
+
+      {description && (
+        <p className={cn('mt-5 max-w-3xl font-sans text-base md:text-lg', descriptionClassName)} style={{ color: 'var(--text-muted)' }}>
+          {description}
+        </p>
+      )}
     </div>
   );
 }

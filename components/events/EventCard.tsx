@@ -26,7 +26,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, heroImage
     <TiltCard className="group block w-full h-full">
       <Link
         href={`/eventos/${slug}`}
-        className="event-card-surface-shadow group relative block aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border"
+        className="event-card-surface-shadow group relative block aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
         style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'rgba(255,255,255,0.12)' }}
       >
         <Image
@@ -45,13 +45,13 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, heroImage
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/65 to-black/20" />
 
         <div className="absolute left-4 top-4 z-10 leading-none">
-          <p className="font-mono text-[3.4rem] md:text-[4.8rem] tracking-[-0.04em] text-[var(--text-primary)]">{day}</p>
-          <p className="font-mono text-[0.7rem] uppercase tracking-[0.26em]" style={{ color: 'var(--accent-led)' }}>{month}</p>
+          <p className="font-mono text-[2.2rem] md:text-[3.8rem] tracking-[-0.04em] text-[var(--text-primary)]">{day}</p>
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.26em]" style={{ color: 'var(--accent-led)' }}>{month}</p>
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 space-y-2 p-5">
+        <div className="absolute inset-x-0 bottom-0 space-y-2 p-4 md:p-5">
           <h3
-            className="font-festival-heading text-3xl md:text-4xl leading-[0.9] uppercase text-[var(--text-primary)]"
+            className="font-festival-heading text-[1.35rem] md:text-3xl leading-[0.9] uppercase text-[var(--text-primary)] break-words"
           >
             {title}
           </h3>

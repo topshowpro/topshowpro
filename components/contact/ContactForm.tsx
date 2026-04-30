@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const schema = z.object({
   category: z.string().min(1, 'Seleccioná una categoría'),
@@ -20,17 +20,53 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const [sent, setSent] = useState(false);
+  const [networkError, setNetworkError] = useState<string | null>(null);
+  const [lastPayload, setLastPayload] = useState<FormData | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  async function submitPayload(data: FormData) {
+    setNetworkError(null);
+    clearErrors('root.serverError');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) {
+        const responseBody = (await res.json().catch(() => null)) as { error?: string } | null;
+        const message = responseBody?.error?.trim() || 'No pudimos enviar la consulta. Probá nuevamente.';
+        setNetworkError(message);
+        setError('root.serverError', { type: 'server', message });
+        return;
+      }
+
+      setSent(true);
+    } catch {
+      const message = 'No hay conexión con el servidor. Verificá tu red e intentá otra vez.';
+      setNetworkError(message);
+      setError('root.serverError', { type: 'network', message });
+    }
+  }
 
   async function onSubmit(data: FormData) {
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (res.ok) setSent(true);
+    setLastPayload(data);
+    await submitPayload(data);
+  }
+
+  async function retrySubmit() {
+    if (!lastPayload || isSubmitting) {
+      return;
+    }
+
+    await submitPayload(lastPayload);
   }
 
   return (
@@ -40,8 +76,8 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
       </p>
       <motion.div
         className="relative flex-1"
-        animate={{ rotateY: sent ? 180 : 0 }}
-        transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+        animate={shouldReduceMotion ? { opacity: sent ? 0 : 1 } : { rotateY: sent ? 180 : 0 }}
+        transition={shouldReduceMotion ? { duration: 0.2 } : { duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
         style={{ transformStyle: 'preserve-3d' }}
       >
         {/* ── FRONT: form ── */}
@@ -131,10 +167,32 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-6 py-3 font-sans text-sm uppercase tracking-widest btn-simple disabled:opacity-50"
+              className="btn-simple w-full min-h-11 px-6 py-3 font-sans text-sm uppercase tracking-widest disabled:opacity-50"
             >
               {isSubmitting ? 'Enviando…' : 'Enviar consulta'}
             </button>
+
+            {networkError && (
+              <div
+                role="alert"
+                className="mt-3 rounded-md border p-3"
+                style={{
+                  borderColor: 'color-mix(in srgb, var(--color-error) 52%, transparent)',
+                  backgroundColor: 'color-mix(in srgb, var(--color-error) 10%, transparent)',
+                }}
+              >
+                <p className="font-sans text-sm" style={{ color: 'var(--text-primary)' }}>{networkError}</p>
+                <button
+                  type="button"
+                  onClick={retrySubmit}
+                  disabled={isSubmitting || !lastPayload}
+                  className="mt-2 inline-flex min-h-11 items-center justify-center rounded-md border px-4 font-mono text-[11px] uppercase tracking-[0.14em] transition-colors hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)]"
+                  style={{ borderColor: 'rgba(255,255,255,0.22)', color: 'var(--text-primary)' }}
+                >
+                  Reintentar envío
+                </button>
+              </div>
+            )}
           </form>
         </div>
 

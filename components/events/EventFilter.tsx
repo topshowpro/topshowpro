@@ -39,13 +39,13 @@ export function EventFilter({
   }
 
   return (
-    <div className="mb-12 flex justify-center">
+    <div className="mb-10 flex justify-center sm:mb-12">
       <div
         role="tablist"
         aria-orientation="horizontal"
         aria-label="Filtrar eventos por categoria"
         id={tabListId}
-        className="ui-pill-tabs flex max-w-full justify-start overflow-x-auto md:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="ui-pill-tabs flex max-w-full justify-start overflow-x-auto px-1 md:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item, index) => {
           const selected = active === item.slug;

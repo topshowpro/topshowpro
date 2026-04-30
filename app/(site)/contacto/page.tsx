@@ -64,14 +64,10 @@ export default async function ContactoPage() {
 
       {/* Two-column layout */}
       <div className="px-4 sm:px-6 py-16 max-w-7xl mx-auto pb-16 md:pb-24 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16">
-        <div className="flex flex-col">
-          <ContactForm categories={categories ?? []} />
-        </div>
-
-        <aside className="space-y-8 lg:pt-8">
+        <aside className="space-y-8 lg:pt-8 order-2 lg:order-1">
           {/* Contact info */}
           <div
-            className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+            className="card-surface-shadow rounded-[var(--radius-card)] p-5 sm:p-8"
             style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             <p
@@ -80,13 +76,13 @@ export default async function ContactoPage() {
             >
               Contacto general
             </p>
-            <p className="font-sans text-lg text-white mb-1">{settings?.email}</p>
-            <p className="font-sans text-lg" style={{ color: 'var(--text-muted)' }}>{settings?.phone}</p>
+            <p className="font-sans text-lg text-white mb-1 break-all">{settings?.email}</p>
+            <p className="font-sans text-lg break-words" style={{ color: 'var(--text-muted)' }}>{settings?.phone}</p>
           </div>
 
           {settings?.techContact && (
             <div
-              className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+                className="card-surface-shadow rounded-[var(--radius-card)] p-5 sm:p-8"
               style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
               <p
@@ -96,13 +92,13 @@ export default async function ContactoPage() {
                 Soporte técnico
               </p>
               <p className="font-sans text-lg text-white mb-1">{settings.techContact.name}</p>
-              <p className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>{settings.techContact.phone}</p>
-              <p className="font-sans text-base" style={{ color: 'var(--text-muted)' }}>{settings.techContact.email}</p>
+              <p className="font-sans text-base break-words" style={{ color: 'var(--text-muted)' }}>{settings.techContact.phone}</p>
+              <p className="font-sans text-base break-all" style={{ color: 'var(--text-muted)' }}>{settings.techContact.email}</p>
             </div>
           )}
 
           <div
-            className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+            className="card-surface-shadow rounded-[var(--radius-card)] p-5 sm:p-8"
             style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
           >
             <p
@@ -116,7 +112,7 @@ export default async function ContactoPage() {
 
           {settings?.address && (
             <div
-              className="card-surface-shadow rounded-[var(--radius-card)] p-8"
+              className="card-surface-shadow rounded-[var(--radius-card)] p-5 sm:p-8"
               style={{ backgroundColor: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.08)' }}
             >
               <p
@@ -129,6 +125,10 @@ export default async function ContactoPage() {
             </div>
           )}
         </aside>
+
+        <div className="flex flex-col order-1 lg:order-2">
+          <ContactForm categories={categories ?? []} />
+        </div>
       </div>
     </div>
   );

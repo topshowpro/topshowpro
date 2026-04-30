@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { EventosClientPage } from './EventosClientPage';
 
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_SITE_SETTINGS } from '@/sanity/lib/queries';
+import { Q_SITE_SETTINGS, Q_BRANDS } from '@/sanity/lib/queries';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Eventos',
@@ -12,6 +12,10 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function EventosPage() {
-  const settings = await sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 });
-  return <EventosClientPage settings={settings} />;
+  const [settings, brands] = await Promise.all([
+    sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
+    sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
+  ]);
+  
+  return <EventosClientPage settings={settings} brands={brands} />;
 }

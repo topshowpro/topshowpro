@@ -137,9 +137,9 @@
 
   /* Texto */
   --text-primary: #f5f5f5;
-  --text-secondary: #a0a0a0;
-  --text-muted: #888888;
-  --text-faint: #555555;
+  --text-secondary: #8fc6ef;
+  --text-muted: #cfcfcf;
+  --text-faint: #9b9b9b;
 
   /* Error */
   --color-error: #FF6B6B;
@@ -187,6 +187,7 @@
 html {
   background-color: var(--bg-base);
   color-scheme: dark;
+  overflow-x: clip;
 }
 
 body {
@@ -197,6 +198,54 @@ body {
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+main {
+  overflow-x: clip;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+[role='button'] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(23, 133, 211, 0.22);
+}
+
+::selection {
+  background-color: var(--accent-cyan);
+  color: var(--bg-base);
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Grid overlay utility (Stitch-style 24px grid) */
+.grid-overlay {
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.card-surface-shadow {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
 a,
@@ -260,28 +309,15 @@ textarea,
 
 @media (min-width: 1024px) {
   .services-reveal-track {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
-    overflow-x: auto;
-    overflow-y: visible;
-    padding-top: 0.45rem;
-    padding-left: 0.35rem;
-    padding-right: 0.85rem;
-    padding-bottom: 0.4rem;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    padding: 0.5rem 0.2rem;
   }
+}
 
-  .services-reveal-track::-webkit-scrollbar {
-    display: none;
-  }
-
-  .services-reveal-track > * {
-    flex-shrink: 0;
-    align-self: flex-start;
-    position: relative;
+@media (min-width: 1280px) {
+  .services-reveal-track {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
@@ -291,8 +327,6 @@ textarea,
   width: 100%;
   max-width: 100%;
   border-radius: var(--radius-card);
-  --service-card-collapsed: 13.5rem;
-  --service-card-expanded: 19.5rem;
 }
 
 .service-card-shell {
@@ -311,39 +345,13 @@ textarea,
 .service-card-reveal-inner {
   width: 100%;
   border-radius: var(--radius-card);
-  will-change: width;
 }
 
 @media (min-width: 1024px) {
   .service-card-reveal {
-    width: var(--service-card-collapsed);
-    max-width: var(--service-card-collapsed);
+    width: 100%;
+    max-width: 100%;
     overflow: hidden;
-    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1), max-width 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .service-card-reveal:hover,
-  .service-card-reveal:focus-within {
-    z-index: 3;
-    width: var(--service-card-expanded);
-    max-width: var(--service-card-expanded);
-  }
-
-  .service-card-reveal-inner {
-    width: var(--service-card-collapsed);
-    transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .service-card-reveal:hover .service-card-reveal-inner,
-  .service-card-reveal:focus-within .service-card-reveal-inner {
-    width: var(--service-card-expanded);
-  }
-}
-
-@media (min-width: 1280px) {
-  .service-card-reveal {
-    --service-card-collapsed: 14rem;
-    --service-card-expanded: 21.5rem;
   }
 }
 
@@ -468,6 +476,8 @@ textarea,
   transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
   white-space: nowrap !important;
   flex-shrink: 0 !important;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
 }
 
 .ui-pill-tab:hover {
@@ -580,6 +590,13 @@ textarea,
   color: var(--accent-cyan);
 }
 
+.nav-link:focus-visible {
+  color: var(--text-primary);
+  outline: 2px solid color-mix(in srgb, var(--accent-cyan) 72%, transparent);
+  outline-offset: 2px;
+  border-radius: 0.375rem;
+}
+
 .glass-island {
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(135deg, rgba(26, 26, 26, 0.6), rgba(12, 12, 12, 0.52));
@@ -603,6 +620,9 @@ textarea,
   background: linear-gradient(160deg, rgba(18, 18, 18, 0.95), rgba(10, 10, 10, 0.9));
   backdrop-filter: blur(16px) saturate(120%);
   overscroll-behavior: contain;
+  max-height: calc(100dvh - 5rem - env(safe-area-inset-top, 0px));
+  overflow-y: auto;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
 }
 
 .navbar-contact-glass {
@@ -795,6 +815,11 @@ textarea,
   transform: scale(0.98);
 }
 
+.btn-simple:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-cyan) 72%, transparent);
+  outline-offset: 2px;
+}
+
 /* ── Neon CTA Button (legacy) ──────────────────────────────────────────────── *
 
 /* Rotating gradient square — clipped to button bounds by overflow:hidden */
@@ -970,6 +995,19 @@ textarea,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .service-card-reveal,
+  .service-card-reveal-inner,
+  .service-card-shell,
+  .service-card-shell:hover,
+  .service-card-shell:focus-within {
+    transition: none !important;
+  }
+
+  .service-card-reveal:hover .service-card-reveal-inner,
+  .service-card-reveal:focus-within .service-card-reveal-inner {
+    width: var(--service-card-collapsed) !important;
+  }
+
   .btn-cta-premium {
     transition: border-color 220ms ease, box-shadow 220ms ease;
   }

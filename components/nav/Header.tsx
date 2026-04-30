@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const defaultLinks = [
@@ -19,6 +19,10 @@ type SiteSettings = {
 export function Header({ settings }: { settings?: SiteSettings | null }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const wasOpenRef = useRef(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const displayLinks = settings?.menuLinks?.length ? settings.menuLinks : defaultLinks;
 
@@ -69,12 +73,71 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    const panel = panelRef.current;
+    if (!panel) {
+      return;
+    }
+
+    const firstFocusable = panel.querySelector<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    firstFocusable?.focus();
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setOpen(false);
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const focusable = Array.from(
+        panel.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+      ).filter((element) => !element.hasAttribute('disabled') && !element.getAttribute('aria-hidden'));
+
+      if (!focusable.length) {
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+
+      if (event.shiftKey && active === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open && wasOpenRef.current) {
+      menuButtonRef.current?.focus();
+    }
+
+    wasOpenRef.current = open;
+  }, [open]);
+
   return (
     <header
       data-scrolled={scrolled}
       className={cn(
         'glass-island fixed inset-x-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500 md:inset-x-6 lg:inset-x-10',
-        scrolled ? 'top-3' : 'top-4'
+        scrolled ? 'top-[calc(0.5rem+env(safe-area-inset-top,0px))]' : 'top-[calc(0.75rem+env(safe-area-inset-top,0px))]'
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 md:py-4">
@@ -95,7 +158,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
             <Link
               key={l.href}
               href={l.href}
-              className="nav-link font-sans text-sm font-semibold uppercase tracking-widest transition"
+              className="nav-link min-h-11 min-w-11 px-1 inline-flex items-center justify-center font-sans text-sm font-semibold uppercase tracking-widest transition"
             >
               {l.label}
             </Link>
@@ -109,8 +172,9 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
         </div>
 
         <button
+          ref={menuButtonRef}
           onClick={() => setOpen((o) => !o)}
-          className="min-h-11 min-w-11 p-3 text-white md:hidden"
+          className="min-h-11 min-w-11 rounded-md p-3 text-white md:hidden focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           aria-label="Menú"
           aria-expanded={open}
           aria-controls="mobile-nav-panel"
@@ -124,12 +188,16 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
       <AnimatePresence>
         {open && (
           <motion.div
+            ref={panelRef}
             id="mobile-nav-panel"
             className="glass-panel-mobile px-6 py-7 md:hidden"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navegación móvil"
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={shouldReduceMotion ? { duration: 0.12 } : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             <div className="flex flex-col gap-4">
               {displayLinks.map((l) => (

@@ -54,11 +54,28 @@ export default defineType({
     }),
     defineField({
       name: 'bannerAzul',
-      title: 'Banner azul (bottom)',
+      title: 'Barra de contacto (Bottom)',
       type: 'object',
       fields: [
-        { name: 'text', type: 'string' },
-        { name: 'cta', type: 'ctaBlock' },
+        { name: 'text', type: 'string', title: 'Texto' },
+        { 
+          name: 'backgroundColor', 
+          type: 'string', 
+          title: 'Color de fondo',
+          options: {
+            list: [
+              { title: 'Celeste (Marca)', value: 'cyan' },
+              { title: 'Amarillo', value: 'yellow' },
+              { title: 'Violeta', value: 'violet' },
+              { title: 'Fucsia', value: 'fuchsia' },
+              { title: 'Menta', value: 'mint' },
+              { title: 'Negro', value: 'black' },
+            ]
+          },
+          initialValue: 'cyan'
+        },
+        { name: 'showCta', type: 'boolean', title: 'Mostrar botón de contacto', initialValue: true },
+        { name: 'cta', type: 'ctaBlock', title: 'Botón CTA' },
       ],
     }),
   ],

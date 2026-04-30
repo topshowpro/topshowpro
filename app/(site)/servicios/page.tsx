@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_SERVICES, Q_SITE_SETTINGS } from '@/sanity/lib/queries';
+import { Q_SERVICES, Q_SITE_SETTINGS, Q_BRANDS } from '@/sanity/lib/queries';
 import { FadeIn } from '@/components/motion/FadeIn';
 import { ServiceTabs } from '@/components/services/ServiceTabs';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { NeonBackdrop } from '@/components/ui/neon-backdrop';
 import { SectionHeader } from '@/components/ui/section-header';
+import { BrandsMarquee } from '@/components/equipment/BrandsMarquee';
 import { buildMetadata } from '@/lib/seo';
 import type { Metadata } from 'next';
 
@@ -38,29 +39,11 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default async function ServiciosPage() {
-  const [services, settings] = await Promise.all([
+  const [services, settings, brands] = await Promise.all([
     sanityFetch<Service[]>(Q_SERVICES, undefined, { tag: 'service', revalidate: 30 }),
     sanityFetch<any>(Q_SITE_SETTINGS, undefined, { tag: 'siteSettings', revalidate: 30 }),
+    sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
   ]);
-
-  const includes = [
-    {
-      title: 'Direccion tecnica y plan de show',
-      description: 'Curaduria tecnica, rider, plan de montaje y secuencia operativa alineada a tus objetivos.',
-    },
-    {
-      title: 'Operadores y crew en sitio',
-      description: 'Equipo tecnico especializado para audio, iluminacion y video durante toda la ejecucion.',
-    },
-    {
-      title: 'Integracion visual y escenica',
-      description: 'Diseno de atmosfera, narrativa visual y puesta tecnica para sostener experiencia de marca.',
-    },
-    {
-      title: 'Backups y respuesta en tiempo real',
-      description: 'Redundancias, monitoreo y capacidad de reaccion para mantener continuidad en vivo.',
-    },
-  ];
 
   const fontSizeMap: Record<string, string> = {
     '14': 'text-sm',
@@ -111,9 +94,14 @@ export default async function ServiciosPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-14 md:px-6 md:py-20">
         <FadeIn>
-          <ServiceTabs services={services ?? []} includes={includes} />
+          <ServiceTabs services={services ?? []} />
         </FadeIn>
       </section>
+
+      {/* Brands marquee */}
+      <div className="py-12">
+        <BrandsMarquee brands={brands ?? []} />
+      </div>
 
       <section className="relative isolate overflow-hidden px-6 py-24 text-center md:px-10 md:py-28">
         <NeonBackdrop variant="aurora-ribbon" />

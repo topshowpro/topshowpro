@@ -5,7 +5,7 @@ export const Q_HERO = `*[_type == "hero"][0]{
     "posterLqip": poster.asset->metadata.lqip,
     "videoUrl": video.asset->url
   },
-  bannerAzul{ text, cta{ label, link, variant } }
+  bannerAzul{ text, backgroundColor, showCta, cta{ label, link, variant } }
 }`;
 
 export const Q_HOMEPAGE = `{
@@ -66,6 +66,17 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   "eventosDesc":      eventosDesc,
   "eventosFontSize":  eventosFontSize,
   "eventosTitleColor": eventosTitleColor,
+  menuLinks,
+  copyright
+}`;
+
+export const Q_SITE_SETTINGS_CHROME = `*[_type == "siteSettings"][0]{
+  "logoUrl": logo.asset->url,
+  address,
+  email,
+  phone,
+  schedule,
+  socials,
   menuLinks,
   copyright
 }`;

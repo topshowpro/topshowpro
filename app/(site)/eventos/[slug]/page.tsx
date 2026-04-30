@@ -42,7 +42,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
   return (
     <article style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Hero */}
-      <header className="relative h-[62svh] md:h-[76svh] lg:h-[84svh] w-full overflow-hidden">
+      <header className="relative h-[66svh] md:h-[76svh] lg:h-[84svh] w-full overflow-hidden">
         {event.heroImage && (
           <Image
             src={event.heroImage.url}
@@ -59,7 +59,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-transparent" />
 
-        <div className="absolute inset-x-0 top-24 z-30 px-6 md:top-28">
+        <div className="absolute inset-x-0 top-[calc(5.5rem+env(safe-area-inset-top,0px))] z-30 px-4 sm:px-6 md:top-[calc(6rem+env(safe-area-inset-top,0px))]">
           <div className="mx-auto max-w-7xl">
             <Link
               href="/eventos"
@@ -73,7 +73,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
           </div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-end pb-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 h-full flex flex-col justify-end pb-10 sm:pb-12">
           <span className="event-category-pill mb-4">
             <span aria-hidden="true" className="event-category-pill__dot" />
             {event.category?.label}
@@ -85,7 +85,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             {event.title}
           </h1>
           {event.subtitle && (
-            <p className="font-sans text-xl md:text-2xl mt-2" style={{ color: 'var(--text-secondary)' }}>
+            <p className="mt-2 font-sans text-base md:text-2xl" style={{ color: 'var(--text-secondary)' }}>
               {event.subtitle}
             </p>
           )}
@@ -100,17 +100,17 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         className="px-6 py-6"
         style={{ backgroundColor: 'var(--bg-surface)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}
       >
-        <div className="max-w-7xl mx-auto flex flex-wrap gap-8">
+        <div className="max-w-7xl mx-auto flex flex-wrap gap-6 md:gap-8">
           {event.client && (
             <div>
               <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--text-faint)' }}>Cliente</p>
-              <p className="font-sans text-sm text-white">{event.client}</p>
+              <p className="font-sans text-sm text-white break-words">{event.client}</p>
             </div>
           )}
           {event.location && (
             <div>
               <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'var(--text-faint)' }}>Lugar</p>
-              <p className="font-sans text-sm text-white">{event.location}</p>
+              <p className="font-sans text-sm text-white break-words">{event.location}</p>
             </div>
           )}
           {event.tagsTecnicos?.length > 0 && (
