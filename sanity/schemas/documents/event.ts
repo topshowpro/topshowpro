@@ -33,22 +33,22 @@ export default defineType({
     }),
     defineField({
       name: 'heroImage',
-      title: '📐 Imagen principal (1920x1080 / 16:9)',
+      title: '📐 Imagen principal (Full HD / 4K)',
       type: 'image',
       options: { hotspot: true },
       validation: (r) => r.required(),
-      description: 'Medidas recomendadas: 1920x1080px (16:9). Formato: WebP o JPG (Calidad 80-85%).',
+      description: 'Mínimo: 1920x1080px (16:9). Se recomienda 2K o 4K para máxima nitidez.',
     }),
     defineField({
       name: 'gallery',
-      title: '🖼️ Galeria (800x600)',
+      title: '🖼️ Galeria (High Resolution)',
       type: 'array',
       of: [{ 
         type: 'image', 
         options: { hotspot: true },
-        description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).'
+        description: 'Recomendado: 1600x1200px (4:3) o superior. Sanity optimiza el peso final.'
       }],
-      description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).',
+      description: 'Carga fotos de alta calidad de los eventos.',
     }),
     defineField({ name: 'video', type: 'url', title: 'URL video (YouTube/Vimeo/Mux)' }),
     defineField({

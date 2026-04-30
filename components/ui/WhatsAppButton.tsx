@@ -1,23 +1,21 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useReducedMotion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
 export function WhatsAppButton() {
-  const whatsappUrl = "https://wa.me/541126670149?text=Hola!%20Quiero%20solicitar%20una%20cotizaci%C3%B3n";
-  const shouldReduceMotion = useReducedMotion();
+  const whatsappUrl = 'https://wa.me/541126670149?text=Hola!%20Quiero%20solicitar%20una%20cotizaci%C3%B3n';
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(true);
+
+  useEffect(() => {
+    setShouldReduceMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }, []);
 
   return (
-    <motion.a
+    <a
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.92, y: 16 }}
-      animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
-      whileHover={shouldReduceMotion ? undefined : { scale: 1.06, borderColor: 'var(--accent-cyan)', boxShadow: '0 0 20px rgba(23,133,211,0.3)' }}
-      whileTap={shouldReduceMotion ? undefined : { scale: 0.94 }}
-      transition={shouldReduceMotion ? { duration: 0.12 } : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed z-[100] flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-black/80 text-white shadow-2xl backdrop-blur-md transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
+      className={`fixed z-[100] flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-black/80 text-white shadow-2xl backdrop-blur-md transition-all focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] ${shouldReduceMotion ? '' : 'whatsapp-fab'}`}
       style={{
         right: 'max(1rem, env(safe-area-inset-right, 0px))',
         bottom: 'max(1rem, env(safe-area-inset-bottom, 0px))',
@@ -38,6 +36,6 @@ export function WhatsAppButton() {
         <span className={`absolute inline-flex h-full w-full rounded-full bg-[var(--accent-cyan)] opacity-75 ${shouldReduceMotion ? '' : 'animate-ping'}`}></span>
         <span className="relative inline-flex h-4 w-4 rounded-full bg-[var(--accent-cyan)] border-2 border-black"></span>
       </span>
-    </motion.a>
+    </a>
   );
 }

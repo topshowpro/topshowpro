@@ -12,14 +12,14 @@ export default defineType({
     defineField({ name: 'longDesc', type: 'array', of: [{ type: 'block' }] }),
     defineField({
       name: 'gallery',
-      title: '🖼️ Galeria de imagenes (800x600)',
+      title: '🖼️ Galeria de imagenes (High Quality)',
       type: 'array',
       of: [{ 
         type: 'image', 
         options: { hotspot: true },
-        description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).'
+        description: 'Recomendado: 1600x1200px (4:3) o 1920x1080px (16:9). Formato: WebP o JPG (Calidad 90%+).'
       }],
-      description: 'Medidas recomendadas: 800x600px (4:3). Formato: WebP o JPG (Calidad 80-85%).',
+      description: 'Carga imágenes de alta resolución. Sanity optimizará el peso automáticamente.',
     }),
     defineField({
       name: 'techContact',

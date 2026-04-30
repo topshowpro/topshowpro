@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 const defaultLinks = [
@@ -22,7 +21,6 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
   const wasOpenRef = useRef(false);
-  const shouldReduceMotion = useReducedMotion();
 
   const displayLinks = settings?.menuLinks?.length ? settings.menuLinks : defaultLinks;
 
@@ -185,42 +183,36 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
         </button>
       </nav>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            ref={panelRef}
-            id="mobile-nav-panel"
-            className="glass-panel-mobile px-6 py-7 md:hidden"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navegación móvil"
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
-            transition={shouldReduceMotion ? { duration: 0.12 } : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+      {open ? (
+        <div
+          ref={panelRef}
+          id="mobile-nav-panel"
+          className="glass-panel-mobile mobile-nav-panel-open px-6 py-7 md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navegación móvil"
+        >
+          <div className="flex flex-col gap-4">
+            {displayLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="block font-display text-xl text-white transition hover:opacity-70"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/contacto"
+            onClick={() => setOpen(false)}
+            className="navbar-contact-glass mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           >
-            <div className="flex flex-col gap-4">
-              {displayLinks.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block font-display text-xl text-white transition hover:opacity-70"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-            <Link
-              href="/contacto"
-              onClick={() => setOpen(false)}
-              className="navbar-contact-glass mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
-            >
-              Contacto
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            Contacto
+          </Link>
+        </div>
+      ) : null}
     </header>
   );
 }

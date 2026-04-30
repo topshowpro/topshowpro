@@ -1,7 +1,7 @@
 import { LenisProvider } from '@/components/motion/LenisProvider';
 import { Header } from '@/components/nav/Header';
 import { Footer } from '@/components/nav/Footer';
-import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
+import { LazyWhatsAppButton } from '@/components/ui/LazyWhatsAppButton';
 import { sanityFetch } from '@/sanity/lib/client';
 import { Q_SITE_SETTINGS_CHROME, Q_SEO_DEFAULTS } from '@/sanity/lib/queries';
 import { buildMetadata } from '@/lib/seo';
@@ -25,7 +25,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <Header settings={settings} />
       <main id="main-content">{children}</main>
       <Footer settings={settings} />
-      <WhatsAppButton />
+      <LazyWhatsAppButton />
     </LenisProvider>
   );
 }

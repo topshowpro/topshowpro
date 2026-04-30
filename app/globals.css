@@ -205,47 +205,69 @@ main {
   overflow-x: clip;
 }
 
-a,
-button,
-input,
-select,
-textarea,
-[role='button'] {
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: rgba(23, 133, 211, 0.22);
+.fade-in-section {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
-::selection {
-  background-color: var(--accent-cyan);
-  color: var(--bg-base);
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
-/* Focus visibility */
-:focus-visible {
-  outline: 2px solid var(--accent-cyan);
-  outline-offset: 2px;
+.reveal-word {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  animation: reveal-word-in 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@keyframes reveal-word-in {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
-/* Grid overlay utility (Stitch-style 24px grid) */
-.grid-overlay {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
-  background-size: 24px 24px;
+.mobile-nav-panel-open {
+  animation: mobile-nav-open 260ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-surface-shadow {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+@keyframes mobile-nav-open {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.whatsapp-fab {
+  animation: whatsapp-fab-in 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.06);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 20px rgba(23, 133, 211, 0.3);
+}
+
+.whatsapp-fab:active {
+  transform: scale(0.94);
+}
+
+@keyframes whatsapp-fab-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
 }
 
 a,
