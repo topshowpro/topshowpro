@@ -75,6 +75,7 @@ export default async function ServiciosPage() {
     'cyan': 'text-neon-cyan',
     'yellow': 'text-neon-yellow',
     'violet': 'text-neon-violet',
+    'fuchsia': 'text-neon-fuchsia',
     'mint': 'text-neon-mint',
     'white': 'text-white',
   };
