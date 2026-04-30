@@ -18,7 +18,7 @@ type SiteSettings = {
 
 export function Footer({ settings }: { settings: SiteSettings | null }) {
   return (
-    <footer className="bg-bg-elevated border-t border-white/5 px-6 py-16">
+    <footer className="border-t border-white/5 px-6 py-16" style={{ backgroundColor: '#000000' }}>
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <Image
