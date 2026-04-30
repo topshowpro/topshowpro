@@ -119,6 +119,7 @@ export default defineType({
         { title: 'Celeste (Marca)', value: 'cyan' },
         { title: 'Amarillo', value: 'yellow' },
         { title: 'Violeta', value: 'violet' },
+        { title: 'Fucsia', value: 'fuchsia' },
         { title: 'Menta', value: 'mint' },
         { title: 'Blanco (Sin glow)', value: 'white' }
       ] },
@@ -152,6 +153,7 @@ export default defineType({
         { title: 'Celeste (Marca)', value: 'cyan' },
         { title: 'Amarillo', value: 'yellow' },
         { title: 'Violeta', value: 'violet' },
+        { title: 'Fucsia', value: 'fuchsia' },
         { title: 'Menta', value: 'mint' },
         { title: 'Blanco (Sin glow)', value: 'white' }
       ] },
