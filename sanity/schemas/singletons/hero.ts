@@ -23,9 +23,29 @@ export default defineType({
             { name: 'phrase', type: 'string', validation: (r) => r.required() },
             {
               name: 'accentColor',
+              title: 'Efecto Glow (Neón)',
               type: 'string',
-              options: { list: ['cyan', 'violet', 'mint'] },
+              options: { list: [
+                { title: 'Celeste (Marca)', value: 'cyan' },
+                { title: 'Amarillo', value: 'yellow' },
+                { title: 'Violeta', value: 'violet' },
+                { title: 'Fucsia', value: 'fuchsia' },
+                { title: 'Menta', value: 'mint' },
+                { title: 'Blanco (Sin glow)', value: 'white' }
+              ] },
               initialValue: 'cyan',
+            },
+            {
+              name: 'fontSize',
+              title: 'Tamaño del texto (Impacto)',
+              type: 'string',
+              options: { list: [
+                { title: 'Compacto', value: 'compact' },
+                { title: 'Estándar', value: 'standard' },
+                { title: 'Grande', value: 'large' },
+                { title: 'Monumental', value: 'huge' }
+              ] },
+              initialValue: 'standard',
             },
           ],
           preview: { select: { title: 'phrase', media: 'poster' } },

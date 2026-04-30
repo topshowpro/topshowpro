@@ -4,10 +4,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RevealText } from '@/components/motion/RevealText';
+import { cn } from '@/lib/utils';
 
 type Slide = {
   phrase: string;
   accentColor?: string;
+  fontSize?: string;
   videoUrl?: string | null;
   posterUrl?: string | null;
   posterLqip?: string | null;
@@ -84,6 +86,25 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
   const slide = slides[idx];
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
 
+  const neonColorMap: Record<string, string> = {
+    'cyan': 'text-neon-cyan',
+    'yellow': 'text-neon-yellow',
+    'violet': 'text-neon-violet',
+    'fuchsia': 'text-neon-fuchsia',
+    'mint': 'text-neon-mint',
+    'white': 'text-white',
+  };
+
+  const fontSizeMap: Record<string, string> = {
+    'compact': 'clamp(2.5rem, 7vw, 6rem)',
+    'standard': 'clamp(3.4rem, 11vw, 10rem)',
+    'large': 'clamp(4rem, 14vw, 13rem)',
+    'huge': 'clamp(5rem, 18vw, 18rem)',
+  };
+
+  const activeNeonClass = neonColorMap[slide?.accentColor || 'cyan'];
+  const activeFontSize = fontSizeMap[slide?.fontSize || 'standard'];
+
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
@@ -149,8 +170,8 @@ export function HeroVideoCarousel({ slides, banner }: { slides: Slide[]; banner?
 
       <div className="relative z-10 flex h-full items-center justify-center px-6">
         <h1
-          className="text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] text-neon-yellow leading-[0.88]"
-          style={{ fontSize: 'clamp(3.4rem, 11vw, 10rem)', letterSpacing: '0.01em' }}
+          className={cn("text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] leading-[0.88]", activeNeonClass)}
+          style={{ fontSize: activeFontSize, letterSpacing: '0.01em' }}
         >
           <RevealText text={slide?.phrase ?? ''} key={idx} />
         </h1>

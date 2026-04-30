@@ -1,6 +1,6 @@
 export const Q_HERO = `*[_type == "hero"][0]{
   slides[]{
-    phrase, accentColor,
+    phrase, accentColor, fontSize,
     "posterUrl": poster.asset->url,
     "posterLqip": poster.asset->metadata.lqip,
     "videoUrl": video.asset->url
