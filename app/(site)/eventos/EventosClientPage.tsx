@@ -51,6 +51,16 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
 
   const descSizeClass = fontSizeMap[settings?.eventosFontSize || '18'];
 
+  const neonColorMap: Record<string, string> = {
+    'cyan': 'text-neon-cyan',
+    'yellow': 'text-neon-yellow',
+    'violet': 'text-neon-violet',
+    'mint': 'text-neon-mint',
+    'white': 'text-white',
+  };
+
+  const titleNeonClass = neonColorMap[settings?.eventosTitleColor || 'cyan'];
+
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       <div
@@ -71,6 +81,7 @@ export function EventosClientPage({ settings }: EventosClientPageProps) {
             <SectionHeader
               title="Eventos"
               titleTag="h1"
+              titleClassName={titleNeonClass}
               description={settings?.eventosDesc || "Portfolio de proyectos realizados: eventos corporativos, festivales, conciertos y activaciones de marca."}
               descriptionClassName={descSizeClass}
             />

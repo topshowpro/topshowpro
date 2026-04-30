@@ -44,6 +44,19 @@ export default defineType({
       description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
+      name: 'serviciosTitleColor',
+      title: '✨ Hero: Servicios (Glow Título)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'cyan',
+    }),
+    defineField({
       name: 'serviciosDesc',
       title: '📝 Hero: Servicios (Descripción)',
       type: 'text',
@@ -62,6 +75,19 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
+    }),
+    defineField({
+      name: 'equipamientoTitleColor',
+      title: '✨ Hero: Equipamiento (Glow Título)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'cyan',
     }),
     defineField({
       name: 'equipamientoDesc',
@@ -84,6 +110,19 @@ export default defineType({
       description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
     }),
     defineField({
+      name: 'contactoTitleColor',
+      title: '✨ Hero: Contacto (Glow Título)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'cyan',
+    }),
+    defineField({
       name: 'contactoDesc',
       title: '📝 Hero: Contacto (Descripción)',
       type: 'text',
@@ -102,6 +141,19 @@ export default defineType({
       type: 'image',
       options: { hotspot: true },
       description: 'Medidas: 1920x1080px (16:9). WebP o JPG (Calidad 80-85%).',
+    }),
+    defineField({
+      name: 'eventosTitleColor',
+      title: '✨ Hero: Eventos (Glow Título)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'cyan',
     }),
     defineField({
       name: 'eventosDesc',

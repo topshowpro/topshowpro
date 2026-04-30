@@ -27,6 +27,16 @@ export default async function ContactoPage() {
 
   const descSizeClass = fontSizeMap[settings?.contactoFontSize || '18'];
 
+  const neonColorMap: Record<string, string> = {
+    'cyan': 'text-neon-cyan',
+    'yellow': 'text-neon-yellow',
+    'violet': 'text-neon-violet',
+    'mint': 'text-neon-mint',
+    'white': 'text-white',
+  };
+
+  const titleNeonClass = neonColorMap[settings?.contactoTitleColor || 'cyan'];
+
   return (
     <div style={{ backgroundColor: 'var(--bg-base)' }}>
       {/* Header */}
@@ -40,7 +50,7 @@ export default async function ContactoPage() {
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
           <h1
-            className="font-display text-white leading-none"
+            className={cn("font-display text-white leading-none", titleNeonClass)}
             style={{ fontSize: 'clamp(3rem, 8vw, 8rem)', letterSpacing: '-0.02em' }}
           >
             Contacto

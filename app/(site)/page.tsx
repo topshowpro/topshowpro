@@ -44,6 +44,17 @@ export default async function HomePage() {
   const introSizeClass = fontSizeMap[homepage?.introFontSize || '18'];
   const footerSizeClass = fontSizeMap[homepage?.footerFontSize || '18'];
 
+  const neonColorMap: Record<string, string> = {
+    'cyan': 'text-neon-cyan',
+    'yellow': 'text-neon-yellow',
+    'violet': 'text-neon-violet',
+    'mint': 'text-neon-mint',
+    'white': 'text-white',
+  };
+
+  const introNeonClass = neonColorMap[homepage?.introTitleColor || 'cyan'];
+  const footerNeonClass = neonColorMap[homepage?.footerTitleColor || 'yellow'];
+
   return (
     <>
       <OrganizationJsonLd />
@@ -60,7 +71,7 @@ export default async function HomePage() {
         
         <div className="relative z-10 px-4 sm:px-6 max-w-4xl mx-auto text-center w-full">
           <FadeIn>
-            <h2 className="font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-neon-cyan text-[var(--text-primary)] text-center mb-0">
+            <h2 className={cn("font-display leading-none text-[clamp(2.5rem,6vw,6rem)] font-festival-heading text-[var(--text-primary)] text-center mb-0", introNeonClass)}>
               {homepage?.introTitle || 'Hacemos que todo suceda'}
             </h2>
           </FadeIn>
@@ -146,7 +157,7 @@ export default async function HomePage() {
         ]} />
 <FadeIn>
            <h2
-             className="font-festival-heading text-[var(--text-primary)] mb-6 leading-none text-neon-yellow relative z-10"
+             className={cn("font-festival-heading text-[var(--text-primary)] mb-6 leading-none relative z-10", footerNeonClass)}
              style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
            >
              {homepage?.footerTitle || '¿Tu próximo evento?'}

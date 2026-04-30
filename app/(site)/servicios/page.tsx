@@ -71,6 +71,16 @@ export default async function ServiciosPage() {
 
   const descSizeClass = fontSizeMap[settings?.serviciosFontSize || '18'];
 
+  const neonColorMap: Record<string, string> = {
+    'cyan': 'text-neon-cyan',
+    'yellow': 'text-neon-yellow',
+    'violet': 'text-neon-violet',
+    'mint': 'text-neon-mint',
+    'white': 'text-white',
+  };
+
+  const titleNeonClass = neonColorMap[settings?.serviciosTitleColor || 'cyan'];
+
   return (
     <div className="bg-[var(--bg-base)]">
       <section className="relative overflow-hidden px-6 pb-16 pt-32 md:px-6 md:pb-24 md:pt-40" style={{ backgroundColor: 'var(--bg-surface)' }}>
@@ -90,6 +100,7 @@ export default async function ServiciosPage() {
             <SectionHeader
               title="Servicios"
               titleTag="h1"
+              titleClassName={titleNeonClass}
               description={settings?.serviciosDesc || "Elegi un servicio y revisa su propuesta en un solo panel, con detalle expandible y contacto directo."}
               descriptionClassName={descSizeClass}
             />

@@ -6,6 +6,19 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({ name: 'introTitle', type: 'string', title: 'Título Intro', initialValue: 'Hacemos que todo suceda' }),
+    defineField({
+      name: 'introTitleColor',
+      title: 'Efecto Glow (Título Intro)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'cyan',
+    }),
     defineField({ name: 'intro', type: 'array', of: [{ type: 'block' }], title: 'Contenido Intro' }),
     defineField({
       name: 'introFontSize',
@@ -22,6 +35,19 @@ export default defineType({
       validation: (r) => r.max(4),
     }),
     defineField({ name: 'footerTitle', type: 'string', title: 'Título Cierre (CTA)', initialValue: '¿Tu próximo evento?' }),
+    defineField({
+      name: 'footerTitleColor',
+      title: 'Efecto Glow (Título Cierre)',
+      type: 'string',
+      options: { list: [
+        { title: 'Celeste (Marca)', value: 'cyan' },
+        { title: 'Amarillo', value: 'yellow' },
+        { title: 'Violeta', value: 'violet' },
+        { title: 'Menta', value: 'mint' },
+        { title: 'Blanco (Sin glow)', value: 'white' }
+      ] },
+      initialValue: 'yellow',
+    }),
     defineField({ name: 'footerSubtitle', type: 'string', title: 'Subtítulo Cierre (CTA)', initialValue: 'Contanos qué tenés en mente y te armamos una propuesta a medida.' }),
     defineField({
       name: 'footerFontSize',

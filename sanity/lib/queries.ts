@@ -11,8 +11,10 @@ export const Q_HERO = `*[_type == "hero"][0]{
 export const Q_HOMEPAGE = `{
   "homepage": *[_type == "homepage"][0]{
     introTitle,
+    introTitleColor,
     intro,
     footerTitle,
+    footerTitleColor,
     footerSubtitle,
     ctaLabel,
     "manualFeaturedEvents": featuredEvents[]->{
@@ -30,9 +32,11 @@ export const Q_HOMEPAGE = `{
   }
 }{
   "introTitle": homepage.introTitle,
+  "introTitleColor": homepage.introTitleColor,
   "intro": homepage.intro,
   "introFontSize": homepage.introFontSize,
   "footerTitle": homepage.footerTitle,
+  "footerTitleColor": homepage.footerTitleColor,
   "footerSubtitle": homepage.footerSubtitle,
   "footerFontSize": homepage.footerFontSize,
   "ctaLabel": homepage.ctaLabel,
@@ -49,15 +53,19 @@ export const Q_SITE_SETTINGS = `*[_type == "siteSettings"][0]{
   "serviciosHero":    serviciosHero.asset->url,
   "serviciosDesc":    serviciosDesc,
   "serviciosFontSize": serviciosFontSize,
+  "serviciosTitleColor": serviciosTitleColor,
   "equipamientoHero": equipamientoHero.asset->url,
   "equipamientoDesc": equipamientoDesc,
   "equipamientoFontSize": equipamientoFontSize,
+  "equipamientoTitleColor": equipamientoTitleColor,
   "contactoHero":     contactoHero.asset->url,
   "contactoDesc":     contactoDesc,
   "contactoFontSize": contactoFontSize,
+  "contactoTitleColor": contactoTitleColor,
   "eventosHero":      eventosHero.asset->url,
   "eventosDesc":      eventosDesc,
   "eventosFontSize":  eventosFontSize,
+  "eventosTitleColor": eventosTitleColor,
   menuLinks,
   copyright
 }`;
