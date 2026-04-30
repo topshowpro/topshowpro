@@ -123,12 +123,9 @@ export function EquipmentTabs({ categories }: EquipmentTabsProps) {
                 <div className="absolute inset-0 grid-overlay opacity-20" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-6 left-6">
-                <Tag variant="accent">Top Show Pro Quality</Tag>
-              </div>
             </div>
 
-            <div className="flex flex-col justify-center">
+              <div className="flex flex-col justify-center">
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--accent-cyan)' }}>
                 Catálogo de Equipamiento
               </p>
@@ -138,11 +135,6 @@ export function EquipmentTabs({ categories }: EquipmentTabsProps) {
                   {current.description}
                 </p>
               )}
-              <div className="mt-8 flex flex-wrap gap-4">
-                <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 font-mono text-[10px] uppercase tracking-wider text-white">
-                  {items.length} Equipos disponibles
-                </div>
-              </div>
             </div>
           </div>
 

@@ -108,7 +108,6 @@ export function ServiceTabs({ services }: { services: Service[] }) {
 
           <div className="relative z-10 grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
             <div>
-              <Tag variant="accent" className="mb-4">Servicio activo</Tag>
               {current.icon && (
                 <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: 'var(--text-faint)' }}>
                   {current.icon}

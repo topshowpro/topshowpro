@@ -58,3 +58,9 @@ stitch_premium_event_showcase/
 *.tsbuildinfo
 next-env.d.ts
 
+
+# local QA/runtime artifacts
+.next-start.pid
+.playwright-cli/
+lighthouse-*.json
+
