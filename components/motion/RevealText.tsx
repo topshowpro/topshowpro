@@ -15,7 +15,7 @@ export function RevealText({ text, className = '' }: { text: string; className?:
       {words.map((w, i) => {
         const isItalic = w.endsWith('.') || w.includes('!!!'); // simple heuristic or can be expanded
         return (
-          <span key={i} className="inline-block overflow-hidden align-bottom py-[0.8em] my-[-0.8em] px-[0.4em] mx-[-0.4em]">
+          <span key={i} className="inline-block overflow-hidden align-bottom py-[2.5em] my-[-2.5em] px-[1em] mx-[-1em]">
             <motion.span 
               variants={revealTextWords} 
               className={`inline-block ${isItalic ? 'italic' : ''}`}
