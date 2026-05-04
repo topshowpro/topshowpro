@@ -37,5 +37,10 @@ export function buildMetadata(opts: {
     robots: opts.noIndex ? { index: false, follow: false } : undefined,
     openGraph: { title, description, url, siteName: 'Top Show Pro', images: [ogImage], locale: 'es_AR', type: 'website' },
     twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/icon.png',
+      apple: '/icon.png',
+    },
   };
 }
