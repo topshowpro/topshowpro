@@ -123,7 +123,8 @@ export const Q_EQUIPMENT_CATEGORIES = `*[_type == "equipmentCategory"] | order(o
 
 export const Q_BRANDS = `*[_type == "brand"] | order(name asc){
   name, website,
-  "logoUrl": logoBw.asset->url
+  "logoUrl": logoBw.asset->url,
+  logo { asset->{url} }
 }`;
 
 export const Q_CONTACT_CATEGORIES = `*[_type == "contactCategory"] | order(order asc){ label }`;

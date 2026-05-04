@@ -1,7 +1,12 @@
 import Image from 'next/image';
 
-export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: string | null; website?: string | null }[] }) {
-  const loop = [...brands, ...brands];
+export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: string | null; logo?: any; website?: string | null }[] }) {
+  if (!brands || brands.length === 0) return null;
+
+  // Quadruple items to ensure the track is always longer than the viewport
+  // and the loop is seamless even on ultra-wide screens.
+  const loop = [...brands, ...brands, ...brands, ...brands];
+
   return (
     <div
       className="relative overflow-hidden py-16"
@@ -12,55 +17,49 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
       }}
     >
-      <div className="flex gap-8 md:gap-16 animate-[marquee_20s_linear_infinite] whitespace-nowrap">
-        {loop.map((b, i) => (
-          b.website ? (
-            <a
-              key={i}
-              href={b.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
-            >
-              {b.logoUrl ? (
+      <div 
+        className="flex gap-12 md:gap-20 animate-[marquee_40s_linear_infinite] whitespace-nowrap"
+        style={{ width: 'max-content' }}
+      >
+        {loop.map((b, i) => {
+          const logoToUse = b.logoUrl || b.logo?.asset?.url;
+          
+          const content = (
+            <div className="flex items-center justify-center min-w-[180px] md:min-w-[240px] px-4 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+              {logoToUse ? (
                 <Image
-                  src={b.logoUrl}
+                  src={logoToUse}
                   alt={b.name}
-                  width={220}
-                  height={68}
-                  className="h-14 md:h-16 w-auto object-contain"
+                  width={240}
+                  height={80}
+                  className="h-12 md:h-16 w-auto object-contain"
                   loading="lazy"
-                  sizes="220px"
+                  sizes="240px"
                 />
               ) : (
-                <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
-                  {b.name}
-                </span>
-              )}
-            </a>
-          ) : (
-            <div
-              key={i}
-              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition"
-            >
-              {b.logoUrl ? (
-                <Image
-                  src={b.logoUrl}
-                  alt={b.name}
-                  width={220}
-                  height={68}
-                  className="h-14 md:h-16 w-auto object-contain"
-                  loading="lazy"
-                  sizes="220px"
-                />
-              ) : (
-                <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
+                <span className="font-display text-xl md:text-2xl tracking-wider text-[var(--text-muted)] uppercase">
                   {b.name}
                 </span>
               )}
             </div>
-          )
-        ))}
+          );
+
+          if (b.website) {
+            return (
+              <a
+                key={`${b.name}-${i}`}
+                href={b.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                {content}
+              </a>
+            );
+          }
+
+          return <div key={`${b.name}-${i}`}>{content}</div>;
+        })}
       </div>
     </div>
   );
