@@ -70,13 +70,19 @@
   --leading-body: 1.65;
 
   /* Animations */
-  --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee-slow 80s linear infinite;
   --animate-beam-sweep: beam-sweep 1s ease-out;
   --animate-scanline: scanline 3s linear infinite;
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @keyframes marquee-slow {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
   }
 
   @keyframes beam-sweep {
