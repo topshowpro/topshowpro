@@ -222,13 +222,10 @@ const clients = [
   { _id: 'client-teatro-colon',    _type: 'client', name: 'Teatro Colón',           order: 1 },
   { _id: 'client-movistar-arena',  _type: 'client', name: 'Movistar Arena',          order: 2 },
   { _id: 'client-luna-park',       _type: 'client', name: 'Luna Park',               order: 3 },
-  { _id: 'client-lollapalooza',    _type: 'client', name: 'Lollapalooza Argentina',  order: 4 },
-  { _id: 'client-banco-galicia',   _type: 'client', name: 'Banco Galicia',           order: 5 },
-  { _id: 'client-telecom',         _type: 'client', name: 'Telecom Argentina',       order: 6 },
-  { _id: 'client-hard-rock',       _type: 'client', name: 'Hard Rock Cafe BA',       order: 7 },
-  { _id: 'client-bafici',          _type: 'client', name: 'BAFICI',                  order: 8 },
-  { _id: 'client-move-concerts',   _type: 'client', name: 'Move Concerts',           order: 9 },
-  { _id: 'client-mercadolibre',    _type: 'client', name: 'MercadoLibre',            order: 10 },
+  { _id: 'client-telecom',         _type: 'client', name: 'Telecom Argentina',       order: 4 },
+  { _id: 'client-hard-rock',       _type: 'client', name: 'Hard Rock Cafe BA',       order: 5 },
+  { _id: 'client-bafici',          _type: 'client', name: 'BAFICI',                  order: 6 },
+  { _id: 'client-move-concerts',   _type: 'client', name: 'Move Concerts',           order: 7 },
 ];
 
 // Categorías de contacto

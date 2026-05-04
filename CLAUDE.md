@@ -4,71 +4,71 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
+## Project Snapshot
+
+**Top Show Pro** is the marketing site for an event tech rental company in Argentina.
+Stack: Next.js 16 App Router + TypeScript strict + Tailwind v4 + shadcn/ui + Framer Motion + Lenis + Sanity v3 + Resend.
+
 ## Commands
 
 ```bash
 pnpm dev          # dev server (Turbopack, http://localhost:3000)
 pnpm build        # production build
 pnpm start        # production server
-pnpm typecheck    # tsc --noEmit (no lint script — use typecheck)
+pnpm typecheck    # tsc --noEmit (primary CI signal)
 ```
 
-No test runner configured. Type-check is the primary CI signal.
+No test runner is configured in this repo. Use `pnpm typecheck` plus manual visual QA for UI changes.
 
 ## Architecture
 
-**Top Show Pro** — event tech rental company website (Argentina). Next.js 16 App Router + Sanity CMS + Resend email.
+- `app/(site)/` public pages (Header/Footer layout)
+- `app/api/` contact form, events endpoint, OG image, Sanity revalidation webhook
+- `app/studio/[[...tool]]/` embedded Sanity Studio at `/studio`
 
-### Route structure
+Data path for CMS content:
+- Queries in `sanity/lib/queries.ts`
+- Client config in `sanity/lib/client.ts`
+- Image URL builder in `sanity/lib/image.ts`
 
-- `app/(site)/` — public-facing pages wrapped in Header/Footer layout
-- `app/api/` — contact form, events endpoint, OG image gen, Sanity revalidation webhook
-- `app/studio/[[...tool]]/` — embedded Sanity Studio at `/studio`
+Fallback mode:
+- If `NEXT_PUBLIC_SANITY_PROJECT_ID` is missing, pages fall back to `lib/mock-data.ts`
 
-### Data strategy
+## Current UX / Performance / Responsive Baseline
 
-Without `NEXT_PUBLIC_SANITY_PROJECT_ID`, all pages fall back to `lib/mock-data.ts`. Phase 2 wires up real Sanity data. Data fetching goes through `sanity/lib/queries.ts` (GROQ) + `sanity/lib/client.ts`.
+- Motion is premium but must degrade cleanly with `prefers-reduced-motion` (implemented across hero, tabs, forms, Lenis, and global CSS).
+- Images should use `next/image` with accurate `sizes`; reserve `priority` for above-the-fold assets only.
+- Keep mobile/desktop parity for CTAs and nav behavior; avoid desktop-only interactions.
+- Prefer CSS/Tailwind interaction states over JS-only hover handlers when equivalent.
+- Maintain accessibility and performance guardrails: no heavy animation regressions, no unnecessary layout shift, no blocked interaction on mobile.
 
-### Sanity schema layout
+## Design System
 
-```
-sanity/schemas/
-  documents/   # event, service, equipmentItem, brand, lead, …
-  objects/     # seoFields, ctaBlock, mediaPicker
-  singletons/  # siteSettings, hero, homepage, seoDefaults
-```
+Dark cyberpunk visual system with tokenized CSS variables in `app/globals.css` (color, glow, glass, motion helpers).
+Shared motion variants live in `lib/motion.ts`.
+Design reference: `docs-kickoff/DESIGN-SYSTEM.md`.
 
-`lead` is the contact form submission document — written via `SANITY_API_WRITE_TOKEN`.
+## Key Lib Files
 
-### Design system
+- `lib/motion.ts` shared Framer Motion variants
+- `lib/seo.ts` metadata builder used across routes
+- `lib/mock-data.ts` development fallback matching Sanity query shapes
+- `lib/resend.ts` email helpers (`lib/email-templates/`)
+- `lib/turnstile.ts` server-side Cloudflare Turnstile validation
 
-Dark-only cyberpunk aesthetic. Design tokens live in `app/globals.css` as CSS custom properties (`--bg-base`, `--accent-cyan`, `--accent-violet`, `--accent-mint`, etc.). shadcn/ui uses OKLch overrides. Utility classes like `.shadow-optic`, `.bg-focal-beam`, `.cta-gradient`, `.l-bracket` are defined there. Full reference: `docs-kickoff/DESIGN-SYSTEM.md`.
+## Environment Variables
 
-### Key lib files
-
-- `lib/motion.ts` — shared Framer Motion variants
-- `lib/seo.ts` — metadata builder (used in every route)
-- `lib/mock-data.ts` — dev fallback, mirrors Sanity query shape
-- `lib/resend.ts` — email helpers; templates in `lib/email-templates/`
-- `lib/turnstile.ts` — Cloudflare Turnstile server-side validation
-
-### Environment variables
-
-See `.env.local.example`. Required for full functionality:
+See `.env.local.example` for the full list. Core variables:
 
 | Variable | Purpose |
 |---|---|
-| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Enables Sanity data (without it → mock data) |
-| `SANITY_API_READ_TOKEN` | SSR queries |
-| `SANITY_API_WRITE_TOKEN` | Lead capture |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Enable Sanity content (otherwise mock data) |
+| `NEXT_PUBLIC_SANITY_DATASET` | Sanity dataset |
+| `NEXT_PUBLIC_SANITY_API_VERSION` | Sanity API version |
+| `SANITY_API_READ_TOKEN` | SSR Sanity queries |
+| `SANITY_API_WRITE_TOKEN` | Lead capture writes |
+| `SANITY_REVALIDATE_SECRET` | Revalidation webhook secret |
 | `RESEND_API_KEY` | Contact email delivery |
+| `RESEND_FROM` / `RESEND_TO` | Email sender / recipient |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Anti-spam |
-| `SANITY_REVALIDATE_SECRET` | Webhook revalidation |
-
-### Image handling
-
-Remote images allowed from `cdn.sanity.io`, `images.unsplash.com`, `img.youtube.com`. Use `sanity/lib/image.ts` (wraps `@sanity/image-url`) for Sanity asset URLs.
-
-### Animations
-
-Lenis smooth scroll via `components/motion/LenisProvider.tsx` (root layout). Framer Motion `variants` from `lib/motion.ts`. Custom keyframes (`marquee`, `beam-sweep`, `scanline`) in `globals.css`.
+| `NEXT_PUBLIC_SITE_URL` | Production canonical URL |

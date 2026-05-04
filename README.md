@@ -25,7 +25,7 @@ pnpm install
 pnpm dev
 ```
 
-Abre `http://localhost:3000`. El sitio funciona **con mock data** sin necesitar APIs externas.
+Abre `http://localhost:3000`. El sitio requiere las variables de entorno de Sanity configuradas en `.env.local` para funcionar correctamente.
 
 ## Variables de entorno
 
@@ -89,7 +89,6 @@ components/
 lib/
 ├── utils.ts         # cn(), formatDateRange()
 ├── motion.ts        # Framer Motion variants
-├── mock-data.ts     # Mock data para desarrollo
 ├── resend.ts        # Email (Resend)
 ├── turnstile.ts     # Anti-spam (Cloudflare)
 ├── seo.ts           # buildMetadata()
@@ -101,8 +100,8 @@ sanity/
 
 ## Desarrollo
 
-### Mock data
-Sin `NEXT_PUBLIC_SANITY_PROJECT_ID` configurado, todas las páginas usan mock data de `lib/mock-data.ts`. El formulario de contacto logea en consola del servidor.
+### Sincronización
+El sitio utiliza Sanity como única fuente de verdad para el contenido.
 
 ### Activar APIs (Fase 2)
 1. Crear proyecto en sanity.io → copiar Project ID en `.env.local`

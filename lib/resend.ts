@@ -14,8 +14,7 @@ export type ContactPayload = {
 
 export async function sendContactEmail(params: ContactPayload) {
   if (!resend) {
-    console.log('[Resend mock] contact form payload:', params);
-    return { ok: true, mock: true };
+    return { ok: false, error: 'Email service not configured' };
   }
 
   const from = process.env.RESEND_FROM || 'Top Show Pro <onboarding@resend.dev>';

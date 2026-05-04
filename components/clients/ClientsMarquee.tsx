@@ -8,15 +8,16 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
   const loop = [...clients, ...clients];
 
   return (
-    <section
-      className="relative overflow-hidden py-14"
-      style={{ 
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+    <div
+      className="relative overflow-hidden py-16"
+      style={{
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
         maskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)',
       }}
     >
-      <div className="flex gap-8 md:gap-16 animate-[marquee_30s_linear_infinite] whitespace-nowrap">
+      <div className="flex gap-8 md:gap-16 animate-[marquee_20s_linear_infinite] whitespace-nowrap">
         {loop.map((c, i) => (
           c.website ? (
             <a
@@ -24,20 +25,20 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
               href={c.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-center min-w-[180px] md:min-w-[220px] transition-all duration-300"
+              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition duration-300"
             >
               {c.logoUrl ? (
                 <Image
                   src={c.logoUrl}
                   alt={c.name}
                   width={220}
-                  height={78}
-                  className="h-12 md:h-14 object-contain grayscale opacity-50 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  height={80}
+                  className="h-14 md:h-16 w-auto object-contain"
                   loading="lazy"
                   sizes="220px"
                 />
               ) : (
-                <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
+                <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
                   {c.name}
                 </span>
               )}
@@ -45,20 +46,20 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
           ) : (
             <div
               key={i}
-              className="group flex items-center justify-center min-w-[180px] md:min-w-[220px] transition-all duration-300"
+              className="flex items-center justify-center min-w-[200px] grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition duration-300"
             >
               {c.logoUrl ? (
                 <Image
                   src={c.logoUrl}
                   alt={c.name}
                   width={220}
-                  height={78}
-                  className="h-12 md:h-14 object-contain grayscale opacity-50 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  height={80}
+                  className="h-14 md:h-16 w-auto object-contain"
                   loading="lazy"
                   sizes="220px"
                 />
               ) : (
-                <span className="font-festival-heading text-xl md:text-2xl tracking-wide text-center px-2 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors">
+                <span className="font-display text-2xl tracking-wider" style={{ color: 'var(--text-muted)' }}>
                   {c.name}
                 </span>
               )}
@@ -66,6 +67,6 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
           )
         ))}
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 import { createClient, type SanityClient, type QueryParams } from '@sanity/client';
 import { draftMode } from 'next/headers';
 import { apiVersion, dataset, hasSanity, projectId } from '../env';
-import { mockSanity } from '@/lib/mock-data';
 
 type SanityReadMode = 'published' | 'draft';
 
@@ -80,12 +79,14 @@ export async function sanityFetch<T>(
   params?: Record<string, unknown>,
   tagOrOptions?: string | SanityFetchOptions,
 ): Promise<T> {
-  if (!publishedSanityClient) return mockSanity.resolve<T>(query, params);
-
   const options = normalizeFetchOptions(tagOrOptions);
   const mode = await resolveReadMode(options.mode);
   const readClient = getReadClient(mode);
-  if (!readClient) return mockSanity.resolve<T>(query, params);
+
+  if (!readClient) {
+    console.warn(`[Sanity] Fetch called but no client available. Query: ${query.substring(0, 50)}...`);
+    return null as T;
+  }
 
   return readClient.fetch<T>(
     query,
