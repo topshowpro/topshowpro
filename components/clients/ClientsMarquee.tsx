@@ -5,8 +5,8 @@ type Client = { name: string; logoUrl?: string | null; website?: string | null }
 export function ClientsMarquee({ clients }: { clients: Client[] }) {
   if (!clients.length) return null;
 
-  // Use 6 repetitions for a seamless, slow loop
-  const loop = [...clients, ...clients, ...clients, ...clients, ...clients, ...clients];
+  // Use 4 sets for a perfect mathematical loop.
+  const loop = [...clients, ...clients, ...clients, ...clients];
 
   return (
     <div
@@ -19,24 +19,24 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
       }}
     >
       <div 
-        className="flex gap-16 md:gap-24 animate-marquee-slow whitespace-nowrap will-change-transform"
+        className="flex animate-[marquee_120s_linear_infinite] whitespace-nowrap will-change-transform"
         style={{ width: 'max-content' }}
       >
         {loop.map((c, i) => {
           const content = (
-            <div className="flex items-center justify-center min-w-[180px] md:min-w-[280px] px-6 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-500 ease-out">
+            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-700 ease-out">
               {c.logoUrl ? (
                 <Image
                   src={c.logoUrl}
                   alt={c.name}
-                  width={280}
-                  height={100}
-                  className="h-12 md:h-16 w-auto object-contain"
+                  width={320}
+                  height={120}
+                  className="h-10 md:h-14 w-auto object-contain"
                   loading="lazy"
-                  sizes="280px"
+                  sizes="320px"
                 />
               ) : (
-                <span className="font-display text-xl md:text-2xl tracking-[0.2em] text-[var(--text-muted)] uppercase opacity-80">
+                <span className="font-display text-xl md:text-2xl tracking-[0.25em] text-[var(--text-muted)] uppercase opacity-80">
                   {c.name}
                 </span>
               )}
@@ -50,7 +50,7 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
                 href={c.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:scale-105 transition-transform duration-300"
+                className="block hover:scale-105 transition-transform duration-500"
               >
                 {content}
               </a>
