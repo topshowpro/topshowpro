@@ -82,23 +82,23 @@ export default async function HomePage() {
         </div>
 
         {/* Animated Snake LED (Curved cyan line) */}
-        <div className="relative w-full h-[60px] my-4 overflow-hidden z-10 flex items-center pointer-events-none">
-          <svg width="100%" height="100%" viewBox="0 0 1000 60" preserveAspectRatio="none" className="absolute left-0 top-0">
+        <div className="relative w-full h-[120px] -my-8 z-10 flex items-center pointer-events-none">
+          <svg width="100%" height="100%" viewBox="0 0 1000 120" preserveAspectRatio="none" className="absolute left-0 top-0 overflow-visible">
             {/* The faint background track */}
-            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="2" />
+            <path d="M0,60 C250,20 250,100 500,60 C750,20 750,100 1000,60" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
             
             {/* The centered static cyan glow */}
-            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="rgba(23, 133, 211, 0.5)" strokeWidth="4" 
-              style={{ filter: 'blur(8px)' }}
+            <path d="M0,60 C250,20 250,100 500,60 C750,20 750,100 1000,60" fill="none" stroke="rgba(23, 133, 211, 0.3)" strokeWidth="6" 
+              style={{ filter: 'blur(12px)' }}
               strokeDasharray="400 1000" strokeDashoffset="-300"
             />
 
             {/* The moving cyan snake beam */}
-            <path d="M0,30 C250,-10 250,70 500,30 C750,-10 750,70 1000,30" fill="none" stroke="#1785D3" strokeWidth="2" 
+            <path d="M0,60 C250,20 250,100 500,60 C750,20 750,100 1000,60" fill="none" stroke="#1785D3" strokeWidth="2.5" 
               strokeLinecap="round"
               style={{ 
                 animation: 'snake 3s linear infinite',
-                filter: 'drop-shadow(0 0 8px #1785D3) drop-shadow(0 0 16px #1785D3)' 
+                filter: 'drop-shadow(0 0 10px #1785D3) drop-shadow(0 0 20px rgba(23, 133, 211, 0.6))' 
               }}
             />
           </svg>
