@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { sendContactEmail } from '@/lib/resend';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { sanityClient } from '@/sanity/lib/client';
+import { checkRateLimit } from '@/lib/rate-limit';
 
 const schema = z.object({
   category: z.string(),
@@ -16,8 +17,32 @@ const schema = z.object({
 
 export async function POST(req: Request) {
   try {
+    const forwardedFor = req.headers.get('x-forwarded-for');
+    const clientIp = (forwardedFor?.split(',')[0] ?? 'unknown').trim();
+    const rateLimitKey = `contact:${clientIp}`;
+    const allowed = checkRateLimit(rateLimitKey, 5, 10 * 60 * 1000);
+    if (!allowed) {
+      console.warn('[contact] rate_limit_exceeded', {
+        ip: clientIp,
+        userAgent: req.headers.get('user-agent') ?? 'unknown',
+      });
+      return NextResponse.json({ error: 'Demasiados intentos, probá en unos minutos.' }, { status: 429 });
+    }
+
     const body = await req.json();
     const data = schema.parse(body);
+
+    if (process.env.NODE_ENV === 'production') {
+      const hasTurnstileSecret = Boolean(process.env.TURNSTILE_SECRET_KEY);
+      const hasTurnstileSiteKey = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+      if (hasTurnstileSecret !== hasTurnstileSiteKey) {
+        console.error('[contact] turnstile_misconfigured', {
+          hasTurnstileSecret,
+          hasTurnstileSiteKey,
+        });
+        return NextResponse.json({ error: 'Captcha misconfigured' }, { status: 503 });
+      }
+    }
 
     const shouldEnforceCaptcha = Boolean(process.env.TURNSTILE_SECRET_KEY && process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
     if (shouldEnforceCaptcha) {

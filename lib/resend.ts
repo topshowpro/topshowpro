@@ -37,6 +37,23 @@ export async function sendContactEmail(params: ContactPayload) {
   return { ok: true };
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function sanitizeMailtoEmail(email: string): string {
+  return email.replace(/[\r\n]/g, '').trim();
+}
+
+function sanitizeTel(value: string): string {
+  return value.replace(/[^+\d\s().-]/g, '').trim();
+}
+
 function row(label: string, value: string) {
   return `
     <tr>
@@ -46,11 +63,20 @@ function row(label: string, value: string) {
 }
 
 function buildEmail(p: ContactPayload & { date: string }): string {
+  const safeName = escapeHtml(p.name);
+  const safeEmailText = escapeHtml(p.email);
+  const safeEmailHref = sanitizeMailtoEmail(p.email);
+  const safePhoneText = p.phone ? escapeHtml(p.phone) : '';
+  const safePhoneHref = p.phone ? sanitizeTel(p.phone) : '';
+  const safeCompany = p.company ? escapeHtml(p.company) : '';
+  const safeCategory = escapeHtml(p.category ?? 'Consulta general');
+  const safeMessage = escapeHtml(p.message);
+
   const fields = [
-    row('Nombre', p.name),
-    row('Email', `<a href="mailto:${p.email}" style="color:#1785d3;text-decoration:none">${p.email}</a>`),
-    p.phone ? row('Tel&eacute;fono', `<a href="tel:${p.phone}" style="color:#1785d3;text-decoration:none">${p.phone}</a>`) : '',
-    p.company ? row('Empresa', p.company) : '',
+    row('Nombre', safeName),
+    row('Email', `<a href="mailto:${safeEmailHref}" style="color:#1785d3;text-decoration:none">${safeEmailText}</a>`),
+    p.phone ? row('Tel&eacute;fono', `<a href="tel:${safePhoneHref}" style="color:#1785d3;text-decoration:none">${safePhoneText}</a>`) : '',
+    p.company ? row('Empresa', safeCompany) : '',
   ].join('');
 
   return `<!DOCTYPE html>
@@ -77,7 +103,7 @@ function buildEmail(p: ContactPayload & { date: string }): string {
           <!-- Badge + Título -->
           <tr>
             <td style="padding:24px 32px 0">
-              <span style="display:inline-block;background-color:rgba(23,133,211,0.1);color:#1785d3;border:1px solid rgba(23,133,211,0.3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:2px">${p.category ?? 'Consulta general'}</span>
+              <span style="display:inline-block;background-color:rgba(23,133,211,0.1);color:#1785d3;border:1px solid rgba(23,133,211,0.3);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:4px 10px;border-radius:2px">${safeCategory}</span>
               <h1 style="font-size:26px;font-weight:700;color:#FFFFFF;margin:12px 0 4px;line-height:1.2">Nueva consulta recibida</h1>
               <p style="font-size:12px;color:#7A7A7A;margin:0;text-transform:capitalize">${p.date}</p>
             </td>
@@ -103,14 +129,14 @@ function buildEmail(p: ContactPayload & { date: string }): string {
           <tr>
             <td style="padding:0 32px 24px">
               <p style="font-size:10px;letter-spacing:0.2em;color:#5AA7E0;text-transform:uppercase;margin:0 0 12px">Mensaje</p>
-              <div style="font-size:14px;color:#CCCCCC;line-height:1.7;background-color:#1A1A1A;padding:16px 20px;border-radius:4px;border-left:3px solid #1785d3;white-space:pre-wrap">${p.message}</div>
+              <div style="font-size:14px;color:#CCCCCC;line-height:1.7;background-color:#1A1A1A;padding:16px 20px;border-radius:4px;border-left:3px solid #1785d3;white-space:pre-wrap">${safeMessage}</div>
             </td>
           </tr>
 
           <!-- CTA -->
           <tr>
             <td style="padding:0 32px 32px">
-              <a href="mailto:${p.email}?subject=Re: ${encodeURIComponent(`Consulta ${p.category ?? ''} - Top Show Pro`)}" style="display:inline-block;background-color:#1785d3;color:#000000;font-size:13px;font-weight:600;letter-spacing:0.05em;padding:12px 24px;border-radius:2px;text-decoration:none">Responder a ${p.name} &rarr;</a>
+              <a href="mailto:${safeEmailHref}?subject=Re: ${encodeURIComponent(`Consulta ${p.category ?? ''} - Top Show Pro`)}" style="display:inline-block;background-color:#1785d3;color:#000000;font-size:13px;font-weight:600;letter-spacing:0.05em;padding:12px 24px;border-radius:2px;text-decoration:none">Responder a ${safeName} &rarr;</a>
             </td>
           </tr>
 
