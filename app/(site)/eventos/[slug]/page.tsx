@@ -167,6 +167,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
           <div className="relative aspect-video w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-surface)' }}>
             <iframe
               src={toEmbedUrl(event.video)}
+              title={`Video del evento ${event.title}`}
               className="absolute inset-0 w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -203,7 +204,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
           ¿Necesitás algo similar?
         </h2>
         <CtaOutlineLink href="/contacto" className="min-h-11 px-7 text-xs">
-          Contactanos
+          Contáctanos
         </CtaOutlineLink>
       </section>
     </article>

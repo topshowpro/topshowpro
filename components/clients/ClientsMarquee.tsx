@@ -19,12 +19,12 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
       }}
     >
       <div 
-        className="flex animate-[marquee_120s_linear_infinite] whitespace-nowrap will-change-transform"
+        className="flex animate-[marquee_120s_linear_infinite] whitespace-nowrap will-change-transform motion-reduce:animate-none"
         style={{ width: 'max-content' }}
       >
         {loop.map((c, i) => {
           const content = (
-            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-700 ease-out">
+            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-[opacity,filter] duration-700 ease-out">
               {c.logoUrl ? (
                 <Image
                   src={c.logoUrl}

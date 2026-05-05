@@ -6,6 +6,7 @@ type SanityReadMode = 'published' | 'draft';
 
 type SanityFetchOptions = {
   tag?: string;
+  tags?: string[];
   mode?: SanityReadMode | 'auto';
   revalidate?: number;
 };
@@ -59,17 +60,22 @@ function getReadClient(mode: SanityReadMode): SanityClient | null {
   return mode === 'draft' ? previewSanityClient : publishedSanityClient;
 }
 
-function buildFetchCacheOptions(mode: SanityReadMode, tag?: string, revalidate = DEFAULT_REVALIDATE_SECONDS) {
+function buildFetchCacheOptions(
+  mode: SanityReadMode,
+  tag?: string,
+  tags?: string[],
+  revalidate = DEFAULT_REVALIDATE_SECONDS,
+) {
   if (mode === 'draft') {
     return { cache: 'no-store' as const };
   }
 
-  const tags = tag ? [tag] : undefined;
+  const mergedTags = Array.from(new Set([...(tags ?? []), ...(tag ? [tag] : [])]));
   return {
     cache: 'force-cache' as const,
     next: {
       revalidate,
-      tags,
+      tags: mergedTags.length > 0 ? mergedTags : undefined,
     },
   };
 }
@@ -91,6 +97,6 @@ export async function sanityFetch<T>(
   return readClient.fetch<T>(
     query,
     (params ?? {}) as QueryParams,
-    buildFetchCacheOptions(mode, options.tag, options.revalidate),
+    buildFetchCacheOptions(mode, options.tag, options.tags, options.revalidate),
   );
 }

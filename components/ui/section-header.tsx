@@ -53,7 +53,7 @@ export function SectionHeader({
         {actionLabel && actionHref && (
           <Link
             href={actionHref}
-            className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] transition hover:text-white md:text-xs"
+            className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] transition hover:text-white focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)] md:text-xs"
             style={{ color: 'var(--accent-cyan)' }}
           >
             {actionLabel}

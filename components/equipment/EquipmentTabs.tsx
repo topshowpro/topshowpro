@@ -145,13 +145,13 @@ export function EquipmentTabs({ categories }: EquipmentTabsProps) {
               return (
                 <motion.article
                   key={`${item.name}-${idx}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
+                  whileInView={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="group relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#0a0a0a] transition-all hover:border-white/20 hover:bg-[#111]"
+                  transition={shouldReduceMotion ? { duration: 0.12 } : { delay: idx * 0.05 }}
+                  className="group relative flex flex-col overflow-hidden rounded-xl border border-white/5 bg-[#0a0a0a] transition-[border-color,background-color] hover:border-white/20 hover:bg-[#111]"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden grayscale transition-all duration-500 group-hover:grayscale-0">
+                  <div className="relative aspect-[4/3] overflow-hidden grayscale transition-[filter] duration-500 group-hover:grayscale-0">
                     {item.photo?.url ? (
                       <Image
                         src={item.photo.url}

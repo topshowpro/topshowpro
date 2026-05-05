@@ -16,10 +16,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const settings = await sanityFetch<any>(Q_SITE_SETTINGS_CHROME, undefined, { tag: 'siteSettings', revalidate: 30 });
   return (
     <LenisProvider>
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[var(--bg-elevated)] focus:px-4 focus:py-3 focus:font-mono focus:text-xs focus:uppercase focus:tracking-widest focus:text-white"
-      >
+        <a
+          href="#main-content"
+          className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100] focus-visible:rounded-md focus-visible:bg-[var(--bg-elevated)] focus-visible:px-4 focus-visible:py-3 focus-visible:font-mono focus-visible:text-xs focus-visible:uppercase focus-visible:tracking-widest focus-visible:text-white"
+        >
         Saltar al contenido
       </a>
       <Header settings={settings} />

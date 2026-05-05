@@ -46,10 +46,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.instagram} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-[color,transform] duration-300" 
                 aria-label="Instagram"
               >
-                <Instagram size={22} strokeWidth={1.5} />
+                <Instagram size={22} strokeWidth={1.5} aria-hidden="true" />
               </a>
             )}
             {settings?.socials?.facebook && (
@@ -57,10 +57,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.facebook} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-[color,transform] duration-300" 
                 aria-label="Facebook"
               >
-                <Facebook size={22} strokeWidth={1.5} />
+                <Facebook size={22} strokeWidth={1.5} aria-hidden="true" />
               </a>
             )}
             {settings?.socials?.linkedin && (
@@ -68,10 +68,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.linkedin} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-[color,transform] duration-300" 
                 aria-label="LinkedIn"
               >
-                <Linkedin size={22} strokeWidth={1.5} />
+                <Linkedin size={22} strokeWidth={1.5} aria-hidden="true" />
               </a>
             )}
             {settings?.socials?.youtube && (
@@ -79,10 +79,10 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
                 href={settings.socials.youtube} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-all duration-300" 
+                className="inline-flex min-h-11 min-w-11 items-center justify-center text-fg-muted hover:text-[var(--accent-cyan)] hover:scale-110 transition-[color,transform] duration-300" 
                 aria-label="YouTube"
               >
-                <Youtube size={22} strokeWidth={1.5} />
+                <Youtube size={22} strokeWidth={1.5} aria-hidden="true" />
               </a>
             )}
           </div>

@@ -18,14 +18,14 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
       }}
     >
       <div 
-        className="flex animate-[marquee_120s_linear_infinite] whitespace-nowrap will-change-transform"
+        className="flex animate-[marquee_120s_linear_infinite] whitespace-nowrap will-change-transform motion-reduce:animate-none"
         style={{ width: 'max-content' }}
       >
         {loop.map((b, i) => {
           const logoToUse = b.logoUrl || b.logo?.asset?.url;
           
           const content = (
-            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-all duration-700 ease-out">
+            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-[opacity,filter] duration-700 ease-out">
               {logoToUse ? (
                 <Image
                   src={logoToUse}
@@ -51,7 +51,7 @@ export function BrandsMarquee({ brands }: { brands: { name: string; logoUrl?: st
                 href={b.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:scale-105 transition-transform duration-500"
+                className="block transition-transform duration-500 hover:scale-105 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
               >
                 {content}
               </a>

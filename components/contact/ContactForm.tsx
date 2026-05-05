@@ -21,6 +21,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
     register,
     handleSubmit,
     setError,
+    setFocus,
     clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
@@ -82,7 +83,15 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
       >
         {/* ── FRONT: form ── */}
         <div className="backface-hidden h-full">
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form
+            onSubmit={handleSubmit(onSubmit, (submitErrors) => {
+              const firstErrorField = Object.keys(submitErrors)[0] as keyof FormData | undefined;
+              if (firstErrorField) {
+                setFocus(firstErrorField);
+              }
+            })}
+            className="space-y-5"
+          >
             <div>
               <label htmlFor="category" className="block font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--text-faint)' }}>
                 Categoría
@@ -213,7 +222,7 @@ export function ContactForm({ categories }: { categories: { label: string }[] })
               boxShadow: '0 0 20px rgba(23,133,211,0.7)',
             }}
           >
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" stroke="var(--accent-cyan)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" stroke="var(--accent-cyan)" aria-hidden="true">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>

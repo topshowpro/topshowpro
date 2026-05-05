@@ -7,7 +7,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
   const body = await req.json();
-  const tags = [body._type, `${body._type}:${body.slug?.current}`].filter(Boolean);
+  const slug = typeof body.slug === 'string' ? body.slug : body.slug?.current;
+  const tags = [body._type, slug ? `${body._type}:${slug}` : null].filter(Boolean);
   tags.forEach((t) => revalidateTag(t, 'default'));
   return NextResponse.json({ revalidated: tags });
 }

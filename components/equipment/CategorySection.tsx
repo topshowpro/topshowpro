@@ -162,7 +162,7 @@ export function CategorySection({ categories }: CategorySectionProps) {
                       src={representative.url}
                       alt={cat.name}
                       fill
-                      className="object-cover opacity-70 transition-all duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02] group-hover:opacity-90 group-focus-visible:scale-[1.02] group-focus-visible:opacity-90 group-active:scale-[1.02] group-active:opacity-90 group-aria-pressed:scale-[1.02] group-aria-pressed:opacity-90 motion-reduce:transition-none motion-reduce:transform-none"
+                      className="object-cover opacity-70 transition-[opacity,transform] duration-500 delay-100 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.02] group-hover:opacity-90 group-focus-visible:scale-[1.02] group-focus-visible:opacity-90 group-active:scale-[1.02] group-active:opacity-90 group-aria-pressed:scale-[1.02] group-aria-pressed:opacity-90 motion-reduce:transition-none motion-reduce:transform-none"
                       sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                       placeholder={representative.lqip ? 'blur' : 'empty'}
                       blurDataURL={representative.lqip}
@@ -274,7 +274,7 @@ export function CategorySection({ categories }: CategorySectionProps) {
                   {selectedItems.map((item) => (
                     <article
                       key={item.name}
-                      className="group relative overflow-hidden rounded-[var(--radius-card)] transition-all duration-300 hover:-translate-y-1"
+                      className="group relative overflow-hidden rounded-[var(--radius-card)] transition-transform duration-300 hover:-translate-y-1"
                       style={{
                         backgroundColor: 'var(--bg-surface-hi)',
                         border: '1px solid rgba(255,255,255,0.06)',

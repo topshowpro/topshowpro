@@ -74,7 +74,7 @@ export function ServiceTabs({ services }: { services: Service[] }) {
     <div className="space-y-10">
       <Tabs.Root value={active} onValueChange={setActive}>
         <Tabs.List
-          aria-label="Seleccion de servicios"
+          aria-label="Selección de servicios"
           className="ui-pill-tabs flex w-full justify-start overflow-x-auto px-1 pb-1 md:justify-center md:px-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {normalizedServices.map((service) => (

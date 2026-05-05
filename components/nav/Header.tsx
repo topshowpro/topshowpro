@@ -134,7 +134,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
     <header
       data-scrolled={scrolled}
       className={cn(
-        'glass-island fixed inset-x-4 z-50 mx-auto max-w-7xl rounded-2xl transition-all duration-500 md:inset-x-6 lg:inset-x-10',
+        'glass-island fixed inset-x-4 z-50 mx-auto max-w-7xl rounded-2xl transition-[top] duration-500 md:inset-x-6 lg:inset-x-10',
         scrolled ? 'top-[calc(0.5rem+env(safe-area-inset-top,0px))]' : 'top-[calc(0.75rem+env(safe-area-inset-top,0px))]'
       )}
     >
@@ -163,7 +163,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
           ))}
           <Link
             href="/contacto"
-            className="navbar-contact-glass inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-4 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
+            className="navbar-contact-glass inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg px-4 font-sans text-[11px] font-semibold uppercase tracking-[0.14em] outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           >
             Contacto
           </Link>
@@ -177,7 +177,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
           aria-expanded={open}
           aria-controls="mobile-nav-panel"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
             <path d={open ? 'M6 6l12 12M18 6L6 18' : 'M3 6h18M3 12h18M3 18h18'} />
           </svg>
         </button>
@@ -207,7 +207,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
           <Link
             href="/contacto"
             onClick={() => setOpen(false)}
-            className="navbar-contact-glass mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
+            className="navbar-contact-glass mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-lg px-4 py-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] outline-none transition-[color,background-color,border-color,box-shadow,transform] duration-300 focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
           >
             Contacto
           </Link>

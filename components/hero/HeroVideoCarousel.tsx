@@ -235,7 +235,7 @@ export function HeroVideoCarousel({
             <button
               key={i}
               onClick={() => setIdx(i)}
-              className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all"
+              className="relative inline-flex min-h-11 min-w-11 items-center justify-center rounded-full transition-colors"
               style={{ backgroundColor: i === idx ? 'rgba(23,133,211,0.14)' : 'rgba(245,245,245,0.06)' }}
               aria-label={`Slide ${i + 1}`}
               aria-current={i === idx}

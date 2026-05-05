@@ -7,13 +7,16 @@ export function EventFilter({
   active,
   onSelect,
   panelId,
+  tabIdBase,
 }: {
   categories: { label: string; slug: string; icon?: string }[];
   active: string | null;
   onSelect: (slug: string | null) => void;
   panelId?: string;
+  tabIdBase?: string;
 }) {
   const tabListId = useId();
+  const idBase = tabIdBase ?? tabListId;
   const items = [
     { label: 'Todos', slug: null as string | null, icon: undefined as string | undefined },
     ...categories.map((category) => ({ label: category.label, slug: category.slug, icon: category.icon })),
@@ -43,13 +46,13 @@ export function EventFilter({
       <div
         role="tablist"
         aria-orientation="horizontal"
-        aria-label="Filtrar eventos por categoria"
-        id={tabListId}
+        aria-label="Filtrar eventos por categoría"
+        id={idBase}
         className="ui-pill-tabs flex max-w-full justify-start overflow-x-auto px-1 md:justify-center [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item, index) => {
           const selected = active === item.slug;
-          const tabId = `${tabListId}-tab-${index}`;
+          const tabId = `${idBase}-tab-${index}`;
 
           return (
             <button

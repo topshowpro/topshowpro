@@ -27,7 +27,7 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, heroImage
       <Link
         href={`/eventos/${slug}`}
         className="event-card-surface-shadow group relative block aspect-[4/5] overflow-hidden rounded-[var(--radius-card)] border focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
-        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'rgba(255,255,255,0.12)' }}
+        style={{ backgroundColor: 'var(--bg-surface)', borderColor: 'var(--border-subtle)' }}
       >
         <Image
           src={imgSrc}

@@ -25,7 +25,7 @@ export const metadata: Metadata = buildMetadata({
 export default async function HomePage() {
   const [hero, homepage, brands, services, clients] = await Promise.all([
     sanityFetch<any>(Q_HERO, undefined, { tag: 'hero', revalidate: 30 }),
-    sanityFetch<any>(Q_HOMEPAGE, undefined, { tag: 'homepage', revalidate: 30 }),
+    sanityFetch<any>(Q_HOMEPAGE, undefined, { tags: ['homepage', 'event'], revalidate: 30 }),
     sanityFetch<any[]>(Q_BRANDS, undefined, { tag: 'brand', revalidate: 30 }),
     sanityFetch<any[]>(Q_SERVICES, undefined, { tag: 'service', revalidate: 30 }),
     sanityFetch<any[]>(Q_CLIENTS, undefined, { tag: 'client', revalidate: 30 }),
@@ -130,7 +130,7 @@ export default async function HomePage() {
           <div className="services-reveal-track">
             {(services ?? []).map((s: any, i: number) => (
               <FadeIn key={s.name} delay={i * 0.08}>
-                <ServiceCard name={s.name} shortDesc={s.shortDesc} coverImage={s.gallery?.[0]?.url ?? null} />
+                <ServiceCard name={s.name} shortDesc={s.shortDesc} coverImage={s.gallery?.[0]?.url ?? null} icon={s.icon ?? null} />
               </FadeIn>
             ))}
           </div>
@@ -170,7 +170,7 @@ export default async function HomePage() {
             {homepage?.footerSubtitle || 'Contanos qué tenés en mente y te armamos una propuesta a medida.'}
           </p>
           <CtaOutlineLink href="/contacto" className="relative z-10 min-h-11 px-6 text-xs">
-            {homepage?.ctaLabel || 'Contactanos'}
+            {homepage?.ctaLabel || 'Contáctanos'}
           </CtaOutlineLink>
         </FadeIn>
       </section>

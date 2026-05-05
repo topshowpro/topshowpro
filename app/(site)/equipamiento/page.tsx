@@ -100,7 +100,7 @@ export default async function EquipamientoPage() {
               ¿Necesitas cotizar equipamiento?
             </h2>
             <p className="mx-auto mb-7 max-w-2xl font-sans text-base md:mb-8 md:text-lg" style={{ color: 'var(--text-muted)' }}>
-              Contanos objetivos, fechas y alcance. Te proponemos una solucion tecnica a medida con mirada de show.
+              Contanos objetivos, fechas y alcance. Te proponemos una solución técnica a medida con mirada de show.
             </p>
             <div className="mt-10">
               <CtaOutlineLink href="/contacto" className="min-h-11 px-7 text-xs">

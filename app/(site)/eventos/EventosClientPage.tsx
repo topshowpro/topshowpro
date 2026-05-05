@@ -55,6 +55,19 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
     return cats.filter((cat) => allEvents.some((event) => event.categorySlug === cat.slug));
   }, [cats, allEvents]);
 
+  const tabItems = useMemo(
+    () => [{ slug: null as string | null }, ...availableCats.map((cat) => ({ slug: cat.slug }))],
+    [availableCats]
+  );
+
+  const activeTabIndex = useMemo(() => {
+    const index = tabItems.findIndex((item) => item.slug === active);
+    return index >= 0 ? index : 0;
+  }, [tabItems, active]);
+
+  const tabIdBase = 'events-filter-tabs';
+  const activeTabId = `${tabIdBase}-tab-${activeTabIndex}`;
+
   const heroSrc = settings?.eventosHero || 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1920&auto=format&fit=crop';
 
   const fontSizeMap: Record<string, string> = {
@@ -106,22 +119,29 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
       </div>
 
       <div className="pt-16 px-6 max-w-7xl mx-auto pb-16 md:pb-24">
-        <EventFilter categories={availableCats} active={active} onSelect={setActive} panelId="event-results-panel" />
+        <EventFilter
+          categories={availableCats}
+          active={active}
+          onSelect={setActive}
+          panelId="event-results-panel"
+          tabIdBase={tabIdBase}
+        />
         {loading ? (
-          <div id="event-results-panel" role="tabpanel" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div id="event-results-panel" role="tabpanel" aria-labelledby={activeTabId} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <EventSkeleton key={i} />
             ))}
           </div>
         ) : (
-          <div id="event-results-panel" role="tabpanel" className="space-y-12">
+          <div id="event-results-panel" role="tabpanel" aria-labelledby={activeTabId} className="space-y-12">
             <EventGrid events={visibleEvents} />
             
             {visibleCount < filteredEvents.length && (
               <div className="flex justify-center pt-8">
                 <button
+                  type="button"
                   onClick={() => setVisibleCount(prev => prev + INITIAL_VISIBLE_COUNT)}
-                  className="font-mono text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/10 rounded-md hover:bg-white hover:text-black transition-all"
+                  className="font-mono text-[11px] uppercase tracking-[0.2em] px-8 py-4 border border-white/10 rounded-md hover:bg-white hover:text-black transition-colors"
                 >
                   Cargar más eventos
                 </button>

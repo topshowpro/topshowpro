@@ -5,9 +5,10 @@ type ServiceCardProps = {
   name: string;
   shortDesc: string;
   coverImage?: string | null;
+  icon?: string | null;
 };
 
-export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
+export function ServiceCard({ name, shortDesc, coverImage, icon }: ServiceCardProps) {
   return (
     <TiltCard
       className="service-card-reveal service-card-shell group/service h-full w-full rounded-[var(--radius-card)]"
@@ -46,6 +47,11 @@ export function ServiceCard({ name, shortDesc, coverImage }: ServiceCardProps) {
         />
 
         <div className="relative z-10 p-8 transition-transform duration-500 group-hover/service:-translate-y-0.5">
+          {icon ? (
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.14em]" style={{ color: 'var(--accent-cyan)' }}>
+              {icon}
+            </p>
+          ) : null}
           <h3 className="mb-3 font-display text-2xl text-white transition-[opacity,transform] duration-400 delay-[220ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/service:translate-x-[2px]">
             {name}
           </h3>

@@ -19,8 +19,9 @@ export function LedDisplay({ images, title }: LedDisplayProps) {
   return (
     <>
       <button
+        type="button"
         onClick={() => { setCurrent(0); setOpen(true); }}
-        className="relative block w-full aspect-video overflow-hidden group"
+        className="relative block w-full aspect-video overflow-hidden group focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
         style={{ backgroundColor: 'var(--bg-surface)' }}
       >
         <Image
@@ -74,8 +75,10 @@ export function LedDisplay({ images, title }: LedDisplayProps) {
                 {images.map((img, i) => (
                   <button
                     key={i}
+                    type="button"
                     onClick={() => setCurrent(i)}
-                    className="relative flex-shrink-0 w-16 h-12 overflow-hidden transition"
+                    aria-label={`Ver imagen ${i + 1}`}
+                    className="relative flex-shrink-0 w-16 h-12 overflow-hidden transition focus-visible:ring-2 focus-visible:ring-[var(--accent-cyan)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-base)]"
                     style={{
                       border: i === current ? '2px solid var(--accent-cyan)' : '2px solid transparent',
                       opacity: i === current ? 1 : 0.5,
