@@ -25,7 +25,8 @@ export function ServiceCard({ name, shortDesc, coverImage, icon }: ServiceCardPr
             fill
             loading="lazy"
             className="object-cover opacity-35 transition-[opacity,transform] duration-700 delay-[150ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover/service:scale-[1.03] group-hover/service:opacity-60"
-            sizes="(max-width: 768px) 100vw, 25vw"
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 17vw"
+            quality={68}
           />
         )}
 

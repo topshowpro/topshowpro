@@ -75,7 +75,9 @@ export default async function ServiciosPage() {
             fill
             className="object-cover opacity-25"
             priority
+            fetchPriority="high"
             sizes="100vw"
+            quality={65}
           />
         )}
         <div className="absolute inset-0 grid-overlay opacity-30" />
@@ -92,18 +94,18 @@ export default async function ServiciosPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-14 md:px-6 md:py-20">
+      <section className="defer-render mx-auto max-w-7xl px-6 py-14 md:px-6 md:py-20">
         <FadeIn>
           <ServiceTabs services={services ?? []} />
         </FadeIn>
       </section>
 
       {/* Brands marquee */}
-      <div className="py-12">
+      <div className="defer-render py-12">
         <BrandsMarquee brands={brands ?? []} />
       </div>
 
-      <section className="relative isolate overflow-hidden px-6 py-24 text-center md:px-10 md:py-28">
+      <section className="defer-render relative isolate overflow-hidden px-6 py-24 text-center md:px-10 md:py-28">
         <NeonBackdrop variant="aurora-ribbon" />
         <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.09]" />
 

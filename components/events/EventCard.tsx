@@ -37,8 +37,8 @@ export function EventCard({ title, subtitle, slug, dateStart, dateEnd, heroImage
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : 'auto'}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
-          quality={75}
+          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 25vw"
+          quality={68}
           placeholder={lqip ? 'blur' : 'empty'}
           blurDataURL={lqip ?? undefined}
         />

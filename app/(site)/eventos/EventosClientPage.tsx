@@ -102,7 +102,9 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
           fill
           className="object-cover opacity-25"
           priority
+          fetchPriority="high"
           sizes="100vw"
+          quality={65}
         />
         <div className="absolute inset-0 grid-overlay opacity-30" />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -118,7 +120,7 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
         </div>
       </div>
 
-      <div className="pt-16 px-6 max-w-7xl mx-auto pb-16 md:pb-24">
+      <div className="defer-render pt-16 px-6 max-w-7xl mx-auto pb-16 md:pb-24">
         <EventFilter
           categories={availableCats}
           active={active}
@@ -152,12 +154,12 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
       </div>
 
       {/* Brands marquee */}
-      <div className="py-12">
+      <div className="defer-render py-12">
         <BrandsMarquee brands={brands} />
       </div>
 
       {/* Footer CTA Section */}
-      <section className="relative isolate overflow-hidden px-6 py-24 text-center md:px-10 md:py-28">
+      <section className="defer-render relative isolate overflow-hidden px-6 py-24 text-center md:px-10 md:py-28">
         <NeonBackdrop variant="aurora-ribbon" />
         <div className="pointer-events-none absolute inset-0 grid-overlay opacity-[0.09]" />
 

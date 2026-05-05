@@ -13,6 +13,16 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
   const ref = useRef<HTMLDivElement>(null);
   const frame = useRef<number | null>(null);
   const canTiltRef = useRef(false);
+  const rectRef = useRef<DOMRect | null>(null);
+
+  const refreshRect = () => {
+    if (!ref.current) {
+      rectRef.current = null;
+      return;
+    }
+
+    rectRef.current = ref.current.getBoundingClientRect();
+  };
 
   const detectCapability = () => {
     if (typeof window === 'undefined') {
@@ -32,7 +42,11 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
       return;
     }
 
-    const rect = ref.current.getBoundingClientRect();
+    const rect = rectRef.current;
+    if (!rect) {
+      return;
+    }
+
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     const mouseX = (e.clientX - centerX) / (rect.width / 2);
@@ -64,12 +78,21 @@ export function TiltCard({ children, className, tiltIntensity = 10 }: TiltCardPr
     }
 
     ref.current.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    rectRef.current = null;
   };
 
   return (
     <div
       ref={ref}
-      onMouseEnter={detectCapability}
+      onMouseEnter={() => {
+        detectCapability();
+        if (!canTiltRef.current) {
+          rectRef.current = null;
+          return;
+        }
+
+        refreshRect();
+      }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn('relative transition-transform duration-200', className)}

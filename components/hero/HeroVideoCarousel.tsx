@@ -224,7 +224,7 @@ export function HeroVideoCarousel({
           className={cn("text-center max-w-6xl font-festival-heading uppercase text-[var(--text-primary)] leading-[0.88]", activeNeonClass)}
           style={{ fontSize: activeFontSize, letterSpacing: '0.01em' }}
         >
-          <RevealText text={slide?.phrase ?? ''} key={idx} />
+          <RevealText text={slide?.phrase ?? ''} key={idx} animate={false} />
         </h1>
       </div>
 

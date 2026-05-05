@@ -1,6 +1,4 @@
-'use client';
-
-export function RevealText({ text, className = '' }: { text: string; className?: string }) {
+export function RevealText({ text, className = '', animate = true }: { text: string; className?: string; animate?: boolean }) {
   const words = text.split(' ');
 
   return (
@@ -11,8 +9,8 @@ export function RevealText({ text, className = '' }: { text: string; className?:
         return (
           <span key={`${word}-${index}`} className="inline-block overflow-hidden align-bottom py-[2.5em] my-[-2.5em] px-[1em] mx-[-1em]">
             <span
-              className={`inline-block reveal-word ${isItalic ? 'italic' : ''}`}
-              style={{ animationDelay: `${index * 0.04}s` }}
+              className={`inline-block ${animate ? 'reveal-word' : ''} ${isItalic ? 'italic' : ''}`.trim()}
+              style={animate ? { animationDelay: `${index * 0.04}s` } : undefined}
             >
               {word}
             </span>

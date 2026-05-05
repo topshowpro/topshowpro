@@ -114,7 +114,7 @@ export default async function HomePage() {
       </section>
 
       {/* Services section */}
-      <section className="relative overflow-hidden px-4 sm:px-6 py-24" style={{ backgroundColor: 'var(--bg-surface)' }}>
+      <section className="defer-render relative overflow-hidden px-4 sm:px-6 py-24" style={{ backgroundColor: 'var(--bg-surface)' }}>
         <NeonOrbs orbs={[
           { color: 'cyan', drift: 'c', size: '400px', top: '-80px', right: '-60px', opacity: 0.25 },
         ]} />
@@ -138,7 +138,7 @@ export default async function HomePage() {
       </section>
 
       {/* Featured events section */}
-      <section className="px-4 sm:px-6 py-24 max-w-7xl mx-auto">
+      <section className="defer-render px-4 sm:px-6 py-24 max-w-7xl mx-auto">
         <FadeIn>
           <SectionHeader
             title="Eventos destacados"
@@ -151,10 +151,12 @@ export default async function HomePage() {
       </section>
 
       {/* Brands marquee */}
-      <BrandsMarquee brands={brands ?? []} />
+      <div className="defer-render">
+        <BrandsMarquee brands={brands ?? []} />
+      </div>
 
       {/* CTA section */}
-      <section className="relative overflow-hidden px-4 sm:px-6 py-32 text-center bg-focal-beam">
+      <section className="defer-render relative overflow-hidden px-4 sm:px-6 py-32 text-center bg-focal-beam">
         <NeonOrbs orbs={[
           { color: 'cyan',   drift: 'a', size: '700px', top: '-200px', left: '50%', opacity: 0.4 },
           { color: 'violet', drift: 'c', size: '400px', bottom: '-100px', right: '-80px', opacity: 0.5 },

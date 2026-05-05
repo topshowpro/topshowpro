@@ -387,6 +387,11 @@ textarea,
   background: radial-gradient(ellipse at top, color-mix(in srgb, var(--accent-cyan) 12%, transparent) 0%, transparent 50%);
 }
 
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
 .border-ghost {
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
