@@ -107,7 +107,7 @@ export default function ContactEmail({ name, email, message, category, phone, co
               <Link href="https://topshowpro.vercel.app" style={footerLink}>topshowpro.com.ar</Link>
             </Text>
             <Text style={footerText}>
-              Top Show Pro · Av. Corrientes 1234, CABA · hola@topshowpro.com.ar
+              Top Show Pro &middot; contactoweb@topshowpro.com.ar
             </Text>
           </Section>
 

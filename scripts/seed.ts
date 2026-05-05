@@ -37,7 +37,7 @@ const siteSettings = {
   _id: 'siteSettings',
   _type: 'siteSettings',
   address: 'Av. Corrientes 1234, CABA',
-  email: 'hola@topshowpro.com.ar',
+  email: 'contactoweb@topshowpro.com.ar',
   phone: '+54 11 1234-5678',
   schedule: 'Lunes a Viernes 9–18hs',
   socials: {
