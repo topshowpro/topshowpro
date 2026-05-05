@@ -127,7 +127,7 @@ export const Q_BRANDS = `*[_type == "brand"] | order(name asc){
   logo { asset->{url} }
 }`;
 
-export const Q_CONTACT_CATEGORIES = `*[_type == "contactCategory"] | order(order asc){ label }`;
+export const Q_CONTACT_CATEGORIES = `*[_type == "eventCategory"] | order(order asc){ label }`;
 
 export const Q_CLIENTS = `*[_type == "client"] | order(order asc){ name, website, "logoUrl": logo.asset->url }`;
 

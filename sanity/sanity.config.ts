@@ -30,7 +30,6 @@ export default defineConfig({
             S.documentTypeListItem('client').title('🏢 Clientes'),
             S.documentTypeListItem('brand').title('🎯 Marcas'),
             S.divider(),
-            S.documentTypeListItem('contactCategory').title('📬 Categorías de Contacto'),
             S.documentTypeListItem('lead').title('📥 Consultas recibidas'),
             S.divider(),
             S.listItem().title('🔍 SEO Defaults').child(S.document().schemaType('seoDefaults').documentId('seoDefaults')),
