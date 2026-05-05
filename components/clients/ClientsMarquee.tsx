@@ -24,16 +24,16 @@ export function ClientsMarquee({ clients }: { clients: Client[] }) {
       >
         {loop.map((c, i) => {
           const content = (
-            <div className="flex items-center justify-center min-w-[200px] md:min-w-[320px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-[opacity,filter] duration-700 ease-out">
+            <div className="flex items-center justify-center min-w-[240px] md:min-w-[380px] px-8 md:px-12 grayscale opacity-50 hover:opacity-100 hover:grayscale-0 transition-[opacity,filter] duration-700 ease-out">
               {c.logoUrl ? (
                 <Image
                   src={c.logoUrl}
                   alt={c.name}
                   width={320}
                   height={120}
-                  className="h-10 md:h-14 w-auto object-contain"
+                  className="h-14 md:h-20 w-auto object-contain"
                   loading="lazy"
-                  sizes="320px"
+                  sizes="(min-width: 768px) 380px, 240px"
                 />
               ) : (
                 <span className="font-display text-xl md:text-2xl tracking-[0.25em] text-[var(--text-muted)] uppercase opacity-80">
