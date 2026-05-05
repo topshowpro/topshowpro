@@ -21,7 +21,6 @@ type NetworkInformationWithSaveData = {
 
 type HeroVideoStrategy = {
   eagerFirstVideo?: boolean;
-  deferNonFirstVideoMs?: number;
 };
 
 function heroPosterLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
@@ -49,14 +48,11 @@ export function HeroVideoCarousel({
 }) {
   const [idx, setIdx] = useState(0);
   const [allowVideoPlayback, setAllowVideoPlayback] = useState(false);
-  const [shouldLoadDeferredVideos, setShouldLoadDeferredVideos] = useState(false);
-  const [firstVideoReady, setFirstVideoReady] = useState(false);
-  const [userInteracted, setUserInteracted] = useState(false);
   const [activeVideoPreload, setActiveVideoPreload] = useState<'none' | 'metadata' | 'auto'>('metadata');
+  const [nextVideoPreload, setNextVideoPreload] = useState<'none' | 'metadata' | 'auto'>('metadata');
   const [videoFailed, setVideoFailed] = useState<Record<number, boolean>>({});
 
   const eagerFirstVideo = videoStrategy?.eagerFirstVideo ?? true;
-  const deferNonFirstVideoMs = videoStrategy?.deferNonFirstVideoMs ?? 2200;
 
   useEffect(() => {
     if (typeof window === 'undefined') {
@@ -78,48 +74,8 @@ export function HeroVideoCarousel({
 
     setAllowVideoPlayback(canPlayVideo);
     setActiveVideoPreload(preloadMode);
+    setNextVideoPreload(preloadMode === 'auto' ? 'metadata' : preloadMode);
   }, []);
-
-  useEffect(() => {
-    if (!allowVideoPlayback) {
-      setShouldLoadDeferredVideos(false);
-      return;
-    }
-
-    const enableVideo = () => {
-      setUserInteracted(true);
-      setShouldLoadDeferredVideos(true);
-    };
-
-    if (firstVideoReady || videoFailed[0]) {
-      const timeoutId = window.setTimeout(() => setShouldLoadDeferredVideos(true), deferNonFirstVideoMs);
-      return () => {
-        window.clearTimeout(timeoutId);
-      };
-    }
-
-    const idleCallback =
-      'requestIdleCallback' in window
-        ? window.requestIdleCallback(() => {
-            if (firstVideoReady || userInteracted || videoFailed[0]) {
-              setShouldLoadDeferredVideos(true);
-            }
-          }, { timeout: deferNonFirstVideoMs + 6000 })
-        : null;
-
-    window.addEventListener('pointerdown', enableVideo, { once: true, passive: true });
-    window.addEventListener('touchstart', enableVideo, { once: true, passive: true });
-    window.addEventListener('keydown', enableVideo, { once: true });
-
-    return () => {
-      if (idleCallback !== null && 'cancelIdleCallback' in window) {
-        window.cancelIdleCallback(idleCallback);
-      }
-      window.removeEventListener('pointerdown', enableVideo);
-      window.removeEventListener('touchstart', enableVideo);
-      window.removeEventListener('keydown', enableVideo);
-    };
-  }, [allowVideoPlayback, deferNonFirstVideoMs, firstVideoReady, userInteracted, videoFailed]);
 
   useEffect(() => {
     if (slides.length < 2) return;
@@ -130,11 +86,12 @@ export function HeroVideoCarousel({
   const slide = slides[idx];
   const hasSlides = slides.length > 0;
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
-  const secondSlideVideoUrl = slides[1]?.videoUrl ?? null;
+  const nextIdx = slides.length > 0 ? (idx + 1) % slides.length : 0;
+  const nextSlideVideoUrl = slides[nextIdx]?.videoUrl ?? null;
 
-  const shouldPreloadSecondVideo = useMemo(
-    () => allowVideoPlayback && Boolean(secondSlideVideoUrl) && (shouldLoadDeferredVideos || idx === 0),
-    [allowVideoPlayback, secondSlideVideoUrl, shouldLoadDeferredVideos, idx],
+  const shouldPreloadNextVideo = useMemo(
+    () => allowVideoPlayback && Boolean(nextSlideVideoUrl) && !videoFailed[nextIdx],
+    [allowVideoPlayback, nextSlideVideoUrl, nextIdx, videoFailed],
   );
 
   const neonColorMap: Record<string, string> = {
@@ -162,20 +119,23 @@ export function HeroVideoCarousel({
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
-      {shouldPreloadSecondVideo && secondSlideVideoUrl && (
-        <link rel="preload" as="video" href={secondSlideVideoUrl} />
+      {shouldPreloadNextVideo && nextSlideVideoUrl && (
+        <link rel="preload" as="video" href={nextSlideVideoUrl} />
       )}
       
       {slides.map((s, i) => {
         const isActive = i === idx;
+        const isNext = i === nextIdx;
         const isFirst = i === 0;
         const canRenderVideo =
           Boolean(s.videoUrl) &&
           allowVideoPlayback &&
-          (isActive || (i === 1 && idx === 0 && shouldLoadDeferredVideos)) &&
-          (isFirst ? eagerFirstVideo : shouldLoadDeferredVideos);
+          !videoFailed[i] &&
+          (isActive || isNext) &&
+          (isFirst ? eagerFirstVideo : true);
 
-        const showPosterImage = Boolean(s.posterUrl) && (!canRenderVideo || (isFirst && !firstVideoReady));
+        const showPosterImage = Boolean(s.posterUrl);
+        const preloadMode = isActive ? activeVideoPreload : nextVideoPreload;
 
         return (
           <div
@@ -209,24 +169,22 @@ export function HeroVideoCarousel({
                 muted
                 loop
                 playsInline
-                preload={activeVideoPreload}
+                preload={preloadMode}
                 className="h-full w-full object-cover"
                 poster={s.posterUrl ? heroPosterLoader({ src: s.posterUrl, width: 1920 }) : undefined}
-                onLoadedData={() => {
-                  if (isFirst) {
-                    setFirstVideoReady(true);
-                  }
-                }}
-                onPlaying={() => {
-                  if (isFirst) {
-                    setFirstVideoReady(true);
-                  }
-                }}
                 onError={() => {
                   setVideoFailed((prev) => ({ ...prev, [i]: true }));
                 }}
               />
             ) : null}
+
+            {isActive && videoFailed[i] && (
+              <div className="pointer-events-none absolute inset-x-0 bottom-20 z-[3] flex justify-center px-6">
+                <p className="max-w-2xl rounded-full border border-white/20 bg-black/50 px-4 py-2 text-center font-mono text-[10px] uppercase tracking-[0.16em] text-white/70 backdrop-blur-sm">
+                  Video temporalmente no disponible. Continuamos con imagen de respaldo.
+                </p>
+              </div>
+            )}
           </div>
         );
       })}

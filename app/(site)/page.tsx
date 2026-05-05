@@ -63,7 +63,7 @@ export default async function HomePage() {
       <HeroVideoCarousel
         slides={hero?.slides ?? []}
         banner={hero?.bannerAzul}
-        videoStrategy={{ eagerFirstVideo: true, deferNonFirstVideoMs: 8000 }}
+        videoStrategy={{ eagerFirstVideo: true }}
       />
 
       <ClientsMarquee clients={clients ?? []} />
