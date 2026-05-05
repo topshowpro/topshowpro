@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { RevealText } from '@/components/motion/RevealText';
@@ -53,6 +53,7 @@ export function HeroVideoCarousel({
   const [firstVideoReady, setFirstVideoReady] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
   const [activeVideoPreload, setActiveVideoPreload] = useState<'none' | 'metadata' | 'auto'>('metadata');
+  const [videoFailed, setVideoFailed] = useState<Record<number, boolean>>({});
 
   const eagerFirstVideo = videoStrategy?.eagerFirstVideo ?? true;
   const deferNonFirstVideoMs = videoStrategy?.deferNonFirstVideoMs ?? 2200;
@@ -90,7 +91,7 @@ export function HeroVideoCarousel({
       setShouldLoadDeferredVideos(true);
     };
 
-    if (firstVideoReady) {
+    if (firstVideoReady || videoFailed[0]) {
       const timeoutId = window.setTimeout(() => setShouldLoadDeferredVideos(true), deferNonFirstVideoMs);
       return () => {
         window.clearTimeout(timeoutId);
@@ -100,7 +101,7 @@ export function HeroVideoCarousel({
     const idleCallback =
       'requestIdleCallback' in window
         ? window.requestIdleCallback(() => {
-            if (firstVideoReady || userInteracted) {
+            if (firstVideoReady || userInteracted || videoFailed[0]) {
               setShouldLoadDeferredVideos(true);
             }
           }, { timeout: deferNonFirstVideoMs + 6000 })
@@ -118,7 +119,7 @@ export function HeroVideoCarousel({
       window.removeEventListener('touchstart', enableVideo);
       window.removeEventListener('keydown', enableVideo);
     };
-  }, [allowVideoPlayback, deferNonFirstVideoMs, firstVideoReady, userInteracted]);
+  }, [allowVideoPlayback, deferNonFirstVideoMs, firstVideoReady, userInteracted, videoFailed]);
 
   useEffect(() => {
     if (slides.length < 2) return;
@@ -128,6 +129,12 @@ export function HeroVideoCarousel({
 
   const slide = slides[idx];
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
+  const secondSlideVideoUrl = slides[1]?.videoUrl ?? null;
+
+  const shouldPreloadSecondVideo = useMemo(
+    () => allowVideoPlayback && Boolean(secondSlideVideoUrl) && (shouldLoadDeferredVideos || idx === 0),
+    [allowVideoPlayback, secondSlideVideoUrl, shouldLoadDeferredVideos, idx],
+  );
 
   const neonColorMap: Record<string, string> = {
     'cyan': 'text-neon-cyan',
@@ -151,6 +158,9 @@ export function HeroVideoCarousel({
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
       {firstSlidePosterUrl && <link rel="preload" as="image" href={firstSlidePosterUrl} fetchPriority="high" />}
+      {shouldPreloadSecondVideo && secondSlideVideoUrl && (
+        <link rel="preload" as="video" href={secondSlideVideoUrl} />
+      )}
       
       {slides.map((s, i) => {
         const isActive = i === idx;
@@ -158,7 +168,7 @@ export function HeroVideoCarousel({
         const canRenderVideo =
           Boolean(s.videoUrl) &&
           allowVideoPlayback &&
-          isActive &&
+          (isActive || (i === 1 && idx === 0 && shouldLoadDeferredVideos)) &&
           (isFirst ? eagerFirstVideo : shouldLoadDeferredVideos);
 
         const showPosterImage = Boolean(s.posterUrl) && (!canRenderVideo || (isFirst && !firstVideoReady));
@@ -207,6 +217,9 @@ export function HeroVideoCarousel({
                   if (isFirst) {
                     setFirstVideoReady(true);
                   }
+                }}
+                onError={() => {
+                  setVideoFailed((prev) => ({ ...prev, [i]: true }));
                 }}
               />
             ) : null}
