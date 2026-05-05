@@ -17,7 +17,7 @@ export async function sendContactEmail(params: ContactPayload) {
     return { ok: false, error: 'Email service not configured' };
   }
 
-  const from = process.env.RESEND_FROM || 'Top Show Pro <onboarding@resend.dev>';
+  const from = process.env.RESEND_FROM || 'Top Show Pro <contactoweb@topshowpro.com.ar>';
   const to = process.env.RESEND_TO || 'contactoweb@topshowpro.com.ar';
 
   const date = new Date().toLocaleDateString('es-AR', {
@@ -117,7 +117,7 @@ function buildEmail(p: ContactPayload & { date: string }): string {
           <!-- Footer -->
           <tr>
             <td style="background-color:#0A0A0A;padding:20px 32px;border-top:1px solid rgba(255,255,255,0.06)">
-              <p style="font-size:11px;color:#555555;margin:0 0 4px;text-align:center">Este mensaje fue enviado desde el formulario de contacto de <a href="https://topshowpro.vercel.app" style="color:#5AA7E0;text-decoration:none">topshowpro.com.ar</a></p>
+              <p style="font-size:11px;color:#555555;margin:0 0 4px;text-align:center">Este mensaje fue enviado desde el formulario de contacto de <a href="https://www.topshowpro.com.ar" style="color:#5AA7E0;text-decoration:none">topshowpro.com.ar</a></p>
               <p style="font-size:11px;color:#555555;margin:0;text-align:center">Top Show Pro &middot; contactoweb@topshowpro.com.ar</p>
             </td>
           </tr>

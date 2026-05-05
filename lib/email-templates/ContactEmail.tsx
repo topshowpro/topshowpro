@@ -104,7 +104,7 @@ export default function ContactEmail({ name, email, message, category, phone, co
           <Section style={footer}>
             <Text style={footerText}>
               Este mensaje fue enviado desde el formulario de contacto de{' '}
-              <Link href="https://topshowpro.vercel.app" style={footerLink}>topshowpro.com.ar</Link>
+              <Link href="https://www.topshowpro.com.ar" style={footerLink}>topshowpro.com.ar</Link>
             </Text>
             <Text style={footerText}>
               Top Show Pro &middot; contactoweb@topshowpro.com.ar
