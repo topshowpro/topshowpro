@@ -141,7 +141,7 @@ export function Header({ settings }: { settings?: SiteSettings | null }) {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 md:py-4">
         <Link href="/" className="flex items-center hover:opacity-85 transition">
           <Image
-            src={settings?.logoUrl || '/Top-show-pro_logo.png'}
+            src={settings?.logoUrl || '/logo.png'}
             alt="Top Show Pro"
             width={160}
             height={40}

@@ -22,7 +22,7 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
           <Image
-            src={settings?.logoUrl || '/Top-show-pro_logo.png'}
+            src={settings?.logoUrl || '/logo.png'}
             alt="Top Show Pro"
             width={160}
             height={40}
