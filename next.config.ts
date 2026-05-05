@@ -1,6 +1,45 @@
 import type { NextConfig } from 'next';
 
+const permanentRedirect = (source: string, destination: string) => ({
+  source,
+  destination,
+  permanent: true,
+});
+
+const withTrailingSlashVariants = (redirects: Array<{ source: string; destination: string }>) =>
+  redirects.flatMap(({ source, destination }) => {
+    const normalizedSource = source.endsWith('/') ? source.slice(0, -1) : source;
+
+    return [
+      { source: normalizedSource, destination },
+      { source: `${normalizedSource}/`, destination },
+    ];
+  });
+
+const LEGACY_REDIRECTS: Array<{ source: string; destination: string }> = [
+  // Basicos
+  { source: '/contactenos', destination: '/contacto' },
+  { source: '/home', destination: '/' },
+  { source: '/HOME', destination: '/' },
+  { source: '/blog', destination: '/' },
+
+  // E-commerce antiguo (WooCommerce) a Equipamiento
+  { source: '/tienda/:path*', destination: '/equipamiento' },
+  { source: '/shop/:path*', destination: '/equipamiento' },
+  { source: '/product-category/:path*', destination: '/equipamiento' },
+
+  // Paginas de eventos/shows especificos a la galeria de eventos
+  { source: '/mandarine-park-tent', destination: '/eventos' },
+  { source: '/groove', destination: '/eventos' },
+  { source: '/tootsie', destination: '/eventos' },
+  { source: '/moldavski', destination: '/eventos' },
+  { source: '/esperando-la-carroza', destination: '/eventos' },
+  { source: '/felicidades', destination: '/eventos' },
+  { source: '/godspell-college', destination: '/eventos' },
+];
+
 const config: NextConfig = {
+  trailingSlash: false,
   async headers() {
     return [
       {
@@ -16,27 +55,7 @@ const config: NextConfig = {
     ];
   },
   async redirects() {
-    return [
-      // 1. Básicos
-      { source: '/contactenos', destination: '/contacto', permanent: true },
-      { source: '/home', destination: '/', permanent: true },
-      { source: '/HOME', destination: '/', permanent: true },
-      { source: '/blog', destination: '/', permanent: true },
-
-      // 2. E-commerce antiguo (WooCommerce) a Equipamiento
-      { source: '/tienda/:path*', destination: '/equipamiento', permanent: true },
-      { source: '/shop/:path*', destination: '/equipamiento', permanent: true },
-      { source: '/product-category/:path*', destination: '/equipamiento', permanent: true },
-
-      // 3. Páginas de eventos/shows específicos a la galería de eventos
-      { source: '/mandarine-park-tent', destination: '/eventos', permanent: true },
-      { source: '/groove', destination: '/eventos', permanent: true },
-      { source: '/tootsie', destination: '/eventos', permanent: true },
-      { source: '/moldavski', destination: '/eventos', permanent: true },
-      { source: '/esperando-la-carroza', destination: '/eventos', permanent: true },
-      { source: '/felicidades', destination: '/eventos', permanent: true },
-      { source: '/godspell-college', destination: '/eventos', permanent: true },
-    ];
+    return withTrailingSlashVariants(LEGACY_REDIRECTS).map(({ source, destination }) => permanentRedirect(source, destination));
   },
   experimental: {
     viewTransition: true,
