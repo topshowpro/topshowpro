@@ -128,6 +128,7 @@ export function HeroVideoCarousel({
   }, [slides.length]);
 
   const slide = slides[idx];
+  const hasSlides = slides.length > 0;
   const firstSlidePosterUrl = slides[0]?.posterUrl ? heroPosterLoader({ src: slides[0].posterUrl, width: 1920 }) : null;
   const secondSlideVideoUrl = slides[1]?.videoUrl ?? null;
 
@@ -154,6 +155,9 @@ export function HeroVideoCarousel({
 
   const activeNeonClass = neonColorMap[slide?.accentColor || 'cyan'];
   const activeFontSize = fontSizeMap[slide?.fontSize || 'standard'];
+  const hasRenderableVideo = Boolean(slide?.videoUrl) && allowVideoPlayback && !videoFailed[idx];
+  const hasPosterFallback = Boolean(slide?.posterUrl);
+  const shouldShowMediaFallback = !hasSlides || (!hasRenderableVideo && !hasPosterFallback);
 
   return (
     <section className="relative min-h-screen h-[100svh] w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-base)' }}>
@@ -226,6 +230,20 @@ export function HeroVideoCarousel({
           </div>
         );
       })}
+
+      {shouldShowMediaFallback && (
+        <div className="absolute inset-0 z-[2]">
+          <div className="absolute inset-0 bg-[radial-gradient(75%_60%_at_50%_30%,rgba(23,133,211,0.28),transparent_65%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(4,8,16,0.9),rgba(7,20,35,0.78))]" />
+          <div className="absolute inset-0 flex items-end justify-center px-6 pb-28 md:pb-32">
+            <p className="max-w-3xl text-center font-mono text-[11px] uppercase tracking-[0.18em] text-white/72">
+              {hasSlides
+                ? 'Estamos preparando el contenido multimedia de este hero. Mientras tanto, podés navegar el sitio sin interrupciones.'
+                : 'Estamos actualizando el hero de inicio. Volve en unos minutos para ver el contenido multimedia.'}
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/45" />
 

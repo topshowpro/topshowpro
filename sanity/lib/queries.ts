@@ -3,7 +3,7 @@ export const Q_HERO = `*[_type == "hero"][0]{
     phrase, accentColor, fontSize,
     "posterUrl": poster.asset->url,
     "posterLqip": poster.asset->metadata.lqip,
-    "videoUrl": video.asset->url
+    "videoUrl": coalesce(video.asset->url, videoUrl)
   },
   bannerAzul{ text, backgroundColor, showCta, cta{ label, link, variant } }
 }`;
