@@ -1,6 +1,29 @@
 import type { NextConfig } from 'next';
 
 const config: NextConfig = {
+  async redirects() {
+    return [
+      // 1. Básicos
+      { source: '/contactenos', destination: '/contacto', permanent: true },
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/HOME', destination: '/', permanent: true },
+      { source: '/blog', destination: '/', permanent: true },
+
+      // 2. E-commerce antiguo (WooCommerce) a Equipamiento
+      { source: '/tienda/:path*', destination: '/equipamiento', permanent: true },
+      { source: '/shop/:path*', destination: '/equipamiento', permanent: true },
+      { source: '/product-category/:path*', destination: '/equipamiento', permanent: true },
+
+      // 3. Páginas de eventos/shows específicos a la galería de eventos
+      { source: '/mandarine-park-tent', destination: '/eventos', permanent: true },
+      { source: '/groove', destination: '/eventos', permanent: true },
+      { source: '/tootsie', destination: '/eventos', permanent: true },
+      { source: '/moldavski', destination: '/eventos', permanent: true },
+      { source: '/esperando-la-carroza', destination: '/eventos', permanent: true },
+      { source: '/felicidades', destination: '/eventos', permanent: true },
+      { source: '/godspell-college', destination: '/eventos', permanent: true },
+    ];
+  },
   experimental: {
     viewTransition: true,
   },
