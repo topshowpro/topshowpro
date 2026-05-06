@@ -20,13 +20,13 @@ export const Q_HOMEPAGE = `{
     "manualFeaturedEvents": featuredEvents[]->{
       title, subtitle, "slug": slug.current, dateStart, dateEnd,
       "heroImage": heroImage.asset->{url, metadata{lqip}}
-    }
+    } | order(dateStart desc)
   },
-  "featuredByFlag": *[_type == "event" && featured == true] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
+  "featuredByFlag": *[_type == "event" && featured == true] | order(dateStart desc, _createdAt desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   },
-  "recentEvents": *[_type == "event"] | order(coalesce(dateStart, _createdAt) desc)[0...6] {
+  "recentEvents": *[_type == "event"] | order(dateStart desc, _createdAt desc)[0...6] {
     title, subtitle, "slug": slug.current, dateStart, dateEnd,
     "heroImage": heroImage.asset->{url, metadata{lqip}}
   }
@@ -81,7 +81,7 @@ export const Q_SITE_SETTINGS_CHROME = `*[_type == "siteSettings"][0]{
   copyright
 }`;
 
-export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc) {
+export const Q_EVENTS_LIST = `*[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc, _createdAt desc) {
   title, subtitle, "slug": slug.current, dateStart, dateEnd,
   "categorySlug": category->slug.current,
   "heroImage": heroImage.asset->{url, metadata{lqip}}
