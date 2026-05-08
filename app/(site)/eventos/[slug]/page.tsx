@@ -16,6 +16,7 @@ import { PortableText } from '@portabletext/react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 import { Tag } from '@/components/ui/tag';
 import { buildMetadata } from '@/lib/seo';
+import { EventAmbientBg, getEventColors } from '@/components/events/EventAmbientBg';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -39,8 +40,22 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
     ? event.gallery.filter((item: any): item is { url: string } => typeof item?.url === 'string' && item.url.length > 0)
     : [];
 
+  const eventColors = getEventColors(event.heroImage?.metadata?.palette);
+
   return (
-    <article style={{ backgroundColor: 'var(--bg-base)' }}>
+    <>
+      {/* Ambient color wash — Spotify-style background derived from hero image palette */}
+      <EventAmbientBg palette={event.heroImage?.metadata?.palette} />
+
+      <article style={{
+        position: 'relative',
+        zIndex: 1,
+        backgroundColor: 'transparent',
+        // Inject palette as CSS custom properties — consumed by pill, borders, accents
+        '--event-primary':   eventColors.primary,
+        '--event-secondary': eventColors.secondary,
+        '--event-tertiary':  eventColors.tertiary,
+      } as React.CSSProperties}>
       {/* Hero */}
       <header className="relative h-[66svh] md:h-[76svh] lg:h-[84svh] w-full overflow-hidden">
         {event.heroImage && (
@@ -56,7 +71,15 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             blurDataURL={event.heroImage.metadata?.lqip ?? undefined}
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/20" />
+        {/* Bottom-up gradient: blends event's dominant color with black so the cover spills into the page */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(to top, color-mix(in srgb, var(--event-primary) 28%, black) 0%, rgba(0,0,0,0.52) 42%, rgba(0,0,0,0.18) 100%)',
+          }}
+        />
+        {/* Top-down dark vignette for nav readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-transparent to-transparent" />
 
         <div className="absolute inset-x-0 top-[calc(5.5rem+env(safe-area-inset-top,0px))] z-30 px-4 sm:px-6 md:top-[calc(6rem+env(safe-area-inset-top,0px))]">
@@ -208,5 +231,6 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
         </CtaOutlineLink>
       </section>
     </article>
+    </>
   );
 }

@@ -91,7 +91,7 @@ export const Q_EVENT_DETAIL = `*[_type == "event" && slug.current == $slug][0]{
   title, subtitle, dateStart, dateEnd, client, location,
   description, equipmentUsed, tagsTecnicos, video,
   "category": category->{label, "slug": slug.current},
-  "heroImage": heroImage.asset->{url, metadata{lqip}},
+  "heroImage": heroImage.asset->{url, metadata{lqip, palette}},
   "gallery": gallery[].asset->{url, metadata{lqip}},
   "seo": seo{
     title,
