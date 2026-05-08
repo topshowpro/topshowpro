@@ -40,17 +40,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   });
 }
 
-/** Applies Sanity CDN quality+format transforms to gallery images */
-function sanityGalleryLoader({ src, width }: { src: string; width: number }): string {
+/** Applies Sanity CDN quality+format params directly to a URL string (server-side, no function prop needed) */
+function sanityOptimizedUrl(url: string, width = 1400): string {
   try {
-    const url = new URL(src);
-    url.searchParams.set('auto', 'format');
-    url.searchParams.set('fit', 'max');
-    url.searchParams.set('w', String(Math.min(width, 2400)));
-    url.searchParams.set('q', '65');
-    return url.toString();
+    const u = new URL(url);
+    u.searchParams.set('auto', 'format');
+    u.searchParams.set('fit', 'max');
+    u.searchParams.set('w', String(width));
+    u.searchParams.set('q', '65');
+    return u.toString();
   } catch {
-    return src;
+    return url;
   }
 }
 
@@ -235,13 +235,11 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
             {gallery.map((g: { url: string }, i: number) => (
               <div key={i} className="relative aspect-[4/3]" style={{ backgroundColor: 'var(--bg-surface)' }}>
                 <Image
-                  src={g.url}
+                  src={sanityOptimizedUrl(g.url)}
                   alt=""
                   fill
-                  loader={sanityGalleryLoader}
                   className="object-cover"
                   sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
-                  quality={65}
                 />
               </div>
             ))}
