@@ -401,7 +401,7 @@ textarea,
 }
 
 .list-active-accent {
-  border-left: 4px solid var(--accent-cyan);
+  border-left: 4px solid var(--event-primary, var(--accent-cyan));
   padding-left: 1rem;
 }
 
@@ -562,14 +562,14 @@ textarea,
   line-height: 1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-color: color-mix(in srgb, var(--accent-cyan) 65%, transparent) !important;
+  border-color: color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 65%, transparent) !important;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--accent-cyan) 24%, transparent), color-mix(in srgb, var(--accent-cyan) 10%, transparent));
+    linear-gradient(135deg, color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 24%, transparent), color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 10%, transparent));
   color: var(--text-primary) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 0 0 1px color-mix(in srgb, var(--accent-cyan) 22%, transparent),
-    0 10px 24px color-mix(in srgb, var(--accent-cyan) 24%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 22%, transparent),
+    0 10px 24px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 24%, transparent);
   backdrop-filter: blur(8px);
   animation: event-pill-border-breathe 3.2s ease-in-out infinite;
 }
@@ -578,10 +578,10 @@ textarea,
   width: 0.52rem;
   height: 0.52rem;
   border-radius: 9999px;
-  background: var(--accent-cyan);
+  background: var(--event-primary, var(--accent-cyan));
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--accent-cyan) 45%, transparent),
-    0 0 10px color-mix(in srgb, var(--accent-cyan) 90%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 45%, transparent),
+    0 0 10px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 90%, transparent);
   animation: event-pill-dot-pulse 2.2s ease-in-out infinite;
 }
 
@@ -600,18 +600,18 @@ textarea,
 @keyframes event-pill-border-breathe {
   0%,
   100% {
-    border-color: color-mix(in srgb, var(--accent-cyan) 58%, transparent);
+    border-color: color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 58%, transparent);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.24),
-      0 0 0 1px color-mix(in srgb, var(--accent-cyan) 20%, transparent),
-      0 8px 18px color-mix(in srgb, var(--accent-cyan) 18%, transparent);
+      0 0 0 1px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 20%, transparent),
+      0 8px 18px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 18%, transparent);
   }
   50% {
-    border-color: color-mix(in srgb, var(--accent-cyan) 78%, transparent);
+    border-color: color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 78%, transparent);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.32),
-      0 0 0 1px color-mix(in srgb, var(--accent-cyan) 30%, transparent),
-      0 12px 28px color-mix(in srgb, var(--accent-cyan) 30%, transparent);
+      0 0 0 1px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 30%, transparent),
+      0 12px 28px color-mix(in srgb, var(--event-primary, var(--accent-cyan)) 30%, transparent);
   }
 }
 
@@ -1089,4 +1089,36 @@ textarea,
 /* Footer Digital Boost hover gold */
 .footer-db:hover {
   color: #ffd700 !important;
+}
+
+/* ── Event Ambient Background (Spotify-style cover color wash) ─────────── */
+
+@keyframes ambient-float-a {
+  0%,  100% { transform: translate(0px,   0px)   scale(1); }
+  33%        { transform: translate(30px, -40px)  scale(1.04); }
+  66%        { transform: translate(-20px, 25px)  scale(0.97); }
+}
+
+@keyframes ambient-float-b {
+  0%,  100% { transform: translate(0px,   0px)   scale(1); }
+  30%        { transform: translate(-35px, 30px)  scale(1.03); }
+  60%        { transform: translate(25px, -35px)  scale(0.98); }
+}
+
+@keyframes ambient-float-c {
+  0%,  100% { transform: translate(0px,   0px)  scale(1); }
+  40%        { transform: translate(20px,  40px) scale(1.05); }
+  70%        { transform: translate(-25px,-20px) scale(0.96); }
+}
+
+.event-ambient-blob--a { animation: ambient-float-a 24s ease-in-out infinite; }
+.event-ambient-blob--b { animation: ambient-float-b 30s ease-in-out infinite; }
+.event-ambient-blob--c { animation: ambient-float-c 20s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .event-ambient-blob--a,
+  .event-ambient-blob--b,
+  .event-ambient-blob--c {
+    animation: none !important;
+  }
 }
