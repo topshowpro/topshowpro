@@ -14,18 +14,23 @@ import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
 interface EventosClientPageProps {
   settings?: any;
   brands?: any[];
+  initialEvents?: any[];
+  initialCategories?: { label: string; slug: string; icon?: string }[];
 }
 
 const INITIAL_VISIBLE_COUNT = 8;
 
-export function EventosClientPage({ settings, brands = [] }: EventosClientPageProps) {
-  const [cats, setCats] = useState<{ label: string; slug: string; icon?: string }[]>([]);
-  const [allEvents, setAllEvents] = useState<any[]>([]);
+export function EventosClientPage({ settings, brands = [], initialEvents = [], initialCategories = [] }: EventosClientPageProps) {
+  const hasServerData = initialEvents.length > 0 || initialCategories.length > 0;
+  const [cats, setCats] = useState<{ label: string; slug: string; icon?: string }[]>(initialCategories);
+  const [allEvents, setAllEvents] = useState<any[]>(initialEvents);
   const [active, setActive] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!hasServerData);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
+  // Only fetch client-side if server didn't provide initial data (fallback path)
   useEffect(() => {
+    if (hasServerData) return;
     Promise.all([
       fetch('/api/events?cats=1').then((r) => r.json()),
       fetch('/api/events').then((r) => r.json()),
@@ -34,7 +39,9 @@ export function EventosClientPage({ settings, brands = [] }: EventosClientPagePr
       setAllEvents(events);
       setLoading(false);
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   // Reset visible count when changing category
   useEffect(() => {

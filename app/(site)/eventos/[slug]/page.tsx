@@ -10,7 +10,7 @@ function toEmbedUrl(url: string): string {
   return url;
 }
 import { sanityFetch } from '@/sanity/lib/client';
-import { Q_EVENT_DETAIL } from '@/sanity/lib/queries';
+import { Q_EVENT_DETAIL, Q_EVENT_SLUGS } from '@/sanity/lib/queries';
 import { formatDateRange } from '@/lib/utils';
 import { PortableText } from '@portabletext/react';
 import { CtaOutlineLink } from '@/components/ui/cta-outline-link';
@@ -18,6 +18,15 @@ import { Tag } from '@/components/ui/tag';
 import { buildMetadata } from '@/lib/seo';
 import { EventAmbientBg, getEventColors } from '@/components/events/EventAmbientBg';
 import type { Metadata } from 'next';
+
+export async function generateStaticParams() {
+  const events = await sanityFetch<{ slug: string }[]>(
+    Q_EVENT_SLUGS,
+    undefined,
+    { revalidate: 300 },
+  );
+  return (events ?? []).map((e) => ({ slug: e.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -29,6 +38,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     noIndex: Boolean(event?.seo?.noIndex),
     path: `/eventos/${slug}`,
   });
+}
+
+/** Applies Sanity CDN quality+format transforms to gallery images */
+function sanityGalleryLoader({ src, width }: { src: string; width: number }): string {
+  try {
+    const url = new URL(src);
+    url.searchParams.set('auto', 'format');
+    url.searchParams.set('fit', 'max');
+    url.searchParams.set('w', String(Math.min(width, 2400)));
+    url.searchParams.set('q', '65');
+    return url.toString();
+  } catch {
+    return src;
+  }
 }
 
 export default async function EventoDetailPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -152,7 +175,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
       </div>
 
       {/* Description */}
-      <section className="max-w-3xl mx-auto px-6 py-24">
+      <section className="defer-render max-w-3xl mx-auto px-6 py-24">
         <div className="font-sans text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
           {event.description && <PortableText value={event.description} />}
         </div>
@@ -160,7 +183,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
 
       {/* Equipment used */}
       {event.equipmentUsed?.length > 0 && (
-        <section className="max-w-5xl mx-auto px-6 py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <section className="defer-render max-w-5xl mx-auto px-6 py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <h2
             className="font-display text-white mb-8 leading-none"
             style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}
@@ -183,7 +206,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
 
       {/* Video */}
       {event.video && (
-        <section className="max-w-5xl mx-auto px-6 py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+        <section className="defer-render max-w-5xl mx-auto px-6 py-16" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
           <h2 className="font-display text-white mb-8 leading-none" style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}>
             Video
           </h2>
@@ -201,7 +224,7 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
 
       {/* Gallery */}
       {gallery.length > 0 && (
-        <section className="max-w-7xl mx-auto px-6 py-16">
+        <section className="defer-render max-w-7xl mx-auto px-6 py-16">
           <h2
             className="font-display text-white mb-8 leading-none"
             style={{ fontSize: 'clamp(2rem, 5vw, 5rem)' }}
@@ -211,7 +234,15 @@ export default async function EventoDetailPage({ params }: { params: Promise<{ s
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
             {gallery.map((g: { url: string }, i: number) => (
               <div key={i} className="relative aspect-[4/3]" style={{ backgroundColor: 'var(--bg-surface)' }}>
-                <Image src={g.url} alt="" fill className="object-cover" sizes="(max-width: 1280px) 33vw, 400px" />
+                <Image
+                  src={g.url}
+                  alt=""
+                  fill
+                  loader={sanityGalleryLoader}
+                  className="object-cover"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 33vw"
+                  quality={65}
+                />
               </div>
             ))}
           </div>

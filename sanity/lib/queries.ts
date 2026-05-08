@@ -103,6 +103,19 @@ export const Q_EVENT_DETAIL = `*[_type == "event" && slug.current == $slug][0]{
 
 export const Q_EVENT_CATEGORIES = `*[_type == "eventCategory"] | order(order asc){ label, "slug": slug.current, icon }`;
 
+/** Used by generateStaticParams to pre-build all event detail pages */
+export const Q_EVENT_SLUGS = `*[_type == "event" && defined(slug.current)]{ "slug": slug.current }`;
+
+/** Fetches events + categories in a single Sanity round-trip for the server-rendered /eventos page */
+export const Q_EVENTS_AND_CATS = `{
+  "events": *[_type == "event" && ($category == null || category->slug.current == $category)] | order(dateStart desc, _createdAt desc) {
+    title, subtitle, "slug": slug.current, dateStart, dateEnd,
+    "categorySlug": category->slug.current,
+    "heroImage": heroImage.asset->{url, metadata{lqip}}
+  },
+  "categories": *[_type == "eventCategory"] | order(order asc){ label, "slug": slug.current, icon }
+}`;
+
 export const Q_SERVICES = `*[_type == "service"] | order(order asc){
   name, icon, shortDesc, longDesc, techContact,
   "gallery": gallery[].asset->{url, metadata{lqip}},
