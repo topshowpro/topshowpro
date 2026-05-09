@@ -78,10 +78,10 @@ export function EventAmbientBg({ palette }: EventAmbientBgProps) {
         className="event-ambient-blob event-ambient-blob--a"
         style={{
           position: 'absolute',
-          top: '-15%',
-          right: '-10%',
-          width: '70vw',
-          height: '70vw',
+          top: '-8%',
+          right: '-4%',
+          width: 'max(70vw, 420px)',
+          height: 'max(70vw, 420px)',
           maxWidth: '900px',
           maxHeight: '900px',
           borderRadius: '50%',
@@ -97,9 +97,9 @@ export function EventAmbientBg({ palette }: EventAmbientBgProps) {
         style={{
           position: 'absolute',
           top: '25%',
-          left: '-15%',
-          width: '55vw',
-          height: '55vw',
+          left: '-6%',
+          width: 'max(55vw, 320px)',
+          height: 'max(55vw, 320px)',
           maxWidth: '700px',
           maxHeight: '700px',
           borderRadius: '50%',
@@ -114,10 +114,10 @@ export function EventAmbientBg({ palette }: EventAmbientBgProps) {
         className="event-ambient-blob event-ambient-blob--c"
         style={{
           position: 'absolute',
-          bottom: '-10%',
-          right: '-5%',
-          width: '45vw',
-          height: '45vw',
+          bottom: '-5%',
+          right: '-2%',
+          width: 'max(45vw, 280px)',
+          height: 'max(45vw, 280px)',
           maxWidth: '600px',
           maxHeight: '600px',
           borderRadius: '50%',
@@ -139,3 +139,4 @@ export function EventAmbientBg({ palette }: EventAmbientBgProps) {
     </div>
   );
 }
+
