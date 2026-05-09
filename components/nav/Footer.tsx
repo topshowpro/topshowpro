@@ -31,8 +31,12 @@ export function Footer({ settings }: { settings: SiteSettings | null }) {
             style={settings?.logoUrl ? undefined : { filter: 'invert(1) hue-rotate(180deg)' }}
           />
           <p className="font-sans text-sm text-fg-muted break-words">{settings?.address}</p>
-          <p className="font-sans text-sm text-fg-muted break-all">{settings?.email}</p>
-          <p className="font-sans text-sm text-fg-muted break-words">{settings?.phone}</p>
+          <a href={`mailto:${settings?.email || 'info@topshowpro.com.ar'}`} className="font-sans text-sm text-fg-muted break-all block hover:text-[var(--accent-cyan)] transition-colors py-1">
+            {settings?.email || 'info@topshowpro.com.ar'}
+          </a>
+          <a href={`tel:${(settings?.phone || '+54 9 11 2667-0149').replace(/[^0-9+]/g, '')}`} className="font-sans text-sm text-fg-muted break-words block hover:text-[var(--accent-cyan)] transition-colors py-1">
+            {settings?.phone || '+54 9 11 2667-0149'}
+          </a>
         </div>
         <div>
           <p className="font-mono text-xs uppercase tracking-widest text-fg-faint mb-4">Horario</p>

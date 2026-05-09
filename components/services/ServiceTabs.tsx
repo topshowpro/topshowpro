@@ -120,9 +120,6 @@ export function ServiceTabs({ services }: { services: Service[] }) {
 
               {hasLongDesc && (
                 <div className="mt-5 border-t pt-5" style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
-                  <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em]" style={{ color: 'var(--accent-cyan)' }}>
-                    Detalle del servicio
-                  </p>
                   <div className="font-sans text-sm leading-relaxed md:text-base" style={{ color: 'var(--text-muted)' }}>
                     <PortableText value={current.longDesc} />
                   </div>

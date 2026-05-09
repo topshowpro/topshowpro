@@ -126,9 +126,6 @@ export function EquipmentTabs({ categories }: EquipmentTabsProps) {
             </div>
 
               <div className="flex flex-col justify-center">
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.3em]" style={{ color: 'var(--accent-cyan)' }}>
-                Catálogo de Equipamiento
-              </p>
               <h2 className="font-display text-4xl leading-none text-white md:text-7xl break-words">{current.name}</h2>
               {current.description && (
                 <p className="mt-6 font-sans text-lg leading-relaxed" style={{ color: 'var(--text-muted)' }}>
