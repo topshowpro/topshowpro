@@ -74,7 +74,7 @@ export default async function ContactoPage() {
               className="font-mono text-xs uppercase tracking-widest mb-4"
               style={{ color: 'var(--text-faint)' }}
             >
-              Contacto general
+              Contacto Comercial
             </p>
             <p className="font-sans text-lg text-white mb-1 break-all">{settings?.email}</p>
             <p className="font-sans text-lg break-words" style={{ color: 'var(--text-muted)' }}>{settings?.phone}</p>
@@ -89,7 +89,7 @@ export default async function ContactoPage() {
                 className="font-mono text-xs uppercase tracking-widest mb-4"
                 style={{ color: 'var(--text-faint)' }}
               >
-                Soporte técnico
+                Servicio Técnico
               </p>
               <p className="font-sans text-lg text-white mb-1">{settings.techContact.name}</p>
               <p className="font-sans text-base break-words" style={{ color: 'var(--text-muted)' }}>{settings.techContact.phone}</p>
